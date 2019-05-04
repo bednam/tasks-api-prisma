@@ -1,0 +1,39 @@
+mutation {
+  project1: createProject(data: { name: "No. 1" }) {
+    id
+  }
+  project2: createProject(data: { name: "No. 2" }) {
+    id
+  }
+  project3: createProject(data: { name: "No. 3" }) {
+    id
+  }
+  subproject1: createSubproject(
+    data: { name: "No. 1", project: { connect: { id: 1 } } }
+  ) {
+    id
+  }
+  subproject2: createSubproject(
+    data: { name: "No. 2", project: { connect: { id: 1 } } }
+  ) {
+    id
+  }
+  subproject3: createSubproject(
+    data: { name: "No. 3", project: { connect: { id: 2 } } }
+  ) {
+    id
+  }
+  task1: createTask(
+    data: { name: "No. 1", subproject: { connect: { id: 1 } } }
+  ) {
+    id
+  }
+  task2: createTask(
+    data: { name: "No. 2", subproject: { connect: { id: 1 } } }
+  ) {
+    id
+  }
+  task3: createTask(data: { name: "No. 3" }) {
+    id
+  }
+}

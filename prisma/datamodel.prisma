@@ -1,0 +1,35 @@
+type Project {
+	id: Int! @id
+	name: String!
+	subprojects: [Subproject!]!
+}
+
+type Subproject {
+	id: Int! @id
+	name: String!
+	project: Project!
+	tasks: [Task!]!
+}
+
+type Task {
+	id: Int! @id
+	name: String!
+	priority: String
+	comments: String
+	repeat: Int
+	estimateTime: String
+	plannedTime: String
+	plannedDate: DateTime
+	finishDate: DateTime
+	deadlineDate: DateTime
+	completed: Boolean! @default(value: false)
+	subproject: Subproject
+	timelogs: [Timelog!]!
+}
+
+type Timelog {
+	id: Int! @id
+	startDate: DateTime!
+	finishDate: DateTime
+	task: Task!
+}

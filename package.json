@@ -1,0 +1,21 @@
+{
+  "name": "tasks-api-prisma",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "dev": "ts-node-dev --no-notify --respawn --transpileOnly src/index.ts"
+  },
+  "dependencies": {
+    "graphql-iso-date": "^3.6.1",
+    "graphql-yoga": "1.17.4",
+    "moment": "^2.24.0",
+    "nexus": "^0.11.7",
+    "nexus-prisma": "^0.3.7",
+    "prisma-client-lib": "1.31.1"
+  },
+  "devDependencies": {
+    "prisma": "1.31.1",
+    "ts-node": "7.0.1",
+    "ts-node-dev": "^1.0.0-pre.32",
+    "typescript": "3.2.2"
+  }
+}
