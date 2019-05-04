@@ -945,10 +945,10 @@ export interface NexusGenFieldTypes {
     startCursor: string | null; // String
   }
   Project: { // field return type
-    estimateTime: string; // String!
+    estimateTime: string | null; // String
     id: number; // Int!
     name: string; // String!
-    statusTime: string; // String!
+    statusTime: string | null; // String
     subprojects: NexusGenRootTypes['Subproject'][] | null; // [Subproject!]
   }
   ProjectConnection: { // field return type
@@ -976,11 +976,11 @@ export interface NexusGenFieldTypes {
     timelogsConnection: NexusGenRootTypes['TimelogConnection']; // TimelogConnection!
   }
   Subproject: { // field return type
-    estimateTime: string; // String!
+    estimateTime: string | null; // String
     id: number; // Int!
     name: string; // String!
     project: NexusGenRootTypes['Project']; // Project!
-    statusTime: string; // String!
+    statusTime: string | null; // String
     tasks: NexusGenRootTypes['Task'][] | null; // [Task!]
   }
   SubprojectConnection: { // field return type

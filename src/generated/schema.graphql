@@ -63,10 +63,10 @@ type PageInfo {
 }
 
 type Project {
-  estimateTime: String!
+  estimateTime: String
   id: Int!
   name: String!
-  statusTime: String!
+  statusTime: String
   subprojects(after: String, before: String, first: Int, last: Int, orderBy: SubprojectOrderByInput, skip: Int, where: SubprojectWhereInput): [Subproject!]
 }
 
@@ -185,11 +185,11 @@ type Query {
 }
 
 type Subproject {
-  estimateTime: String!
+  estimateTime: String
   id: Int!
   name: String!
   project: Project!
-  statusTime: String!
+  statusTime: String
   tasks(after: String, before: String, first: Int, last: Int, orderBy: TaskOrderByInput, skip: Int, where: TaskWhereInput): [Task!]
 }
 
