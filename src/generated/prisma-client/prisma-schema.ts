@@ -918,7 +918,7 @@ input TaskWhereUniqueInput {
 
 type Timelog {
   id: Int!
-  startDate: DateTime!
+  startDate: DateTime
   finishDate: DateTime
   task: Task!
 }
@@ -931,7 +931,7 @@ type TimelogConnection {
 
 input TimelogCreateInput {
   id: Int
-  startDate: DateTime!
+  startDate: DateTime
   finishDate: DateTime
   task: TaskCreateOneWithoutTimelogsInput!
 }
@@ -943,7 +943,7 @@ input TimelogCreateManyWithoutTaskInput {
 
 input TimelogCreateWithoutTaskInput {
   id: Int
-  startDate: DateTime!
+  startDate: DateTime
   finishDate: DateTime
 }
 
@@ -963,7 +963,7 @@ enum TimelogOrderByInput {
 
 type TimelogPreviousValues {
   id: Int!
-  startDate: DateTime!
+  startDate: DateTime
   finishDate: DateTime
 }
 

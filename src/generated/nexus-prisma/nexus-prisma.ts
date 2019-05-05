@@ -745,7 +745,7 @@ export interface TimelogFieldDetails {
     args: {}
     description: string
     list: undefined
-    nullable: false
+    nullable: true
     resolve: undefined
   }
   finishDate: {
@@ -2378,7 +2378,7 @@ export interface TimelogPreviousValuesFieldDetails {
     args: {}
     description: string
     list: undefined
-    nullable: false
+    nullable: true
     resolve: undefined
   }
   finishDate: {
@@ -2929,7 +2929,7 @@ export type TimelogCreateManyWithoutTaskInputInputObject =
   
 export interface TimelogCreateWithoutTaskInput {
   id?: number | null
-  startDate?: string
+  startDate?: string | null
   finishDate?: string | null
 }
 export type TimelogCreateWithoutTaskInputInputObject =
@@ -3765,7 +3765,7 @@ export type TaskUpdateManyMutationInputInputObject =
   
 export interface TimelogCreateInput {
   id?: number | null
-  startDate?: string
+  startDate?: string | null
   finishDate?: string | null
   task?: TaskCreateOneWithoutTimelogsInput
 }

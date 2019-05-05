@@ -40,6 +40,7 @@ type Mutation {
   deleteSubproject(where: SubprojectWhereUniqueInput!): Subproject
   deleteTask(where: TaskWhereUniqueInput!): Task
   deleteTimelog(where: TimelogWhereUniqueInput!): Timelog
+  startTimelog(data: TimelogCreateInput): Timelog!
   stopTimelog(where: TimelogWhereUniqueInput!): Timelog!
   updateManyProjects(data: ProjectUpdateManyMutationInput!, where: ProjectWhereInput): BatchPayload!
   updateManySubprojects(data: SubprojectUpdateManyMutationInput!, where: SubprojectWhereInput): BatchPayload!
@@ -844,7 +845,7 @@ input TaskWhereUniqueInput {
 type Timelog {
   finishDate: DateTime
   id: Int!
-  startDate: DateTime!
+  startDate: DateTime
   task: Task!
 }
 
@@ -857,7 +858,7 @@ type TimelogConnection {
 input TimelogCreateInput {
   finishDate: DateTime
   id: Int
-  startDate: DateTime!
+  startDate: DateTime
   task: TaskCreateOneWithoutTimelogsInput!
 }
 
@@ -869,7 +870,7 @@ input TimelogCreateManyWithoutTaskInput {
 input TimelogCreateWithoutTaskInput {
   finishDate: DateTime
   id: Int
-  startDate: DateTime!
+  startDate: DateTime
 }
 
 type TimelogEdge {

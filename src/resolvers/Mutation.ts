@@ -31,5 +31,15 @@ export const Mutation = prismaObjectType({
           where
         })
     })
+
+    t.field('startTimelog', {
+      type: 'Timelog',
+      args: { data: arg({ type: 'TimelogCreateInput' }) },
+      resolve: (root, { data }, { prisma }) =>
+        prisma.createTimelog({
+          startDate: moment().format(),
+          ...data
+        })
+    })
   }
 })

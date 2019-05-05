@@ -29,7 +29,7 @@ type Task {
 
 type Timelog {
 	id: Int! @id
-	startDate: DateTime!
+	startDate: DateTime
 	finishDate: DateTime
 	task: Task!
 }

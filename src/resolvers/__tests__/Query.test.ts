@@ -2,17 +2,6 @@ import axios from 'axios'
 
 const url = 'http://localhost:4000'
 
-const createTimelog = async (startDate: String, finishDate: String) =>
-	await axios.post(url, {
-		query: `
-			mutation {
-			  createTimelog(data: { startDate: "${startDate}", finishDate: "${finishDate}", task: { create: { name: "No. 1" } } }) {
-			    id
-			  }
-			}
-		`
-	})
-
 describe('Query Resolvers', () => {
 	it('should add timelog with finishDate', async () => {
 		const response = await axios.post(url, {
@@ -25,7 +14,9 @@ describe('Query Resolvers', () => {
 			`
 		})
 
-		expect(response.data).toEqual({ data: { createTimelog: { id: 1 } } })
+		expect(response.data).toEqual({
+			data: { createTimelog: { id: expect.any(Number) } }
+		})
 	})
 
 	it('should add timelog without finishDate', async () => {
@@ -39,7 +30,9 @@ describe('Query Resolvers', () => {
 			`
 		})
 
-		expect(response.data).toEqual({ data: { createTimelog: { id: 2 } } })
+		expect(response.data).toEqual({
+			data: { createTimelog: { id: expect.any(Number) } }
+		})
 	})
 
 	it('should return active timelog', async () => {

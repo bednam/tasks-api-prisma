@@ -610,7 +610,7 @@ export interface NexusGenInputs {
   TimelogCreateInput: { // input type
     finishDate?: any | null; // DateTime
     id?: number | null; // Int
-    startDate: any; // DateTime!
+    startDate?: any | null; // DateTime
     task: NexusGenInputs['TaskCreateOneWithoutTimelogsInput']; // TaskCreateOneWithoutTimelogsInput!
   }
   TimelogCreateManyWithoutTaskInput: { // input type
@@ -620,7 +620,7 @@ export interface NexusGenInputs {
   TimelogCreateWithoutTaskInput: { // input type
     finishDate?: any | null; // DateTime
     id?: number | null; // Int
-    startDate: any; // DateTime!
+    startDate?: any | null; // DateTime
   }
   TimelogScalarWhereInput: { // input type
     AND?: NexusGenInputs['TimelogScalarWhereInput'][] | null; // [TimelogScalarWhereInput!]
@@ -806,7 +806,7 @@ export interface NexusGenRootTypes {
   Timelog: { // root type
     finishDate?: any | null; // DateTime
     id: number; // Int!
-    startDate: any; // DateTime!
+    startDate?: any | null; // DateTime
   }
   TimelogConnection: { // root type
     edges: NexusGenRootTypes['TimelogEdge'][]; // [TimelogEdge!]!
@@ -924,6 +924,7 @@ export interface NexusGenFieldTypes {
     deleteSubproject: NexusGenRootTypes['Subproject'] | null; // Subproject
     deleteTask: NexusGenRootTypes['Task'] | null; // Task
     deleteTimelog: NexusGenRootTypes['Timelog'] | null; // Timelog
+    startTimelog: NexusGenRootTypes['Timelog']; // Timelog!
     stopTimelog: NexusGenRootTypes['Timelog']; // Timelog!
     updateManyProjects: NexusGenRootTypes['BatchPayload']; // BatchPayload!
     updateManySubprojects: NexusGenRootTypes['BatchPayload']; // BatchPayload!
@@ -1021,7 +1022,7 @@ export interface NexusGenFieldTypes {
   Timelog: { // field return type
     finishDate: any | null; // DateTime
     id: number; // Int!
-    startDate: any; // DateTime!
+    startDate: any | null; // DateTime
     task: NexusGenRootTypes['Task']; // Task!
   }
   TimelogConnection: { // field return type
@@ -1075,6 +1076,9 @@ export interface NexusGenArgTypes {
     }
     deleteTimelog: { // args
       where: NexusGenInputs['TimelogWhereUniqueInput']; // TimelogWhereUniqueInput!
+    }
+    startTimelog: { // args
+      data?: NexusGenInputs['TimelogCreateInput'] | null; // TimelogCreateInput
     }
     stopTimelog: { // args
       where: NexusGenInputs['TimelogWhereUniqueInput']; // TimelogWhereUniqueInput!

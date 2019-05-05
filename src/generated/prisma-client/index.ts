@@ -283,7 +283,7 @@ export interface ProjectUpdateWithoutSubprojectsDataInput {
 
 export interface TimelogCreateWithoutTaskInput {
   id?: Int;
-  startDate: DateTimeInput;
+  startDate?: DateTimeInput;
   finishDate?: DateTimeInput;
 }
 
@@ -610,7 +610,7 @@ export interface TimelogUpdateWithWhereUniqueWithoutTaskInput {
 
 export interface TimelogCreateInput {
   id?: Int;
-  startDate: DateTimeInput;
+  startDate?: DateTimeInput;
   finishDate?: DateTimeInput;
   task: TaskCreateOneWithoutTimelogsInput;
 }
@@ -1114,7 +1114,7 @@ export interface NodeNode {
 
 export interface TimelogPreviousValues {
   id: Int;
-  startDate: DateTimeOutput;
+  startDate?: DateTimeOutput;
   finishDate?: DateTimeOutput;
 }
 
@@ -1592,7 +1592,7 @@ export interface SubprojectSubscriptionPayloadSubscription
 
 export interface Timelog {
   id: Int;
-  startDate: DateTimeOutput;
+  startDate?: DateTimeOutput;
   finishDate?: DateTimeOutput;
 }
 

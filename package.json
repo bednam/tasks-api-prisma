@@ -4,6 +4,7 @@
     "start": "STAGE=default ts-node src/index.ts",
     "start-test": "STAGE=test ts-node src/index.ts",
     "deploy-test": "STAGE=test prisma deploy --no-seed",
+    "deploy": "STAGE=default prisma deploy",
     "test": "STAGE=test prisma reset -f && jest",
     "dev": "STAGE=default ts-node-dev --no-notify --respawn --transpileOnly src/index.ts"
   },
