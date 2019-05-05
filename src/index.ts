@@ -9,7 +9,6 @@ import * as moment from 'moment'
 import * as types from './resolvers'
 
 const schema = makePrismaSchema({
-  // types: [Query, Mutation, Task, Project, Subproject],
   types,
   prisma: {
     datamodelInfo,

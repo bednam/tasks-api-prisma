@@ -1,6 +1,6 @@
 # Specifies the HTTP endpoint of your Prisma API (deployed to a Prisma Demo server).
 # endpoint: https://eu1.prisma.sh/public-luminousstinger-883/tasks-api-prisma/dev
-endpoint: http://localhost:4466
+endpoint: http://localhost:4466/default/${env:STAGE}
 
 # Defines your models, each model is mapped to the database as a table.
 datamodel: datamodel.prisma
@@ -22,4 +22,3 @@ hooks:
 # to the `Authorization` header of HTTP requests made against the Prisma API.
 # Info: https://www.prisma.io/docs/prisma-graphql-api/reference/authentication-ghd4/
 # secret: mysecret123
-    

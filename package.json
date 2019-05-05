@@ -1,10 +1,14 @@
 {
   "name": "tasks-api-prisma",
   "scripts": {
-    "start": "ts-node src/index.ts",
-    "dev": "ts-node-dev --no-notify --respawn --transpileOnly src/index.ts"
+    "start": "STAGE=default ts-node src/index.ts",
+    "start-test": "STAGE=test ts-node src/index.ts",
+    "deploy-test": "STAGE=test prisma deploy --no-seed",
+    "test": "STAGE=test prisma reset -f && jest",
+    "dev": "STAGE=default ts-node-dev --no-notify --respawn --transpileOnly src/index.ts"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "graphql-iso-date": "^3.6.1",
     "graphql-yoga": "1.17.4",
     "moment": "^2.24.0",
@@ -13,7 +17,10 @@
     "prisma-client-lib": "1.31.1"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.12",
+    "jest": "^24.7.1",
     "prisma": "1.31.1",
+    "ts-jest": "^24.0.2",
     "ts-node": "7.0.1",
     "ts-node-dev": "^1.0.0-pre.32",
     "typescript": "3.2.2"
