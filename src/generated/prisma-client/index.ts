@@ -384,30 +384,48 @@ export interface TaskWhereInput {
   plannedTime_not_starts_with?: String;
   plannedTime_ends_with?: String;
   plannedTime_not_ends_with?: String;
-  plannedDate?: DateTimeInput;
-  plannedDate_not?: DateTimeInput;
-  plannedDate_in?: DateTimeInput[] | DateTimeInput;
-  plannedDate_not_in?: DateTimeInput[] | DateTimeInput;
-  plannedDate_lt?: DateTimeInput;
-  plannedDate_lte?: DateTimeInput;
-  plannedDate_gt?: DateTimeInput;
-  plannedDate_gte?: DateTimeInput;
-  finishDate?: DateTimeInput;
-  finishDate_not?: DateTimeInput;
-  finishDate_in?: DateTimeInput[] | DateTimeInput;
-  finishDate_not_in?: DateTimeInput[] | DateTimeInput;
-  finishDate_lt?: DateTimeInput;
-  finishDate_lte?: DateTimeInput;
-  finishDate_gt?: DateTimeInput;
-  finishDate_gte?: DateTimeInput;
-  deadlineDate?: DateTimeInput;
-  deadlineDate_not?: DateTimeInput;
-  deadlineDate_in?: DateTimeInput[] | DateTimeInput;
-  deadlineDate_not_in?: DateTimeInput[] | DateTimeInput;
-  deadlineDate_lt?: DateTimeInput;
-  deadlineDate_lte?: DateTimeInput;
-  deadlineDate_gt?: DateTimeInput;
-  deadlineDate_gte?: DateTimeInput;
+  plannedDate?: String;
+  plannedDate_not?: String;
+  plannedDate_in?: String[] | String;
+  plannedDate_not_in?: String[] | String;
+  plannedDate_lt?: String;
+  plannedDate_lte?: String;
+  plannedDate_gt?: String;
+  plannedDate_gte?: String;
+  plannedDate_contains?: String;
+  plannedDate_not_contains?: String;
+  plannedDate_starts_with?: String;
+  plannedDate_not_starts_with?: String;
+  plannedDate_ends_with?: String;
+  plannedDate_not_ends_with?: String;
+  finishDate?: String;
+  finishDate_not?: String;
+  finishDate_in?: String[] | String;
+  finishDate_not_in?: String[] | String;
+  finishDate_lt?: String;
+  finishDate_lte?: String;
+  finishDate_gt?: String;
+  finishDate_gte?: String;
+  finishDate_contains?: String;
+  finishDate_not_contains?: String;
+  finishDate_starts_with?: String;
+  finishDate_not_starts_with?: String;
+  finishDate_ends_with?: String;
+  finishDate_not_ends_with?: String;
+  deadlineDate?: String;
+  deadlineDate_not?: String;
+  deadlineDate_in?: String[] | String;
+  deadlineDate_not_in?: String[] | String;
+  deadlineDate_lt?: String;
+  deadlineDate_lte?: String;
+  deadlineDate_gt?: String;
+  deadlineDate_gte?: String;
+  deadlineDate_contains?: String;
+  deadlineDate_not_contains?: String;
+  deadlineDate_starts_with?: String;
+  deadlineDate_not_starts_with?: String;
+  deadlineDate_ends_with?: String;
+  deadlineDate_not_ends_with?: String;
   completed?: Boolean;
   completed_not?: Boolean;
   subproject?: SubprojectWhereInput;
@@ -512,15 +530,9 @@ export interface SubprojectUpdateWithoutProjectDataInput {
   tasks?: TaskUpdateManyWithoutSubprojectInput;
 }
 
-export interface ProjectSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: ProjectWhereInput;
-  AND?: ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput;
-  OR?: ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput;
-  NOT?: ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput;
+export interface TimelogUpdateManyMutationInput {
+  startDate?: DateTimeInput;
+  finishDate?: DateTimeInput;
 }
 
 export interface TaskUpdateManyWithoutSubprojectInput {
@@ -543,9 +555,18 @@ export interface TaskUpdateManyWithoutSubprojectInput {
     | TaskUpdateManyWithWhereNestedInput;
 }
 
-export interface TaskUpsertWithoutTimelogsInput {
-  update: TaskUpdateWithoutTimelogsDataInput;
-  create: TaskCreateWithoutTimelogsInput;
+export interface TaskUpdateWithoutTimelogsDataInput {
+  name?: String;
+  priority?: String;
+  comments?: String;
+  repeat?: Int;
+  estimateTime?: String;
+  plannedTime?: String;
+  plannedDate?: String;
+  finishDate?: String;
+  deadlineDate?: String;
+  completed?: Boolean;
+  subproject?: SubprojectUpdateOneWithoutTasksInput;
 }
 
 export interface TaskUpdateWithWhereUniqueWithoutSubprojectInput {
@@ -553,11 +574,10 @@ export interface TaskUpdateWithWhereUniqueWithoutSubprojectInput {
   data: TaskUpdateWithoutSubprojectDataInput;
 }
 
-export interface TaskUpdateOneRequiredWithoutTimelogsInput {
-  create?: TaskCreateWithoutTimelogsInput;
-  update?: TaskUpdateWithoutTimelogsDataInput;
-  upsert?: TaskUpsertWithoutTimelogsInput;
-  connect?: TaskWhereUniqueInput;
+export interface TimelogUpdateInput {
+  startDate?: DateTimeInput;
+  finishDate?: DateTimeInput;
+  task?: TaskUpdateOneRequiredWithoutTimelogsInput;
 }
 
 export interface TaskUpdateWithoutSubprojectDataInput {
@@ -567,17 +587,26 @@ export interface TaskUpdateWithoutSubprojectDataInput {
   repeat?: Int;
   estimateTime?: String;
   plannedTime?: String;
-  plannedDate?: DateTimeInput;
-  finishDate?: DateTimeInput;
-  deadlineDate?: DateTimeInput;
+  plannedDate?: String;
+  finishDate?: String;
+  deadlineDate?: String;
   completed?: Boolean;
   timelogs?: TimelogUpdateManyWithoutTaskInput;
 }
 
-export interface TimelogUpdateInput {
-  startDate?: DateTimeInput;
-  finishDate?: DateTimeInput;
-  task?: TaskUpdateOneRequiredWithoutTimelogsInput;
+export interface TaskCreateWithoutTimelogsInput {
+  id?: Int;
+  name: String;
+  priority?: String;
+  comments?: String;
+  repeat?: Int;
+  estimateTime?: String;
+  plannedTime?: String;
+  plannedDate?: String;
+  finishDate?: String;
+  deadlineDate?: String;
+  completed?: Boolean;
+  subproject?: SubprojectCreateOneWithoutTasksInput;
 }
 
 export interface TimelogUpdateManyWithoutTaskInput {
@@ -598,16 +627,6 @@ export interface TimelogUpdateManyWithoutTaskInput {
     | TimelogUpdateManyWithWhereNestedInput;
 }
 
-export interface TaskCreateOneWithoutTimelogsInput {
-  create?: TaskCreateWithoutTimelogsInput;
-  connect?: TaskWhereUniqueInput;
-}
-
-export interface TimelogUpdateWithWhereUniqueWithoutTaskInput {
-  where: TimelogWhereUniqueInput;
-  data: TimelogUpdateWithoutTaskDataInput;
-}
-
 export interface TimelogCreateInput {
   id?: Int;
   startDate?: DateTimeInput;
@@ -615,24 +634,57 @@ export interface TimelogCreateInput {
   task: TaskCreateOneWithoutTimelogsInput;
 }
 
+export interface TimelogUpdateWithWhereUniqueWithoutTaskInput {
+  where: TimelogWhereUniqueInput;
+  data: TimelogUpdateWithoutTaskDataInput;
+}
+
+export interface TaskUpdateManyMutationInput {
+  name?: String;
+  priority?: String;
+  comments?: String;
+  repeat?: Int;
+  estimateTime?: String;
+  plannedTime?: String;
+  plannedDate?: String;
+  finishDate?: String;
+  deadlineDate?: String;
+  completed?: Boolean;
+}
+
 export interface TimelogUpdateWithoutTaskDataInput {
   startDate?: DateTimeInput;
   finishDate?: DateTimeInput;
 }
 
-export interface SubprojectUpsertWithoutTasksInput {
-  update: SubprojectUpdateWithoutTasksDataInput;
-  create: SubprojectCreateWithoutTasksInput;
-}
-
-export interface SubprojectCreateOneWithoutTasksInput {
-  create?: SubprojectCreateWithoutTasksInput;
-  connect?: SubprojectWhereUniqueInput;
-}
-
 export interface SubprojectUpdateWithoutTasksDataInput {
   name?: String;
   project?: ProjectUpdateOneRequiredWithoutSubprojectsInput;
+}
+
+export interface TaskCreateInput {
+  id?: Int;
+  name: String;
+  priority?: String;
+  comments?: String;
+  repeat?: Int;
+  estimateTime?: String;
+  plannedTime?: String;
+  plannedDate?: String;
+  finishDate?: String;
+  deadlineDate?: String;
+  completed?: Boolean;
+  subproject?: SubprojectCreateOneWithoutTasksInput;
+  timelogs?: TimelogCreateManyWithoutTaskInput;
+}
+
+export interface SubprojectUpdateOneWithoutTasksInput {
+  create?: SubprojectCreateWithoutTasksInput;
+  update?: SubprojectUpdateWithoutTasksDataInput;
+  upsert?: SubprojectUpsertWithoutTasksInput;
+  delete?: Boolean;
+  disconnect?: Boolean;
+  connect?: SubprojectWhereUniqueInput;
 }
 
 export interface TimelogScalarWhereInput {
@@ -665,19 +717,10 @@ export interface TimelogScalarWhereInput {
   NOT?: TimelogScalarWhereInput[] | TimelogScalarWhereInput;
 }
 
-export interface TaskUpdateInput {
-  name?: String;
-  priority?: String;
-  comments?: String;
-  repeat?: Int;
-  estimateTime?: String;
-  plannedTime?: String;
-  plannedDate?: DateTimeInput;
-  finishDate?: DateTimeInput;
-  deadlineDate?: DateTimeInput;
-  completed?: Boolean;
-  subproject?: SubprojectUpdateOneWithoutTasksInput;
-  timelogs?: TimelogUpdateManyWithoutTaskInput;
+export interface SubprojectCreateWithoutTasksInput {
+  id?: Int;
+  name: String;
+  project: ProjectCreateOneWithoutSubprojectsInput;
 }
 
 export interface TimelogUpdateManyWithWhereNestedInput {
@@ -690,35 +733,6 @@ export interface SubprojectCreateManyWithoutProjectInput {
     | SubprojectCreateWithoutProjectInput[]
     | SubprojectCreateWithoutProjectInput;
   connect?: SubprojectWhereUniqueInput[] | SubprojectWhereUniqueInput;
-}
-
-export interface TaskCreateInput {
-  id?: Int;
-  name: String;
-  priority?: String;
-  comments?: String;
-  repeat?: Int;
-  estimateTime?: String;
-  plannedTime?: String;
-  plannedDate?: DateTimeInput;
-  finishDate?: DateTimeInput;
-  deadlineDate?: DateTimeInput;
-  completed?: Boolean;
-  subproject?: SubprojectCreateOneWithoutTasksInput;
-  timelogs?: TimelogCreateManyWithoutTaskInput;
-}
-
-export interface TaskCreateManyWithoutSubprojectInput {
-  create?:
-    | TaskCreateWithoutSubprojectInput[]
-    | TaskCreateWithoutSubprojectInput;
-  connect?: TaskWhereUniqueInput[] | TaskWhereUniqueInput;
-}
-
-export interface TaskUpsertWithWhereUniqueWithoutSubprojectInput {
-  where: TaskWhereUniqueInput;
-  update: TaskUpdateWithoutSubprojectDataInput;
-  create: TaskCreateWithoutSubprojectInput;
 }
 
 export interface TimelogWhereInput {
@@ -750,6 +764,30 @@ export interface TimelogWhereInput {
   AND?: TimelogWhereInput[] | TimelogWhereInput;
   OR?: TimelogWhereInput[] | TimelogWhereInput;
   NOT?: TimelogWhereInput[] | TimelogWhereInput;
+}
+
+export interface TaskCreateManyWithoutSubprojectInput {
+  create?:
+    | TaskCreateWithoutSubprojectInput[]
+    | TaskCreateWithoutSubprojectInput;
+  connect?: TaskWhereUniqueInput[] | TaskWhereUniqueInput;
+}
+
+export interface TaskUpsertWithWhereUniqueWithoutSubprojectInput {
+  where: TaskWhereUniqueInput;
+  update: TaskUpdateWithoutSubprojectDataInput;
+  create: TaskCreateWithoutSubprojectInput;
+}
+
+export interface TimelogSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: TimelogWhereInput;
+  AND?: TimelogSubscriptionWhereInput[] | TimelogSubscriptionWhereInput;
+  OR?: TimelogSubscriptionWhereInput[] | TimelogSubscriptionWhereInput;
+  NOT?: TimelogSubscriptionWhereInput[] | TimelogSubscriptionWhereInput;
 }
 
 export interface TaskScalarWhereInput {
@@ -839,30 +877,48 @@ export interface TaskScalarWhereInput {
   plannedTime_not_starts_with?: String;
   plannedTime_ends_with?: String;
   plannedTime_not_ends_with?: String;
-  plannedDate?: DateTimeInput;
-  plannedDate_not?: DateTimeInput;
-  plannedDate_in?: DateTimeInput[] | DateTimeInput;
-  plannedDate_not_in?: DateTimeInput[] | DateTimeInput;
-  plannedDate_lt?: DateTimeInput;
-  plannedDate_lte?: DateTimeInput;
-  plannedDate_gt?: DateTimeInput;
-  plannedDate_gte?: DateTimeInput;
-  finishDate?: DateTimeInput;
-  finishDate_not?: DateTimeInput;
-  finishDate_in?: DateTimeInput[] | DateTimeInput;
-  finishDate_not_in?: DateTimeInput[] | DateTimeInput;
-  finishDate_lt?: DateTimeInput;
-  finishDate_lte?: DateTimeInput;
-  finishDate_gt?: DateTimeInput;
-  finishDate_gte?: DateTimeInput;
-  deadlineDate?: DateTimeInput;
-  deadlineDate_not?: DateTimeInput;
-  deadlineDate_in?: DateTimeInput[] | DateTimeInput;
-  deadlineDate_not_in?: DateTimeInput[] | DateTimeInput;
-  deadlineDate_lt?: DateTimeInput;
-  deadlineDate_lte?: DateTimeInput;
-  deadlineDate_gt?: DateTimeInput;
-  deadlineDate_gte?: DateTimeInput;
+  plannedDate?: String;
+  plannedDate_not?: String;
+  plannedDate_in?: String[] | String;
+  plannedDate_not_in?: String[] | String;
+  plannedDate_lt?: String;
+  plannedDate_lte?: String;
+  plannedDate_gt?: String;
+  plannedDate_gte?: String;
+  plannedDate_contains?: String;
+  plannedDate_not_contains?: String;
+  plannedDate_starts_with?: String;
+  plannedDate_not_starts_with?: String;
+  plannedDate_ends_with?: String;
+  plannedDate_not_ends_with?: String;
+  finishDate?: String;
+  finishDate_not?: String;
+  finishDate_in?: String[] | String;
+  finishDate_not_in?: String[] | String;
+  finishDate_lt?: String;
+  finishDate_lte?: String;
+  finishDate_gt?: String;
+  finishDate_gte?: String;
+  finishDate_contains?: String;
+  finishDate_not_contains?: String;
+  finishDate_starts_with?: String;
+  finishDate_not_starts_with?: String;
+  finishDate_ends_with?: String;
+  finishDate_not_ends_with?: String;
+  deadlineDate?: String;
+  deadlineDate_not?: String;
+  deadlineDate_in?: String[] | String;
+  deadlineDate_not_in?: String[] | String;
+  deadlineDate_lt?: String;
+  deadlineDate_lte?: String;
+  deadlineDate_gt?: String;
+  deadlineDate_gte?: String;
+  deadlineDate_contains?: String;
+  deadlineDate_not_contains?: String;
+  deadlineDate_starts_with?: String;
+  deadlineDate_not_starts_with?: String;
+  deadlineDate_ends_with?: String;
+  deadlineDate_not_ends_with?: String;
   completed?: Boolean;
   completed_not?: Boolean;
   AND?: TaskScalarWhereInput[] | TaskScalarWhereInput;
@@ -870,15 +926,15 @@ export interface TaskScalarWhereInput {
   NOT?: TaskScalarWhereInput[] | TaskScalarWhereInput;
 }
 
-export interface TaskSubscriptionWhereInput {
+export interface SubprojectSubscriptionWhereInput {
   mutation_in?: MutationType[] | MutationType;
   updatedFields_contains?: String;
   updatedFields_contains_every?: String[] | String;
   updatedFields_contains_some?: String[] | String;
-  node?: TaskWhereInput;
-  AND?: TaskSubscriptionWhereInput[] | TaskSubscriptionWhereInput;
-  OR?: TaskSubscriptionWhereInput[] | TaskSubscriptionWhereInput;
-  NOT?: TaskSubscriptionWhereInput[] | TaskSubscriptionWhereInput;
+  node?: SubprojectWhereInput;
+  AND?: SubprojectSubscriptionWhereInput[] | SubprojectSubscriptionWhereInput;
+  OR?: SubprojectSubscriptionWhereInput[] | SubprojectSubscriptionWhereInput;
+  NOT?: SubprojectSubscriptionWhereInput[] | SubprojectSubscriptionWhereInput;
 }
 
 export interface TaskUpdateManyWithWhereNestedInput {
@@ -886,9 +942,9 @@ export interface TaskUpdateManyWithWhereNestedInput {
   data: TaskUpdateManyDataInput;
 }
 
-export interface TimelogUpdateManyMutationInput {
-  startDate?: DateTimeInput;
-  finishDate?: DateTimeInput;
+export interface TaskUpsertWithoutTimelogsInput {
+  update: TaskUpdateWithoutTimelogsDataInput;
+  create: TaskCreateWithoutTimelogsInput;
 }
 
 export interface TaskUpdateManyDataInput {
@@ -898,9 +954,9 @@ export interface TaskUpdateManyDataInput {
   repeat?: Int;
   estimateTime?: String;
   plannedTime?: String;
-  plannedDate?: DateTimeInput;
-  finishDate?: DateTimeInput;
-  deadlineDate?: DateTimeInput;
+  plannedDate?: String;
+  finishDate?: String;
+  deadlineDate?: String;
   completed?: Boolean;
 }
 
@@ -955,10 +1011,9 @@ export interface SubprojectUpdateManyWithWhereNestedInput {
   data: SubprojectUpdateManyDataInput;
 }
 
-export interface SubprojectCreateWithoutTasksInput {
-  id?: Int;
-  name: String;
-  project: ProjectCreateOneWithoutSubprojectsInput;
+export interface SubprojectCreateOneWithoutTasksInput {
+  create?: SubprojectCreateWithoutTasksInput;
+  connect?: SubprojectWhereUniqueInput;
 }
 
 export interface SubprojectUpdateManyDataInput {
@@ -975,33 +1030,26 @@ export interface ProjectUpdateManyMutationInput {
   name?: String;
 }
 
-export interface TimelogSubscriptionWhereInput {
+export interface TaskSubscriptionWhereInput {
   mutation_in?: MutationType[] | MutationType;
   updatedFields_contains?: String;
   updatedFields_contains_every?: String[] | String;
   updatedFields_contains_some?: String[] | String;
-  node?: TimelogWhereInput;
-  AND?: TimelogSubscriptionWhereInput[] | TimelogSubscriptionWhereInput;
-  OR?: TimelogSubscriptionWhereInput[] | TimelogSubscriptionWhereInput;
-  NOT?: TimelogSubscriptionWhereInput[] | TimelogSubscriptionWhereInput;
+  node?: TaskWhereInput;
+  AND?: TaskSubscriptionWhereInput[] | TaskSubscriptionWhereInput;
+  OR?: TaskSubscriptionWhereInput[] | TaskSubscriptionWhereInput;
+  NOT?: TaskSubscriptionWhereInput[] | TaskSubscriptionWhereInput;
 }
 
 export interface SubprojectUpdateManyMutationInput {
   name?: String;
 }
 
-export interface TaskUpdateWithoutTimelogsDataInput {
-  name?: String;
-  priority?: String;
-  comments?: String;
-  repeat?: Int;
-  estimateTime?: String;
-  plannedTime?: String;
-  plannedDate?: DateTimeInput;
-  finishDate?: DateTimeInput;
-  deadlineDate?: DateTimeInput;
-  completed?: Boolean;
-  subproject?: SubprojectUpdateOneWithoutTasksInput;
+export interface TaskUpdateOneRequiredWithoutTimelogsInput {
+  create?: TaskCreateWithoutTimelogsInput;
+  update?: TaskUpdateWithoutTimelogsDataInput;
+  upsert?: TaskUpsertWithoutTimelogsInput;
+  connect?: TaskWhereUniqueInput;
 }
 
 export interface ProjectUpsertWithoutSubprojectsInput {
@@ -1009,17 +1057,9 @@ export interface ProjectUpsertWithoutSubprojectsInput {
   create: ProjectCreateWithoutSubprojectsInput;
 }
 
-export interface TaskUpdateManyMutationInput {
-  name?: String;
-  priority?: String;
-  comments?: String;
-  repeat?: Int;
-  estimateTime?: String;
-  plannedTime?: String;
-  plannedDate?: DateTimeInput;
-  finishDate?: DateTimeInput;
-  deadlineDate?: DateTimeInput;
-  completed?: Boolean;
+export interface SubprojectUpsertWithoutTasksInput {
+  update: SubprojectUpdateWithoutTasksDataInput;
+  create: SubprojectCreateWithoutTasksInput;
 }
 
 export interface SubprojectCreateInput {
@@ -1066,46 +1106,42 @@ export interface TaskCreateWithoutSubprojectInput {
   repeat?: Int;
   estimateTime?: String;
   plannedTime?: String;
-  plannedDate?: DateTimeInput;
-  finishDate?: DateTimeInput;
-  deadlineDate?: DateTimeInput;
+  plannedDate?: String;
+  finishDate?: String;
+  deadlineDate?: String;
   completed?: Boolean;
   timelogs?: TimelogCreateManyWithoutTaskInput;
 }
 
-export interface SubprojectUpdateOneWithoutTasksInput {
-  create?: SubprojectCreateWithoutTasksInput;
-  update?: SubprojectUpdateWithoutTasksDataInput;
-  upsert?: SubprojectUpsertWithoutTasksInput;
-  delete?: Boolean;
-  disconnect?: Boolean;
-  connect?: SubprojectWhereUniqueInput;
-}
-
-export interface TaskCreateWithoutTimelogsInput {
-  id?: Int;
-  name: String;
+export interface TaskUpdateInput {
+  name?: String;
   priority?: String;
   comments?: String;
   repeat?: Int;
   estimateTime?: String;
   plannedTime?: String;
-  plannedDate?: DateTimeInput;
-  finishDate?: DateTimeInput;
-  deadlineDate?: DateTimeInput;
+  plannedDate?: String;
+  finishDate?: String;
+  deadlineDate?: String;
   completed?: Boolean;
-  subproject?: SubprojectCreateOneWithoutTasksInput;
+  subproject?: SubprojectUpdateOneWithoutTasksInput;
+  timelogs?: TimelogUpdateManyWithoutTaskInput;
 }
 
-export interface SubprojectSubscriptionWhereInput {
+export interface TaskCreateOneWithoutTimelogsInput {
+  create?: TaskCreateWithoutTimelogsInput;
+  connect?: TaskWhereUniqueInput;
+}
+
+export interface ProjectSubscriptionWhereInput {
   mutation_in?: MutationType[] | MutationType;
   updatedFields_contains?: String;
   updatedFields_contains_every?: String[] | String;
   updatedFields_contains_some?: String[] | String;
-  node?: SubprojectWhereInput;
-  AND?: SubprojectSubscriptionWhereInput[] | SubprojectSubscriptionWhereInput;
-  OR?: SubprojectSubscriptionWhereInput[] | SubprojectSubscriptionWhereInput;
-  NOT?: SubprojectSubscriptionWhereInput[] | SubprojectSubscriptionWhereInput;
+  node?: ProjectWhereInput;
+  AND?: ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput;
+  OR?: ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput;
+  NOT?: ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput;
 }
 
 export interface NodeNode {
@@ -1134,91 +1170,6 @@ export interface TimelogPreviousValuesSubscription
   finishDate: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface SubprojectConnection {
-  pageInfo: PageInfo;
-  edges: SubprojectEdge[];
-}
-
-export interface SubprojectConnectionPromise
-  extends Promise<SubprojectConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<SubprojectEdge>>() => T;
-  aggregate: <T = AggregateSubprojectPromise>() => T;
-}
-
-export interface SubprojectConnectionSubscription
-  extends Promise<AsyncIterator<SubprojectConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<SubprojectEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateSubprojectSubscription>() => T;
-}
-
-export interface Task {
-  id: Int;
-  name: String;
-  priority?: String;
-  comments?: String;
-  repeat?: Int;
-  estimateTime?: String;
-  plannedTime?: String;
-  plannedDate?: DateTimeOutput;
-  finishDate?: DateTimeOutput;
-  deadlineDate?: DateTimeOutput;
-  completed: Boolean;
-}
-
-export interface TaskPromise extends Promise<Task>, Fragmentable {
-  id: () => Promise<Int>;
-  name: () => Promise<String>;
-  priority: () => Promise<String>;
-  comments: () => Promise<String>;
-  repeat: () => Promise<Int>;
-  estimateTime: () => Promise<String>;
-  plannedTime: () => Promise<String>;
-  plannedDate: () => Promise<DateTimeOutput>;
-  finishDate: () => Promise<DateTimeOutput>;
-  deadlineDate: () => Promise<DateTimeOutput>;
-  completed: () => Promise<Boolean>;
-  subproject: <T = SubprojectPromise>() => T;
-  timelogs: <T = FragmentableArray<Timelog>>(args?: {
-    where?: TimelogWhereInput;
-    orderBy?: TimelogOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-}
-
-export interface TaskSubscription
-  extends Promise<AsyncIterator<Task>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<Int>>;
-  name: () => Promise<AsyncIterator<String>>;
-  priority: () => Promise<AsyncIterator<String>>;
-  comments: () => Promise<AsyncIterator<String>>;
-  repeat: () => Promise<AsyncIterator<Int>>;
-  estimateTime: () => Promise<AsyncIterator<String>>;
-  plannedTime: () => Promise<AsyncIterator<String>>;
-  plannedDate: () => Promise<AsyncIterator<DateTimeOutput>>;
-  finishDate: () => Promise<AsyncIterator<DateTimeOutput>>;
-  deadlineDate: () => Promise<AsyncIterator<DateTimeOutput>>;
-  completed: () => Promise<AsyncIterator<Boolean>>;
-  subproject: <T = SubprojectSubscription>() => T;
-  timelogs: <T = Promise<AsyncIterator<TimelogSubscription>>>(args?: {
-    where?: TimelogWhereInput;
-    orderBy?: TimelogOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-}
-
 export interface AggregateProject {
   count: Int;
 }
@@ -1233,39 +1184,6 @@ export interface AggregateProjectSubscription
   extends Promise<AsyncIterator<AggregateProject>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface ProjectEdge {
-  node: Project;
-  cursor: String;
-}
-
-export interface ProjectEdgePromise extends Promise<ProjectEdge>, Fragmentable {
-  node: <T = ProjectPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface ProjectEdgeSubscription
-  extends Promise<AsyncIterator<ProjectEdge>>,
-    Fragmentable {
-  node: <T = ProjectSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface BatchPayload {
-  count: Long;
-}
-
-export interface BatchPayloadPromise
-  extends Promise<BatchPayload>,
-    Fragmentable {
-  count: () => Promise<Long>;
-}
-
-export interface BatchPayloadSubscription
-  extends Promise<AsyncIterator<BatchPayload>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Long>>;
 }
 
 export interface Subproject {
@@ -1305,6 +1223,23 @@ export interface SubprojectSubscription
   }) => T;
 }
 
+export interface ProjectEdge {
+  node: Project;
+  cursor: String;
+}
+
+export interface ProjectEdgePromise extends Promise<ProjectEdge>, Fragmentable {
+  node: <T = ProjectPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ProjectEdgeSubscription
+  extends Promise<AsyncIterator<ProjectEdge>>,
+    Fragmentable {
+  node: <T = ProjectSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
 export interface PageInfo {
   hasNextPage: Boolean;
   hasPreviousPage: Boolean;
@@ -1328,20 +1263,66 @@ export interface PageInfoSubscription
   endCursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface AggregateTimelog {
-  count: Int;
+export interface BatchPayload {
+  count: Long;
 }
 
-export interface AggregateTimelogPromise
-  extends Promise<AggregateTimelog>,
+export interface BatchPayloadPromise
+  extends Promise<BatchPayload>,
     Fragmentable {
-  count: () => Promise<Int>;
+  count: () => Promise<Long>;
 }
 
-export interface AggregateTimelogSubscription
-  extends Promise<AsyncIterator<AggregateTimelog>>,
+export interface BatchPayloadSubscription
+  extends Promise<AsyncIterator<BatchPayload>>,
     Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
+  count: () => Promise<AsyncIterator<Long>>;
+}
+
+export interface TaskPreviousValues {
+  id: Int;
+  name: String;
+  priority?: String;
+  comments?: String;
+  repeat?: Int;
+  estimateTime?: String;
+  plannedTime?: String;
+  plannedDate?: String;
+  finishDate?: String;
+  deadlineDate?: String;
+  completed: Boolean;
+}
+
+export interface TaskPreviousValuesPromise
+  extends Promise<TaskPreviousValues>,
+    Fragmentable {
+  id: () => Promise<Int>;
+  name: () => Promise<String>;
+  priority: () => Promise<String>;
+  comments: () => Promise<String>;
+  repeat: () => Promise<Int>;
+  estimateTime: () => Promise<String>;
+  plannedTime: () => Promise<String>;
+  plannedDate: () => Promise<String>;
+  finishDate: () => Promise<String>;
+  deadlineDate: () => Promise<String>;
+  completed: () => Promise<Boolean>;
+}
+
+export interface TaskPreviousValuesSubscription
+  extends Promise<AsyncIterator<TaskPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<Int>>;
+  name: () => Promise<AsyncIterator<String>>;
+  priority: () => Promise<AsyncIterator<String>>;
+  comments: () => Promise<AsyncIterator<String>>;
+  repeat: () => Promise<AsyncIterator<Int>>;
+  estimateTime: () => Promise<AsyncIterator<String>>;
+  plannedTime: () => Promise<AsyncIterator<String>>;
+  plannedDate: () => Promise<AsyncIterator<String>>;
+  finishDate: () => Promise<AsyncIterator<String>>;
+  deadlineDate: () => Promise<AsyncIterator<String>>;
+  completed: () => Promise<AsyncIterator<Boolean>>;
 }
 
 export interface ProjectConnection {
@@ -1365,25 +1346,21 @@ export interface ProjectConnectionSubscription
   aggregate: <T = AggregateProjectSubscription>() => T;
 }
 
-export interface TimelogConnection {
-  pageInfo: PageInfo;
-  edges: TimelogEdge[];
+export interface TimelogEdge {
+  node: Timelog;
+  cursor: String;
 }
 
-export interface TimelogConnectionPromise
-  extends Promise<TimelogConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<TimelogEdge>>() => T;
-  aggregate: <T = AggregateTimelogPromise>() => T;
+export interface TimelogEdgePromise extends Promise<TimelogEdge>, Fragmentable {
+  node: <T = TimelogPromise>() => T;
+  cursor: () => Promise<String>;
 }
 
-export interface TimelogConnectionSubscription
-  extends Promise<AsyncIterator<TimelogConnection>>,
+export interface TimelogEdgeSubscription
+  extends Promise<AsyncIterator<TimelogEdge>>,
     Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<TimelogEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateTimelogSubscription>() => T;
+  node: <T = TimelogSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface TaskSubscriptionPayload {
@@ -1411,21 +1388,63 @@ export interface TaskSubscriptionPayloadSubscription
   previousValues: <T = TaskPreviousValuesSubscription>() => T;
 }
 
-export interface TaskEdge {
-  node: Task;
-  cursor: String;
+export interface AggregateTask {
+  count: Int;
 }
 
-export interface TaskEdgePromise extends Promise<TaskEdge>, Fragmentable {
-  node: <T = TaskPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface TaskEdgeSubscription
-  extends Promise<AsyncIterator<TaskEdge>>,
+export interface AggregateTaskPromise
+  extends Promise<AggregateTask>,
     Fragmentable {
-  node: <T = TaskSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
+  count: () => Promise<Int>;
+}
+
+export interface AggregateTaskSubscription
+  extends Promise<AsyncIterator<AggregateTask>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface Timelog {
+  id: Int;
+  startDate?: DateTimeOutput;
+  finishDate?: DateTimeOutput;
+}
+
+export interface TimelogPromise extends Promise<Timelog>, Fragmentable {
+  id: () => Promise<Int>;
+  startDate: () => Promise<DateTimeOutput>;
+  finishDate: () => Promise<DateTimeOutput>;
+  task: <T = TaskPromise>() => T;
+}
+
+export interface TimelogSubscription
+  extends Promise<AsyncIterator<Timelog>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<Int>>;
+  startDate: () => Promise<AsyncIterator<DateTimeOutput>>;
+  finishDate: () => Promise<AsyncIterator<DateTimeOutput>>;
+  task: <T = TaskSubscription>() => T;
+}
+
+export interface TaskConnection {
+  pageInfo: PageInfo;
+  edges: TaskEdge[];
+}
+
+export interface TaskConnectionPromise
+  extends Promise<TaskConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<TaskEdge>>() => T;
+  aggregate: <T = AggregateTaskPromise>() => T;
+}
+
+export interface TaskConnectionSubscription
+  extends Promise<AsyncIterator<TaskConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<TaskEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateTaskSubscription>() => T;
 }
 
 export interface Project {
@@ -1463,20 +1482,23 @@ export interface ProjectSubscription
   }) => T;
 }
 
-export interface AggregateSubproject {
-  count: Int;
+export interface SubprojectEdge {
+  node: Subproject;
+  cursor: String;
 }
 
-export interface AggregateSubprojectPromise
-  extends Promise<AggregateSubproject>,
+export interface SubprojectEdgePromise
+  extends Promise<SubprojectEdge>,
     Fragmentable {
-  count: () => Promise<Int>;
+  node: <T = SubprojectPromise>() => T;
+  cursor: () => Promise<String>;
 }
 
-export interface AggregateSubprojectSubscription
-  extends Promise<AsyncIterator<AggregateSubproject>>,
+export interface SubprojectEdgeSubscription
+  extends Promise<AsyncIterator<SubprojectEdge>>,
     Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
+  node: <T = SubprojectSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface ProjectSubscriptionPayload {
@@ -1529,21 +1551,25 @@ export interface TimelogSubscriptionPayloadSubscription
   previousValues: <T = TimelogPreviousValuesSubscription>() => T;
 }
 
-export interface TimelogEdge {
-  node: Timelog;
-  cursor: String;
+export interface TimelogConnection {
+  pageInfo: PageInfo;
+  edges: TimelogEdge[];
 }
 
-export interface TimelogEdgePromise extends Promise<TimelogEdge>, Fragmentable {
-  node: <T = TimelogPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface TimelogEdgeSubscription
-  extends Promise<AsyncIterator<TimelogEdge>>,
+export interface TimelogConnectionPromise
+  extends Promise<TimelogConnection>,
     Fragmentable {
-  node: <T = TimelogSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<TimelogEdge>>() => T;
+  aggregate: <T = AggregateTimelogPromise>() => T;
+}
+
+export interface TimelogConnectionSubscription
+  extends Promise<AsyncIterator<TimelogConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<TimelogEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateTimelogSubscription>() => T;
 }
 
 export interface SubprojectPreviousValues {
@@ -1590,26 +1616,68 @@ export interface SubprojectSubscriptionPayloadSubscription
   previousValues: <T = SubprojectPreviousValuesSubscription>() => T;
 }
 
-export interface Timelog {
+export interface Task {
   id: Int;
-  startDate?: DateTimeOutput;
-  finishDate?: DateTimeOutput;
+  name: String;
+  priority?: String;
+  comments?: String;
+  repeat?: Int;
+  estimateTime?: String;
+  plannedTime?: String;
+  plannedDate?: String;
+  finishDate?: String;
+  deadlineDate?: String;
+  completed: Boolean;
 }
 
-export interface TimelogPromise extends Promise<Timelog>, Fragmentable {
+export interface TaskPromise extends Promise<Task>, Fragmentable {
   id: () => Promise<Int>;
-  startDate: () => Promise<DateTimeOutput>;
-  finishDate: () => Promise<DateTimeOutput>;
-  task: <T = TaskPromise>() => T;
+  name: () => Promise<String>;
+  priority: () => Promise<String>;
+  comments: () => Promise<String>;
+  repeat: () => Promise<Int>;
+  estimateTime: () => Promise<String>;
+  plannedTime: () => Promise<String>;
+  plannedDate: () => Promise<String>;
+  finishDate: () => Promise<String>;
+  deadlineDate: () => Promise<String>;
+  completed: () => Promise<Boolean>;
+  subproject: <T = SubprojectPromise>() => T;
+  timelogs: <T = FragmentableArray<Timelog>>(args?: {
+    where?: TimelogWhereInput;
+    orderBy?: TimelogOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
-export interface TimelogSubscription
-  extends Promise<AsyncIterator<Timelog>>,
+export interface TaskSubscription
+  extends Promise<AsyncIterator<Task>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<Int>>;
-  startDate: () => Promise<AsyncIterator<DateTimeOutput>>;
-  finishDate: () => Promise<AsyncIterator<DateTimeOutput>>;
-  task: <T = TaskSubscription>() => T;
+  name: () => Promise<AsyncIterator<String>>;
+  priority: () => Promise<AsyncIterator<String>>;
+  comments: () => Promise<AsyncIterator<String>>;
+  repeat: () => Promise<AsyncIterator<Int>>;
+  estimateTime: () => Promise<AsyncIterator<String>>;
+  plannedTime: () => Promise<AsyncIterator<String>>;
+  plannedDate: () => Promise<AsyncIterator<String>>;
+  finishDate: () => Promise<AsyncIterator<String>>;
+  deadlineDate: () => Promise<AsyncIterator<String>>;
+  completed: () => Promise<AsyncIterator<Boolean>>;
+  subproject: <T = SubprojectSubscription>() => T;
+  timelogs: <T = Promise<AsyncIterator<TimelogSubscription>>>(args?: {
+    where?: TimelogWhereInput;
+    orderBy?: TimelogOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
 export interface ProjectPreviousValues {
@@ -1631,107 +1699,87 @@ export interface ProjectPreviousValuesSubscription
   name: () => Promise<AsyncIterator<String>>;
 }
 
-export interface AggregateTask {
+export interface TaskEdge {
+  node: Task;
+  cursor: String;
+}
+
+export interface TaskEdgePromise extends Promise<TaskEdge>, Fragmentable {
+  node: <T = TaskPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface TaskEdgeSubscription
+  extends Promise<AsyncIterator<TaskEdge>>,
+    Fragmentable {
+  node: <T = TaskSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateTimelog {
   count: Int;
 }
 
-export interface AggregateTaskPromise
-  extends Promise<AggregateTask>,
+export interface AggregateTimelogPromise
+  extends Promise<AggregateTimelog>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateTaskSubscription
-  extends Promise<AsyncIterator<AggregateTask>>,
+export interface AggregateTimelogSubscription
+  extends Promise<AsyncIterator<AggregateTimelog>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface TaskPreviousValues {
-  id: Int;
-  name: String;
-  priority?: String;
-  comments?: String;
-  repeat?: Int;
-  estimateTime?: String;
-  plannedTime?: String;
-  plannedDate?: DateTimeOutput;
-  finishDate?: DateTimeOutput;
-  deadlineDate?: DateTimeOutput;
-  completed: Boolean;
-}
-
-export interface TaskPreviousValuesPromise
-  extends Promise<TaskPreviousValues>,
-    Fragmentable {
-  id: () => Promise<Int>;
-  name: () => Promise<String>;
-  priority: () => Promise<String>;
-  comments: () => Promise<String>;
-  repeat: () => Promise<Int>;
-  estimateTime: () => Promise<String>;
-  plannedTime: () => Promise<String>;
-  plannedDate: () => Promise<DateTimeOutput>;
-  finishDate: () => Promise<DateTimeOutput>;
-  deadlineDate: () => Promise<DateTimeOutput>;
-  completed: () => Promise<Boolean>;
-}
-
-export interface TaskPreviousValuesSubscription
-  extends Promise<AsyncIterator<TaskPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<Int>>;
-  name: () => Promise<AsyncIterator<String>>;
-  priority: () => Promise<AsyncIterator<String>>;
-  comments: () => Promise<AsyncIterator<String>>;
-  repeat: () => Promise<AsyncIterator<Int>>;
-  estimateTime: () => Promise<AsyncIterator<String>>;
-  plannedTime: () => Promise<AsyncIterator<String>>;
-  plannedDate: () => Promise<AsyncIterator<DateTimeOutput>>;
-  finishDate: () => Promise<AsyncIterator<DateTimeOutput>>;
-  deadlineDate: () => Promise<AsyncIterator<DateTimeOutput>>;
-  completed: () => Promise<AsyncIterator<Boolean>>;
-}
-
-export interface SubprojectEdge {
-  node: Subproject;
-  cursor: String;
-}
-
-export interface SubprojectEdgePromise
-  extends Promise<SubprojectEdge>,
-    Fragmentable {
-  node: <T = SubprojectPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface SubprojectEdgeSubscription
-  extends Promise<AsyncIterator<SubprojectEdge>>,
-    Fragmentable {
-  node: <T = SubprojectSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface TaskConnection {
+export interface SubprojectConnection {
   pageInfo: PageInfo;
-  edges: TaskEdge[];
+  edges: SubprojectEdge[];
 }
 
-export interface TaskConnectionPromise
-  extends Promise<TaskConnection>,
+export interface SubprojectConnectionPromise
+  extends Promise<SubprojectConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<TaskEdge>>() => T;
-  aggregate: <T = AggregateTaskPromise>() => T;
+  edges: <T = FragmentableArray<SubprojectEdge>>() => T;
+  aggregate: <T = AggregateSubprojectPromise>() => T;
 }
 
-export interface TaskConnectionSubscription
-  extends Promise<AsyncIterator<TaskConnection>>,
+export interface SubprojectConnectionSubscription
+  extends Promise<AsyncIterator<SubprojectConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<TaskEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateTaskSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<SubprojectEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateSubprojectSubscription>() => T;
 }
+
+export interface AggregateSubproject {
+  count: Int;
+}
+
+export interface AggregateSubprojectPromise
+  extends Promise<AggregateSubproject>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateSubprojectSubscription
+  extends Promise<AsyncIterator<AggregateSubproject>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+/*
+The `Boolean` scalar type represents `true` or `false`.
+*/
+export type Boolean = boolean;
+
+export type Long = string;
+
+/*
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
+*/
+export type Int = number;
 
 /*
 DateTime scalar input type, allowing Date
@@ -1742,18 +1790,6 @@ export type DateTimeInput = Date | string;
 DateTime scalar output type, which is always a string
 */
 export type DateTimeOutput = string;
-
-export type Long = string;
-
-/*
-The `Boolean` scalar type represents `true` or `false`.
-*/
-export type Boolean = boolean;
-
-/*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
-*/
-export type Int = number;
 
 /*
 The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.

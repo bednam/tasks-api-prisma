@@ -27,6 +27,7 @@ scalar DateTime
 scalar Long
 
 type Mutation {
+  cloneTask(where: TaskWhereUniqueInput): Task!
   completeTask(where: TaskWhereUniqueInput!): Task!
   createProject(data: ProjectCreateInput!): Project!
   createSubproject(data: SubprojectCreateInput!): Subproject!
@@ -378,12 +379,12 @@ input SubprojectWhereUniqueInput {
 type Task {
   comments: String
   completed: Boolean!
-  deadlineDate: DateTime
+  deadlineDate: String
   estimateTime: String
-  finishDate: DateTime
+  finishDate: String
   id: Int!
   name: String!
-  plannedDate: DateTime
+  plannedDate: String
   plannedTime: String
   priority: String
   project: Project
@@ -402,12 +403,12 @@ type TaskConnection {
 input TaskCreateInput {
   comments: String
   completed: Boolean
-  deadlineDate: DateTime
+  deadlineDate: String
   estimateTime: String
-  finishDate: DateTime
+  finishDate: String
   id: Int
   name: String!
-  plannedDate: DateTime
+  plannedDate: String
   plannedTime: String
   priority: String
   repeat: Int
@@ -428,12 +429,12 @@ input TaskCreateOneWithoutTimelogsInput {
 input TaskCreateWithoutSubprojectInput {
   comments: String
   completed: Boolean
-  deadlineDate: DateTime
+  deadlineDate: String
   estimateTime: String
-  finishDate: DateTime
+  finishDate: String
   id: Int
   name: String!
-  plannedDate: DateTime
+  plannedDate: String
   plannedTime: String
   priority: String
   repeat: Int
@@ -443,12 +444,12 @@ input TaskCreateWithoutSubprojectInput {
 input TaskCreateWithoutTimelogsInput {
   comments: String
   completed: Boolean
-  deadlineDate: DateTime
+  deadlineDate: String
   estimateTime: String
-  finishDate: DateTime
+  finishDate: String
   id: Int
   name: String!
-  plannedDate: DateTime
+  plannedDate: String
   plannedTime: String
   priority: String
   repeat: Int
@@ -507,14 +508,20 @@ input TaskScalarWhereInput {
   comments_starts_with: String
   completed: Boolean
   completed_not: Boolean
-  deadlineDate: DateTime
-  deadlineDate_gt: DateTime
-  deadlineDate_gte: DateTime
-  deadlineDate_in: [DateTime!]
-  deadlineDate_lt: DateTime
-  deadlineDate_lte: DateTime
-  deadlineDate_not: DateTime
-  deadlineDate_not_in: [DateTime!]
+  deadlineDate: String
+  deadlineDate_contains: String
+  deadlineDate_ends_with: String
+  deadlineDate_gt: String
+  deadlineDate_gte: String
+  deadlineDate_in: [String!]
+  deadlineDate_lt: String
+  deadlineDate_lte: String
+  deadlineDate_not: String
+  deadlineDate_not_contains: String
+  deadlineDate_not_ends_with: String
+  deadlineDate_not_in: [String!]
+  deadlineDate_not_starts_with: String
+  deadlineDate_starts_with: String
   estimateTime: String
   estimateTime_contains: String
   estimateTime_ends_with: String
@@ -529,14 +536,20 @@ input TaskScalarWhereInput {
   estimateTime_not_in: [String!]
   estimateTime_not_starts_with: String
   estimateTime_starts_with: String
-  finishDate: DateTime
-  finishDate_gt: DateTime
-  finishDate_gte: DateTime
-  finishDate_in: [DateTime!]
-  finishDate_lt: DateTime
-  finishDate_lte: DateTime
-  finishDate_not: DateTime
-  finishDate_not_in: [DateTime!]
+  finishDate: String
+  finishDate_contains: String
+  finishDate_ends_with: String
+  finishDate_gt: String
+  finishDate_gte: String
+  finishDate_in: [String!]
+  finishDate_lt: String
+  finishDate_lte: String
+  finishDate_not: String
+  finishDate_not_contains: String
+  finishDate_not_ends_with: String
+  finishDate_not_in: [String!]
+  finishDate_not_starts_with: String
+  finishDate_starts_with: String
   id: Int
   id_gt: Int
   id_gte: Int
@@ -561,14 +574,20 @@ input TaskScalarWhereInput {
   name_starts_with: String
   NOT: [TaskScalarWhereInput!]
   OR: [TaskScalarWhereInput!]
-  plannedDate: DateTime
-  plannedDate_gt: DateTime
-  plannedDate_gte: DateTime
-  plannedDate_in: [DateTime!]
-  plannedDate_lt: DateTime
-  plannedDate_lte: DateTime
-  plannedDate_not: DateTime
-  plannedDate_not_in: [DateTime!]
+  plannedDate: String
+  plannedDate_contains: String
+  plannedDate_ends_with: String
+  plannedDate_gt: String
+  plannedDate_gte: String
+  plannedDate_in: [String!]
+  plannedDate_lt: String
+  plannedDate_lte: String
+  plannedDate_not: String
+  plannedDate_not_contains: String
+  plannedDate_not_ends_with: String
+  plannedDate_not_in: [String!]
+  plannedDate_not_starts_with: String
+  plannedDate_starts_with: String
   plannedTime: String
   plannedTime_contains: String
   plannedTime_ends_with: String
@@ -610,11 +629,11 @@ input TaskScalarWhereInput {
 input TaskUpdateInput {
   comments: String
   completed: Boolean
-  deadlineDate: DateTime
+  deadlineDate: String
   estimateTime: String
-  finishDate: DateTime
+  finishDate: String
   name: String
-  plannedDate: DateTime
+  plannedDate: String
   plannedTime: String
   priority: String
   repeat: Int
@@ -625,11 +644,11 @@ input TaskUpdateInput {
 input TaskUpdateManyDataInput {
   comments: String
   completed: Boolean
-  deadlineDate: DateTime
+  deadlineDate: String
   estimateTime: String
-  finishDate: DateTime
+  finishDate: String
   name: String
-  plannedDate: DateTime
+  plannedDate: String
   plannedTime: String
   priority: String
   repeat: Int
@@ -638,11 +657,11 @@ input TaskUpdateManyDataInput {
 input TaskUpdateManyMutationInput {
   comments: String
   completed: Boolean
-  deadlineDate: DateTime
+  deadlineDate: String
   estimateTime: String
-  finishDate: DateTime
+  finishDate: String
   name: String
-  plannedDate: DateTime
+  plannedDate: String
   plannedTime: String
   priority: String
   repeat: Int
@@ -675,11 +694,11 @@ input TaskUpdateOneRequiredWithoutTimelogsInput {
 input TaskUpdateWithoutSubprojectDataInput {
   comments: String
   completed: Boolean
-  deadlineDate: DateTime
+  deadlineDate: String
   estimateTime: String
-  finishDate: DateTime
+  finishDate: String
   name: String
-  plannedDate: DateTime
+  plannedDate: String
   plannedTime: String
   priority: String
   repeat: Int
@@ -689,11 +708,11 @@ input TaskUpdateWithoutSubprojectDataInput {
 input TaskUpdateWithoutTimelogsDataInput {
   comments: String
   completed: Boolean
-  deadlineDate: DateTime
+  deadlineDate: String
   estimateTime: String
-  finishDate: DateTime
+  finishDate: String
   name: String
-  plannedDate: DateTime
+  plannedDate: String
   plannedTime: String
   priority: String
   repeat: Int
@@ -734,14 +753,20 @@ input TaskWhereInput {
   comments_starts_with: String
   completed: Boolean
   completed_not: Boolean
-  deadlineDate: DateTime
-  deadlineDate_gt: DateTime
-  deadlineDate_gte: DateTime
-  deadlineDate_in: [DateTime!]
-  deadlineDate_lt: DateTime
-  deadlineDate_lte: DateTime
-  deadlineDate_not: DateTime
-  deadlineDate_not_in: [DateTime!]
+  deadlineDate: String
+  deadlineDate_contains: String
+  deadlineDate_ends_with: String
+  deadlineDate_gt: String
+  deadlineDate_gte: String
+  deadlineDate_in: [String!]
+  deadlineDate_lt: String
+  deadlineDate_lte: String
+  deadlineDate_not: String
+  deadlineDate_not_contains: String
+  deadlineDate_not_ends_with: String
+  deadlineDate_not_in: [String!]
+  deadlineDate_not_starts_with: String
+  deadlineDate_starts_with: String
   estimateTime: String
   estimateTime_contains: String
   estimateTime_ends_with: String
@@ -756,14 +781,20 @@ input TaskWhereInput {
   estimateTime_not_in: [String!]
   estimateTime_not_starts_with: String
   estimateTime_starts_with: String
-  finishDate: DateTime
-  finishDate_gt: DateTime
-  finishDate_gte: DateTime
-  finishDate_in: [DateTime!]
-  finishDate_lt: DateTime
-  finishDate_lte: DateTime
-  finishDate_not: DateTime
-  finishDate_not_in: [DateTime!]
+  finishDate: String
+  finishDate_contains: String
+  finishDate_ends_with: String
+  finishDate_gt: String
+  finishDate_gte: String
+  finishDate_in: [String!]
+  finishDate_lt: String
+  finishDate_lte: String
+  finishDate_not: String
+  finishDate_not_contains: String
+  finishDate_not_ends_with: String
+  finishDate_not_in: [String!]
+  finishDate_not_starts_with: String
+  finishDate_starts_with: String
   id: Int
   id_gt: Int
   id_gte: Int
@@ -788,14 +819,20 @@ input TaskWhereInput {
   name_starts_with: String
   NOT: [TaskWhereInput!]
   OR: [TaskWhereInput!]
-  plannedDate: DateTime
-  plannedDate_gt: DateTime
-  plannedDate_gte: DateTime
-  plannedDate_in: [DateTime!]
-  plannedDate_lt: DateTime
-  plannedDate_lte: DateTime
-  plannedDate_not: DateTime
-  plannedDate_not_in: [DateTime!]
+  plannedDate: String
+  plannedDate_contains: String
+  plannedDate_ends_with: String
+  plannedDate_gt: String
+  plannedDate_gte: String
+  plannedDate_in: [String!]
+  plannedDate_lt: String
+  plannedDate_lte: String
+  plannedDate_not: String
+  plannedDate_not_contains: String
+  plannedDate_not_ends_with: String
+  plannedDate_not_in: [String!]
+  plannedDate_not_starts_with: String
+  plannedDate_starts_with: String
   plannedTime: String
   plannedTime_contains: String
   plannedTime_ends_with: String

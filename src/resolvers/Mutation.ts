@@ -20,6 +20,17 @@ export const Mutation = prismaObjectType({
         })
       }
     })
+    t.field('cloneTask', {
+      type: 'Task',
+      args: { where: arg({ type: 'TaskWhereUniqueInput' }) },
+      resolve: async (root, { where }, { prisma }) => {
+        const { id, completed, finishDate, ...data } = await prisma.task({
+          id: where.id
+        })
+
+        return prisma.createTask(data)
+      }
+    })
     t.field('stopTimelog', {
       type: 'Timelog',
       args: {
@@ -31,7 +42,6 @@ export const Mutation = prismaObjectType({
           where
         })
     })
-
     t.field('startTimelog', {
       type: 'Timelog',
       args: { data: arg({ type: 'TimelogCreateInput' }) },
