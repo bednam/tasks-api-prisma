@@ -220,12 +220,12 @@ export interface NexusGenInputs {
   TaskCreateInput: { // input type
     comments?: string | null; // String
     completed?: boolean | null; // Boolean
-    deadlineDate?: any | null; // DateTime
+    deadlineDate?: string | null; // String
     estimateTime?: string | null; // String
-    finishDate?: any | null; // DateTime
+    finishDate?: string | null; // String
     id?: number | null; // Int
     name: string; // String!
-    plannedDate?: any | null; // DateTime
+    plannedDate?: string | null; // String
     plannedTime?: string | null; // String
     priority?: string | null; // String
     repeat?: number | null; // Int
@@ -243,12 +243,12 @@ export interface NexusGenInputs {
   TaskCreateWithoutSubprojectInput: { // input type
     comments?: string | null; // String
     completed?: boolean | null; // Boolean
-    deadlineDate?: any | null; // DateTime
+    deadlineDate?: string | null; // String
     estimateTime?: string | null; // String
-    finishDate?: any | null; // DateTime
+    finishDate?: string | null; // String
     id?: number | null; // Int
     name: string; // String!
-    plannedDate?: any | null; // DateTime
+    plannedDate?: string | null; // String
     plannedTime?: string | null; // String
     priority?: string | null; // String
     repeat?: number | null; // Int
@@ -257,12 +257,12 @@ export interface NexusGenInputs {
   TaskCreateWithoutTimelogsInput: { // input type
     comments?: string | null; // String
     completed?: boolean | null; // Boolean
-    deadlineDate?: any | null; // DateTime
+    deadlineDate?: string | null; // String
     estimateTime?: string | null; // String
-    finishDate?: any | null; // DateTime
+    finishDate?: string | null; // String
     id?: number | null; // Int
     name: string; // String!
-    plannedDate?: any | null; // DateTime
+    plannedDate?: string | null; // String
     plannedTime?: string | null; // String
     priority?: string | null; // String
     repeat?: number | null; // Int
@@ -286,14 +286,20 @@ export interface NexusGenInputs {
     comments_starts_with?: string | null; // String
     completed?: boolean | null; // Boolean
     completed_not?: boolean | null; // Boolean
-    deadlineDate?: any | null; // DateTime
-    deadlineDate_gt?: any | null; // DateTime
-    deadlineDate_gte?: any | null; // DateTime
-    deadlineDate_in?: any[] | null; // [DateTime!]
-    deadlineDate_lt?: any | null; // DateTime
-    deadlineDate_lte?: any | null; // DateTime
-    deadlineDate_not?: any | null; // DateTime
-    deadlineDate_not_in?: any[] | null; // [DateTime!]
+    deadlineDate?: string | null; // String
+    deadlineDate_contains?: string | null; // String
+    deadlineDate_ends_with?: string | null; // String
+    deadlineDate_gt?: string | null; // String
+    deadlineDate_gte?: string | null; // String
+    deadlineDate_in?: string[] | null; // [String!]
+    deadlineDate_lt?: string | null; // String
+    deadlineDate_lte?: string | null; // String
+    deadlineDate_not?: string | null; // String
+    deadlineDate_not_contains?: string | null; // String
+    deadlineDate_not_ends_with?: string | null; // String
+    deadlineDate_not_in?: string[] | null; // [String!]
+    deadlineDate_not_starts_with?: string | null; // String
+    deadlineDate_starts_with?: string | null; // String
     estimateTime?: string | null; // String
     estimateTime_contains?: string | null; // String
     estimateTime_ends_with?: string | null; // String
@@ -308,14 +314,20 @@ export interface NexusGenInputs {
     estimateTime_not_in?: string[] | null; // [String!]
     estimateTime_not_starts_with?: string | null; // String
     estimateTime_starts_with?: string | null; // String
-    finishDate?: any | null; // DateTime
-    finishDate_gt?: any | null; // DateTime
-    finishDate_gte?: any | null; // DateTime
-    finishDate_in?: any[] | null; // [DateTime!]
-    finishDate_lt?: any | null; // DateTime
-    finishDate_lte?: any | null; // DateTime
-    finishDate_not?: any | null; // DateTime
-    finishDate_not_in?: any[] | null; // [DateTime!]
+    finishDate?: string | null; // String
+    finishDate_contains?: string | null; // String
+    finishDate_ends_with?: string | null; // String
+    finishDate_gt?: string | null; // String
+    finishDate_gte?: string | null; // String
+    finishDate_in?: string[] | null; // [String!]
+    finishDate_lt?: string | null; // String
+    finishDate_lte?: string | null; // String
+    finishDate_not?: string | null; // String
+    finishDate_not_contains?: string | null; // String
+    finishDate_not_ends_with?: string | null; // String
+    finishDate_not_in?: string[] | null; // [String!]
+    finishDate_not_starts_with?: string | null; // String
+    finishDate_starts_with?: string | null; // String
     id?: number | null; // Int
     id_gt?: number | null; // Int
     id_gte?: number | null; // Int
@@ -340,14 +352,20 @@ export interface NexusGenInputs {
     name_starts_with?: string | null; // String
     NOT?: NexusGenInputs['TaskScalarWhereInput'][] | null; // [TaskScalarWhereInput!]
     OR?: NexusGenInputs['TaskScalarWhereInput'][] | null; // [TaskScalarWhereInput!]
-    plannedDate?: any | null; // DateTime
-    plannedDate_gt?: any | null; // DateTime
-    plannedDate_gte?: any | null; // DateTime
-    plannedDate_in?: any[] | null; // [DateTime!]
-    plannedDate_lt?: any | null; // DateTime
-    plannedDate_lte?: any | null; // DateTime
-    plannedDate_not?: any | null; // DateTime
-    plannedDate_not_in?: any[] | null; // [DateTime!]
+    plannedDate?: string | null; // String
+    plannedDate_contains?: string | null; // String
+    plannedDate_ends_with?: string | null; // String
+    plannedDate_gt?: string | null; // String
+    plannedDate_gte?: string | null; // String
+    plannedDate_in?: string[] | null; // [String!]
+    plannedDate_lt?: string | null; // String
+    plannedDate_lte?: string | null; // String
+    plannedDate_not?: string | null; // String
+    plannedDate_not_contains?: string | null; // String
+    plannedDate_not_ends_with?: string | null; // String
+    plannedDate_not_in?: string[] | null; // [String!]
+    plannedDate_not_starts_with?: string | null; // String
+    plannedDate_starts_with?: string | null; // String
     plannedTime?: string | null; // String
     plannedTime_contains?: string | null; // String
     plannedTime_ends_with?: string | null; // String
@@ -388,11 +406,11 @@ export interface NexusGenInputs {
   TaskUpdateInput: { // input type
     comments?: string | null; // String
     completed?: boolean | null; // Boolean
-    deadlineDate?: any | null; // DateTime
+    deadlineDate?: string | null; // String
     estimateTime?: string | null; // String
-    finishDate?: any | null; // DateTime
+    finishDate?: string | null; // String
     name?: string | null; // String
-    plannedDate?: any | null; // DateTime
+    plannedDate?: string | null; // String
     plannedTime?: string | null; // String
     priority?: string | null; // String
     repeat?: number | null; // Int
@@ -402,11 +420,11 @@ export interface NexusGenInputs {
   TaskUpdateManyDataInput: { // input type
     comments?: string | null; // String
     completed?: boolean | null; // Boolean
-    deadlineDate?: any | null; // DateTime
+    deadlineDate?: string | null; // String
     estimateTime?: string | null; // String
-    finishDate?: any | null; // DateTime
+    finishDate?: string | null; // String
     name?: string | null; // String
-    plannedDate?: any | null; // DateTime
+    plannedDate?: string | null; // String
     plannedTime?: string | null; // String
     priority?: string | null; // String
     repeat?: number | null; // Int
@@ -414,11 +432,11 @@ export interface NexusGenInputs {
   TaskUpdateManyMutationInput: { // input type
     comments?: string | null; // String
     completed?: boolean | null; // Boolean
-    deadlineDate?: any | null; // DateTime
+    deadlineDate?: string | null; // String
     estimateTime?: string | null; // String
-    finishDate?: any | null; // DateTime
+    finishDate?: string | null; // String
     name?: string | null; // String
-    plannedDate?: any | null; // DateTime
+    plannedDate?: string | null; // String
     plannedTime?: string | null; // String
     priority?: string | null; // String
     repeat?: number | null; // Int
@@ -451,11 +469,11 @@ export interface NexusGenInputs {
   TaskUpdateWithoutSubprojectDataInput: { // input type
     comments?: string | null; // String
     completed?: boolean | null; // Boolean
-    deadlineDate?: any | null; // DateTime
+    deadlineDate?: string | null; // String
     estimateTime?: string | null; // String
-    finishDate?: any | null; // DateTime
+    finishDate?: string | null; // String
     name?: string | null; // String
-    plannedDate?: any | null; // DateTime
+    plannedDate?: string | null; // String
     plannedTime?: string | null; // String
     priority?: string | null; // String
     repeat?: number | null; // Int
@@ -464,11 +482,11 @@ export interface NexusGenInputs {
   TaskUpdateWithoutTimelogsDataInput: { // input type
     comments?: string | null; // String
     completed?: boolean | null; // Boolean
-    deadlineDate?: any | null; // DateTime
+    deadlineDate?: string | null; // String
     estimateTime?: string | null; // String
-    finishDate?: any | null; // DateTime
+    finishDate?: string | null; // String
     name?: string | null; // String
-    plannedDate?: any | null; // DateTime
+    plannedDate?: string | null; // String
     plannedTime?: string | null; // String
     priority?: string | null; // String
     repeat?: number | null; // Int
@@ -501,14 +519,20 @@ export interface NexusGenInputs {
     comments_starts_with?: string | null; // String
     completed?: boolean | null; // Boolean
     completed_not?: boolean | null; // Boolean
-    deadlineDate?: any | null; // DateTime
-    deadlineDate_gt?: any | null; // DateTime
-    deadlineDate_gte?: any | null; // DateTime
-    deadlineDate_in?: any[] | null; // [DateTime!]
-    deadlineDate_lt?: any | null; // DateTime
-    deadlineDate_lte?: any | null; // DateTime
-    deadlineDate_not?: any | null; // DateTime
-    deadlineDate_not_in?: any[] | null; // [DateTime!]
+    deadlineDate?: string | null; // String
+    deadlineDate_contains?: string | null; // String
+    deadlineDate_ends_with?: string | null; // String
+    deadlineDate_gt?: string | null; // String
+    deadlineDate_gte?: string | null; // String
+    deadlineDate_in?: string[] | null; // [String!]
+    deadlineDate_lt?: string | null; // String
+    deadlineDate_lte?: string | null; // String
+    deadlineDate_not?: string | null; // String
+    deadlineDate_not_contains?: string | null; // String
+    deadlineDate_not_ends_with?: string | null; // String
+    deadlineDate_not_in?: string[] | null; // [String!]
+    deadlineDate_not_starts_with?: string | null; // String
+    deadlineDate_starts_with?: string | null; // String
     estimateTime?: string | null; // String
     estimateTime_contains?: string | null; // String
     estimateTime_ends_with?: string | null; // String
@@ -523,14 +547,20 @@ export interface NexusGenInputs {
     estimateTime_not_in?: string[] | null; // [String!]
     estimateTime_not_starts_with?: string | null; // String
     estimateTime_starts_with?: string | null; // String
-    finishDate?: any | null; // DateTime
-    finishDate_gt?: any | null; // DateTime
-    finishDate_gte?: any | null; // DateTime
-    finishDate_in?: any[] | null; // [DateTime!]
-    finishDate_lt?: any | null; // DateTime
-    finishDate_lte?: any | null; // DateTime
-    finishDate_not?: any | null; // DateTime
-    finishDate_not_in?: any[] | null; // [DateTime!]
+    finishDate?: string | null; // String
+    finishDate_contains?: string | null; // String
+    finishDate_ends_with?: string | null; // String
+    finishDate_gt?: string | null; // String
+    finishDate_gte?: string | null; // String
+    finishDate_in?: string[] | null; // [String!]
+    finishDate_lt?: string | null; // String
+    finishDate_lte?: string | null; // String
+    finishDate_not?: string | null; // String
+    finishDate_not_contains?: string | null; // String
+    finishDate_not_ends_with?: string | null; // String
+    finishDate_not_in?: string[] | null; // [String!]
+    finishDate_not_starts_with?: string | null; // String
+    finishDate_starts_with?: string | null; // String
     id?: number | null; // Int
     id_gt?: number | null; // Int
     id_gte?: number | null; // Int
@@ -555,14 +585,20 @@ export interface NexusGenInputs {
     name_starts_with?: string | null; // String
     NOT?: NexusGenInputs['TaskWhereInput'][] | null; // [TaskWhereInput!]
     OR?: NexusGenInputs['TaskWhereInput'][] | null; // [TaskWhereInput!]
-    plannedDate?: any | null; // DateTime
-    plannedDate_gt?: any | null; // DateTime
-    plannedDate_gte?: any | null; // DateTime
-    plannedDate_in?: any[] | null; // [DateTime!]
-    plannedDate_lt?: any | null; // DateTime
-    plannedDate_lte?: any | null; // DateTime
-    plannedDate_not?: any | null; // DateTime
-    plannedDate_not_in?: any[] | null; // [DateTime!]
+    plannedDate?: string | null; // String
+    plannedDate_contains?: string | null; // String
+    plannedDate_ends_with?: string | null; // String
+    plannedDate_gt?: string | null; // String
+    plannedDate_gte?: string | null; // String
+    plannedDate_in?: string[] | null; // [String!]
+    plannedDate_lt?: string | null; // String
+    plannedDate_lte?: string | null; // String
+    plannedDate_not?: string | null; // String
+    plannedDate_not_contains?: string | null; // String
+    plannedDate_not_ends_with?: string | null; // String
+    plannedDate_not_in?: string[] | null; // [String!]
+    plannedDate_not_starts_with?: string | null; // String
+    plannedDate_starts_with?: string | null; // String
     plannedTime?: string | null; // String
     plannedTime_contains?: string | null; // String
     plannedTime_ends_with?: string | null; // String
@@ -785,12 +821,12 @@ export interface NexusGenRootTypes {
   Task: { // root type
     comments?: string | null; // String
     completed: boolean; // Boolean!
-    deadlineDate?: any | null; // DateTime
+    deadlineDate?: string | null; // String
     estimateTime?: string | null; // String
-    finishDate?: any | null; // DateTime
+    finishDate?: string | null; // String
     id: number; // Int!
     name: string; // String!
-    plannedDate?: any | null; // DateTime
+    plannedDate?: string | null; // String
     plannedTime?: string | null; // String
     priority?: string | null; // String
     repeat?: number | null; // Int
@@ -911,6 +947,7 @@ export interface NexusGenFieldTypes {
     count: any; // Long!
   }
   Mutation: { // field return type
+    cloneTask: NexusGenRootTypes['Task']; // Task!
     completeTask: NexusGenRootTypes['Task']; // Task!
     createProject: NexusGenRootTypes['Project']; // Project!
     createSubproject: NexusGenRootTypes['Subproject']; // Subproject!
@@ -996,12 +1033,12 @@ export interface NexusGenFieldTypes {
   Task: { // field return type
     comments: string | null; // String
     completed: boolean; // Boolean!
-    deadlineDate: any | null; // DateTime
+    deadlineDate: string | null; // String
     estimateTime: string | null; // String
-    finishDate: any | null; // DateTime
+    finishDate: string | null; // String
     id: number; // Int!
     name: string; // String!
-    plannedDate: any | null; // DateTime
+    plannedDate: string | null; // String
     plannedTime: string | null; // String
     priority: string | null; // String
     project: NexusGenRootTypes['Project'] | null; // Project
@@ -1038,6 +1075,9 @@ export interface NexusGenFieldTypes {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    cloneTask: { // args
+      where?: NexusGenInputs['TaskWhereUniqueInput'] | null; // TaskWhereUniqueInput
+    }
     completeTask: { // args
       where: NexusGenInputs['TaskWhereUniqueInput']; // TaskWhereUniqueInput!
     }

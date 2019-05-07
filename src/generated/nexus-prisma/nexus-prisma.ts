@@ -652,7 +652,7 @@ export interface TaskFieldDetails {
     resolve: undefined
   }
   plannedDate: {
-    type: 'DateTime'
+    type: 'String'
     args: {}
     description: string
     list: undefined
@@ -660,7 +660,7 @@ export interface TaskFieldDetails {
     resolve: undefined
   }
   finishDate: {
-    type: 'DateTime'
+    type: 'String'
     args: {}
     description: string
     list: undefined
@@ -668,7 +668,7 @@ export interface TaskFieldDetails {
     resolve: undefined
   }
   deadlineDate: {
-    type: 'DateTime'
+    type: 'String'
     args: {}
     description: string
     list: undefined
@@ -2243,7 +2243,7 @@ export interface TaskPreviousValuesFieldDetails {
     resolve: undefined
   }
   plannedDate: {
-    type: 'DateTime'
+    type: 'String'
     args: {}
     description: string
     list: undefined
@@ -2251,7 +2251,7 @@ export interface TaskPreviousValuesFieldDetails {
     resolve: undefined
   }
   finishDate: {
-    type: 'DateTime'
+    type: 'String'
     args: {}
     description: string
     list: undefined
@@ -2259,7 +2259,7 @@ export interface TaskPreviousValuesFieldDetails {
     resolve: undefined
   }
   deadlineDate: {
-    type: 'DateTime'
+    type: 'String'
     args: {}
     description: string
     list: undefined
@@ -2619,6 +2619,12 @@ export interface TaskWhereInput {
   plannedDate_lte?: string | null
   plannedDate_gt?: string | null
   plannedDate_gte?: string | null
+  plannedDate_contains?: string | null
+  plannedDate_not_contains?: string | null
+  plannedDate_starts_with?: string | null
+  plannedDate_not_starts_with?: string | null
+  plannedDate_ends_with?: string | null
+  plannedDate_not_ends_with?: string | null
   finishDate?: string | null
   finishDate_not?: string | null
   finishDate_in?: string[]
@@ -2627,6 +2633,12 @@ export interface TaskWhereInput {
   finishDate_lte?: string | null
   finishDate_gt?: string | null
   finishDate_gte?: string | null
+  finishDate_contains?: string | null
+  finishDate_not_contains?: string | null
+  finishDate_starts_with?: string | null
+  finishDate_not_starts_with?: string | null
+  finishDate_ends_with?: string | null
+  finishDate_not_ends_with?: string | null
   deadlineDate?: string | null
   deadlineDate_not?: string | null
   deadlineDate_in?: string[]
@@ -2635,6 +2647,12 @@ export interface TaskWhereInput {
   deadlineDate_lte?: string | null
   deadlineDate_gt?: string | null
   deadlineDate_gte?: string | null
+  deadlineDate_contains?: string | null
+  deadlineDate_not_contains?: string | null
+  deadlineDate_starts_with?: string | null
+  deadlineDate_not_starts_with?: string | null
+  deadlineDate_ends_with?: string | null
+  deadlineDate_not_ends_with?: string | null
   completed?: boolean | null
   completed_not?: boolean | null
   subproject?: SubprojectWhereInput | null
@@ -2741,6 +2759,12 @@ export type TaskWhereInputInputObject =
   | { name: 'plannedDate_lte', alias?: string  } 
   | { name: 'plannedDate_gt', alias?: string  } 
   | { name: 'plannedDate_gte', alias?: string  } 
+  | { name: 'plannedDate_contains', alias?: string  } 
+  | { name: 'plannedDate_not_contains', alias?: string  } 
+  | { name: 'plannedDate_starts_with', alias?: string  } 
+  | { name: 'plannedDate_not_starts_with', alias?: string  } 
+  | { name: 'plannedDate_ends_with', alias?: string  } 
+  | { name: 'plannedDate_not_ends_with', alias?: string  } 
   | { name: 'finishDate', alias?: string  } 
   | { name: 'finishDate_not', alias?: string  } 
   | { name: 'finishDate_in', alias?: string  } 
@@ -2749,6 +2773,12 @@ export type TaskWhereInputInputObject =
   | { name: 'finishDate_lte', alias?: string  } 
   | { name: 'finishDate_gt', alias?: string  } 
   | { name: 'finishDate_gte', alias?: string  } 
+  | { name: 'finishDate_contains', alias?: string  } 
+  | { name: 'finishDate_not_contains', alias?: string  } 
+  | { name: 'finishDate_starts_with', alias?: string  } 
+  | { name: 'finishDate_not_starts_with', alias?: string  } 
+  | { name: 'finishDate_ends_with', alias?: string  } 
+  | { name: 'finishDate_not_ends_with', alias?: string  } 
   | { name: 'deadlineDate', alias?: string  } 
   | { name: 'deadlineDate_not', alias?: string  } 
   | { name: 'deadlineDate_in', alias?: string  } 
@@ -2757,6 +2787,12 @@ export type TaskWhereInputInputObject =
   | { name: 'deadlineDate_lte', alias?: string  } 
   | { name: 'deadlineDate_gt', alias?: string  } 
   | { name: 'deadlineDate_gte', alias?: string  } 
+  | { name: 'deadlineDate_contains', alias?: string  } 
+  | { name: 'deadlineDate_not_contains', alias?: string  } 
+  | { name: 'deadlineDate_starts_with', alias?: string  } 
+  | { name: 'deadlineDate_not_starts_with', alias?: string  } 
+  | { name: 'deadlineDate_ends_with', alias?: string  } 
+  | { name: 'deadlineDate_not_ends_with', alias?: string  } 
   | { name: 'completed', alias?: string  } 
   | { name: 'completed_not', alias?: string  } 
   | { name: 'subproject', alias?: string  } 
@@ -3282,6 +3318,12 @@ export interface TaskScalarWhereInput {
   plannedDate_lte?: string | null
   plannedDate_gt?: string | null
   plannedDate_gte?: string | null
+  plannedDate_contains?: string | null
+  plannedDate_not_contains?: string | null
+  plannedDate_starts_with?: string | null
+  plannedDate_not_starts_with?: string | null
+  plannedDate_ends_with?: string | null
+  plannedDate_not_ends_with?: string | null
   finishDate?: string | null
   finishDate_not?: string | null
   finishDate_in?: string[]
@@ -3290,6 +3332,12 @@ export interface TaskScalarWhereInput {
   finishDate_lte?: string | null
   finishDate_gt?: string | null
   finishDate_gte?: string | null
+  finishDate_contains?: string | null
+  finishDate_not_contains?: string | null
+  finishDate_starts_with?: string | null
+  finishDate_not_starts_with?: string | null
+  finishDate_ends_with?: string | null
+  finishDate_not_ends_with?: string | null
   deadlineDate?: string | null
   deadlineDate_not?: string | null
   deadlineDate_in?: string[]
@@ -3298,6 +3346,12 @@ export interface TaskScalarWhereInput {
   deadlineDate_lte?: string | null
   deadlineDate_gt?: string | null
   deadlineDate_gte?: string | null
+  deadlineDate_contains?: string | null
+  deadlineDate_not_contains?: string | null
+  deadlineDate_starts_with?: string | null
+  deadlineDate_not_starts_with?: string | null
+  deadlineDate_ends_with?: string | null
+  deadlineDate_not_ends_with?: string | null
   completed?: boolean | null
   completed_not?: boolean | null
   AND?: TaskScalarWhereInput[]
@@ -3400,6 +3454,12 @@ export type TaskScalarWhereInputInputObject =
   | { name: 'plannedDate_lte', alias?: string  } 
   | { name: 'plannedDate_gt', alias?: string  } 
   | { name: 'plannedDate_gte', alias?: string  } 
+  | { name: 'plannedDate_contains', alias?: string  } 
+  | { name: 'plannedDate_not_contains', alias?: string  } 
+  | { name: 'plannedDate_starts_with', alias?: string  } 
+  | { name: 'plannedDate_not_starts_with', alias?: string  } 
+  | { name: 'plannedDate_ends_with', alias?: string  } 
+  | { name: 'plannedDate_not_ends_with', alias?: string  } 
   | { name: 'finishDate', alias?: string  } 
   | { name: 'finishDate_not', alias?: string  } 
   | { name: 'finishDate_in', alias?: string  } 
@@ -3408,6 +3468,12 @@ export type TaskScalarWhereInputInputObject =
   | { name: 'finishDate_lte', alias?: string  } 
   | { name: 'finishDate_gt', alias?: string  } 
   | { name: 'finishDate_gte', alias?: string  } 
+  | { name: 'finishDate_contains', alias?: string  } 
+  | { name: 'finishDate_not_contains', alias?: string  } 
+  | { name: 'finishDate_starts_with', alias?: string  } 
+  | { name: 'finishDate_not_starts_with', alias?: string  } 
+  | { name: 'finishDate_ends_with', alias?: string  } 
+  | { name: 'finishDate_not_ends_with', alias?: string  } 
   | { name: 'deadlineDate', alias?: string  } 
   | { name: 'deadlineDate_not', alias?: string  } 
   | { name: 'deadlineDate_in', alias?: string  } 
@@ -3416,6 +3482,12 @@ export type TaskScalarWhereInputInputObject =
   | { name: 'deadlineDate_lte', alias?: string  } 
   | { name: 'deadlineDate_gt', alias?: string  } 
   | { name: 'deadlineDate_gte', alias?: string  } 
+  | { name: 'deadlineDate_contains', alias?: string  } 
+  | { name: 'deadlineDate_not_contains', alias?: string  } 
+  | { name: 'deadlineDate_starts_with', alias?: string  } 
+  | { name: 'deadlineDate_not_starts_with', alias?: string  } 
+  | { name: 'deadlineDate_ends_with', alias?: string  } 
+  | { name: 'deadlineDate_not_ends_with', alias?: string  } 
   | { name: 'completed', alias?: string  } 
   | { name: 'completed_not', alias?: string  } 
   | { name: 'AND', alias?: string  } 

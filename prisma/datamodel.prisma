@@ -19,9 +19,9 @@ type Task {
 	repeat: Int
 	estimateTime: String
 	plannedTime: String
-	plannedDate: DateTime
-	finishDate: DateTime
-	deadlineDate: DateTime
+	plannedDate: String
+	finishDate: String
+	deadlineDate: String
 	completed: Boolean! @default(value: false)
 	subproject: Subproject
 	timelogs: [Timelog!]!

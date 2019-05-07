@@ -26,4 +26,32 @@ describe('Query Mutations', () => {
 			}
 		})
 	})
+	it('should clone task', async () => {
+		const {
+			data: { data }
+		} = await axios.post(url, {
+			query: `
+				mutation {
+					createTask(data: { name: "No. 1" }) {
+						id
+					}
+				}
+			`
+		})
+		expect(data).toMatchObject({
+			createTask: { id: expect.anything() }
+		})
+		const response = await axios.post(url, {
+			query: `
+				mutation {
+					cloneTask(where: { id: ${data.createTask.id} }) {
+						name
+					}
+				}
+			`
+		})
+		expect(response.data).toMatchObject({
+			data: { cloneTask: { name: 'No. 1' } }
+		})
+	})
 })
