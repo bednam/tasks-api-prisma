@@ -1,12 +1,12 @@
 type Project {
 	id: Int! @id
-	name: String!
+	name: String! @unique
 	subprojects: [Subproject!]!
 }
 
 type Subproject {
 	id: Int! @id
-	name: String!
+	name: String! @unique
 	project: Project!
 	tasks: [Task!]!
 }
@@ -24,7 +24,7 @@ type Task {
 	deadlineDate: String
 	completed: Boolean! @default(value: false)
 	subproject: Subproject
-	timelogs: [Timelog!]!
+	timelogs: [Timelog!]! @relation(onDelete: CASCADE)
 }
 
 type Timelog {

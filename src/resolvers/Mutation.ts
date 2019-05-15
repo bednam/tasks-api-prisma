@@ -6,6 +6,9 @@ export const Mutation = prismaObjectType({
   name: 'Mutation',
   definition: t => {
     t.prismaFields(['*'])
+    t.field('updateTask', {
+      type: 'Task'
+    })
     t.field('completeTask', {
       type: 'Task',
       args: { where: arg({ type: 'TaskWhereUniqueInput', nullable: false }) },

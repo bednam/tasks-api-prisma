@@ -2395,10 +2395,12 @@ export interface TimelogPreviousValuesFieldDetails {
 
 export interface ProjectWhereUniqueInput {
   id?: number | null
+  name?: string | null
 }
 export type ProjectWhereUniqueInputInputObject =
   | Extract<keyof ProjectWhereUniqueInput, string>
   | { name: 'id', alias?: string  } 
+  | { name: 'name', alias?: string  } 
   
 export interface SubprojectWhereInput {
   id?: number | null
@@ -2866,10 +2868,12 @@ export type TimelogWhereInputInputObject =
   
 export interface SubprojectWhereUniqueInput {
   id?: number | null
+  name?: string | null
 }
 export type SubprojectWhereUniqueInputInputObject =
   | Extract<keyof SubprojectWhereUniqueInput, string>
   | { name: 'id', alias?: string  } 
+  | { name: 'name', alias?: string  } 
   
 export interface TaskWhereUniqueInput {
   id?: number | null

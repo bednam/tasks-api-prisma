@@ -49,7 +49,7 @@ type Mutation {
   updateManyTimelogs(data: TimelogUpdateManyMutationInput!, where: TimelogWhereInput): BatchPayload!
   updateProject(data: ProjectUpdateInput!, where: ProjectWhereUniqueInput!): Project
   updateSubproject(data: SubprojectUpdateInput!, where: SubprojectWhereUniqueInput!): Subproject
-  updateTask(data: TaskUpdateInput!, where: TaskWhereUniqueInput!): Task
+  updateTask: Task!
   updateTimelog(data: TimelogUpdateInput!, where: TimelogWhereUniqueInput!): Timelog
   upsertProject(create: ProjectCreateInput!, update: ProjectUpdateInput!, where: ProjectWhereUniqueInput!): Project!
   upsertSubproject(create: SubprojectCreateInput!, update: SubprojectUpdateInput!, where: SubprojectWhereUniqueInput!): Subproject!
@@ -168,6 +168,7 @@ input ProjectWhereInput {
 
 input ProjectWhereUniqueInput {
   id: Int
+  name: String
 }
 
 type Query {
@@ -374,6 +375,7 @@ input SubprojectWhereInput {
 
 input SubprojectWhereUniqueInput {
   id: Int
+  name: String
 }
 
 type Task {

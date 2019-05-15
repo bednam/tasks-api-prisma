@@ -76,6 +76,7 @@ export interface NexusGenInputs {
   }
   ProjectWhereUniqueInput: { // input type
     id?: number | null; // Int
+    name?: string | null; // String
   }
   SubprojectCreateInput: { // input type
     id?: number | null; // Int
@@ -216,6 +217,7 @@ export interface NexusGenInputs {
   }
   SubprojectWhereUniqueInput: { // input type
     id?: number | null; // Int
+    name?: string | null; // String
   }
   TaskCreateInput: { // input type
     comments?: string | null; // String
@@ -969,7 +971,7 @@ export interface NexusGenFieldTypes {
     updateManyTimelogs: NexusGenRootTypes['BatchPayload']; // BatchPayload!
     updateProject: NexusGenRootTypes['Project'] | null; // Project
     updateSubproject: NexusGenRootTypes['Subproject'] | null; // Subproject
-    updateTask: NexusGenRootTypes['Task'] | null; // Task
+    updateTask: NexusGenRootTypes['Task']; // Task!
     updateTimelog: NexusGenRootTypes['Timelog'] | null; // Timelog
     upsertProject: NexusGenRootTypes['Project']; // Project!
     upsertSubproject: NexusGenRootTypes['Subproject']; // Subproject!
@@ -1146,10 +1148,6 @@ export interface NexusGenArgTypes {
     updateSubproject: { // args
       data: NexusGenInputs['SubprojectUpdateInput']; // SubprojectUpdateInput!
       where: NexusGenInputs['SubprojectWhereUniqueInput']; // SubprojectWhereUniqueInput!
-    }
-    updateTask: { // args
-      data: NexusGenInputs['TaskUpdateInput']; // TaskUpdateInput!
-      where: NexusGenInputs['TaskWhereUniqueInput']; // TaskWhereUniqueInput!
     }
     updateTimelog: { // args
       data: NexusGenInputs['TimelogUpdateInput']; // TimelogUpdateInput!
