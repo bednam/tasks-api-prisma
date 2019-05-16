@@ -16,6 +16,7 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
 export interface Exists {
   project: (where?: ProjectWhereInput) => Promise<boolean>;
   subproject: (where?: SubprojectWhereInput) => Promise<boolean>;
+  tag: (where?: TagWhereInput) => Promise<boolean>;
   task: (where?: TaskWhereInput) => Promise<boolean>;
   timelog: (where?: TimelogWhereInput) => Promise<boolean>;
 }
@@ -77,6 +78,25 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => SubprojectConnectionPromise;
+  tag: (where: TagWhereUniqueInput) => TagPromise;
+  tags: (args?: {
+    where?: TagWhereInput;
+    orderBy?: TagOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Tag>;
+  tagsConnection: (args?: {
+    where?: TagWhereInput;
+    orderBy?: TagOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => TagConnectionPromise;
   task: (where: TaskWhereUniqueInput) => TaskPromise;
   tasks: (args?: {
     where?: TaskWhereInput;
@@ -153,6 +173,22 @@ export interface Prisma {
   }) => SubprojectPromise;
   deleteSubproject: (where: SubprojectWhereUniqueInput) => SubprojectPromise;
   deleteManySubprojects: (where?: SubprojectWhereInput) => BatchPayloadPromise;
+  createTag: (data: TagCreateInput) => TagPromise;
+  updateTag: (args: {
+    data: TagUpdateInput;
+    where: TagWhereUniqueInput;
+  }) => TagPromise;
+  updateManyTags: (args: {
+    data: TagUpdateManyMutationInput;
+    where?: TagWhereInput;
+  }) => BatchPayloadPromise;
+  upsertTag: (args: {
+    where: TagWhereUniqueInput;
+    create: TagCreateInput;
+    update: TagUpdateInput;
+  }) => TagPromise;
+  deleteTag: (where: TagWhereUniqueInput) => TagPromise;
+  deleteManyTags: (where?: TagWhereInput) => BatchPayloadPromise;
   createTask: (data: TaskCreateInput) => TaskPromise;
   updateTask: (args: {
     data: TaskUpdateInput;
@@ -200,6 +236,9 @@ export interface Subscription {
   subproject: (
     where?: SubprojectSubscriptionWhereInput
   ) => SubprojectSubscriptionPayloadSubscription;
+  tag: (
+    where?: TagSubscriptionWhereInput
+  ) => TagSubscriptionPayloadSubscription;
   task: (
     where?: TaskSubscriptionWhereInput
   ) => TaskSubscriptionPayloadSubscription;
@@ -254,6 +293,8 @@ export type TimelogOrderByInput =
   | "finishDate_ASC"
   | "finishDate_DESC";
 
+export type TagOrderByInput = "id_ASC" | "id_DESC" | "name_ASC" | "name_DESC";
+
 export type ProjectOrderByInput =
   | "id_ASC"
   | "id_DESC"
@@ -262,10 +303,9 @@ export type ProjectOrderByInput =
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export interface TimelogUpsertWithWhereUniqueWithoutTaskInput {
-  where: TimelogWhereUniqueInput;
-  update: TimelogUpdateWithoutTaskDataInput;
-  create: TimelogCreateWithoutTaskInput;
+export interface TagUpdateWithWhereUniqueWithoutTasksInput {
+  where: TagWhereUniqueInput;
+  data: TagUpdateWithoutTasksDataInput;
 }
 
 export type ProjectWhereUniqueInput = AtLeastOne<{
@@ -273,19 +313,322 @@ export type ProjectWhereUniqueInput = AtLeastOne<{
   name?: String;
 }>;
 
-export interface TimelogCreateManyWithoutTaskInput {
-  create?: TimelogCreateWithoutTaskInput[] | TimelogCreateWithoutTaskInput;
-  connect?: TimelogWhereUniqueInput[] | TimelogWhereUniqueInput;
+export interface TagUpdateManyWithWhereNestedInput {
+  where: TagScalarWhereInput;
+  data: TagUpdateManyDataInput;
 }
 
-export interface ProjectUpdateWithoutSubprojectsDataInput {
+export interface TimelogWhereInput {
+  id?: Int;
+  id_not?: Int;
+  id_in?: Int[] | Int;
+  id_not_in?: Int[] | Int;
+  id_lt?: Int;
+  id_lte?: Int;
+  id_gt?: Int;
+  id_gte?: Int;
+  startDate?: DateTimeInput;
+  startDate_not?: DateTimeInput;
+  startDate_in?: DateTimeInput[] | DateTimeInput;
+  startDate_not_in?: DateTimeInput[] | DateTimeInput;
+  startDate_lt?: DateTimeInput;
+  startDate_lte?: DateTimeInput;
+  startDate_gt?: DateTimeInput;
+  startDate_gte?: DateTimeInput;
+  finishDate?: DateTimeInput;
+  finishDate_not?: DateTimeInput;
+  finishDate_in?: DateTimeInput[] | DateTimeInput;
+  finishDate_not_in?: DateTimeInput[] | DateTimeInput;
+  finishDate_lt?: DateTimeInput;
+  finishDate_lte?: DateTimeInput;
+  finishDate_gt?: DateTimeInput;
+  finishDate_gte?: DateTimeInput;
+  task?: TaskWhereInput;
+  AND?: TimelogWhereInput[] | TimelogWhereInput;
+  OR?: TimelogWhereInput[] | TimelogWhereInput;
+  NOT?: TimelogWhereInput[] | TimelogWhereInput;
+}
+
+export interface TagUpdateManyDataInput {
   name?: String;
 }
 
-export interface TimelogCreateWithoutTaskInput {
+export interface TagWhereInput {
   id?: Int;
+  id_not?: Int;
+  id_in?: Int[] | Int;
+  id_not_in?: Int[] | Int;
+  id_lt?: Int;
+  id_lte?: Int;
+  id_gt?: Int;
+  id_gte?: Int;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  tasks_every?: TaskWhereInput;
+  tasks_some?: TaskWhereInput;
+  tasks_none?: TaskWhereInput;
+  AND?: TagWhereInput[] | TagWhereInput;
+  OR?: TagWhereInput[] | TagWhereInput;
+  NOT?: TagWhereInput[] | TagWhereInput;
+}
+
+export interface SubprojectUpdateWithoutProjectDataInput {
+  name?: String;
+  tasks?: TaskUpdateManyWithoutSubprojectInput;
+}
+
+export interface SubprojectCreateOneWithoutTasksInput {
+  create?: SubprojectCreateWithoutTasksInput;
+  connect?: SubprojectWhereUniqueInput;
+}
+
+export interface TaskUpdateManyWithoutSubprojectInput {
+  create?:
+    | TaskCreateWithoutSubprojectInput[]
+    | TaskCreateWithoutSubprojectInput;
+  delete?: TaskWhereUniqueInput[] | TaskWhereUniqueInput;
+  connect?: TaskWhereUniqueInput[] | TaskWhereUniqueInput;
+  set?: TaskWhereUniqueInput[] | TaskWhereUniqueInput;
+  disconnect?: TaskWhereUniqueInput[] | TaskWhereUniqueInput;
+  update?:
+    | TaskUpdateWithWhereUniqueWithoutSubprojectInput[]
+    | TaskUpdateWithWhereUniqueWithoutSubprojectInput;
+  upsert?:
+    | TaskUpsertWithWhereUniqueWithoutSubprojectInput[]
+    | TaskUpsertWithWhereUniqueWithoutSubprojectInput;
+  deleteMany?: TaskScalarWhereInput[] | TaskScalarWhereInput;
+  updateMany?:
+    | TaskUpdateManyWithWhereNestedInput[]
+    | TaskUpdateManyWithWhereNestedInput;
+}
+
+export interface TaskUpsertWithWhereUniqueWithoutSubprojectInput {
+  where: TaskWhereUniqueInput;
+  update: TaskUpdateWithoutSubprojectDataInput;
+  create: TaskCreateWithoutSubprojectInput;
+}
+
+export interface TaskUpdateWithWhereUniqueWithoutSubprojectInput {
+  where: TaskWhereUniqueInput;
+  data: TaskUpdateWithoutSubprojectDataInput;
+}
+
+export interface ProjectWhereInput {
+  id?: Int;
+  id_not?: Int;
+  id_in?: Int[] | Int;
+  id_not_in?: Int[] | Int;
+  id_lt?: Int;
+  id_lte?: Int;
+  id_gt?: Int;
+  id_gte?: Int;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  subprojects_every?: SubprojectWhereInput;
+  subprojects_some?: SubprojectWhereInput;
+  subprojects_none?: SubprojectWhereInput;
+  AND?: ProjectWhereInput[] | ProjectWhereInput;
+  OR?: ProjectWhereInput[] | ProjectWhereInput;
+  NOT?: ProjectWhereInput[] | ProjectWhereInput;
+}
+
+export interface TaskUpdateWithoutSubprojectDataInput {
+  name?: String;
+  priority?: String;
+  comments?: String;
+  repeat?: Int;
+  estimateTime?: String;
+  plannedTime?: String;
+  plannedDate?: String;
+  finishDate?: String;
+  deadlineDate?: String;
+  completed?: Boolean;
+  timelogs?: TimelogUpdateManyWithoutTaskInput;
+  tags?: TagUpdateManyWithoutTasksInput;
+}
+
+export interface SubprojectWhereInput {
+  id?: Int;
+  id_not?: Int;
+  id_in?: Int[] | Int;
+  id_not_in?: Int[] | Int;
+  id_lt?: Int;
+  id_lte?: Int;
+  id_gt?: Int;
+  id_gte?: Int;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  project?: ProjectWhereInput;
+  tasks_every?: TaskWhereInput;
+  tasks_some?: TaskWhereInput;
+  tasks_none?: TaskWhereInput;
+  AND?: SubprojectWhereInput[] | SubprojectWhereInput;
+  OR?: SubprojectWhereInput[] | SubprojectWhereInput;
+  NOT?: SubprojectWhereInput[] | SubprojectWhereInput;
+}
+
+export interface TimelogUpdateManyWithoutTaskInput {
+  create?: TimelogCreateWithoutTaskInput[] | TimelogCreateWithoutTaskInput;
+  delete?: TimelogWhereUniqueInput[] | TimelogWhereUniqueInput;
+  connect?: TimelogWhereUniqueInput[] | TimelogWhereUniqueInput;
+  set?: TimelogWhereUniqueInput[] | TimelogWhereUniqueInput;
+  disconnect?: TimelogWhereUniqueInput[] | TimelogWhereUniqueInput;
+  update?:
+    | TimelogUpdateWithWhereUniqueWithoutTaskInput[]
+    | TimelogUpdateWithWhereUniqueWithoutTaskInput;
+  upsert?:
+    | TimelogUpsertWithWhereUniqueWithoutTaskInput[]
+    | TimelogUpsertWithWhereUniqueWithoutTaskInput;
+  deleteMany?: TimelogScalarWhereInput[] | TimelogScalarWhereInput;
+  updateMany?:
+    | TimelogUpdateManyWithWhereNestedInput[]
+    | TimelogUpdateManyWithWhereNestedInput;
+}
+
+export interface SubprojectSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: SubprojectWhereInput;
+  AND?: SubprojectSubscriptionWhereInput[] | SubprojectSubscriptionWhereInput;
+  OR?: SubprojectSubscriptionWhereInput[] | SubprojectSubscriptionWhereInput;
+  NOT?: SubprojectSubscriptionWhereInput[] | SubprojectSubscriptionWhereInput;
+}
+
+export interface TimelogUpdateWithWhereUniqueWithoutTaskInput {
+  where: TimelogWhereUniqueInput;
+  data: TimelogUpdateWithoutTaskDataInput;
+}
+
+export interface TimelogUpdateManyMutationInput {
   startDate?: DateTimeInput;
   finishDate?: DateTimeInput;
+}
+
+export interface TimelogUpdateWithoutTaskDataInput {
+  startDate?: DateTimeInput;
+  finishDate?: DateTimeInput;
+}
+
+export interface TaskUpdateWithoutTimelogsDataInput {
+  name?: String;
+  priority?: String;
+  comments?: String;
+  repeat?: Int;
+  estimateTime?: String;
+  plannedTime?: String;
+  plannedDate?: String;
+  finishDate?: String;
+  deadlineDate?: String;
+  completed?: Boolean;
+  subproject?: SubprojectUpdateOneWithoutTasksInput;
+  tags?: TagUpdateManyWithoutTasksInput;
+}
+
+export interface TimelogUpsertWithWhereUniqueWithoutTaskInput {
+  where: TimelogWhereUniqueInput;
+  update: TimelogUpdateWithoutTaskDataInput;
+  create: TimelogCreateWithoutTaskInput;
+}
+
+export interface TaskUpdateOneRequiredWithoutTimelogsInput {
+  create?: TaskCreateWithoutTimelogsInput;
+  update?: TaskUpdateWithoutTimelogsDataInput;
+  upsert?: TaskUpsertWithoutTimelogsInput;
+  connect?: TaskWhereUniqueInput;
+}
+
+export interface TimelogScalarWhereInput {
+  id?: Int;
+  id_not?: Int;
+  id_in?: Int[] | Int;
+  id_not_in?: Int[] | Int;
+  id_lt?: Int;
+  id_lte?: Int;
+  id_gt?: Int;
+  id_gte?: Int;
+  startDate?: DateTimeInput;
+  startDate_not?: DateTimeInput;
+  startDate_in?: DateTimeInput[] | DateTimeInput;
+  startDate_not_in?: DateTimeInput[] | DateTimeInput;
+  startDate_lt?: DateTimeInput;
+  startDate_lte?: DateTimeInput;
+  startDate_gt?: DateTimeInput;
+  startDate_gte?: DateTimeInput;
+  finishDate?: DateTimeInput;
+  finishDate_not?: DateTimeInput;
+  finishDate_in?: DateTimeInput[] | DateTimeInput;
+  finishDate_not_in?: DateTimeInput[] | DateTimeInput;
+  finishDate_lt?: DateTimeInput;
+  finishDate_lte?: DateTimeInput;
+  finishDate_gt?: DateTimeInput;
+  finishDate_gte?: DateTimeInput;
+  AND?: TimelogScalarWhereInput[] | TimelogScalarWhereInput;
+  OR?: TimelogScalarWhereInput[] | TimelogScalarWhereInput;
+  NOT?: TimelogScalarWhereInput[] | TimelogScalarWhereInput;
+}
+
+export interface TaskCreateWithoutTimelogsInput {
+  id?: Int;
+  name: String;
+  priority?: String;
+  comments?: String;
+  repeat?: Int;
+  estimateTime?: String;
+  plannedTime?: String;
+  plannedDate?: String;
+  finishDate?: String;
+  deadlineDate?: String;
+  completed?: Boolean;
+  subproject?: SubprojectCreateOneWithoutTasksInput;
+  tags?: TagCreateManyWithoutTasksInput;
+}
+
+export interface TimelogUpdateManyWithWhereNestedInput {
+  where: TimelogScalarWhereInput;
+  data: TimelogUpdateManyDataInput;
+}
+
+export interface TaskCreateOneWithoutTimelogsInput {
+  create?: TaskCreateWithoutTimelogsInput;
+  connect?: TaskWhereUniqueInput;
 }
 
 export interface TimelogUpdateManyDataInput {
@@ -293,9 +636,161 @@ export interface TimelogUpdateManyDataInput {
   finishDate?: DateTimeInput;
 }
 
-export interface ProjectUpdateInput {
+export interface TaskUpdateManyMutationInput {
   name?: String;
-  subprojects?: SubprojectUpdateManyWithoutProjectInput;
+  priority?: String;
+  comments?: String;
+  repeat?: Int;
+  estimateTime?: String;
+  plannedTime?: String;
+  plannedDate?: String;
+  finishDate?: String;
+  deadlineDate?: String;
+  completed?: Boolean;
+}
+
+export interface TagUpdateManyWithoutTasksInput {
+  create?: TagCreateWithoutTasksInput[] | TagCreateWithoutTasksInput;
+  delete?: TagWhereUniqueInput[] | TagWhereUniqueInput;
+  connect?: TagWhereUniqueInput[] | TagWhereUniqueInput;
+  set?: TagWhereUniqueInput[] | TagWhereUniqueInput;
+  disconnect?: TagWhereUniqueInput[] | TagWhereUniqueInput;
+  update?:
+    | TagUpdateWithWhereUniqueWithoutTasksInput[]
+    | TagUpdateWithWhereUniqueWithoutTasksInput;
+  upsert?:
+    | TagUpsertWithWhereUniqueWithoutTasksInput[]
+    | TagUpsertWithWhereUniqueWithoutTasksInput;
+  deleteMany?: TagScalarWhereInput[] | TagScalarWhereInput;
+  updateMany?:
+    | TagUpdateManyWithWhereNestedInput[]
+    | TagUpdateManyWithWhereNestedInput;
+}
+
+export interface TaskUpdateInput {
+  name?: String;
+  priority?: String;
+  comments?: String;
+  repeat?: Int;
+  estimateTime?: String;
+  plannedTime?: String;
+  plannedDate?: String;
+  finishDate?: String;
+  deadlineDate?: String;
+  completed?: Boolean;
+  subproject?: SubprojectUpdateOneWithoutTasksInput;
+  timelogs?: TimelogUpdateManyWithoutTaskInput;
+  tags?: TagUpdateManyWithoutTasksInput;
+}
+
+export interface TaskUpdateWithoutTagsDataInput {
+  name?: String;
+  priority?: String;
+  comments?: String;
+  repeat?: Int;
+  estimateTime?: String;
+  plannedTime?: String;
+  plannedDate?: String;
+  finishDate?: String;
+  deadlineDate?: String;
+  completed?: Boolean;
+  subproject?: SubprojectUpdateOneWithoutTasksInput;
+  timelogs?: TimelogUpdateManyWithoutTaskInput;
+}
+
+export interface TagUpdateManyMutationInput {
+  name?: String;
+}
+
+export interface TagUpdateWithoutTasksDataInput {
+  name?: String;
+}
+
+export interface TaskUpsertWithWhereUniqueWithoutTagsInput {
+  where: TaskWhereUniqueInput;
+  update: TaskUpdateWithoutTagsDataInput;
+  create: TaskCreateWithoutTagsInput;
+}
+
+export interface TagUpsertWithWhereUniqueWithoutTasksInput {
+  where: TagWhereUniqueInput;
+  update: TagUpdateWithoutTasksDataInput;
+  create: TagCreateWithoutTasksInput;
+}
+
+export interface SubprojectUpdateWithoutTasksDataInput {
+  name?: String;
+  project?: ProjectUpdateOneRequiredWithoutSubprojectsInput;
+}
+
+export interface TagScalarWhereInput {
+  id?: Int;
+  id_not?: Int;
+  id_in?: Int[] | Int;
+  id_not_in?: Int[] | Int;
+  id_lt?: Int;
+  id_lte?: Int;
+  id_gt?: Int;
+  id_gte?: Int;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  AND?: TagScalarWhereInput[] | TagScalarWhereInput;
+  OR?: TagScalarWhereInput[] | TagScalarWhereInput;
+  NOT?: TagScalarWhereInput[] | TagScalarWhereInput;
+}
+
+export interface SubprojectCreateManyWithoutProjectInput {
+  create?:
+    | SubprojectCreateWithoutProjectInput[]
+    | SubprojectCreateWithoutProjectInput;
+  connect?: SubprojectWhereUniqueInput[] | SubprojectWhereUniqueInput;
+}
+
+export interface TaskUpdateWithWhereUniqueWithoutTagsInput {
+  where: TaskWhereUniqueInput;
+  data: TaskUpdateWithoutTagsDataInput;
+}
+
+export interface TaskCreateManyWithoutSubprojectInput {
+  create?:
+    | TaskCreateWithoutSubprojectInput[]
+    | TaskCreateWithoutSubprojectInput;
+  connect?: TaskWhereUniqueInput[] | TaskWhereUniqueInput;
+}
+
+export interface TaskUpdateManyWithoutTagsInput {
+  create?: TaskCreateWithoutTagsInput[] | TaskCreateWithoutTagsInput;
+  delete?: TaskWhereUniqueInput[] | TaskWhereUniqueInput;
+  connect?: TaskWhereUniqueInput[] | TaskWhereUniqueInput;
+  set?: TaskWhereUniqueInput[] | TaskWhereUniqueInput;
+  disconnect?: TaskWhereUniqueInput[] | TaskWhereUniqueInput;
+  update?:
+    | TaskUpdateWithWhereUniqueWithoutTagsInput[]
+    | TaskUpdateWithWhereUniqueWithoutTagsInput;
+  upsert?:
+    | TaskUpsertWithWhereUniqueWithoutTagsInput[]
+    | TaskUpsertWithWhereUniqueWithoutTagsInput;
+  deleteMany?: TaskScalarWhereInput[] | TaskScalarWhereInput;
+  updateMany?:
+    | TaskUpdateManyWithWhereNestedInput[]
+    | TaskUpdateManyWithWhereNestedInput;
+}
+
+export interface TimelogCreateManyWithoutTaskInput {
+  create?: TimelogCreateWithoutTaskInput[] | TimelogCreateWithoutTaskInput;
+  connect?: TimelogWhereUniqueInput[] | TimelogWhereUniqueInput;
 }
 
 export interface TaskWhereInput {
@@ -433,362 +928,17 @@ export interface TaskWhereInput {
   timelogs_every?: TimelogWhereInput;
   timelogs_some?: TimelogWhereInput;
   timelogs_none?: TimelogWhereInput;
+  tags_every?: TagWhereInput;
+  tags_some?: TagWhereInput;
+  tags_none?: TagWhereInput;
   AND?: TaskWhereInput[] | TaskWhereInput;
   OR?: TaskWhereInput[] | TaskWhereInput;
   NOT?: TaskWhereInput[] | TaskWhereInput;
 }
 
-export interface SubprojectUpdateManyWithoutProjectInput {
-  create?:
-    | SubprojectCreateWithoutProjectInput[]
-    | SubprojectCreateWithoutProjectInput;
-  delete?: SubprojectWhereUniqueInput[] | SubprojectWhereUniqueInput;
-  connect?: SubprojectWhereUniqueInput[] | SubprojectWhereUniqueInput;
-  set?: SubprojectWhereUniqueInput[] | SubprojectWhereUniqueInput;
-  disconnect?: SubprojectWhereUniqueInput[] | SubprojectWhereUniqueInput;
-  update?:
-    | SubprojectUpdateWithWhereUniqueWithoutProjectInput[]
-    | SubprojectUpdateWithWhereUniqueWithoutProjectInput;
-  upsert?:
-    | SubprojectUpsertWithWhereUniqueWithoutProjectInput[]
-    | SubprojectUpsertWithWhereUniqueWithoutProjectInput;
-  deleteMany?: SubprojectScalarWhereInput[] | SubprojectScalarWhereInput;
-  updateMany?:
-    | SubprojectUpdateManyWithWhereNestedInput[]
-    | SubprojectUpdateManyWithWhereNestedInput;
-}
-
-export interface ProjectWhereInput {
-  id?: Int;
-  id_not?: Int;
-  id_in?: Int[] | Int;
-  id_not_in?: Int[] | Int;
-  id_lt?: Int;
-  id_lte?: Int;
-  id_gt?: Int;
-  id_gte?: Int;
-  name?: String;
-  name_not?: String;
-  name_in?: String[] | String;
-  name_not_in?: String[] | String;
-  name_lt?: String;
-  name_lte?: String;
-  name_gt?: String;
-  name_gte?: String;
-  name_contains?: String;
-  name_not_contains?: String;
-  name_starts_with?: String;
-  name_not_starts_with?: String;
-  name_ends_with?: String;
-  name_not_ends_with?: String;
-  subprojects_every?: SubprojectWhereInput;
-  subprojects_some?: SubprojectWhereInput;
-  subprojects_none?: SubprojectWhereInput;
-  AND?: ProjectWhereInput[] | ProjectWhereInput;
-  OR?: ProjectWhereInput[] | ProjectWhereInput;
-  NOT?: ProjectWhereInput[] | ProjectWhereInput;
-}
-
-export interface SubprojectUpdateWithWhereUniqueWithoutProjectInput {
-  where: SubprojectWhereUniqueInput;
-  data: SubprojectUpdateWithoutProjectDataInput;
-}
-
-export interface SubprojectWhereInput {
-  id?: Int;
-  id_not?: Int;
-  id_in?: Int[] | Int;
-  id_not_in?: Int[] | Int;
-  id_lt?: Int;
-  id_lte?: Int;
-  id_gt?: Int;
-  id_gte?: Int;
-  name?: String;
-  name_not?: String;
-  name_in?: String[] | String;
-  name_not_in?: String[] | String;
-  name_lt?: String;
-  name_lte?: String;
-  name_gt?: String;
-  name_gte?: String;
-  name_contains?: String;
-  name_not_contains?: String;
-  name_starts_with?: String;
-  name_not_starts_with?: String;
-  name_ends_with?: String;
-  name_not_ends_with?: String;
-  project?: ProjectWhereInput;
-  tasks_every?: TaskWhereInput;
-  tasks_some?: TaskWhereInput;
-  tasks_none?: TaskWhereInput;
-  AND?: SubprojectWhereInput[] | SubprojectWhereInput;
-  OR?: SubprojectWhereInput[] | SubprojectWhereInput;
-  NOT?: SubprojectWhereInput[] | SubprojectWhereInput;
-}
-
-export interface SubprojectUpdateWithoutProjectDataInput {
-  name?: String;
-  tasks?: TaskUpdateManyWithoutSubprojectInput;
-}
-
-export interface TimelogUpdateManyMutationInput {
-  startDate?: DateTimeInput;
-  finishDate?: DateTimeInput;
-}
-
-export interface TaskUpdateManyWithoutSubprojectInput {
-  create?:
-    | TaskCreateWithoutSubprojectInput[]
-    | TaskCreateWithoutSubprojectInput;
-  delete?: TaskWhereUniqueInput[] | TaskWhereUniqueInput;
-  connect?: TaskWhereUniqueInput[] | TaskWhereUniqueInput;
-  set?: TaskWhereUniqueInput[] | TaskWhereUniqueInput;
-  disconnect?: TaskWhereUniqueInput[] | TaskWhereUniqueInput;
-  update?:
-    | TaskUpdateWithWhereUniqueWithoutSubprojectInput[]
-    | TaskUpdateWithWhereUniqueWithoutSubprojectInput;
-  upsert?:
-    | TaskUpsertWithWhereUniqueWithoutSubprojectInput[]
-    | TaskUpsertWithWhereUniqueWithoutSubprojectInput;
-  deleteMany?: TaskScalarWhereInput[] | TaskScalarWhereInput;
-  updateMany?:
-    | TaskUpdateManyWithWhereNestedInput[]
-    | TaskUpdateManyWithWhereNestedInput;
-}
-
-export interface TaskUpdateWithoutTimelogsDataInput {
-  name?: String;
-  priority?: String;
-  comments?: String;
-  repeat?: Int;
-  estimateTime?: String;
-  plannedTime?: String;
-  plannedDate?: String;
-  finishDate?: String;
-  deadlineDate?: String;
-  completed?: Boolean;
-  subproject?: SubprojectUpdateOneWithoutTasksInput;
-}
-
-export interface TaskUpdateWithWhereUniqueWithoutSubprojectInput {
-  where: TaskWhereUniqueInput;
-  data: TaskUpdateWithoutSubprojectDataInput;
-}
-
-export interface TimelogUpdateInput {
-  startDate?: DateTimeInput;
-  finishDate?: DateTimeInput;
-  task?: TaskUpdateOneRequiredWithoutTimelogsInput;
-}
-
-export interface TaskUpdateWithoutSubprojectDataInput {
-  name?: String;
-  priority?: String;
-  comments?: String;
-  repeat?: Int;
-  estimateTime?: String;
-  plannedTime?: String;
-  plannedDate?: String;
-  finishDate?: String;
-  deadlineDate?: String;
-  completed?: Boolean;
-  timelogs?: TimelogUpdateManyWithoutTaskInput;
-}
-
-export interface TaskCreateWithoutTimelogsInput {
-  id?: Int;
-  name: String;
-  priority?: String;
-  comments?: String;
-  repeat?: Int;
-  estimateTime?: String;
-  plannedTime?: String;
-  plannedDate?: String;
-  finishDate?: String;
-  deadlineDate?: String;
-  completed?: Boolean;
-  subproject?: SubprojectCreateOneWithoutTasksInput;
-}
-
-export interface TimelogUpdateManyWithoutTaskInput {
-  create?: TimelogCreateWithoutTaskInput[] | TimelogCreateWithoutTaskInput;
-  delete?: TimelogWhereUniqueInput[] | TimelogWhereUniqueInput;
-  connect?: TimelogWhereUniqueInput[] | TimelogWhereUniqueInput;
-  set?: TimelogWhereUniqueInput[] | TimelogWhereUniqueInput;
-  disconnect?: TimelogWhereUniqueInput[] | TimelogWhereUniqueInput;
-  update?:
-    | TimelogUpdateWithWhereUniqueWithoutTaskInput[]
-    | TimelogUpdateWithWhereUniqueWithoutTaskInput;
-  upsert?:
-    | TimelogUpsertWithWhereUniqueWithoutTaskInput[]
-    | TimelogUpsertWithWhereUniqueWithoutTaskInput;
-  deleteMany?: TimelogScalarWhereInput[] | TimelogScalarWhereInput;
-  updateMany?:
-    | TimelogUpdateManyWithWhereNestedInput[]
-    | TimelogUpdateManyWithWhereNestedInput;
-}
-
-export interface TimelogCreateInput {
-  id?: Int;
-  startDate?: DateTimeInput;
-  finishDate?: DateTimeInput;
-  task: TaskCreateOneWithoutTimelogsInput;
-}
-
-export interface TimelogUpdateWithWhereUniqueWithoutTaskInput {
-  where: TimelogWhereUniqueInput;
-  data: TimelogUpdateWithoutTaskDataInput;
-}
-
-export interface TaskUpdateManyMutationInput {
-  name?: String;
-  priority?: String;
-  comments?: String;
-  repeat?: Int;
-  estimateTime?: String;
-  plannedTime?: String;
-  plannedDate?: String;
-  finishDate?: String;
-  deadlineDate?: String;
-  completed?: Boolean;
-}
-
-export interface TimelogUpdateWithoutTaskDataInput {
-  startDate?: DateTimeInput;
-  finishDate?: DateTimeInput;
-}
-
-export interface SubprojectUpdateWithoutTasksDataInput {
-  name?: String;
-  project?: ProjectUpdateOneRequiredWithoutSubprojectsInput;
-}
-
-export interface TaskCreateInput {
-  id?: Int;
-  name: String;
-  priority?: String;
-  comments?: String;
-  repeat?: Int;
-  estimateTime?: String;
-  plannedTime?: String;
-  plannedDate?: String;
-  finishDate?: String;
-  deadlineDate?: String;
-  completed?: Boolean;
-  subproject?: SubprojectCreateOneWithoutTasksInput;
-  timelogs?: TimelogCreateManyWithoutTaskInput;
-}
-
-export interface SubprojectUpdateOneWithoutTasksInput {
-  create?: SubprojectCreateWithoutTasksInput;
-  update?: SubprojectUpdateWithoutTasksDataInput;
-  upsert?: SubprojectUpsertWithoutTasksInput;
-  delete?: Boolean;
-  disconnect?: Boolean;
-  connect?: SubprojectWhereUniqueInput;
-}
-
-export interface TimelogScalarWhereInput {
-  id?: Int;
-  id_not?: Int;
-  id_in?: Int[] | Int;
-  id_not_in?: Int[] | Int;
-  id_lt?: Int;
-  id_lte?: Int;
-  id_gt?: Int;
-  id_gte?: Int;
-  startDate?: DateTimeInput;
-  startDate_not?: DateTimeInput;
-  startDate_in?: DateTimeInput[] | DateTimeInput;
-  startDate_not_in?: DateTimeInput[] | DateTimeInput;
-  startDate_lt?: DateTimeInput;
-  startDate_lte?: DateTimeInput;
-  startDate_gt?: DateTimeInput;
-  startDate_gte?: DateTimeInput;
-  finishDate?: DateTimeInput;
-  finishDate_not?: DateTimeInput;
-  finishDate_in?: DateTimeInput[] | DateTimeInput;
-  finishDate_not_in?: DateTimeInput[] | DateTimeInput;
-  finishDate_lt?: DateTimeInput;
-  finishDate_lte?: DateTimeInput;
-  finishDate_gt?: DateTimeInput;
-  finishDate_gte?: DateTimeInput;
-  AND?: TimelogScalarWhereInput[] | TimelogScalarWhereInput;
-  OR?: TimelogScalarWhereInput[] | TimelogScalarWhereInput;
-  NOT?: TimelogScalarWhereInput[] | TimelogScalarWhereInput;
-}
-
-export interface SubprojectCreateWithoutTasksInput {
-  id?: Int;
-  name: String;
-  project: ProjectCreateOneWithoutSubprojectsInput;
-}
-
-export interface TimelogUpdateManyWithWhereNestedInput {
-  where: TimelogScalarWhereInput;
-  data: TimelogUpdateManyDataInput;
-}
-
-export interface SubprojectCreateManyWithoutProjectInput {
-  create?:
-    | SubprojectCreateWithoutProjectInput[]
-    | SubprojectCreateWithoutProjectInput;
-  connect?: SubprojectWhereUniqueInput[] | SubprojectWhereUniqueInput;
-}
-
-export interface TimelogWhereInput {
-  id?: Int;
-  id_not?: Int;
-  id_in?: Int[] | Int;
-  id_not_in?: Int[] | Int;
-  id_lt?: Int;
-  id_lte?: Int;
-  id_gt?: Int;
-  id_gte?: Int;
-  startDate?: DateTimeInput;
-  startDate_not?: DateTimeInput;
-  startDate_in?: DateTimeInput[] | DateTimeInput;
-  startDate_not_in?: DateTimeInput[] | DateTimeInput;
-  startDate_lt?: DateTimeInput;
-  startDate_lte?: DateTimeInput;
-  startDate_gt?: DateTimeInput;
-  startDate_gte?: DateTimeInput;
-  finishDate?: DateTimeInput;
-  finishDate_not?: DateTimeInput;
-  finishDate_in?: DateTimeInput[] | DateTimeInput;
-  finishDate_not_in?: DateTimeInput[] | DateTimeInput;
-  finishDate_lt?: DateTimeInput;
-  finishDate_lte?: DateTimeInput;
-  finishDate_gt?: DateTimeInput;
-  finishDate_gte?: DateTimeInput;
-  task?: TaskWhereInput;
-  AND?: TimelogWhereInput[] | TimelogWhereInput;
-  OR?: TimelogWhereInput[] | TimelogWhereInput;
-  NOT?: TimelogWhereInput[] | TimelogWhereInput;
-}
-
-export interface TaskCreateManyWithoutSubprojectInput {
-  create?:
-    | TaskCreateWithoutSubprojectInput[]
-    | TaskCreateWithoutSubprojectInput;
-  connect?: TaskWhereUniqueInput[] | TaskWhereUniqueInput;
-}
-
-export interface TaskUpsertWithWhereUniqueWithoutSubprojectInput {
-  where: TaskWhereUniqueInput;
-  update: TaskUpdateWithoutSubprojectDataInput;
-  create: TaskCreateWithoutSubprojectInput;
-}
-
-export interface TimelogSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: TimelogWhereInput;
-  AND?: TimelogSubscriptionWhereInput[] | TimelogSubscriptionWhereInput;
-  OR?: TimelogSubscriptionWhereInput[] | TimelogSubscriptionWhereInput;
-  NOT?: TimelogSubscriptionWhereInput[] | TimelogSubscriptionWhereInput;
+export interface TagCreateManyWithoutTasksInput {
+  create?: TagCreateWithoutTasksInput[] | TagCreateWithoutTasksInput;
+  connect?: TagWhereUniqueInput[] | TagWhereUniqueInput;
 }
 
 export interface TaskScalarWhereInput {
@@ -927,15 +1077,9 @@ export interface TaskScalarWhereInput {
   NOT?: TaskScalarWhereInput[] | TaskScalarWhereInput;
 }
 
-export interface SubprojectSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: SubprojectWhereInput;
-  AND?: SubprojectSubscriptionWhereInput[] | SubprojectSubscriptionWhereInput;
-  OR?: SubprojectSubscriptionWhereInput[] | SubprojectSubscriptionWhereInput;
-  NOT?: SubprojectSubscriptionWhereInput[] | SubprojectSubscriptionWhereInput;
+export interface ProjectUpdateInput {
+  name?: String;
+  subprojects?: SubprojectUpdateManyWithoutProjectInput;
 }
 
 export interface TaskUpdateManyWithWhereNestedInput {
@@ -943,9 +1087,9 @@ export interface TaskUpdateManyWithWhereNestedInput {
   data: TaskUpdateManyDataInput;
 }
 
-export interface TaskUpsertWithoutTimelogsInput {
-  update: TaskUpdateWithoutTimelogsDataInput;
-  create: TaskCreateWithoutTimelogsInput;
+export interface SubprojectUpdateWithWhereUniqueWithoutProjectInput {
+  where: SubprojectWhereUniqueInput;
+  data: SubprojectUpdateWithoutProjectDataInput;
 }
 
 export interface TaskUpdateManyDataInput {
@@ -961,10 +1105,16 @@ export interface TaskUpdateManyDataInput {
   completed?: Boolean;
 }
 
-export type SubprojectWhereUniqueInput = AtLeastOne<{
-  id: Int;
-  name?: String;
-}>;
+export interface TaskSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: TaskWhereInput;
+  AND?: TaskSubscriptionWhereInput[] | TaskSubscriptionWhereInput;
+  OR?: TaskSubscriptionWhereInput[] | TaskSubscriptionWhereInput;
+  NOT?: TaskSubscriptionWhereInput[] | TaskSubscriptionWhereInput;
+}
 
 export interface SubprojectUpsertWithWhereUniqueWithoutProjectInput {
   where: SubprojectWhereUniqueInput;
@@ -972,9 +1122,16 @@ export interface SubprojectUpsertWithWhereUniqueWithoutProjectInput {
   create: SubprojectCreateWithoutProjectInput;
 }
 
-export type TaskWhereUniqueInput = AtLeastOne<{
-  id: Int;
-}>;
+export interface ProjectSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: ProjectWhereInput;
+  AND?: ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput;
+  OR?: ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput;
+  NOT?: ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput;
+}
 
 export interface SubprojectScalarWhereInput {
   id?: Int;
@@ -1004,8 +1161,9 @@ export interface SubprojectScalarWhereInput {
   NOT?: SubprojectScalarWhereInput[] | SubprojectScalarWhereInput;
 }
 
-export type TimelogWhereUniqueInput = AtLeastOne<{
+export type SubprojectWhereUniqueInput = AtLeastOne<{
   id: Int;
+  name?: String;
 }>;
 
 export interface SubprojectUpdateManyWithWhereNestedInput {
@@ -1013,55 +1171,51 @@ export interface SubprojectUpdateManyWithWhereNestedInput {
   data: SubprojectUpdateManyDataInput;
 }
 
-export interface SubprojectCreateOneWithoutTasksInput {
-  create?: SubprojectCreateWithoutTasksInput;
-  connect?: SubprojectWhereUniqueInput;
-}
+export type TagWhereUniqueInput = AtLeastOne<{
+  id: Int;
+  name?: String;
+}>;
 
 export interface SubprojectUpdateManyDataInput {
   name?: String;
+}
+
+export type TaskWhereUniqueInput = AtLeastOne<{
+  id: Int;
+}>;
+
+export interface ProjectUpdateManyMutationInput {
+  name?: String;
+}
+
+export type TimelogWhereUniqueInput = AtLeastOne<{
+  id: Int;
+}>;
+
+export interface TagUpdateInput {
+  name?: String;
+  tasks?: TaskUpdateManyWithoutTagsInput;
+}
+
+export interface SubprojectUpdateOneWithoutTasksInput {
+  create?: SubprojectCreateWithoutTasksInput;
+  update?: SubprojectUpdateWithoutTasksDataInput;
+  upsert?: SubprojectUpsertWithoutTasksInput;
+  delete?: Boolean;
+  disconnect?: Boolean;
+  connect?: SubprojectWhereUniqueInput;
+}
+
+export interface SubprojectCreateWithoutTasksInput {
+  id?: Int;
+  name: String;
+  project: ProjectCreateOneWithoutSubprojectsInput;
 }
 
 export interface SubprojectCreateWithoutProjectInput {
   id?: Int;
   name: String;
   tasks?: TaskCreateManyWithoutSubprojectInput;
-}
-
-export interface ProjectUpdateManyMutationInput {
-  name?: String;
-}
-
-export interface TaskSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: TaskWhereInput;
-  AND?: TaskSubscriptionWhereInput[] | TaskSubscriptionWhereInput;
-  OR?: TaskSubscriptionWhereInput[] | TaskSubscriptionWhereInput;
-  NOT?: TaskSubscriptionWhereInput[] | TaskSubscriptionWhereInput;
-}
-
-export interface SubprojectUpdateManyMutationInput {
-  name?: String;
-}
-
-export interface TaskUpdateOneRequiredWithoutTimelogsInput {
-  create?: TaskCreateWithoutTimelogsInput;
-  update?: TaskUpdateWithoutTimelogsDataInput;
-  upsert?: TaskUpsertWithoutTimelogsInput;
-  connect?: TaskWhereUniqueInput;
-}
-
-export interface ProjectUpsertWithoutSubprojectsInput {
-  update: ProjectUpdateWithoutSubprojectsDataInput;
-  create: ProjectCreateWithoutSubprojectsInput;
-}
-
-export interface SubprojectUpsertWithoutTasksInput {
-  update: SubprojectUpdateWithoutTasksDataInput;
-  create: SubprojectCreateWithoutTasksInput;
 }
 
 export interface SubprojectCreateInput {
@@ -1071,10 +1225,63 @@ export interface SubprojectCreateInput {
   tasks?: TaskCreateManyWithoutSubprojectInput;
 }
 
-export interface ProjectCreateInput {
+export interface TimelogCreateWithoutTaskInput {
+  id?: Int;
+  startDate?: DateTimeInput;
+  finishDate?: DateTimeInput;
+}
+
+export interface ProjectCreateOneWithoutSubprojectsInput {
+  create?: ProjectCreateWithoutSubprojectsInput;
+  connect?: ProjectWhereUniqueInput;
+}
+
+export interface SubprojectUpdateManyWithoutProjectInput {
+  create?:
+    | SubprojectCreateWithoutProjectInput[]
+    | SubprojectCreateWithoutProjectInput;
+  delete?: SubprojectWhereUniqueInput[] | SubprojectWhereUniqueInput;
+  connect?: SubprojectWhereUniqueInput[] | SubprojectWhereUniqueInput;
+  set?: SubprojectWhereUniqueInput[] | SubprojectWhereUniqueInput;
+  disconnect?: SubprojectWhereUniqueInput[] | SubprojectWhereUniqueInput;
+  update?:
+    | SubprojectUpdateWithWhereUniqueWithoutProjectInput[]
+    | SubprojectUpdateWithWhereUniqueWithoutProjectInput;
+  upsert?:
+    | SubprojectUpsertWithWhereUniqueWithoutProjectInput[]
+    | SubprojectUpsertWithWhereUniqueWithoutProjectInput;
+  deleteMany?: SubprojectScalarWhereInput[] | SubprojectScalarWhereInput;
+  updateMany?:
+    | SubprojectUpdateManyWithWhereNestedInput[]
+    | SubprojectUpdateManyWithWhereNestedInput;
+}
+
+export interface ProjectCreateWithoutSubprojectsInput {
   id?: Int;
   name: String;
-  subprojects?: SubprojectCreateManyWithoutProjectInput;
+}
+
+export interface TagSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: TagWhereInput;
+  AND?: TagSubscriptionWhereInput[] | TagSubscriptionWhereInput;
+  OR?: TagSubscriptionWhereInput[] | TagSubscriptionWhereInput;
+  NOT?: TagSubscriptionWhereInput[] | TagSubscriptionWhereInput;
+}
+
+export interface SubprojectUpdateInput {
+  name?: String;
+  project?: ProjectUpdateOneRequiredWithoutSubprojectsInput;
+  tasks?: TaskUpdateManyWithoutSubprojectInput;
+}
+
+export interface TimelogUpdateInput {
+  startDate?: DateTimeInput;
+  finishDate?: DateTimeInput;
+  task?: TaskUpdateOneRequiredWithoutTimelogsInput;
 }
 
 export interface ProjectUpdateOneRequiredWithoutSubprojectsInput {
@@ -1084,20 +1291,83 @@ export interface ProjectUpdateOneRequiredWithoutSubprojectsInput {
   connect?: ProjectWhereUniqueInput;
 }
 
-export interface SubprojectUpdateInput {
-  name?: String;
-  project?: ProjectUpdateOneRequiredWithoutSubprojectsInput;
-  tasks?: TaskUpdateManyWithoutSubprojectInput;
+export interface TaskCreateInput {
+  id?: Int;
+  name: String;
+  priority?: String;
+  comments?: String;
+  repeat?: Int;
+  estimateTime?: String;
+  plannedTime?: String;
+  plannedDate?: String;
+  finishDate?: String;
+  deadlineDate?: String;
+  completed?: Boolean;
+  subproject?: SubprojectCreateOneWithoutTasksInput;
+  timelogs?: TimelogCreateManyWithoutTaskInput;
+  tags?: TagCreateManyWithoutTasksInput;
 }
 
-export interface ProjectCreateWithoutSubprojectsInput {
+export interface ProjectUpdateWithoutSubprojectsDataInput {
+  name?: String;
+}
+
+export interface ProjectCreateInput {
+  id?: Int;
+  name: String;
+  subprojects?: SubprojectCreateManyWithoutProjectInput;
+}
+
+export interface ProjectUpsertWithoutSubprojectsInput {
+  update: ProjectUpdateWithoutSubprojectsDataInput;
+  create: ProjectCreateWithoutSubprojectsInput;
+}
+
+export interface TagCreateWithoutTasksInput {
   id?: Int;
   name: String;
 }
 
-export interface ProjectCreateOneWithoutSubprojectsInput {
-  create?: ProjectCreateWithoutSubprojectsInput;
-  connect?: ProjectWhereUniqueInput;
+export interface TaskCreateWithoutTagsInput {
+  id?: Int;
+  name: String;
+  priority?: String;
+  comments?: String;
+  repeat?: Int;
+  estimateTime?: String;
+  plannedTime?: String;
+  plannedDate?: String;
+  finishDate?: String;
+  deadlineDate?: String;
+  completed?: Boolean;
+  subproject?: SubprojectCreateOneWithoutTasksInput;
+  timelogs?: TimelogCreateManyWithoutTaskInput;
+}
+
+export interface TaskCreateManyWithoutTagsInput {
+  create?: TaskCreateWithoutTagsInput[] | TaskCreateWithoutTagsInput;
+  connect?: TaskWhereUniqueInput[] | TaskWhereUniqueInput;
+}
+
+export interface TagCreateInput {
+  id?: Int;
+  name: String;
+  tasks?: TaskCreateManyWithoutTagsInput;
+}
+
+export interface SubprojectUpdateManyMutationInput {
+  name?: String;
+}
+
+export interface TimelogSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: TimelogWhereInput;
+  AND?: TimelogSubscriptionWhereInput[] | TimelogSubscriptionWhereInput;
+  OR?: TimelogSubscriptionWhereInput[] | TimelogSubscriptionWhereInput;
+  NOT?: TimelogSubscriptionWhereInput[] | TimelogSubscriptionWhereInput;
 }
 
 export interface TaskCreateWithoutSubprojectInput {
@@ -1113,37 +1383,24 @@ export interface TaskCreateWithoutSubprojectInput {
   deadlineDate?: String;
   completed?: Boolean;
   timelogs?: TimelogCreateManyWithoutTaskInput;
+  tags?: TagCreateManyWithoutTasksInput;
 }
 
-export interface TaskUpdateInput {
-  name?: String;
-  priority?: String;
-  comments?: String;
-  repeat?: Int;
-  estimateTime?: String;
-  plannedTime?: String;
-  plannedDate?: String;
-  finishDate?: String;
-  deadlineDate?: String;
-  completed?: Boolean;
-  subproject?: SubprojectUpdateOneWithoutTasksInput;
-  timelogs?: TimelogUpdateManyWithoutTaskInput;
+export interface SubprojectUpsertWithoutTasksInput {
+  update: SubprojectUpdateWithoutTasksDataInput;
+  create: SubprojectCreateWithoutTasksInput;
 }
 
-export interface TaskCreateOneWithoutTimelogsInput {
-  create?: TaskCreateWithoutTimelogsInput;
-  connect?: TaskWhereUniqueInput;
+export interface TimelogCreateInput {
+  id?: Int;
+  startDate?: DateTimeInput;
+  finishDate?: DateTimeInput;
+  task: TaskCreateOneWithoutTimelogsInput;
 }
 
-export interface ProjectSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: ProjectWhereInput;
-  AND?: ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput;
-  OR?: ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput;
-  NOT?: ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput;
+export interface TaskUpsertWithoutTimelogsInput {
+  update: TaskUpdateWithoutTimelogsDataInput;
+  create: TaskCreateWithoutTimelogsInput;
 }
 
 export interface NodeNode {
@@ -1225,44 +1482,47 @@ export interface SubprojectSubscription
   }) => T;
 }
 
-export interface ProjectEdge {
-  node: Project;
-  cursor: String;
+export interface SubprojectConnection {
+  pageInfo: PageInfo;
+  edges: SubprojectEdge[];
 }
 
-export interface ProjectEdgePromise extends Promise<ProjectEdge>, Fragmentable {
-  node: <T = ProjectPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface ProjectEdgeSubscription
-  extends Promise<AsyncIterator<ProjectEdge>>,
+export interface SubprojectConnectionPromise
+  extends Promise<SubprojectConnection>,
     Fragmentable {
-  node: <T = ProjectSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<SubprojectEdge>>() => T;
+  aggregate: <T = AggregateSubprojectPromise>() => T;
 }
 
-export interface PageInfo {
-  hasNextPage: Boolean;
-  hasPreviousPage: Boolean;
-  startCursor?: String;
-  endCursor?: String;
-}
-
-export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
-  hasNextPage: () => Promise<Boolean>;
-  hasPreviousPage: () => Promise<Boolean>;
-  startCursor: () => Promise<String>;
-  endCursor: () => Promise<String>;
-}
-
-export interface PageInfoSubscription
-  extends Promise<AsyncIterator<PageInfo>>,
+export interface SubprojectConnectionSubscription
+  extends Promise<AsyncIterator<SubprojectConnection>>,
     Fragmentable {
-  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
-  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
-  startCursor: () => Promise<AsyncIterator<String>>;
-  endCursor: () => Promise<AsyncIterator<String>>;
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<SubprojectEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateSubprojectSubscription>() => T;
+}
+
+export interface Timelog {
+  id: Int;
+  startDate?: DateTimeOutput;
+  finishDate?: DateTimeOutput;
+}
+
+export interface TimelogPromise extends Promise<Timelog>, Fragmentable {
+  id: () => Promise<Int>;
+  startDate: () => Promise<DateTimeOutput>;
+  finishDate: () => Promise<DateTimeOutput>;
+  task: <T = TaskPromise>() => T;
+}
+
+export interface TimelogSubscription
+  extends Promise<AsyncIterator<Timelog>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<Int>>;
+  startDate: () => Promise<AsyncIterator<DateTimeOutput>>;
+  finishDate: () => Promise<AsyncIterator<DateTimeOutput>>;
+  task: <T = TaskSubscription>() => T;
 }
 
 export interface BatchPayload {
@@ -1279,6 +1539,23 @@ export interface BatchPayloadSubscription
   extends Promise<AsyncIterator<BatchPayload>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Long>>;
+}
+
+export interface ProjectEdge {
+  node: Project;
+  cursor: String;
+}
+
+export interface ProjectEdgePromise extends Promise<ProjectEdge>, Fragmentable {
+  node: <T = ProjectPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ProjectEdgeSubscription
+  extends Promise<AsyncIterator<ProjectEdge>>,
+    Fragmentable {
+  node: <T = ProjectSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface TaskPreviousValues {
@@ -1327,6 +1604,128 @@ export interface TaskPreviousValuesSubscription
   completed: () => Promise<AsyncIterator<Boolean>>;
 }
 
+export interface Task {
+  id: Int;
+  name: String;
+  priority?: String;
+  comments?: String;
+  repeat?: Int;
+  estimateTime?: String;
+  plannedTime?: String;
+  plannedDate?: String;
+  finishDate?: String;
+  deadlineDate?: String;
+  completed: Boolean;
+}
+
+export interface TaskPromise extends Promise<Task>, Fragmentable {
+  id: () => Promise<Int>;
+  name: () => Promise<String>;
+  priority: () => Promise<String>;
+  comments: () => Promise<String>;
+  repeat: () => Promise<Int>;
+  estimateTime: () => Promise<String>;
+  plannedTime: () => Promise<String>;
+  plannedDate: () => Promise<String>;
+  finishDate: () => Promise<String>;
+  deadlineDate: () => Promise<String>;
+  completed: () => Promise<Boolean>;
+  subproject: <T = SubprojectPromise>() => T;
+  timelogs: <T = FragmentableArray<Timelog>>(args?: {
+    where?: TimelogWhereInput;
+    orderBy?: TimelogOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  tags: <T = FragmentableArray<Tag>>(args?: {
+    where?: TagWhereInput;
+    orderBy?: TagOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface TaskSubscription
+  extends Promise<AsyncIterator<Task>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<Int>>;
+  name: () => Promise<AsyncIterator<String>>;
+  priority: () => Promise<AsyncIterator<String>>;
+  comments: () => Promise<AsyncIterator<String>>;
+  repeat: () => Promise<AsyncIterator<Int>>;
+  estimateTime: () => Promise<AsyncIterator<String>>;
+  plannedTime: () => Promise<AsyncIterator<String>>;
+  plannedDate: () => Promise<AsyncIterator<String>>;
+  finishDate: () => Promise<AsyncIterator<String>>;
+  deadlineDate: () => Promise<AsyncIterator<String>>;
+  completed: () => Promise<AsyncIterator<Boolean>>;
+  subproject: <T = SubprojectSubscription>() => T;
+  timelogs: <T = Promise<AsyncIterator<TimelogSubscription>>>(args?: {
+    where?: TimelogWhereInput;
+    orderBy?: TimelogOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  tags: <T = Promise<AsyncIterator<TagSubscription>>>(args?: {
+    where?: TagWhereInput;
+    orderBy?: TagOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface PageInfo {
+  hasNextPage: Boolean;
+  hasPreviousPage: Boolean;
+  startCursor?: String;
+  endCursor?: String;
+}
+
+export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
+  hasNextPage: () => Promise<Boolean>;
+  hasPreviousPage: () => Promise<Boolean>;
+  startCursor: () => Promise<String>;
+  endCursor: () => Promise<String>;
+}
+
+export interface PageInfoSubscription
+  extends Promise<AsyncIterator<PageInfo>>,
+    Fragmentable {
+  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
+  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
+  startCursor: () => Promise<AsyncIterator<String>>;
+  endCursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface TimelogEdge {
+  node: Timelog;
+  cursor: String;
+}
+
+export interface TimelogEdgePromise extends Promise<TimelogEdge>, Fragmentable {
+  node: <T = TimelogPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface TimelogEdgeSubscription
+  extends Promise<AsyncIterator<TimelogEdge>>,
+    Fragmentable {
+  node: <T = TimelogSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
 export interface ProjectConnection {
   pageInfo: PageInfo;
   edges: ProjectEdge[];
@@ -1348,21 +1747,143 @@ export interface ProjectConnectionSubscription
   aggregate: <T = AggregateProjectSubscription>() => T;
 }
 
-export interface TimelogEdge {
-  node: Timelog;
+export interface AggregateTask {
+  count: Int;
+}
+
+export interface AggregateTaskPromise
+  extends Promise<AggregateTask>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateTaskSubscription
+  extends Promise<AsyncIterator<AggregateTask>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface TaskSubscriptionPayload {
+  mutation: MutationType;
+  node: Task;
+  updatedFields: String[];
+  previousValues: TaskPreviousValues;
+}
+
+export interface TaskSubscriptionPayloadPromise
+  extends Promise<TaskSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = TaskPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = TaskPreviousValuesPromise>() => T;
+}
+
+export interface TaskSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<TaskSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = TaskSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = TaskPreviousValuesSubscription>() => T;
+}
+
+export interface TaskConnection {
+  pageInfo: PageInfo;
+  edges: TaskEdge[];
+}
+
+export interface TaskConnectionPromise
+  extends Promise<TaskConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<TaskEdge>>() => T;
+  aggregate: <T = AggregateTaskPromise>() => T;
+}
+
+export interface TaskConnectionSubscription
+  extends Promise<AsyncIterator<TaskConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<TaskEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateTaskSubscription>() => T;
+}
+
+export interface ProjectSubscriptionPayload {
+  mutation: MutationType;
+  node: Project;
+  updatedFields: String[];
+  previousValues: ProjectPreviousValues;
+}
+
+export interface ProjectSubscriptionPayloadPromise
+  extends Promise<ProjectSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ProjectPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ProjectPreviousValuesPromise>() => T;
+}
+
+export interface ProjectSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ProjectSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ProjectSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ProjectPreviousValuesSubscription>() => T;
+}
+
+export interface TagEdge {
+  node: Tag;
   cursor: String;
 }
 
-export interface TimelogEdgePromise extends Promise<TimelogEdge>, Fragmentable {
-  node: <T = TimelogPromise>() => T;
+export interface TagEdgePromise extends Promise<TagEdge>, Fragmentable {
+  node: <T = TagPromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface TimelogEdgeSubscription
-  extends Promise<AsyncIterator<TimelogEdge>>,
+export interface TagEdgeSubscription
+  extends Promise<AsyncIterator<TagEdge>>,
     Fragmentable {
-  node: <T = TimelogSubscription>() => T;
+  node: <T = TagSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ProjectPreviousValues {
+  id: Int;
+  name: String;
+}
+
+export interface ProjectPreviousValuesPromise
+  extends Promise<ProjectPreviousValues>,
+    Fragmentable {
+  id: () => Promise<Int>;
+  name: () => Promise<String>;
+}
+
+export interface ProjectPreviousValuesSubscription
+  extends Promise<AsyncIterator<ProjectPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<Int>>;
+  name: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateSubproject {
+  count: Int;
+}
+
+export interface AggregateSubprojectPromise
+  extends Promise<AggregateSubproject>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateSubprojectSubscription
+  extends Promise<AsyncIterator<AggregateSubproject>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface Project {
@@ -1400,134 +1921,6 @@ export interface ProjectSubscription
   }) => T;
 }
 
-export interface AggregateTask {
-  count: Int;
-}
-
-export interface AggregateTaskPromise
-  extends Promise<AggregateTask>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateTaskSubscription
-  extends Promise<AsyncIterator<AggregateTask>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface Timelog {
-  id: Int;
-  startDate?: DateTimeOutput;
-  finishDate?: DateTimeOutput;
-}
-
-export interface TimelogPromise extends Promise<Timelog>, Fragmentable {
-  id: () => Promise<Int>;
-  startDate: () => Promise<DateTimeOutput>;
-  finishDate: () => Promise<DateTimeOutput>;
-  task: <T = TaskPromise>() => T;
-}
-
-export interface TimelogSubscription
-  extends Promise<AsyncIterator<Timelog>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<Int>>;
-  startDate: () => Promise<AsyncIterator<DateTimeOutput>>;
-  finishDate: () => Promise<AsyncIterator<DateTimeOutput>>;
-  task: <T = TaskSubscription>() => T;
-}
-
-export interface TaskConnection {
-  pageInfo: PageInfo;
-  edges: TaskEdge[];
-}
-
-export interface TaskConnectionPromise
-  extends Promise<TaskConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<TaskEdge>>() => T;
-  aggregate: <T = AggregateTaskPromise>() => T;
-}
-
-export interface TaskConnectionSubscription
-  extends Promise<AsyncIterator<TaskConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<TaskEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateTaskSubscription>() => T;
-}
-
-export interface TaskSubscriptionPayload {
-  mutation: MutationType;
-  node: Task;
-  updatedFields: String[];
-  previousValues: TaskPreviousValues;
-}
-
-export interface TaskSubscriptionPayloadPromise
-  extends Promise<TaskSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = TaskPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = TaskPreviousValuesPromise>() => T;
-}
-
-export interface TaskSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<TaskSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = TaskSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = TaskPreviousValuesSubscription>() => T;
-}
-
-export interface SubprojectEdge {
-  node: Subproject;
-  cursor: String;
-}
-
-export interface SubprojectEdgePromise
-  extends Promise<SubprojectEdge>,
-    Fragmentable {
-  node: <T = SubprojectPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface SubprojectEdgeSubscription
-  extends Promise<AsyncIterator<SubprojectEdge>>,
-    Fragmentable {
-  node: <T = SubprojectSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface ProjectSubscriptionPayload {
-  mutation: MutationType;
-  node: Project;
-  updatedFields: String[];
-  previousValues: ProjectPreviousValues;
-}
-
-export interface ProjectSubscriptionPayloadPromise
-  extends Promise<ProjectSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = ProjectPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = ProjectPreviousValuesPromise>() => T;
-}
-
-export interface ProjectSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<ProjectSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = ProjectSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = ProjectPreviousValuesSubscription>() => T;
-}
-
 export interface TimelogSubscriptionPayload {
   mutation: MutationType;
   node: Timelog;
@@ -1551,46 +1944,6 @@ export interface TimelogSubscriptionPayloadSubscription
   node: <T = TimelogSubscription>() => T;
   updatedFields: () => Promise<AsyncIterator<String[]>>;
   previousValues: <T = TimelogPreviousValuesSubscription>() => T;
-}
-
-export interface TimelogConnection {
-  pageInfo: PageInfo;
-  edges: TimelogEdge[];
-}
-
-export interface TimelogConnectionPromise
-  extends Promise<TimelogConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<TimelogEdge>>() => T;
-  aggregate: <T = AggregateTimelogPromise>() => T;
-}
-
-export interface TimelogConnectionSubscription
-  extends Promise<AsyncIterator<TimelogConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<TimelogEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateTimelogSubscription>() => T;
-}
-
-export interface SubprojectPreviousValues {
-  id: Int;
-  name: String;
-}
-
-export interface SubprojectPreviousValuesPromise
-  extends Promise<SubprojectPreviousValues>,
-    Fragmentable {
-  id: () => Promise<Int>;
-  name: () => Promise<String>;
-}
-
-export interface SubprojectPreviousValuesSubscription
-  extends Promise<AsyncIterator<SubprojectPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<Int>>;
-  name: () => Promise<AsyncIterator<String>>;
 }
 
 export interface SubprojectSubscriptionPayload {
@@ -1618,36 +1971,98 @@ export interface SubprojectSubscriptionPayloadSubscription
   previousValues: <T = SubprojectPreviousValuesSubscription>() => T;
 }
 
-export interface Task {
-  id: Int;
-  name: String;
-  priority?: String;
-  comments?: String;
-  repeat?: Int;
-  estimateTime?: String;
-  plannedTime?: String;
-  plannedDate?: String;
-  finishDate?: String;
-  deadlineDate?: String;
-  completed: Boolean;
+export interface TimelogConnection {
+  pageInfo: PageInfo;
+  edges: TimelogEdge[];
 }
 
-export interface TaskPromise extends Promise<Task>, Fragmentable {
+export interface TimelogConnectionPromise
+  extends Promise<TimelogConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<TimelogEdge>>() => T;
+  aggregate: <T = AggregateTimelogPromise>() => T;
+}
+
+export interface TimelogConnectionSubscription
+  extends Promise<AsyncIterator<TimelogConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<TimelogEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateTimelogSubscription>() => T;
+}
+
+export interface AggregateTag {
+  count: Int;
+}
+
+export interface AggregateTagPromise
+  extends Promise<AggregateTag>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateTagSubscription
+  extends Promise<AsyncIterator<AggregateTag>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface TagPreviousValues {
+  id: Int;
+  name: String;
+}
+
+export interface TagPreviousValuesPromise
+  extends Promise<TagPreviousValues>,
+    Fragmentable {
   id: () => Promise<Int>;
   name: () => Promise<String>;
-  priority: () => Promise<String>;
-  comments: () => Promise<String>;
-  repeat: () => Promise<Int>;
-  estimateTime: () => Promise<String>;
-  plannedTime: () => Promise<String>;
-  plannedDate: () => Promise<String>;
-  finishDate: () => Promise<String>;
-  deadlineDate: () => Promise<String>;
-  completed: () => Promise<Boolean>;
-  subproject: <T = SubprojectPromise>() => T;
-  timelogs: <T = FragmentableArray<Timelog>>(args?: {
-    where?: TimelogWhereInput;
-    orderBy?: TimelogOrderByInput;
+}
+
+export interface TagPreviousValuesSubscription
+  extends Promise<AsyncIterator<TagPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<Int>>;
+  name: () => Promise<AsyncIterator<String>>;
+}
+
+export interface TagSubscriptionPayload {
+  mutation: MutationType;
+  node: Tag;
+  updatedFields: String[];
+  previousValues: TagPreviousValues;
+}
+
+export interface TagSubscriptionPayloadPromise
+  extends Promise<TagSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = TagPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = TagPreviousValuesPromise>() => T;
+}
+
+export interface TagSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<TagSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = TagSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = TagPreviousValuesSubscription>() => T;
+}
+
+export interface Tag {
+  id: Int;
+  name: String;
+}
+
+export interface TagPromise extends Promise<Tag>, Fragmentable {
+  id: () => Promise<Int>;
+  name: () => Promise<String>;
+  tasks: <T = FragmentableArray<Task>>(args?: {
+    where?: TaskWhereInput;
+    orderBy?: TaskOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
@@ -1656,24 +2071,14 @@ export interface TaskPromise extends Promise<Task>, Fragmentable {
   }) => T;
 }
 
-export interface TaskSubscription
-  extends Promise<AsyncIterator<Task>>,
+export interface TagSubscription
+  extends Promise<AsyncIterator<Tag>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<Int>>;
   name: () => Promise<AsyncIterator<String>>;
-  priority: () => Promise<AsyncIterator<String>>;
-  comments: () => Promise<AsyncIterator<String>>;
-  repeat: () => Promise<AsyncIterator<Int>>;
-  estimateTime: () => Promise<AsyncIterator<String>>;
-  plannedTime: () => Promise<AsyncIterator<String>>;
-  plannedDate: () => Promise<AsyncIterator<String>>;
-  finishDate: () => Promise<AsyncIterator<String>>;
-  deadlineDate: () => Promise<AsyncIterator<String>>;
-  completed: () => Promise<AsyncIterator<Boolean>>;
-  subproject: <T = SubprojectSubscription>() => T;
-  timelogs: <T = Promise<AsyncIterator<TimelogSubscription>>>(args?: {
-    where?: TimelogWhereInput;
-    orderBy?: TimelogOrderByInput;
+  tasks: <T = Promise<AsyncIterator<TaskSubscription>>>(args?: {
+    where?: TaskWhereInput;
+    orderBy?: TaskOrderByInput;
     skip?: Int;
     after?: String;
     before?: String;
@@ -1682,23 +2087,44 @@ export interface TaskSubscription
   }) => T;
 }
 
-export interface ProjectPreviousValues {
+export interface SubprojectPreviousValues {
   id: Int;
   name: String;
 }
 
-export interface ProjectPreviousValuesPromise
-  extends Promise<ProjectPreviousValues>,
+export interface SubprojectPreviousValuesPromise
+  extends Promise<SubprojectPreviousValues>,
     Fragmentable {
   id: () => Promise<Int>;
   name: () => Promise<String>;
 }
 
-export interface ProjectPreviousValuesSubscription
-  extends Promise<AsyncIterator<ProjectPreviousValues>>,
+export interface SubprojectPreviousValuesSubscription
+  extends Promise<AsyncIterator<SubprojectPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<Int>>;
   name: () => Promise<AsyncIterator<String>>;
+}
+
+export interface TagConnection {
+  pageInfo: PageInfo;
+  edges: TagEdge[];
+}
+
+export interface TagConnectionPromise
+  extends Promise<TagConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<TagEdge>>() => T;
+  aggregate: <T = AggregateTagPromise>() => T;
+}
+
+export interface TagConnectionSubscription
+  extends Promise<AsyncIterator<TagConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<TagEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateTagSubscription>() => T;
 }
 
 export interface TaskEdge {
@@ -1734,54 +2160,42 @@ export interface AggregateTimelogSubscription
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface SubprojectConnection {
-  pageInfo: PageInfo;
-  edges: SubprojectEdge[];
+export interface SubprojectEdge {
+  node: Subproject;
+  cursor: String;
 }
 
-export interface SubprojectConnectionPromise
-  extends Promise<SubprojectConnection>,
+export interface SubprojectEdgePromise
+  extends Promise<SubprojectEdge>,
     Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<SubprojectEdge>>() => T;
-  aggregate: <T = AggregateSubprojectPromise>() => T;
+  node: <T = SubprojectPromise>() => T;
+  cursor: () => Promise<String>;
 }
 
-export interface SubprojectConnectionSubscription
-  extends Promise<AsyncIterator<SubprojectConnection>>,
+export interface SubprojectEdgeSubscription
+  extends Promise<AsyncIterator<SubprojectEdge>>,
     Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<SubprojectEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateSubprojectSubscription>() => T;
+  node: <T = SubprojectSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface AggregateSubproject {
-  count: Int;
-}
-
-export interface AggregateSubprojectPromise
-  extends Promise<AggregateSubproject>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateSubprojectSubscription
-  extends Promise<AsyncIterator<AggregateSubproject>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
+export type Long = string;
 
 /*
 The `Boolean` scalar type represents `true` or `false`.
 */
 export type Boolean = boolean;
 
-export type Long = string;
-
 /*
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
 */
 export type Int = number;
+
+/*
+The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
+*/
+export type ID_Input = string | number;
+export type ID_Output = string;
 
 /*
 DateTime scalar input type, allowing Date
@@ -1792,12 +2206,6 @@ export type DateTimeInput = Date | string;
 DateTime scalar output type, which is always a string
 */
 export type DateTimeOutput = string;
-
-/*
-The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
-*/
-export type ID_Input = string | number;
-export type ID_Output = string;
 
 /*
 The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
@@ -1824,6 +2232,10 @@ export const models: Model[] = [
   {
     name: "Timelog",
     embedded: false
+  },
+  {
+    name: "Tag",
+    embedded: false
   }
 ];
 
@@ -1834,6 +2246,6 @@ export const models: Model[] = [
 export const Prisma = makePrismaClientClass<ClientConstructor<Prisma>>({
   typeDefs,
   models,
-  endpoint: `http://localhost:4466/default/${process.env["STAGE"]}`
+  endpoint: `https://tasks-api-prisma-9d8a96e4f1.herokuapp.com/tasks-api-prisma/dev`
 });
 export const prisma = new Prisma();

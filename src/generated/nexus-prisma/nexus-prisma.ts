@@ -19,6 +19,7 @@ export interface NexusPrismaTypes {
       Subproject: SubprojectObject
       Task: TaskObject
       Timelog: TimelogObject
+      Tag: TagObject
       ProjectConnection: ProjectConnectionObject
       PageInfo: PageInfoObject
       ProjectEdge: ProjectEdgeObject
@@ -32,6 +33,9 @@ export interface NexusPrismaTypes {
       TimelogConnection: TimelogConnectionObject
       TimelogEdge: TimelogEdgeObject
       AggregateTimelog: AggregateTimelogObject
+      TagConnection: TagConnectionObject
+      TagEdge: TagEdgeObject
+      AggregateTag: AggregateTagObject
       Mutation: MutationObject
       BatchPayload: BatchPayloadObject
       Subscription: SubscriptionObject
@@ -43,6 +47,8 @@ export interface NexusPrismaTypes {
       TaskPreviousValues: TaskPreviousValuesObject
       TimelogSubscriptionPayload: TimelogSubscriptionPayloadObject
       TimelogPreviousValues: TimelogPreviousValuesObject
+      TagSubscriptionPayload: TagSubscriptionPayloadObject
+      TagPreviousValues: TagPreviousValuesObject
     }
     fieldsDetails: {
       Query: QueryFieldDetails
@@ -50,6 +56,7 @@ export interface NexusPrismaTypes {
       Subproject: SubprojectFieldDetails
       Task: TaskFieldDetails
       Timelog: TimelogFieldDetails
+      Tag: TagFieldDetails
       ProjectConnection: ProjectConnectionFieldDetails
       PageInfo: PageInfoFieldDetails
       ProjectEdge: ProjectEdgeFieldDetails
@@ -63,6 +70,9 @@ export interface NexusPrismaTypes {
       TimelogConnection: TimelogConnectionFieldDetails
       TimelogEdge: TimelogEdgeFieldDetails
       AggregateTimelog: AggregateTimelogFieldDetails
+      TagConnection: TagConnectionFieldDetails
+      TagEdge: TagEdgeFieldDetails
+      AggregateTag: AggregateTagFieldDetails
       Mutation: MutationFieldDetails
       BatchPayload: BatchPayloadFieldDetails
       Subscription: SubscriptionFieldDetails
@@ -74,6 +84,8 @@ export interface NexusPrismaTypes {
       TaskPreviousValues: TaskPreviousValuesFieldDetails
       TimelogSubscriptionPayload: TimelogSubscriptionPayloadFieldDetails
       TimelogPreviousValues: TimelogPreviousValuesFieldDetails
+      TagSubscriptionPayload: TagSubscriptionPayloadFieldDetails
+      TagPreviousValues: TagPreviousValuesFieldDetails
     }
   }
   inputTypes: {
@@ -83,9 +95,11 @@ export interface NexusPrismaTypes {
       ProjectWhereInput: ProjectWhereInputInputObject
       TaskWhereInput: TaskWhereInputInputObject
       TimelogWhereInput: TimelogWhereInputInputObject
+      TagWhereInput: TagWhereInputInputObject
       SubprojectWhereUniqueInput: SubprojectWhereUniqueInputInputObject
       TaskWhereUniqueInput: TaskWhereUniqueInputInputObject
       TimelogWhereUniqueInput: TimelogWhereUniqueInputInputObject
+      TagWhereUniqueInput: TagWhereUniqueInputInputObject
       ProjectCreateInput: ProjectCreateInputInputObject
       SubprojectCreateManyWithoutProjectInput: SubprojectCreateManyWithoutProjectInputInputObject
       SubprojectCreateWithoutProjectInput: SubprojectCreateWithoutProjectInputInputObject
@@ -93,6 +107,8 @@ export interface NexusPrismaTypes {
       TaskCreateWithoutSubprojectInput: TaskCreateWithoutSubprojectInputInputObject
       TimelogCreateManyWithoutTaskInput: TimelogCreateManyWithoutTaskInputInputObject
       TimelogCreateWithoutTaskInput: TimelogCreateWithoutTaskInputInputObject
+      TagCreateManyWithoutTasksInput: TagCreateManyWithoutTasksInputInputObject
+      TagCreateWithoutTasksInput: TagCreateWithoutTasksInputInputObject
       ProjectUpdateInput: ProjectUpdateInputInputObject
       SubprojectUpdateManyWithoutProjectInput: SubprojectUpdateManyWithoutProjectInputInputObject
       SubprojectUpdateWithWhereUniqueWithoutProjectInput: SubprojectUpdateWithWhereUniqueWithoutProjectInputInputObject
@@ -107,6 +123,13 @@ export interface NexusPrismaTypes {
       TimelogScalarWhereInput: TimelogScalarWhereInputInputObject
       TimelogUpdateManyWithWhereNestedInput: TimelogUpdateManyWithWhereNestedInputInputObject
       TimelogUpdateManyDataInput: TimelogUpdateManyDataInputInputObject
+      TagUpdateManyWithoutTasksInput: TagUpdateManyWithoutTasksInputInputObject
+      TagUpdateWithWhereUniqueWithoutTasksInput: TagUpdateWithWhereUniqueWithoutTasksInputInputObject
+      TagUpdateWithoutTasksDataInput: TagUpdateWithoutTasksDataInputInputObject
+      TagUpsertWithWhereUniqueWithoutTasksInput: TagUpsertWithWhereUniqueWithoutTasksInputInputObject
+      TagScalarWhereInput: TagScalarWhereInputInputObject
+      TagUpdateManyWithWhereNestedInput: TagUpdateManyWithWhereNestedInputInputObject
+      TagUpdateManyDataInput: TagUpdateManyDataInputInputObject
       TaskUpsertWithWhereUniqueWithoutSubprojectInput: TaskUpsertWithWhereUniqueWithoutSubprojectInputInputObject
       TaskScalarWhereInput: TaskScalarWhereInputInputObject
       TaskUpdateManyWithWhereNestedInput: TaskUpdateManyWithWhereNestedInputInputObject
@@ -140,16 +163,27 @@ export interface NexusPrismaTypes {
       TaskUpdateWithoutTimelogsDataInput: TaskUpdateWithoutTimelogsDataInputInputObject
       TaskUpsertWithoutTimelogsInput: TaskUpsertWithoutTimelogsInputInputObject
       TimelogUpdateManyMutationInput: TimelogUpdateManyMutationInputInputObject
+      TagCreateInput: TagCreateInputInputObject
+      TaskCreateManyWithoutTagsInput: TaskCreateManyWithoutTagsInputInputObject
+      TaskCreateWithoutTagsInput: TaskCreateWithoutTagsInputInputObject
+      TagUpdateInput: TagUpdateInputInputObject
+      TaskUpdateManyWithoutTagsInput: TaskUpdateManyWithoutTagsInputInputObject
+      TaskUpdateWithWhereUniqueWithoutTagsInput: TaskUpdateWithWhereUniqueWithoutTagsInputInputObject
+      TaskUpdateWithoutTagsDataInput: TaskUpdateWithoutTagsDataInputInputObject
+      TaskUpsertWithWhereUniqueWithoutTagsInput: TaskUpsertWithWhereUniqueWithoutTagsInputInputObject
+      TagUpdateManyMutationInput: TagUpdateManyMutationInputInputObject
       ProjectSubscriptionWhereInput: ProjectSubscriptionWhereInputInputObject
       SubprojectSubscriptionWhereInput: SubprojectSubscriptionWhereInputInputObject
       TaskSubscriptionWhereInput: TaskSubscriptionWhereInputInputObject
       TimelogSubscriptionWhereInput: TimelogSubscriptionWhereInputInputObject
+      TagSubscriptionWhereInput: TagSubscriptionWhereInputInputObject
     }
   }
   enumTypes: {
     SubprojectOrderByInput: SubprojectOrderByInputValues,
     TaskOrderByInput: TaskOrderByInputValues,
     TimelogOrderByInput: TimelogOrderByInputValues,
+    TagOrderByInput: TagOrderByInputValues,
     ProjectOrderByInput: ProjectOrderByInputValues,
     MutationType: MutationTypeValues,
   }
@@ -171,6 +205,9 @@ type QueryObject =
   | { name: 'timelog', args?: QueryTimelogArgs[] | false, alias?: string  } 
   | { name: 'timelogs', args?: QueryTimelogsArgs[] | false, alias?: string  } 
   | { name: 'timelogsConnection', args?: QueryTimelogsConnectionArgs[] | false, alias?: string  } 
+  | { name: 'tag', args?: QueryTagArgs[] | false, alias?: string  } 
+  | { name: 'tags', args?: QueryTagsArgs[] | false, alias?: string  } 
+  | { name: 'tagsConnection', args?: QueryTagsConnectionArgs[] | false, alias?: string  } 
 
 type QueryFields =
   | 'project'
@@ -185,6 +222,9 @@ type QueryFields =
   | 'timelog'
   | 'timelogs'
   | 'timelogsConnection'
+  | 'tag'
+  | 'tags'
+  | 'tagsConnection'
 
 
 type QueryProjectArgs =
@@ -252,6 +292,24 @@ type QueryTimelogsArgs =
   | 'first'
   | 'last'
 type QueryTimelogsConnectionArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryTagArgs =
+  | 'where'
+type QueryTagsArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryTagsConnectionArgs =
   | 'where'
   | 'orderBy'
   | 'skip'
@@ -418,6 +476,45 @@ export interface QueryFieldDetails {
       info?: GraphQLResolveInfo
     ) => Promise<prisma.TimelogConnection> | prisma.TimelogConnection
   }
+  tag: {
+    type: 'Tag'
+    args: Record<QueryTagArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where: TagWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Tag | null> | prisma.Tag | null
+  }
+  tags: {
+    type: 'Tag'
+    args: Record<QueryTagsArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: TagWhereInput | null, orderBy?: prisma.TagOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Tag[]> | prisma.Tag[]
+  }
+  tagsConnection: {
+    type: 'TagConnection'
+    args: Record<QueryTagsConnectionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: TagWhereInput | null, orderBy?: prisma.TagOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TagConnection> | prisma.TagConnection
+  }
 }
   
 
@@ -567,6 +664,7 @@ type TaskObject =
   | { name: 'completed', args?: [] | false, alias?: string  } 
   | { name: 'subproject', args?: [] | false, alias?: string  } 
   | { name: 'timelogs', args?: TaskTimelogsArgs[] | false, alias?: string  } 
+  | { name: 'tags', args?: TaskTagsArgs[] | false, alias?: string  } 
 
 type TaskFields =
   | 'id'
@@ -582,9 +680,18 @@ type TaskFields =
   | 'completed'
   | 'subproject'
   | 'timelogs'
+  | 'tags'
 
 
 type TaskTimelogsArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type TaskTagsArgs =
   | 'where'
   | 'orderBy'
   | 'skip'
@@ -709,6 +816,19 @@ export interface TaskFieldDetails {
       info?: GraphQLResolveInfo
     ) => Promise<prisma.Timelog[]> | prisma.Timelog[]
   }
+  tags: {
+    type: 'Tag'
+    args: Record<TaskTagsArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Task">,
+      args: { where?: TagWhereInput | null, orderBy?: prisma.TagOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Tag[]> | prisma.Tag[]
+  }
 }
   
 
@@ -768,6 +888,63 @@ export interface TimelogFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.Task> | prisma.Task
+  }
+}
+  
+
+// Types for Tag
+
+type TagObject =
+  | TagFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'name', args?: [] | false, alias?: string  } 
+  | { name: 'tasks', args?: TagTasksArgs[] | false, alias?: string  } 
+
+type TagFields =
+  | 'id'
+  | 'name'
+  | 'tasks'
+
+
+type TagTasksArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+  
+
+export interface TagFieldDetails {
+  id: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  name: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  tasks: {
+    type: 'Task'
+    args: Record<TagTasksArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Tag">,
+      args: { where?: TaskWhereInput | null, orderBy?: prisma.TaskOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Task[]> | prisma.Task[]
   }
 }
   
@@ -1327,6 +1504,131 @@ export interface AggregateTimelogFieldDetails {
 }
   
 
+// Types for TagConnection
+
+type TagConnectionObject =
+  | TagConnectionFields
+  | { name: 'pageInfo', args?: [] | false, alias?: string  } 
+  | { name: 'edges', args?: [] | false, alias?: string  } 
+  | { name: 'aggregate', args?: [] | false, alias?: string  } 
+
+type TagConnectionFields =
+  | 'pageInfo'
+  | 'edges'
+  | 'aggregate'
+
+
+
+  
+
+export interface TagConnectionFieldDetails {
+  pageInfo: {
+    type: 'PageInfo'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TagConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.PageInfo> | prisma.PageInfo
+  }
+  edges: {
+    type: 'TagEdge'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TagConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TagEdge[]> | prisma.TagEdge[]
+  }
+  aggregate: {
+    type: 'AggregateTag'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TagConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AggregateTag> | prisma.AggregateTag
+  }
+}
+  
+
+// Types for TagEdge
+
+type TagEdgeObject =
+  | TagEdgeFields
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'cursor', args?: [] | false, alias?: string  } 
+
+type TagEdgeFields =
+  | 'node'
+  | 'cursor'
+
+
+
+  
+
+export interface TagEdgeFieldDetails {
+  node: {
+    type: 'Tag'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TagEdge">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Tag> | prisma.Tag
+  }
+  cursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AggregateTag
+
+type AggregateTagObject =
+  | AggregateTagFields
+  | { name: 'count', args?: [] | false, alias?: string  } 
+
+type AggregateTagFields =
+  | 'count'
+
+
+
+  
+
+export interface AggregateTagFieldDetails {
+  count: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
 // Types for Mutation
 
 type MutationObject =
@@ -1355,6 +1657,12 @@ type MutationObject =
   | { name: 'upsertTimelog', args?: MutationUpsertTimelogArgs[] | false, alias?: string  } 
   | { name: 'deleteTimelog', args?: MutationDeleteTimelogArgs[] | false, alias?: string  } 
   | { name: 'deleteManyTimelogs', args?: MutationDeleteManyTimelogsArgs[] | false, alias?: string  } 
+  | { name: 'createTag', args?: MutationCreateTagArgs[] | false, alias?: string  } 
+  | { name: 'updateTag', args?: MutationUpdateTagArgs[] | false, alias?: string  } 
+  | { name: 'updateManyTags', args?: MutationUpdateManyTagsArgs[] | false, alias?: string  } 
+  | { name: 'upsertTag', args?: MutationUpsertTagArgs[] | false, alias?: string  } 
+  | { name: 'deleteTag', args?: MutationDeleteTagArgs[] | false, alias?: string  } 
+  | { name: 'deleteManyTags', args?: MutationDeleteManyTagsArgs[] | false, alias?: string  } 
 
 type MutationFields =
   | 'createProject'
@@ -1381,6 +1689,12 @@ type MutationFields =
   | 'upsertTimelog'
   | 'deleteTimelog'
   | 'deleteManyTimelogs'
+  | 'createTag'
+  | 'updateTag'
+  | 'updateManyTags'
+  | 'upsertTag'
+  | 'deleteTag'
+  | 'deleteManyTags'
 
 
 type MutationCreateProjectArgs =
@@ -1446,6 +1760,22 @@ type MutationUpsertTimelogArgs =
 type MutationDeleteTimelogArgs =
   | 'where'
 type MutationDeleteManyTimelogsArgs =
+  | 'where'
+type MutationCreateTagArgs =
+  | 'data'
+type MutationUpdateTagArgs =
+  | 'data'
+  | 'where'
+type MutationUpdateManyTagsArgs =
+  | 'data'
+  | 'where'
+type MutationUpsertTagArgs =
+  | 'where'
+  | 'create'
+  | 'update'
+type MutationDeleteTagArgs =
+  | 'where'
+type MutationDeleteManyTagsArgs =
   | 'where'
   
 
@@ -1762,6 +2092,84 @@ export interface MutationFieldDetails {
       info?: GraphQLResolveInfo
     ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
   }
+  createTag: {
+    type: 'Tag'
+    args: Record<MutationCreateTagArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: TagCreateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Tag> | prisma.Tag
+  }
+  updateTag: {
+    type: 'Tag'
+    args: Record<MutationUpdateTagArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: TagUpdateInput, where: TagWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Tag | null> | prisma.Tag | null
+  }
+  updateManyTags: {
+    type: 'BatchPayload'
+    args: Record<MutationUpdateManyTagsArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: TagUpdateManyMutationInput, where?: TagWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  upsertTag: {
+    type: 'Tag'
+    args: Record<MutationUpsertTagArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: TagWhereUniqueInput, create: TagCreateInput, update: TagUpdateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Tag> | prisma.Tag
+  }
+  deleteTag: {
+    type: 'Tag'
+    args: Record<MutationDeleteTagArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: TagWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Tag | null> | prisma.Tag | null
+  }
+  deleteManyTags: {
+    type: 'BatchPayload'
+    args: Record<MutationDeleteManyTagsArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where?: TagWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
 }
   
 
@@ -1798,12 +2206,14 @@ type SubscriptionObject =
   | { name: 'subproject', args?: SubscriptionSubprojectArgs[] | false, alias?: string  } 
   | { name: 'task', args?: SubscriptionTaskArgs[] | false, alias?: string  } 
   | { name: 'timelog', args?: SubscriptionTimelogArgs[] | false, alias?: string  } 
+  | { name: 'tag', args?: SubscriptionTagArgs[] | false, alias?: string  } 
 
 type SubscriptionFields =
   | 'project'
   | 'subproject'
   | 'task'
   | 'timelog'
+  | 'tag'
 
 
 type SubscriptionProjectArgs =
@@ -1813,6 +2223,8 @@ type SubscriptionSubprojectArgs =
 type SubscriptionTaskArgs =
   | 'where'
 type SubscriptionTimelogArgs =
+  | 'where'
+type SubscriptionTagArgs =
   | 'where'
   
 
@@ -1868,6 +2280,19 @@ export interface SubscriptionFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.TimelogSubscriptionPayload | null> | prisma.TimelogSubscriptionPayload | null
+  }
+  tag: {
+    type: 'TagSubscriptionPayload'
+    args: Record<SubscriptionTagArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Subscription">,
+      args: { where?: TagSubscriptionWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TagSubscriptionPayload | null> | prisma.TagSubscriptionPayload | null
   }
 }
   
@@ -2392,6 +2817,111 @@ export interface TimelogPreviousValuesFieldDetails {
 }
   
 
+// Types for TagSubscriptionPayload
+
+type TagSubscriptionPayloadObject =
+  | TagSubscriptionPayloadFields
+  | { name: 'mutation', args?: [] | false, alias?: string  } 
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'updatedFields', args?: [] | false, alias?: string  } 
+  | { name: 'previousValues', args?: [] | false, alias?: string  } 
+
+type TagSubscriptionPayloadFields =
+  | 'mutation'
+  | 'node'
+  | 'updatedFields'
+  | 'previousValues'
+
+
+
+  
+
+export interface TagSubscriptionPayloadFieldDetails {
+  mutation: {
+    type: 'MutationType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"TagSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MutationType> | prisma.MutationType
+  }
+  node: {
+    type: 'Tag'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"TagSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Tag | null> | prisma.Tag | null
+  }
+  updatedFields: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
+  }
+  previousValues: {
+    type: 'TagPreviousValues'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"TagSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.TagPreviousValues | null> | prisma.TagPreviousValues | null
+  }
+}
+  
+
+// Types for TagPreviousValues
+
+type TagPreviousValuesObject =
+  | TagPreviousValuesFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'name', args?: [] | false, alias?: string  } 
+
+type TagPreviousValuesFields =
+  | 'id'
+  | 'name'
+
+
+
+  
+
+export interface TagPreviousValuesFieldDetails {
+  id: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  name: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
 
 export interface ProjectWhereUniqueInput {
   id?: number | null
@@ -2661,6 +3191,9 @@ export interface TaskWhereInput {
   timelogs_every?: TimelogWhereInput | null
   timelogs_some?: TimelogWhereInput | null
   timelogs_none?: TimelogWhereInput | null
+  tags_every?: TagWhereInput | null
+  tags_some?: TagWhereInput | null
+  tags_none?: TagWhereInput | null
   AND?: TaskWhereInput[]
   OR?: TaskWhereInput[]
   NOT?: TaskWhereInput[]
@@ -2801,6 +3334,9 @@ export type TaskWhereInputInputObject =
   | { name: 'timelogs_every', alias?: string  } 
   | { name: 'timelogs_some', alias?: string  } 
   | { name: 'timelogs_none', alias?: string  } 
+  | { name: 'tags_every', alias?: string  } 
+  | { name: 'tags_some', alias?: string  } 
+  | { name: 'tags_none', alias?: string  } 
   | { name: 'AND', alias?: string  } 
   | { name: 'OR', alias?: string  } 
   | { name: 'NOT', alias?: string  } 
@@ -2866,6 +3402,67 @@ export type TimelogWhereInputInputObject =
   | { name: 'OR', alias?: string  } 
   | { name: 'NOT', alias?: string  } 
   
+export interface TagWhereInput {
+  id?: number | null
+  id_not?: number | null
+  id_in?: number[]
+  id_not_in?: number[]
+  id_lt?: number | null
+  id_lte?: number | null
+  id_gt?: number | null
+  id_gte?: number | null
+  name?: string | null
+  name_not?: string | null
+  name_in?: string[]
+  name_not_in?: string[]
+  name_lt?: string | null
+  name_lte?: string | null
+  name_gt?: string | null
+  name_gte?: string | null
+  name_contains?: string | null
+  name_not_contains?: string | null
+  name_starts_with?: string | null
+  name_not_starts_with?: string | null
+  name_ends_with?: string | null
+  name_not_ends_with?: string | null
+  tasks_every?: TaskWhereInput | null
+  tasks_some?: TaskWhereInput | null
+  tasks_none?: TaskWhereInput | null
+  AND?: TagWhereInput[]
+  OR?: TagWhereInput[]
+  NOT?: TagWhereInput[]
+}
+export type TagWhereInputInputObject =
+  | Extract<keyof TagWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  | { name: 'name_not', alias?: string  } 
+  | { name: 'name_in', alias?: string  } 
+  | { name: 'name_not_in', alias?: string  } 
+  | { name: 'name_lt', alias?: string  } 
+  | { name: 'name_lte', alias?: string  } 
+  | { name: 'name_gt', alias?: string  } 
+  | { name: 'name_gte', alias?: string  } 
+  | { name: 'name_contains', alias?: string  } 
+  | { name: 'name_not_contains', alias?: string  } 
+  | { name: 'name_starts_with', alias?: string  } 
+  | { name: 'name_not_starts_with', alias?: string  } 
+  | { name: 'name_ends_with', alias?: string  } 
+  | { name: 'name_not_ends_with', alias?: string  } 
+  | { name: 'tasks_every', alias?: string  } 
+  | { name: 'tasks_some', alias?: string  } 
+  | { name: 'tasks_none', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
 export interface SubprojectWhereUniqueInput {
   id?: number | null
   name?: string | null
@@ -2888,6 +3485,15 @@ export interface TimelogWhereUniqueInput {
 export type TimelogWhereUniqueInputInputObject =
   | Extract<keyof TimelogWhereUniqueInput, string>
   | { name: 'id', alias?: string  } 
+  
+export interface TagWhereUniqueInput {
+  id?: number | null
+  name?: string | null
+}
+export type TagWhereUniqueInputInputObject =
+  | Extract<keyof TagWhereUniqueInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'name', alias?: string  } 
   
 export interface ProjectCreateInput {
   id?: number | null
@@ -2942,6 +3548,7 @@ export interface TaskCreateWithoutSubprojectInput {
   deadlineDate?: string | null
   completed?: boolean | null
   timelogs?: TimelogCreateManyWithoutTaskInput | null
+  tags?: TagCreateManyWithoutTasksInput | null
 }
 export type TaskCreateWithoutSubprojectInputInputObject =
   | Extract<keyof TaskCreateWithoutSubprojectInput, string>
@@ -2957,6 +3564,7 @@ export type TaskCreateWithoutSubprojectInputInputObject =
   | { name: 'deadlineDate', alias?: string  } 
   | { name: 'completed', alias?: string  } 
   | { name: 'timelogs', alias?: string  } 
+  | { name: 'tags', alias?: string  } 
   
 export interface TimelogCreateManyWithoutTaskInput {
   create?: TimelogCreateWithoutTaskInput[]
@@ -2977,6 +3585,24 @@ export type TimelogCreateWithoutTaskInputInputObject =
   | { name: 'id', alias?: string  } 
   | { name: 'startDate', alias?: string  } 
   | { name: 'finishDate', alias?: string  } 
+  
+export interface TagCreateManyWithoutTasksInput {
+  create?: TagCreateWithoutTasksInput[]
+  connect?: TagWhereUniqueInput[]
+}
+export type TagCreateManyWithoutTasksInputInputObject =
+  | Extract<keyof TagCreateManyWithoutTasksInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface TagCreateWithoutTasksInput {
+  id?: number | null
+  name?: string
+}
+export type TagCreateWithoutTasksInputInputObject =
+  | Extract<keyof TagCreateWithoutTasksInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'name', alias?: string  } 
   
 export interface ProjectUpdateInput {
   name?: string | null
@@ -3072,6 +3698,7 @@ export interface TaskUpdateWithoutSubprojectDataInput {
   deadlineDate?: string | null
   completed?: boolean | null
   timelogs?: TimelogUpdateManyWithoutTaskInput | null
+  tags?: TagUpdateManyWithoutTasksInput | null
 }
 export type TaskUpdateWithoutSubprojectDataInputInputObject =
   | Extract<keyof TaskUpdateWithoutSubprojectDataInput, string>
@@ -3086,6 +3713,7 @@ export type TaskUpdateWithoutSubprojectDataInputInputObject =
   | { name: 'deadlineDate', alias?: string  } 
   | { name: 'completed', alias?: string  } 
   | { name: 'timelogs', alias?: string  } 
+  | { name: 'tags', alias?: string  } 
   
 export interface TimelogUpdateManyWithoutTaskInput {
   create?: TimelogCreateWithoutTaskInput[]
@@ -3215,6 +3843,127 @@ export type TimelogUpdateManyDataInputInputObject =
   | Extract<keyof TimelogUpdateManyDataInput, string>
   | { name: 'startDate', alias?: string  } 
   | { name: 'finishDate', alias?: string  } 
+  
+export interface TagUpdateManyWithoutTasksInput {
+  create?: TagCreateWithoutTasksInput[]
+  delete?: TagWhereUniqueInput[]
+  connect?: TagWhereUniqueInput[]
+  set?: TagWhereUniqueInput[]
+  disconnect?: TagWhereUniqueInput[]
+  update?: TagUpdateWithWhereUniqueWithoutTasksInput[]
+  upsert?: TagUpsertWithWhereUniqueWithoutTasksInput[]
+  deleteMany?: TagScalarWhereInput[]
+  updateMany?: TagUpdateManyWithWhereNestedInput[]
+}
+export type TagUpdateManyWithoutTasksInputInputObject =
+  | Extract<keyof TagUpdateManyWithoutTasksInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface TagUpdateWithWhereUniqueWithoutTasksInput {
+  where?: TagWhereUniqueInput
+  data?: TagUpdateWithoutTasksDataInput
+}
+export type TagUpdateWithWhereUniqueWithoutTasksInputInputObject =
+  | Extract<keyof TagUpdateWithWhereUniqueWithoutTasksInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface TagUpdateWithoutTasksDataInput {
+  name?: string | null
+}
+export type TagUpdateWithoutTasksDataInputInputObject =
+  | Extract<keyof TagUpdateWithoutTasksDataInput, string>
+  | { name: 'name', alias?: string  } 
+  
+export interface TagUpsertWithWhereUniqueWithoutTasksInput {
+  where?: TagWhereUniqueInput
+  update?: TagUpdateWithoutTasksDataInput
+  create?: TagCreateWithoutTasksInput
+}
+export type TagUpsertWithWhereUniqueWithoutTasksInputInputObject =
+  | Extract<keyof TagUpsertWithWhereUniqueWithoutTasksInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface TagScalarWhereInput {
+  id?: number | null
+  id_not?: number | null
+  id_in?: number[]
+  id_not_in?: number[]
+  id_lt?: number | null
+  id_lte?: number | null
+  id_gt?: number | null
+  id_gte?: number | null
+  name?: string | null
+  name_not?: string | null
+  name_in?: string[]
+  name_not_in?: string[]
+  name_lt?: string | null
+  name_lte?: string | null
+  name_gt?: string | null
+  name_gte?: string | null
+  name_contains?: string | null
+  name_not_contains?: string | null
+  name_starts_with?: string | null
+  name_not_starts_with?: string | null
+  name_ends_with?: string | null
+  name_not_ends_with?: string | null
+  AND?: TagScalarWhereInput[]
+  OR?: TagScalarWhereInput[]
+  NOT?: TagScalarWhereInput[]
+}
+export type TagScalarWhereInputInputObject =
+  | Extract<keyof TagScalarWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  | { name: 'name_not', alias?: string  } 
+  | { name: 'name_in', alias?: string  } 
+  | { name: 'name_not_in', alias?: string  } 
+  | { name: 'name_lt', alias?: string  } 
+  | { name: 'name_lte', alias?: string  } 
+  | { name: 'name_gt', alias?: string  } 
+  | { name: 'name_gte', alias?: string  } 
+  | { name: 'name_contains', alias?: string  } 
+  | { name: 'name_not_contains', alias?: string  } 
+  | { name: 'name_starts_with', alias?: string  } 
+  | { name: 'name_not_starts_with', alias?: string  } 
+  | { name: 'name_ends_with', alias?: string  } 
+  | { name: 'name_not_ends_with', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
+export interface TagUpdateManyWithWhereNestedInput {
+  where?: TagScalarWhereInput
+  data?: TagUpdateManyDataInput
+}
+export type TagUpdateManyWithWhereNestedInputInputObject =
+  | Extract<keyof TagUpdateManyWithWhereNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface TagUpdateManyDataInput {
+  name?: string | null
+}
+export type TagUpdateManyDataInputInputObject =
+  | Extract<keyof TagUpdateManyDataInput, string>
+  | { name: 'name', alias?: string  } 
   
 export interface TaskUpsertWithWhereUniqueWithoutSubprojectInput {
   where?: TaskWhereUniqueInput
@@ -3713,6 +4462,7 @@ export interface TaskCreateInput {
   completed?: boolean | null
   subproject?: SubprojectCreateOneWithoutTasksInput | null
   timelogs?: TimelogCreateManyWithoutTaskInput | null
+  tags?: TagCreateManyWithoutTasksInput | null
 }
 export type TaskCreateInputInputObject =
   | Extract<keyof TaskCreateInput, string>
@@ -3729,6 +4479,7 @@ export type TaskCreateInputInputObject =
   | { name: 'completed', alias?: string  } 
   | { name: 'subproject', alias?: string  } 
   | { name: 'timelogs', alias?: string  } 
+  | { name: 'tags', alias?: string  } 
   
 export interface SubprojectCreateOneWithoutTasksInput {
   create?: SubprojectCreateWithoutTasksInput | null
@@ -3763,6 +4514,7 @@ export interface TaskUpdateInput {
   completed?: boolean | null
   subproject?: SubprojectUpdateOneWithoutTasksInput | null
   timelogs?: TimelogUpdateManyWithoutTaskInput | null
+  tags?: TagUpdateManyWithoutTasksInput | null
 }
 export type TaskUpdateInputInputObject =
   | Extract<keyof TaskUpdateInput, string>
@@ -3778,6 +4530,7 @@ export type TaskUpdateInputInputObject =
   | { name: 'completed', alias?: string  } 
   | { name: 'subproject', alias?: string  } 
   | { name: 'timelogs', alias?: string  } 
+  | { name: 'tags', alias?: string  } 
   
 export interface SubprojectUpdateOneWithoutTasksInput {
   create?: SubprojectCreateWithoutTasksInput | null
@@ -3874,6 +4627,7 @@ export interface TaskCreateWithoutTimelogsInput {
   deadlineDate?: string | null
   completed?: boolean | null
   subproject?: SubprojectCreateOneWithoutTasksInput | null
+  tags?: TagCreateManyWithoutTasksInput | null
 }
 export type TaskCreateWithoutTimelogsInputInputObject =
   | Extract<keyof TaskCreateWithoutTimelogsInput, string>
@@ -3889,6 +4643,7 @@ export type TaskCreateWithoutTimelogsInputInputObject =
   | { name: 'deadlineDate', alias?: string  } 
   | { name: 'completed', alias?: string  } 
   | { name: 'subproject', alias?: string  } 
+  | { name: 'tags', alias?: string  } 
   
 export interface TimelogUpdateInput {
   startDate?: string | null
@@ -3926,6 +4681,7 @@ export interface TaskUpdateWithoutTimelogsDataInput {
   deadlineDate?: string | null
   completed?: boolean | null
   subproject?: SubprojectUpdateOneWithoutTasksInput | null
+  tags?: TagUpdateManyWithoutTasksInput | null
 }
 export type TaskUpdateWithoutTimelogsDataInputInputObject =
   | Extract<keyof TaskUpdateWithoutTimelogsDataInput, string>
@@ -3940,6 +4696,7 @@ export type TaskUpdateWithoutTimelogsDataInputInputObject =
   | { name: 'deadlineDate', alias?: string  } 
   | { name: 'completed', alias?: string  } 
   | { name: 'subproject', alias?: string  } 
+  | { name: 'tags', alias?: string  } 
   
 export interface TaskUpsertWithoutTimelogsInput {
   update?: TaskUpdateWithoutTimelogsDataInput
@@ -3958,6 +4715,145 @@ export type TimelogUpdateManyMutationInputInputObject =
   | Extract<keyof TimelogUpdateManyMutationInput, string>
   | { name: 'startDate', alias?: string  } 
   | { name: 'finishDate', alias?: string  } 
+  
+export interface TagCreateInput {
+  id?: number | null
+  name?: string
+  tasks?: TaskCreateManyWithoutTagsInput | null
+}
+export type TagCreateInputInputObject =
+  | Extract<keyof TagCreateInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  | { name: 'tasks', alias?: string  } 
+  
+export interface TaskCreateManyWithoutTagsInput {
+  create?: TaskCreateWithoutTagsInput[]
+  connect?: TaskWhereUniqueInput[]
+}
+export type TaskCreateManyWithoutTagsInputInputObject =
+  | Extract<keyof TaskCreateManyWithoutTagsInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface TaskCreateWithoutTagsInput {
+  id?: number | null
+  name?: string
+  priority?: string | null
+  comments?: string | null
+  repeat?: number | null
+  estimateTime?: string | null
+  plannedTime?: string | null
+  plannedDate?: string | null
+  finishDate?: string | null
+  deadlineDate?: string | null
+  completed?: boolean | null
+  subproject?: SubprojectCreateOneWithoutTasksInput | null
+  timelogs?: TimelogCreateManyWithoutTaskInput | null
+}
+export type TaskCreateWithoutTagsInputInputObject =
+  | Extract<keyof TaskCreateWithoutTagsInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  | { name: 'priority', alias?: string  } 
+  | { name: 'comments', alias?: string  } 
+  | { name: 'repeat', alias?: string  } 
+  | { name: 'estimateTime', alias?: string  } 
+  | { name: 'plannedTime', alias?: string  } 
+  | { name: 'plannedDate', alias?: string  } 
+  | { name: 'finishDate', alias?: string  } 
+  | { name: 'deadlineDate', alias?: string  } 
+  | { name: 'completed', alias?: string  } 
+  | { name: 'subproject', alias?: string  } 
+  | { name: 'timelogs', alias?: string  } 
+  
+export interface TagUpdateInput {
+  name?: string | null
+  tasks?: TaskUpdateManyWithoutTagsInput | null
+}
+export type TagUpdateInputInputObject =
+  | Extract<keyof TagUpdateInput, string>
+  | { name: 'name', alias?: string  } 
+  | { name: 'tasks', alias?: string  } 
+  
+export interface TaskUpdateManyWithoutTagsInput {
+  create?: TaskCreateWithoutTagsInput[]
+  delete?: TaskWhereUniqueInput[]
+  connect?: TaskWhereUniqueInput[]
+  set?: TaskWhereUniqueInput[]
+  disconnect?: TaskWhereUniqueInput[]
+  update?: TaskUpdateWithWhereUniqueWithoutTagsInput[]
+  upsert?: TaskUpsertWithWhereUniqueWithoutTagsInput[]
+  deleteMany?: TaskScalarWhereInput[]
+  updateMany?: TaskUpdateManyWithWhereNestedInput[]
+}
+export type TaskUpdateManyWithoutTagsInputInputObject =
+  | Extract<keyof TaskUpdateManyWithoutTagsInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface TaskUpdateWithWhereUniqueWithoutTagsInput {
+  where?: TaskWhereUniqueInput
+  data?: TaskUpdateWithoutTagsDataInput
+}
+export type TaskUpdateWithWhereUniqueWithoutTagsInputInputObject =
+  | Extract<keyof TaskUpdateWithWhereUniqueWithoutTagsInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface TaskUpdateWithoutTagsDataInput {
+  name?: string | null
+  priority?: string | null
+  comments?: string | null
+  repeat?: number | null
+  estimateTime?: string | null
+  plannedTime?: string | null
+  plannedDate?: string | null
+  finishDate?: string | null
+  deadlineDate?: string | null
+  completed?: boolean | null
+  subproject?: SubprojectUpdateOneWithoutTasksInput | null
+  timelogs?: TimelogUpdateManyWithoutTaskInput | null
+}
+export type TaskUpdateWithoutTagsDataInputInputObject =
+  | Extract<keyof TaskUpdateWithoutTagsDataInput, string>
+  | { name: 'name', alias?: string  } 
+  | { name: 'priority', alias?: string  } 
+  | { name: 'comments', alias?: string  } 
+  | { name: 'repeat', alias?: string  } 
+  | { name: 'estimateTime', alias?: string  } 
+  | { name: 'plannedTime', alias?: string  } 
+  | { name: 'plannedDate', alias?: string  } 
+  | { name: 'finishDate', alias?: string  } 
+  | { name: 'deadlineDate', alias?: string  } 
+  | { name: 'completed', alias?: string  } 
+  | { name: 'subproject', alias?: string  } 
+  | { name: 'timelogs', alias?: string  } 
+  
+export interface TaskUpsertWithWhereUniqueWithoutTagsInput {
+  where?: TaskWhereUniqueInput
+  update?: TaskUpdateWithoutTagsDataInput
+  create?: TaskCreateWithoutTagsInput
+}
+export type TaskUpsertWithWhereUniqueWithoutTagsInputInputObject =
+  | Extract<keyof TaskUpsertWithWhereUniqueWithoutTagsInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface TagUpdateManyMutationInput {
+  name?: string | null
+}
+export type TagUpdateManyMutationInputInputObject =
+  | Extract<keyof TagUpdateManyMutationInput, string>
+  | { name: 'name', alias?: string  } 
   
 export interface ProjectSubscriptionWhereInput {
   mutation_in?: prisma.MutationType[]
@@ -4043,6 +4939,27 @@ export type TimelogSubscriptionWhereInputInputObject =
   | { name: 'OR', alias?: string  } 
   | { name: 'NOT', alias?: string  } 
   
+export interface TagSubscriptionWhereInput {
+  mutation_in?: prisma.MutationType[]
+  updatedFields_contains?: string | null
+  updatedFields_contains_every?: string[]
+  updatedFields_contains_some?: string[]
+  node?: TagWhereInput | null
+  AND?: TagSubscriptionWhereInput[]
+  OR?: TagSubscriptionWhereInput[]
+  NOT?: TagSubscriptionWhereInput[]
+}
+export type TagSubscriptionWhereInputInputObject =
+  | Extract<keyof TagSubscriptionWhereInput, string>
+  | { name: 'mutation_in', alias?: string  } 
+  | { name: 'updatedFields_contains', alias?: string  } 
+  | { name: 'updatedFields_contains_every', alias?: string  } 
+  | { name: 'updatedFields_contains_some', alias?: string  } 
+  | { name: 'node', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
 
 export type SubprojectOrderByInputValues =
   | 'id_ASC'
@@ -4089,6 +5006,16 @@ export type TimelogOrderByInputValues =
   | 'startDate_DESC'
   | 'finishDate_ASC'
   | 'finishDate_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  
+export type TagOrderByInputValues =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'name_ASC'
+  | 'name_DESC'
   | 'createdAt_ASC'
   | 'createdAt_DESC'
   | 'updatedAt_ASC'

@@ -219,6 +219,117 @@ export interface NexusGenInputs {
     id?: number | null; // Int
     name?: string | null; // String
   }
+  TagCreateInput: { // input type
+    id?: number | null; // Int
+    name: string; // String!
+    tasks?: NexusGenInputs['TaskCreateManyWithoutTagsInput'] | null; // TaskCreateManyWithoutTagsInput
+  }
+  TagCreateManyWithoutTasksInput: { // input type
+    connect?: NexusGenInputs['TagWhereUniqueInput'][] | null; // [TagWhereUniqueInput!]
+    create?: NexusGenInputs['TagCreateWithoutTasksInput'][] | null; // [TagCreateWithoutTasksInput!]
+  }
+  TagCreateWithoutTasksInput: { // input type
+    id?: number | null; // Int
+    name: string; // String!
+  }
+  TagScalarWhereInput: { // input type
+    AND?: NexusGenInputs['TagScalarWhereInput'][] | null; // [TagScalarWhereInput!]
+    id?: number | null; // Int
+    id_gt?: number | null; // Int
+    id_gte?: number | null; // Int
+    id_in?: number[] | null; // [Int!]
+    id_lt?: number | null; // Int
+    id_lte?: number | null; // Int
+    id_not?: number | null; // Int
+    id_not_in?: number[] | null; // [Int!]
+    name?: string | null; // String
+    name_contains?: string | null; // String
+    name_ends_with?: string | null; // String
+    name_gt?: string | null; // String
+    name_gte?: string | null; // String
+    name_in?: string[] | null; // [String!]
+    name_lt?: string | null; // String
+    name_lte?: string | null; // String
+    name_not?: string | null; // String
+    name_not_contains?: string | null; // String
+    name_not_ends_with?: string | null; // String
+    name_not_in?: string[] | null; // [String!]
+    name_not_starts_with?: string | null; // String
+    name_starts_with?: string | null; // String
+    NOT?: NexusGenInputs['TagScalarWhereInput'][] | null; // [TagScalarWhereInput!]
+    OR?: NexusGenInputs['TagScalarWhereInput'][] | null; // [TagScalarWhereInput!]
+  }
+  TagUpdateInput: { // input type
+    name?: string | null; // String
+    tasks?: NexusGenInputs['TaskUpdateManyWithoutTagsInput'] | null; // TaskUpdateManyWithoutTagsInput
+  }
+  TagUpdateManyDataInput: { // input type
+    name?: string | null; // String
+  }
+  TagUpdateManyMutationInput: { // input type
+    name?: string | null; // String
+  }
+  TagUpdateManyWithWhereNestedInput: { // input type
+    data: NexusGenInputs['TagUpdateManyDataInput']; // TagUpdateManyDataInput!
+    where: NexusGenInputs['TagScalarWhereInput']; // TagScalarWhereInput!
+  }
+  TagUpdateManyWithoutTasksInput: { // input type
+    connect?: NexusGenInputs['TagWhereUniqueInput'][] | null; // [TagWhereUniqueInput!]
+    create?: NexusGenInputs['TagCreateWithoutTasksInput'][] | null; // [TagCreateWithoutTasksInput!]
+    delete?: NexusGenInputs['TagWhereUniqueInput'][] | null; // [TagWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['TagScalarWhereInput'][] | null; // [TagScalarWhereInput!]
+    disconnect?: NexusGenInputs['TagWhereUniqueInput'][] | null; // [TagWhereUniqueInput!]
+    set?: NexusGenInputs['TagWhereUniqueInput'][] | null; // [TagWhereUniqueInput!]
+    update?: NexusGenInputs['TagUpdateWithWhereUniqueWithoutTasksInput'][] | null; // [TagUpdateWithWhereUniqueWithoutTasksInput!]
+    updateMany?: NexusGenInputs['TagUpdateManyWithWhereNestedInput'][] | null; // [TagUpdateManyWithWhereNestedInput!]
+    upsert?: NexusGenInputs['TagUpsertWithWhereUniqueWithoutTasksInput'][] | null; // [TagUpsertWithWhereUniqueWithoutTasksInput!]
+  }
+  TagUpdateWithWhereUniqueWithoutTasksInput: { // input type
+    data: NexusGenInputs['TagUpdateWithoutTasksDataInput']; // TagUpdateWithoutTasksDataInput!
+    where: NexusGenInputs['TagWhereUniqueInput']; // TagWhereUniqueInput!
+  }
+  TagUpdateWithoutTasksDataInput: { // input type
+    name?: string | null; // String
+  }
+  TagUpsertWithWhereUniqueWithoutTasksInput: { // input type
+    create: NexusGenInputs['TagCreateWithoutTasksInput']; // TagCreateWithoutTasksInput!
+    update: NexusGenInputs['TagUpdateWithoutTasksDataInput']; // TagUpdateWithoutTasksDataInput!
+    where: NexusGenInputs['TagWhereUniqueInput']; // TagWhereUniqueInput!
+  }
+  TagWhereInput: { // input type
+    AND?: NexusGenInputs['TagWhereInput'][] | null; // [TagWhereInput!]
+    id?: number | null; // Int
+    id_gt?: number | null; // Int
+    id_gte?: number | null; // Int
+    id_in?: number[] | null; // [Int!]
+    id_lt?: number | null; // Int
+    id_lte?: number | null; // Int
+    id_not?: number | null; // Int
+    id_not_in?: number[] | null; // [Int!]
+    name?: string | null; // String
+    name_contains?: string | null; // String
+    name_ends_with?: string | null; // String
+    name_gt?: string | null; // String
+    name_gte?: string | null; // String
+    name_in?: string[] | null; // [String!]
+    name_lt?: string | null; // String
+    name_lte?: string | null; // String
+    name_not?: string | null; // String
+    name_not_contains?: string | null; // String
+    name_not_ends_with?: string | null; // String
+    name_not_in?: string[] | null; // [String!]
+    name_not_starts_with?: string | null; // String
+    name_starts_with?: string | null; // String
+    NOT?: NexusGenInputs['TagWhereInput'][] | null; // [TagWhereInput!]
+    OR?: NexusGenInputs['TagWhereInput'][] | null; // [TagWhereInput!]
+    tasks_every?: NexusGenInputs['TaskWhereInput'] | null; // TaskWhereInput
+    tasks_none?: NexusGenInputs['TaskWhereInput'] | null; // TaskWhereInput
+    tasks_some?: NexusGenInputs['TaskWhereInput'] | null; // TaskWhereInput
+  }
+  TagWhereUniqueInput: { // input type
+    id?: number | null; // Int
+    name?: string | null; // String
+  }
   TaskCreateInput: { // input type
     comments?: string | null; // String
     completed?: boolean | null; // Boolean
@@ -232,11 +343,16 @@ export interface NexusGenInputs {
     priority?: string | null; // String
     repeat?: number | null; // Int
     subproject?: NexusGenInputs['SubprojectCreateOneWithoutTasksInput'] | null; // SubprojectCreateOneWithoutTasksInput
+    tags?: NexusGenInputs['TagCreateManyWithoutTasksInput'] | null; // TagCreateManyWithoutTasksInput
     timelogs?: NexusGenInputs['TimelogCreateManyWithoutTaskInput'] | null; // TimelogCreateManyWithoutTaskInput
   }
   TaskCreateManyWithoutSubprojectInput: { // input type
     connect?: NexusGenInputs['TaskWhereUniqueInput'][] | null; // [TaskWhereUniqueInput!]
     create?: NexusGenInputs['TaskCreateWithoutSubprojectInput'][] | null; // [TaskCreateWithoutSubprojectInput!]
+  }
+  TaskCreateManyWithoutTagsInput: { // input type
+    connect?: NexusGenInputs['TaskWhereUniqueInput'][] | null; // [TaskWhereUniqueInput!]
+    create?: NexusGenInputs['TaskCreateWithoutTagsInput'][] | null; // [TaskCreateWithoutTagsInput!]
   }
   TaskCreateOneWithoutTimelogsInput: { // input type
     connect?: NexusGenInputs['TaskWhereUniqueInput'] | null; // TaskWhereUniqueInput
@@ -254,6 +370,22 @@ export interface NexusGenInputs {
     plannedTime?: string | null; // String
     priority?: string | null; // String
     repeat?: number | null; // Int
+    tags?: NexusGenInputs['TagCreateManyWithoutTasksInput'] | null; // TagCreateManyWithoutTasksInput
+    timelogs?: NexusGenInputs['TimelogCreateManyWithoutTaskInput'] | null; // TimelogCreateManyWithoutTaskInput
+  }
+  TaskCreateWithoutTagsInput: { // input type
+    comments?: string | null; // String
+    completed?: boolean | null; // Boolean
+    deadlineDate?: string | null; // String
+    estimateTime?: string | null; // String
+    finishDate?: string | null; // String
+    id?: number | null; // Int
+    name: string; // String!
+    plannedDate?: string | null; // String
+    plannedTime?: string | null; // String
+    priority?: string | null; // String
+    repeat?: number | null; // Int
+    subproject?: NexusGenInputs['SubprojectCreateOneWithoutTasksInput'] | null; // SubprojectCreateOneWithoutTasksInput
     timelogs?: NexusGenInputs['TimelogCreateManyWithoutTaskInput'] | null; // TimelogCreateManyWithoutTaskInput
   }
   TaskCreateWithoutTimelogsInput: { // input type
@@ -269,6 +401,7 @@ export interface NexusGenInputs {
     priority?: string | null; // String
     repeat?: number | null; // Int
     subproject?: NexusGenInputs['SubprojectCreateOneWithoutTasksInput'] | null; // SubprojectCreateOneWithoutTasksInput
+    tags?: NexusGenInputs['TagCreateManyWithoutTasksInput'] | null; // TagCreateManyWithoutTasksInput
   }
   TaskScalarWhereInput: { // input type
     AND?: NexusGenInputs['TaskScalarWhereInput'][] | null; // [TaskScalarWhereInput!]
@@ -417,6 +550,7 @@ export interface NexusGenInputs {
     priority?: string | null; // String
     repeat?: number | null; // Int
     subproject?: NexusGenInputs['SubprojectUpdateOneWithoutTasksInput'] | null; // SubprojectUpdateOneWithoutTasksInput
+    tags?: NexusGenInputs['TagUpdateManyWithoutTasksInput'] | null; // TagUpdateManyWithoutTasksInput
     timelogs?: NexusGenInputs['TimelogUpdateManyWithoutTaskInput'] | null; // TimelogUpdateManyWithoutTaskInput
   }
   TaskUpdateManyDataInput: { // input type
@@ -458,6 +592,17 @@ export interface NexusGenInputs {
     updateMany?: NexusGenInputs['TaskUpdateManyWithWhereNestedInput'][] | null; // [TaskUpdateManyWithWhereNestedInput!]
     upsert?: NexusGenInputs['TaskUpsertWithWhereUniqueWithoutSubprojectInput'][] | null; // [TaskUpsertWithWhereUniqueWithoutSubprojectInput!]
   }
+  TaskUpdateManyWithoutTagsInput: { // input type
+    connect?: NexusGenInputs['TaskWhereUniqueInput'][] | null; // [TaskWhereUniqueInput!]
+    create?: NexusGenInputs['TaskCreateWithoutTagsInput'][] | null; // [TaskCreateWithoutTagsInput!]
+    delete?: NexusGenInputs['TaskWhereUniqueInput'][] | null; // [TaskWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['TaskScalarWhereInput'][] | null; // [TaskScalarWhereInput!]
+    disconnect?: NexusGenInputs['TaskWhereUniqueInput'][] | null; // [TaskWhereUniqueInput!]
+    set?: NexusGenInputs['TaskWhereUniqueInput'][] | null; // [TaskWhereUniqueInput!]
+    update?: NexusGenInputs['TaskUpdateWithWhereUniqueWithoutTagsInput'][] | null; // [TaskUpdateWithWhereUniqueWithoutTagsInput!]
+    updateMany?: NexusGenInputs['TaskUpdateManyWithWhereNestedInput'][] | null; // [TaskUpdateManyWithWhereNestedInput!]
+    upsert?: NexusGenInputs['TaskUpsertWithWhereUniqueWithoutTagsInput'][] | null; // [TaskUpsertWithWhereUniqueWithoutTagsInput!]
+  }
   TaskUpdateOneRequiredWithoutTimelogsInput: { // input type
     connect?: NexusGenInputs['TaskWhereUniqueInput'] | null; // TaskWhereUniqueInput
     create?: NexusGenInputs['TaskCreateWithoutTimelogsInput'] | null; // TaskCreateWithoutTimelogsInput
@@ -466,6 +611,10 @@ export interface NexusGenInputs {
   }
   TaskUpdateWithWhereUniqueWithoutSubprojectInput: { // input type
     data: NexusGenInputs['TaskUpdateWithoutSubprojectDataInput']; // TaskUpdateWithoutSubprojectDataInput!
+    where: NexusGenInputs['TaskWhereUniqueInput']; // TaskWhereUniqueInput!
+  }
+  TaskUpdateWithWhereUniqueWithoutTagsInput: { // input type
+    data: NexusGenInputs['TaskUpdateWithoutTagsDataInput']; // TaskUpdateWithoutTagsDataInput!
     where: NexusGenInputs['TaskWhereUniqueInput']; // TaskWhereUniqueInput!
   }
   TaskUpdateWithoutSubprojectDataInput: { // input type
@@ -479,6 +628,21 @@ export interface NexusGenInputs {
     plannedTime?: string | null; // String
     priority?: string | null; // String
     repeat?: number | null; // Int
+    tags?: NexusGenInputs['TagUpdateManyWithoutTasksInput'] | null; // TagUpdateManyWithoutTasksInput
+    timelogs?: NexusGenInputs['TimelogUpdateManyWithoutTaskInput'] | null; // TimelogUpdateManyWithoutTaskInput
+  }
+  TaskUpdateWithoutTagsDataInput: { // input type
+    comments?: string | null; // String
+    completed?: boolean | null; // Boolean
+    deadlineDate?: string | null; // String
+    estimateTime?: string | null; // String
+    finishDate?: string | null; // String
+    name?: string | null; // String
+    plannedDate?: string | null; // String
+    plannedTime?: string | null; // String
+    priority?: string | null; // String
+    repeat?: number | null; // Int
+    subproject?: NexusGenInputs['SubprojectUpdateOneWithoutTasksInput'] | null; // SubprojectUpdateOneWithoutTasksInput
     timelogs?: NexusGenInputs['TimelogUpdateManyWithoutTaskInput'] | null; // TimelogUpdateManyWithoutTaskInput
   }
   TaskUpdateWithoutTimelogsDataInput: { // input type
@@ -493,10 +657,16 @@ export interface NexusGenInputs {
     priority?: string | null; // String
     repeat?: number | null; // Int
     subproject?: NexusGenInputs['SubprojectUpdateOneWithoutTasksInput'] | null; // SubprojectUpdateOneWithoutTasksInput
+    tags?: NexusGenInputs['TagUpdateManyWithoutTasksInput'] | null; // TagUpdateManyWithoutTasksInput
   }
   TaskUpsertWithWhereUniqueWithoutSubprojectInput: { // input type
     create: NexusGenInputs['TaskCreateWithoutSubprojectInput']; // TaskCreateWithoutSubprojectInput!
     update: NexusGenInputs['TaskUpdateWithoutSubprojectDataInput']; // TaskUpdateWithoutSubprojectDataInput!
+    where: NexusGenInputs['TaskWhereUniqueInput']; // TaskWhereUniqueInput!
+  }
+  TaskUpsertWithWhereUniqueWithoutTagsInput: { // input type
+    create: NexusGenInputs['TaskCreateWithoutTagsInput']; // TaskCreateWithoutTagsInput!
+    update: NexusGenInputs['TaskUpdateWithoutTagsDataInput']; // TaskUpdateWithoutTagsDataInput!
     where: NexusGenInputs['TaskWhereUniqueInput']; // TaskWhereUniqueInput!
   }
   TaskUpsertWithoutTimelogsInput: { // input type
@@ -638,6 +808,9 @@ export interface NexusGenInputs {
     repeat_not?: number | null; // Int
     repeat_not_in?: number[] | null; // [Int!]
     subproject?: NexusGenInputs['SubprojectWhereInput'] | null; // SubprojectWhereInput
+    tags_every?: NexusGenInputs['TagWhereInput'] | null; // TagWhereInput
+    tags_none?: NexusGenInputs['TagWhereInput'] | null; // TagWhereInput
+    tags_some?: NexusGenInputs['TagWhereInput'] | null; // TagWhereInput
     timelogs_every?: NexusGenInputs['TimelogWhereInput'] | null; // TimelogWhereInput
     timelogs_none?: NexusGenInputs['TimelogWhereInput'] | null; // TimelogWhereInput
     timelogs_some?: NexusGenInputs['TimelogWhereInput'] | null; // TimelogWhereInput
@@ -768,6 +941,7 @@ export interface NexusGenInputs {
 export interface NexusGenEnums {
   ProjectOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "name_ASC" | "name_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
   SubprojectOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "name_ASC" | "name_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
+  TagOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "name_ASC" | "name_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
   TaskOrderByInput: "comments_ASC" | "comments_DESC" | "completed_ASC" | "completed_DESC" | "createdAt_ASC" | "createdAt_DESC" | "deadlineDate_ASC" | "deadlineDate_DESC" | "estimateTime_ASC" | "estimateTime_DESC" | "finishDate_ASC" | "finishDate_DESC" | "id_ASC" | "id_DESC" | "name_ASC" | "name_DESC" | "plannedDate_ASC" | "plannedDate_DESC" | "plannedTime_ASC" | "plannedTime_DESC" | "priority_ASC" | "priority_DESC" | "repeat_ASC" | "repeat_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
   TimelogOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "finishDate_ASC" | "finishDate_DESC" | "id_ASC" | "id_DESC" | "startDate_ASC" | "startDate_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
 }
@@ -777,6 +951,9 @@ export interface NexusGenRootTypes {
     count: number; // Int!
   }
   AggregateSubproject: { // root type
+    count: number; // Int!
+  }
+  AggregateTag: { // root type
     count: number; // Int!
   }
   AggregateTask: { // root type
@@ -819,6 +996,18 @@ export interface NexusGenRootTypes {
   SubprojectEdge: { // root type
     cursor: string; // String!
     node: NexusGenRootTypes['Subproject']; // Subproject!
+  }
+  Tag: { // root type
+    id: number; // Int!
+    name: string; // String!
+  }
+  TagConnection: { // root type
+    edges: NexusGenRootTypes['TagEdge'][]; // [TagEdge!]!
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+  }
+  TagEdge: { // root type
+    cursor: string; // String!
+    node: NexusGenRootTypes['Tag']; // Tag!
   }
   Task: { // root type
     comments?: string | null; // String
@@ -893,10 +1082,26 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   SubprojectUpsertWithoutTasksInput: NexusGenInputs['SubprojectUpsertWithoutTasksInput'];
   SubprojectWhereInput: NexusGenInputs['SubprojectWhereInput'];
   SubprojectWhereUniqueInput: NexusGenInputs['SubprojectWhereUniqueInput'];
+  TagCreateInput: NexusGenInputs['TagCreateInput'];
+  TagCreateManyWithoutTasksInput: NexusGenInputs['TagCreateManyWithoutTasksInput'];
+  TagCreateWithoutTasksInput: NexusGenInputs['TagCreateWithoutTasksInput'];
+  TagScalarWhereInput: NexusGenInputs['TagScalarWhereInput'];
+  TagUpdateInput: NexusGenInputs['TagUpdateInput'];
+  TagUpdateManyDataInput: NexusGenInputs['TagUpdateManyDataInput'];
+  TagUpdateManyMutationInput: NexusGenInputs['TagUpdateManyMutationInput'];
+  TagUpdateManyWithWhereNestedInput: NexusGenInputs['TagUpdateManyWithWhereNestedInput'];
+  TagUpdateManyWithoutTasksInput: NexusGenInputs['TagUpdateManyWithoutTasksInput'];
+  TagUpdateWithWhereUniqueWithoutTasksInput: NexusGenInputs['TagUpdateWithWhereUniqueWithoutTasksInput'];
+  TagUpdateWithoutTasksDataInput: NexusGenInputs['TagUpdateWithoutTasksDataInput'];
+  TagUpsertWithWhereUniqueWithoutTasksInput: NexusGenInputs['TagUpsertWithWhereUniqueWithoutTasksInput'];
+  TagWhereInput: NexusGenInputs['TagWhereInput'];
+  TagWhereUniqueInput: NexusGenInputs['TagWhereUniqueInput'];
   TaskCreateInput: NexusGenInputs['TaskCreateInput'];
   TaskCreateManyWithoutSubprojectInput: NexusGenInputs['TaskCreateManyWithoutSubprojectInput'];
+  TaskCreateManyWithoutTagsInput: NexusGenInputs['TaskCreateManyWithoutTagsInput'];
   TaskCreateOneWithoutTimelogsInput: NexusGenInputs['TaskCreateOneWithoutTimelogsInput'];
   TaskCreateWithoutSubprojectInput: NexusGenInputs['TaskCreateWithoutSubprojectInput'];
+  TaskCreateWithoutTagsInput: NexusGenInputs['TaskCreateWithoutTagsInput'];
   TaskCreateWithoutTimelogsInput: NexusGenInputs['TaskCreateWithoutTimelogsInput'];
   TaskScalarWhereInput: NexusGenInputs['TaskScalarWhereInput'];
   TaskUpdateInput: NexusGenInputs['TaskUpdateInput'];
@@ -904,11 +1109,15 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   TaskUpdateManyMutationInput: NexusGenInputs['TaskUpdateManyMutationInput'];
   TaskUpdateManyWithWhereNestedInput: NexusGenInputs['TaskUpdateManyWithWhereNestedInput'];
   TaskUpdateManyWithoutSubprojectInput: NexusGenInputs['TaskUpdateManyWithoutSubprojectInput'];
+  TaskUpdateManyWithoutTagsInput: NexusGenInputs['TaskUpdateManyWithoutTagsInput'];
   TaskUpdateOneRequiredWithoutTimelogsInput: NexusGenInputs['TaskUpdateOneRequiredWithoutTimelogsInput'];
   TaskUpdateWithWhereUniqueWithoutSubprojectInput: NexusGenInputs['TaskUpdateWithWhereUniqueWithoutSubprojectInput'];
+  TaskUpdateWithWhereUniqueWithoutTagsInput: NexusGenInputs['TaskUpdateWithWhereUniqueWithoutTagsInput'];
   TaskUpdateWithoutSubprojectDataInput: NexusGenInputs['TaskUpdateWithoutSubprojectDataInput'];
+  TaskUpdateWithoutTagsDataInput: NexusGenInputs['TaskUpdateWithoutTagsDataInput'];
   TaskUpdateWithoutTimelogsDataInput: NexusGenInputs['TaskUpdateWithoutTimelogsDataInput'];
   TaskUpsertWithWhereUniqueWithoutSubprojectInput: NexusGenInputs['TaskUpsertWithWhereUniqueWithoutSubprojectInput'];
+  TaskUpsertWithWhereUniqueWithoutTagsInput: NexusGenInputs['TaskUpsertWithWhereUniqueWithoutTagsInput'];
   TaskUpsertWithoutTimelogsInput: NexusGenInputs['TaskUpsertWithoutTimelogsInput'];
   TaskWhereInput: NexusGenInputs['TaskWhereInput'];
   TaskWhereUniqueInput: NexusGenInputs['TaskWhereUniqueInput'];
@@ -928,6 +1137,7 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   TimelogWhereUniqueInput: NexusGenInputs['TimelogWhereUniqueInput'];
   ProjectOrderByInput: NexusGenEnums['ProjectOrderByInput'];
   SubprojectOrderByInput: NexusGenEnums['SubprojectOrderByInput'];
+  TagOrderByInput: NexusGenEnums['TagOrderByInput'];
   TaskOrderByInput: NexusGenEnums['TaskOrderByInput'];
   TimelogOrderByInput: NexusGenEnums['TimelogOrderByInput'];
 }
@@ -937,6 +1147,9 @@ export interface NexusGenFieldTypes {
     count: number; // Int!
   }
   AggregateSubproject: { // field return type
+    count: number; // Int!
+  }
+  AggregateTag: { // field return type
     count: number; // Int!
   }
   AggregateTask: { // field return type
@@ -953,28 +1166,34 @@ export interface NexusGenFieldTypes {
     completeTask: NexusGenRootTypes['Task']; // Task!
     createProject: NexusGenRootTypes['Project']; // Project!
     createSubproject: NexusGenRootTypes['Subproject']; // Subproject!
+    createTag: NexusGenRootTypes['Tag']; // Tag!
     createTask: NexusGenRootTypes['Task']; // Task!
     createTimelog: NexusGenRootTypes['Timelog']; // Timelog!
     deleteManyProjects: NexusGenRootTypes['BatchPayload']; // BatchPayload!
     deleteManySubprojects: NexusGenRootTypes['BatchPayload']; // BatchPayload!
+    deleteManyTags: NexusGenRootTypes['BatchPayload']; // BatchPayload!
     deleteManyTasks: NexusGenRootTypes['BatchPayload']; // BatchPayload!
     deleteManyTimelogs: NexusGenRootTypes['BatchPayload']; // BatchPayload!
     deleteProject: NexusGenRootTypes['Project'] | null; // Project
     deleteSubproject: NexusGenRootTypes['Subproject'] | null; // Subproject
+    deleteTag: NexusGenRootTypes['Tag'] | null; // Tag
     deleteTask: NexusGenRootTypes['Task'] | null; // Task
     deleteTimelog: NexusGenRootTypes['Timelog'] | null; // Timelog
     startTimelog: NexusGenRootTypes['Timelog']; // Timelog!
     stopTimelog: NexusGenRootTypes['Timelog']; // Timelog!
     updateManyProjects: NexusGenRootTypes['BatchPayload']; // BatchPayload!
     updateManySubprojects: NexusGenRootTypes['BatchPayload']; // BatchPayload!
+    updateManyTags: NexusGenRootTypes['BatchPayload']; // BatchPayload!
     updateManyTasks: NexusGenRootTypes['BatchPayload']; // BatchPayload!
     updateManyTimelogs: NexusGenRootTypes['BatchPayload']; // BatchPayload!
     updateProject: NexusGenRootTypes['Project'] | null; // Project
     updateSubproject: NexusGenRootTypes['Subproject'] | null; // Subproject
-    updateTask: NexusGenRootTypes['Task']; // Task!
+    updateTag: NexusGenRootTypes['Tag'] | null; // Tag
+    updateTask: NexusGenRootTypes['Task'] | null; // Task
     updateTimelog: NexusGenRootTypes['Timelog'] | null; // Timelog
     upsertProject: NexusGenRootTypes['Project']; // Project!
     upsertSubproject: NexusGenRootTypes['Subproject']; // Subproject!
+    upsertTag: NexusGenRootTypes['Tag']; // Tag!
     upsertTask: NexusGenRootTypes['Task']; // Task!
     upsertTimelog: NexusGenRootTypes['Timelog']; // Timelog!
   }
@@ -1008,6 +1227,9 @@ export interface NexusGenFieldTypes {
     subproject: NexusGenRootTypes['Subproject'] | null; // Subproject
     subprojects: NexusGenRootTypes['Subproject'][]; // [Subproject!]!
     subprojectsConnection: NexusGenRootTypes['SubprojectConnection']; // SubprojectConnection!
+    tag: NexusGenRootTypes['Tag'] | null; // Tag
+    tags: NexusGenRootTypes['Tag'][]; // [Tag!]!
+    tagsConnection: NexusGenRootTypes['TagConnection']; // TagConnection!
     task: NexusGenRootTypes['Task'] | null; // Task
     tasks: NexusGenRootTypes['Task'][]; // [Task!]!
     tasksConnection: NexusGenRootTypes['TaskConnection']; // TaskConnection!
@@ -1032,6 +1254,20 @@ export interface NexusGenFieldTypes {
     cursor: string; // String!
     node: NexusGenRootTypes['Subproject']; // Subproject!
   }
+  Tag: { // field return type
+    id: number; // Int!
+    name: string; // String!
+    tasks: NexusGenRootTypes['Task'][] | null; // [Task!]
+  }
+  TagConnection: { // field return type
+    aggregate: NexusGenRootTypes['AggregateTag']; // AggregateTag!
+    edges: NexusGenRootTypes['TagEdge'][]; // [TagEdge!]!
+    pageInfo: NexusGenRootTypes['PageInfo']; // PageInfo!
+  }
+  TagEdge: { // field return type
+    cursor: string; // String!
+    node: NexusGenRootTypes['Tag']; // Tag!
+  }
   Task: { // field return type
     comments: string | null; // String
     completed: boolean; // Boolean!
@@ -1047,6 +1283,7 @@ export interface NexusGenFieldTypes {
     repeat: number | null; // Int
     statusTime: string | null; // String
     subproject: NexusGenRootTypes['Subproject'] | null; // Subproject
+    tags: NexusGenRootTypes['Tag'][] | null; // [Tag!]
     timelogs: NexusGenRootTypes['Timelog'][] | null; // [Timelog!]
   }
   TaskConnection: { // field return type
@@ -1089,6 +1326,9 @@ export interface NexusGenArgTypes {
     createSubproject: { // args
       data: NexusGenInputs['SubprojectCreateInput']; // SubprojectCreateInput!
     }
+    createTag: { // args
+      data: NexusGenInputs['TagCreateInput']; // TagCreateInput!
+    }
     createTask: { // args
       data: NexusGenInputs['TaskCreateInput']; // TaskCreateInput!
     }
@@ -1101,6 +1341,9 @@ export interface NexusGenArgTypes {
     deleteManySubprojects: { // args
       where?: NexusGenInputs['SubprojectWhereInput'] | null; // SubprojectWhereInput
     }
+    deleteManyTags: { // args
+      where?: NexusGenInputs['TagWhereInput'] | null; // TagWhereInput
+    }
     deleteManyTasks: { // args
       where?: NexusGenInputs['TaskWhereInput'] | null; // TaskWhereInput
     }
@@ -1112,6 +1355,9 @@ export interface NexusGenArgTypes {
     }
     deleteSubproject: { // args
       where: NexusGenInputs['SubprojectWhereUniqueInput']; // SubprojectWhereUniqueInput!
+    }
+    deleteTag: { // args
+      where: NexusGenInputs['TagWhereUniqueInput']; // TagWhereUniqueInput!
     }
     deleteTask: { // args
       where: NexusGenInputs['TaskWhereUniqueInput']; // TaskWhereUniqueInput!
@@ -1133,6 +1379,10 @@ export interface NexusGenArgTypes {
       data: NexusGenInputs['SubprojectUpdateManyMutationInput']; // SubprojectUpdateManyMutationInput!
       where?: NexusGenInputs['SubprojectWhereInput'] | null; // SubprojectWhereInput
     }
+    updateManyTags: { // args
+      data: NexusGenInputs['TagUpdateManyMutationInput']; // TagUpdateManyMutationInput!
+      where?: NexusGenInputs['TagWhereInput'] | null; // TagWhereInput
+    }
     updateManyTasks: { // args
       data: NexusGenInputs['TaskUpdateManyMutationInput']; // TaskUpdateManyMutationInput!
       where?: NexusGenInputs['TaskWhereInput'] | null; // TaskWhereInput
@@ -1149,6 +1399,14 @@ export interface NexusGenArgTypes {
       data: NexusGenInputs['SubprojectUpdateInput']; // SubprojectUpdateInput!
       where: NexusGenInputs['SubprojectWhereUniqueInput']; // SubprojectWhereUniqueInput!
     }
+    updateTag: { // args
+      data: NexusGenInputs['TagUpdateInput']; // TagUpdateInput!
+      where: NexusGenInputs['TagWhereUniqueInput']; // TagWhereUniqueInput!
+    }
+    updateTask: { // args
+      data: NexusGenInputs['TaskUpdateInput']; // TaskUpdateInput!
+      where: NexusGenInputs['TaskWhereUniqueInput']; // TaskWhereUniqueInput!
+    }
     updateTimelog: { // args
       data: NexusGenInputs['TimelogUpdateInput']; // TimelogUpdateInput!
       where: NexusGenInputs['TimelogWhereUniqueInput']; // TimelogWhereUniqueInput!
@@ -1162,6 +1420,11 @@ export interface NexusGenArgTypes {
       create: NexusGenInputs['SubprojectCreateInput']; // SubprojectCreateInput!
       update: NexusGenInputs['SubprojectUpdateInput']; // SubprojectUpdateInput!
       where: NexusGenInputs['SubprojectWhereUniqueInput']; // SubprojectWhereUniqueInput!
+    }
+    upsertTag: { // args
+      create: NexusGenInputs['TagCreateInput']; // TagCreateInput!
+      update: NexusGenInputs['TagUpdateInput']; // TagUpdateInput!
+      where: NexusGenInputs['TagWhereUniqueInput']; // TagWhereUniqueInput!
     }
     upsertTask: { // args
       create: NexusGenInputs['TaskCreateInput']; // TaskCreateInput!
@@ -1228,6 +1491,27 @@ export interface NexusGenArgTypes {
       skip?: number | null; // Int
       where?: NexusGenInputs['SubprojectWhereInput'] | null; // SubprojectWhereInput
     }
+    tag: { // args
+      where: NexusGenInputs['TagWhereUniqueInput']; // TagWhereUniqueInput!
+    }
+    tags: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['TagOrderByInput'] | null; // TagOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['TagWhereInput'] | null; // TagWhereInput
+    }
+    tagsConnection: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['TagOrderByInput'] | null; // TagOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['TagWhereInput'] | null; // TagWhereInput
+    }
     task: { // args
       where: NexusGenInputs['TaskWhereUniqueInput']; // TaskWhereUniqueInput!
     }
@@ -1282,7 +1566,27 @@ export interface NexusGenArgTypes {
       where?: NexusGenInputs['TaskWhereInput'] | null; // TaskWhereInput
     }
   }
+  Tag: {
+    tasks: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['TaskOrderByInput'] | null; // TaskOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['TaskWhereInput'] | null; // TaskWhereInput
+    }
+  }
   Task: {
+    tags: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['TagOrderByInput'] | null; // TagOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['TagWhereInput'] | null; // TagWhereInput
+    }
     timelogs: { // args
       after?: string | null; // String
       before?: string | null; // String
@@ -1300,11 +1604,11 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "AggregateProject" | "AggregateSubproject" | "AggregateTask" | "AggregateTimelog" | "BatchPayload" | "Mutation" | "PageInfo" | "Project" | "ProjectConnection" | "ProjectEdge" | "Query" | "Subproject" | "SubprojectConnection" | "SubprojectEdge" | "Task" | "TaskConnection" | "TaskEdge" | "Timelog" | "TimelogConnection" | "TimelogEdge";
+export type NexusGenObjectNames = "AggregateProject" | "AggregateSubproject" | "AggregateTag" | "AggregateTask" | "AggregateTimelog" | "BatchPayload" | "Mutation" | "PageInfo" | "Project" | "ProjectConnection" | "ProjectEdge" | "Query" | "Subproject" | "SubprojectConnection" | "SubprojectEdge" | "Tag" | "TagConnection" | "TagEdge" | "Task" | "TaskConnection" | "TaskEdge" | "Timelog" | "TimelogConnection" | "TimelogEdge";
 
-export type NexusGenInputNames = "ProjectCreateInput" | "ProjectCreateOneWithoutSubprojectsInput" | "ProjectCreateWithoutSubprojectsInput" | "ProjectUpdateInput" | "ProjectUpdateManyMutationInput" | "ProjectUpdateOneRequiredWithoutSubprojectsInput" | "ProjectUpdateWithoutSubprojectsDataInput" | "ProjectUpsertWithoutSubprojectsInput" | "ProjectWhereInput" | "ProjectWhereUniqueInput" | "SubprojectCreateInput" | "SubprojectCreateManyWithoutProjectInput" | "SubprojectCreateOneWithoutTasksInput" | "SubprojectCreateWithoutProjectInput" | "SubprojectCreateWithoutTasksInput" | "SubprojectScalarWhereInput" | "SubprojectUpdateInput" | "SubprojectUpdateManyDataInput" | "SubprojectUpdateManyMutationInput" | "SubprojectUpdateManyWithWhereNestedInput" | "SubprojectUpdateManyWithoutProjectInput" | "SubprojectUpdateOneWithoutTasksInput" | "SubprojectUpdateWithWhereUniqueWithoutProjectInput" | "SubprojectUpdateWithoutProjectDataInput" | "SubprojectUpdateWithoutTasksDataInput" | "SubprojectUpsertWithWhereUniqueWithoutProjectInput" | "SubprojectUpsertWithoutTasksInput" | "SubprojectWhereInput" | "SubprojectWhereUniqueInput" | "TaskCreateInput" | "TaskCreateManyWithoutSubprojectInput" | "TaskCreateOneWithoutTimelogsInput" | "TaskCreateWithoutSubprojectInput" | "TaskCreateWithoutTimelogsInput" | "TaskScalarWhereInput" | "TaskUpdateInput" | "TaskUpdateManyDataInput" | "TaskUpdateManyMutationInput" | "TaskUpdateManyWithWhereNestedInput" | "TaskUpdateManyWithoutSubprojectInput" | "TaskUpdateOneRequiredWithoutTimelogsInput" | "TaskUpdateWithWhereUniqueWithoutSubprojectInput" | "TaskUpdateWithoutSubprojectDataInput" | "TaskUpdateWithoutTimelogsDataInput" | "TaskUpsertWithWhereUniqueWithoutSubprojectInput" | "TaskUpsertWithoutTimelogsInput" | "TaskWhereInput" | "TaskWhereUniqueInput" | "TimelogCreateInput" | "TimelogCreateManyWithoutTaskInput" | "TimelogCreateWithoutTaskInput" | "TimelogScalarWhereInput" | "TimelogUpdateInput" | "TimelogUpdateManyDataInput" | "TimelogUpdateManyMutationInput" | "TimelogUpdateManyWithWhereNestedInput" | "TimelogUpdateManyWithoutTaskInput" | "TimelogUpdateWithWhereUniqueWithoutTaskInput" | "TimelogUpdateWithoutTaskDataInput" | "TimelogUpsertWithWhereUniqueWithoutTaskInput" | "TimelogWhereInput" | "TimelogWhereUniqueInput";
+export type NexusGenInputNames = "ProjectCreateInput" | "ProjectCreateOneWithoutSubprojectsInput" | "ProjectCreateWithoutSubprojectsInput" | "ProjectUpdateInput" | "ProjectUpdateManyMutationInput" | "ProjectUpdateOneRequiredWithoutSubprojectsInput" | "ProjectUpdateWithoutSubprojectsDataInput" | "ProjectUpsertWithoutSubprojectsInput" | "ProjectWhereInput" | "ProjectWhereUniqueInput" | "SubprojectCreateInput" | "SubprojectCreateManyWithoutProjectInput" | "SubprojectCreateOneWithoutTasksInput" | "SubprojectCreateWithoutProjectInput" | "SubprojectCreateWithoutTasksInput" | "SubprojectScalarWhereInput" | "SubprojectUpdateInput" | "SubprojectUpdateManyDataInput" | "SubprojectUpdateManyMutationInput" | "SubprojectUpdateManyWithWhereNestedInput" | "SubprojectUpdateManyWithoutProjectInput" | "SubprojectUpdateOneWithoutTasksInput" | "SubprojectUpdateWithWhereUniqueWithoutProjectInput" | "SubprojectUpdateWithoutProjectDataInput" | "SubprojectUpdateWithoutTasksDataInput" | "SubprojectUpsertWithWhereUniqueWithoutProjectInput" | "SubprojectUpsertWithoutTasksInput" | "SubprojectWhereInput" | "SubprojectWhereUniqueInput" | "TagCreateInput" | "TagCreateManyWithoutTasksInput" | "TagCreateWithoutTasksInput" | "TagScalarWhereInput" | "TagUpdateInput" | "TagUpdateManyDataInput" | "TagUpdateManyMutationInput" | "TagUpdateManyWithWhereNestedInput" | "TagUpdateManyWithoutTasksInput" | "TagUpdateWithWhereUniqueWithoutTasksInput" | "TagUpdateWithoutTasksDataInput" | "TagUpsertWithWhereUniqueWithoutTasksInput" | "TagWhereInput" | "TagWhereUniqueInput" | "TaskCreateInput" | "TaskCreateManyWithoutSubprojectInput" | "TaskCreateManyWithoutTagsInput" | "TaskCreateOneWithoutTimelogsInput" | "TaskCreateWithoutSubprojectInput" | "TaskCreateWithoutTagsInput" | "TaskCreateWithoutTimelogsInput" | "TaskScalarWhereInput" | "TaskUpdateInput" | "TaskUpdateManyDataInput" | "TaskUpdateManyMutationInput" | "TaskUpdateManyWithWhereNestedInput" | "TaskUpdateManyWithoutSubprojectInput" | "TaskUpdateManyWithoutTagsInput" | "TaskUpdateOneRequiredWithoutTimelogsInput" | "TaskUpdateWithWhereUniqueWithoutSubprojectInput" | "TaskUpdateWithWhereUniqueWithoutTagsInput" | "TaskUpdateWithoutSubprojectDataInput" | "TaskUpdateWithoutTagsDataInput" | "TaskUpdateWithoutTimelogsDataInput" | "TaskUpsertWithWhereUniqueWithoutSubprojectInput" | "TaskUpsertWithWhereUniqueWithoutTagsInput" | "TaskUpsertWithoutTimelogsInput" | "TaskWhereInput" | "TaskWhereUniqueInput" | "TimelogCreateInput" | "TimelogCreateManyWithoutTaskInput" | "TimelogCreateWithoutTaskInput" | "TimelogScalarWhereInput" | "TimelogUpdateInput" | "TimelogUpdateManyDataInput" | "TimelogUpdateManyMutationInput" | "TimelogUpdateManyWithWhereNestedInput" | "TimelogUpdateManyWithoutTaskInput" | "TimelogUpdateWithWhereUniqueWithoutTaskInput" | "TimelogUpdateWithoutTaskDataInput" | "TimelogUpsertWithWhereUniqueWithoutTaskInput" | "TimelogWhereInput" | "TimelogWhereUniqueInput";
 
-export type NexusGenEnumNames = "ProjectOrderByInput" | "SubprojectOrderByInput" | "TaskOrderByInput" | "TimelogOrderByInput";
+export type NexusGenEnumNames = "ProjectOrderByInput" | "SubprojectOrderByInput" | "TagOrderByInput" | "TaskOrderByInput" | "TimelogOrderByInput";
 
 export type NexusGenInterfaceNames = never;
 

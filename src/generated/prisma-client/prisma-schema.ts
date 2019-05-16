@@ -10,6 +10,10 @@ type AggregateSubproject {
   count: Int!
 }
 
+type AggregateTag {
+  count: Int!
+}
+
 type AggregateTask {
   count: Int!
 }
@@ -39,6 +43,12 @@ type Mutation {
   upsertSubproject(where: SubprojectWhereUniqueInput!, create: SubprojectCreateInput!, update: SubprojectUpdateInput!): Subproject!
   deleteSubproject(where: SubprojectWhereUniqueInput!): Subproject
   deleteManySubprojects(where: SubprojectWhereInput): BatchPayload!
+  createTag(data: TagCreateInput!): Tag!
+  updateTag(data: TagUpdateInput!, where: TagWhereUniqueInput!): Tag
+  updateManyTags(data: TagUpdateManyMutationInput!, where: TagWhereInput): BatchPayload!
+  upsertTag(where: TagWhereUniqueInput!, create: TagCreateInput!, update: TagUpdateInput!): Tag!
+  deleteTag(where: TagWhereUniqueInput!): Tag
+  deleteManyTags(where: TagWhereInput): BatchPayload!
   createTask(data: TaskCreateInput!): Task!
   updateTask(data: TaskUpdateInput!, where: TaskWhereUniqueInput!): Task
   updateManyTasks(data: TaskUpdateManyMutationInput!, where: TaskWhereInput): BatchPayload!
@@ -201,6 +211,9 @@ type Query {
   subproject(where: SubprojectWhereUniqueInput!): Subproject
   subprojects(where: SubprojectWhereInput, orderBy: SubprojectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Subproject]!
   subprojectsConnection(where: SubprojectWhereInput, orderBy: SubprojectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SubprojectConnection!
+  tag(where: TagWhereUniqueInput!): Tag
+  tags(where: TagWhereInput, orderBy: TagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Tag]!
+  tagsConnection(where: TagWhereInput, orderBy: TagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TagConnection!
   task(where: TaskWhereUniqueInput!): Task
   tasks(where: TaskWhereInput, orderBy: TaskOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Task]!
   tasksConnection(where: TaskWhereInput, orderBy: TaskOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TaskConnection!
@@ -421,8 +434,181 @@ input SubprojectWhereUniqueInput {
 type Subscription {
   project(where: ProjectSubscriptionWhereInput): ProjectSubscriptionPayload
   subproject(where: SubprojectSubscriptionWhereInput): SubprojectSubscriptionPayload
+  tag(where: TagSubscriptionWhereInput): TagSubscriptionPayload
   task(where: TaskSubscriptionWhereInput): TaskSubscriptionPayload
   timelog(where: TimelogSubscriptionWhereInput): TimelogSubscriptionPayload
+}
+
+type Tag {
+  id: Int!
+  name: String!
+  tasks(where: TaskWhereInput, orderBy: TaskOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Task!]
+}
+
+type TagConnection {
+  pageInfo: PageInfo!
+  edges: [TagEdge]!
+  aggregate: AggregateTag!
+}
+
+input TagCreateInput {
+  id: Int
+  name: String!
+  tasks: TaskCreateManyWithoutTagsInput
+}
+
+input TagCreateManyWithoutTasksInput {
+  create: [TagCreateWithoutTasksInput!]
+  connect: [TagWhereUniqueInput!]
+}
+
+input TagCreateWithoutTasksInput {
+  id: Int
+  name: String!
+}
+
+type TagEdge {
+  node: Tag!
+  cursor: String!
+}
+
+enum TagOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+}
+
+type TagPreviousValues {
+  id: Int!
+  name: String!
+}
+
+input TagScalarWhereInput {
+  id: Int
+  id_not: Int
+  id_in: [Int!]
+  id_not_in: [Int!]
+  id_lt: Int
+  id_lte: Int
+  id_gt: Int
+  id_gte: Int
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  AND: [TagScalarWhereInput!]
+  OR: [TagScalarWhereInput!]
+  NOT: [TagScalarWhereInput!]
+}
+
+type TagSubscriptionPayload {
+  mutation: MutationType!
+  node: Tag
+  updatedFields: [String!]
+  previousValues: TagPreviousValues
+}
+
+input TagSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: TagWhereInput
+  AND: [TagSubscriptionWhereInput!]
+  OR: [TagSubscriptionWhereInput!]
+  NOT: [TagSubscriptionWhereInput!]
+}
+
+input TagUpdateInput {
+  name: String
+  tasks: TaskUpdateManyWithoutTagsInput
+}
+
+input TagUpdateManyDataInput {
+  name: String
+}
+
+input TagUpdateManyMutationInput {
+  name: String
+}
+
+input TagUpdateManyWithoutTasksInput {
+  create: [TagCreateWithoutTasksInput!]
+  delete: [TagWhereUniqueInput!]
+  connect: [TagWhereUniqueInput!]
+  set: [TagWhereUniqueInput!]
+  disconnect: [TagWhereUniqueInput!]
+  update: [TagUpdateWithWhereUniqueWithoutTasksInput!]
+  upsert: [TagUpsertWithWhereUniqueWithoutTasksInput!]
+  deleteMany: [TagScalarWhereInput!]
+  updateMany: [TagUpdateManyWithWhereNestedInput!]
+}
+
+input TagUpdateManyWithWhereNestedInput {
+  where: TagScalarWhereInput!
+  data: TagUpdateManyDataInput!
+}
+
+input TagUpdateWithoutTasksDataInput {
+  name: String
+}
+
+input TagUpdateWithWhereUniqueWithoutTasksInput {
+  where: TagWhereUniqueInput!
+  data: TagUpdateWithoutTasksDataInput!
+}
+
+input TagUpsertWithWhereUniqueWithoutTasksInput {
+  where: TagWhereUniqueInput!
+  update: TagUpdateWithoutTasksDataInput!
+  create: TagCreateWithoutTasksInput!
+}
+
+input TagWhereInput {
+  id: Int
+  id_not: Int
+  id_in: [Int!]
+  id_not_in: [Int!]
+  id_lt: Int
+  id_lte: Int
+  id_gt: Int
+  id_gte: Int
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  tasks_every: TaskWhereInput
+  tasks_some: TaskWhereInput
+  tasks_none: TaskWhereInput
+  AND: [TagWhereInput!]
+  OR: [TagWhereInput!]
+  NOT: [TagWhereInput!]
+}
+
+input TagWhereUniqueInput {
+  id: Int
+  name: String
 }
 
 type Task {
@@ -439,6 +625,7 @@ type Task {
   completed: Boolean!
   subproject: Subproject
   timelogs(where: TimelogWhereInput, orderBy: TimelogOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Timelog!]
+  tags(where: TagWhereInput, orderBy: TagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Tag!]
 }
 
 type TaskConnection {
@@ -461,10 +648,16 @@ input TaskCreateInput {
   completed: Boolean
   subproject: SubprojectCreateOneWithoutTasksInput
   timelogs: TimelogCreateManyWithoutTaskInput
+  tags: TagCreateManyWithoutTasksInput
 }
 
 input TaskCreateManyWithoutSubprojectInput {
   create: [TaskCreateWithoutSubprojectInput!]
+  connect: [TaskWhereUniqueInput!]
+}
+
+input TaskCreateManyWithoutTagsInput {
+  create: [TaskCreateWithoutTagsInput!]
   connect: [TaskWhereUniqueInput!]
 }
 
@@ -486,6 +679,23 @@ input TaskCreateWithoutSubprojectInput {
   deadlineDate: String
   completed: Boolean
   timelogs: TimelogCreateManyWithoutTaskInput
+  tags: TagCreateManyWithoutTasksInput
+}
+
+input TaskCreateWithoutTagsInput {
+  id: Int
+  name: String!
+  priority: String
+  comments: String
+  repeat: Int
+  estimateTime: String
+  plannedTime: String
+  plannedDate: String
+  finishDate: String
+  deadlineDate: String
+  completed: Boolean
+  subproject: SubprojectCreateOneWithoutTasksInput
+  timelogs: TimelogCreateManyWithoutTaskInput
 }
 
 input TaskCreateWithoutTimelogsInput {
@@ -501,6 +711,7 @@ input TaskCreateWithoutTimelogsInput {
   deadlineDate: String
   completed: Boolean
   subproject: SubprojectCreateOneWithoutTasksInput
+  tags: TagCreateManyWithoutTasksInput
 }
 
 type TaskEdge {
@@ -714,6 +925,7 @@ input TaskUpdateInput {
   completed: Boolean
   subproject: SubprojectUpdateOneWithoutTasksInput
   timelogs: TimelogUpdateManyWithoutTaskInput
+  tags: TagUpdateManyWithoutTasksInput
 }
 
 input TaskUpdateManyDataInput {
@@ -754,6 +966,18 @@ input TaskUpdateManyWithoutSubprojectInput {
   updateMany: [TaskUpdateManyWithWhereNestedInput!]
 }
 
+input TaskUpdateManyWithoutTagsInput {
+  create: [TaskCreateWithoutTagsInput!]
+  delete: [TaskWhereUniqueInput!]
+  connect: [TaskWhereUniqueInput!]
+  set: [TaskWhereUniqueInput!]
+  disconnect: [TaskWhereUniqueInput!]
+  update: [TaskUpdateWithWhereUniqueWithoutTagsInput!]
+  upsert: [TaskUpsertWithWhereUniqueWithoutTagsInput!]
+  deleteMany: [TaskScalarWhereInput!]
+  updateMany: [TaskUpdateManyWithWhereNestedInput!]
+}
+
 input TaskUpdateManyWithWhereNestedInput {
   where: TaskScalarWhereInput!
   data: TaskUpdateManyDataInput!
@@ -778,6 +1002,22 @@ input TaskUpdateWithoutSubprojectDataInput {
   deadlineDate: String
   completed: Boolean
   timelogs: TimelogUpdateManyWithoutTaskInput
+  tags: TagUpdateManyWithoutTasksInput
+}
+
+input TaskUpdateWithoutTagsDataInput {
+  name: String
+  priority: String
+  comments: String
+  repeat: Int
+  estimateTime: String
+  plannedTime: String
+  plannedDate: String
+  finishDate: String
+  deadlineDate: String
+  completed: Boolean
+  subproject: SubprojectUpdateOneWithoutTasksInput
+  timelogs: TimelogUpdateManyWithoutTaskInput
 }
 
 input TaskUpdateWithoutTimelogsDataInput {
@@ -792,11 +1032,17 @@ input TaskUpdateWithoutTimelogsDataInput {
   deadlineDate: String
   completed: Boolean
   subproject: SubprojectUpdateOneWithoutTasksInput
+  tags: TagUpdateManyWithoutTasksInput
 }
 
 input TaskUpdateWithWhereUniqueWithoutSubprojectInput {
   where: TaskWhereUniqueInput!
   data: TaskUpdateWithoutSubprojectDataInput!
+}
+
+input TaskUpdateWithWhereUniqueWithoutTagsInput {
+  where: TaskWhereUniqueInput!
+  data: TaskUpdateWithoutTagsDataInput!
 }
 
 input TaskUpsertWithoutTimelogsInput {
@@ -808,6 +1054,12 @@ input TaskUpsertWithWhereUniqueWithoutSubprojectInput {
   where: TaskWhereUniqueInput!
   update: TaskUpdateWithoutSubprojectDataInput!
   create: TaskCreateWithoutSubprojectInput!
+}
+
+input TaskUpsertWithWhereUniqueWithoutTagsInput {
+  where: TaskWhereUniqueInput!
+  update: TaskUpdateWithoutTagsDataInput!
+  create: TaskCreateWithoutTagsInput!
 }
 
 input TaskWhereInput {
@@ -945,6 +1197,9 @@ input TaskWhereInput {
   timelogs_every: TimelogWhereInput
   timelogs_some: TimelogWhereInput
   timelogs_none: TimelogWhereInput
+  tags_every: TagWhereInput
+  tags_some: TagWhereInput
+  tags_none: TagWhereInput
   AND: [TaskWhereInput!]
   OR: [TaskWhereInput!]
   NOT: [TaskWhereInput!]

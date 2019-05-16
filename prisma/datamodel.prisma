@@ -25,6 +25,7 @@ type Task {
 	completed: Boolean! @default(value: false)
 	subproject: Subproject
 	timelogs: [Timelog!]! @relation(onDelete: CASCADE)
+	tags: [Tag!]! @relation
 }
 
 type Timelog {
@@ -32,4 +33,10 @@ type Timelog {
 	startDate: DateTime
 	finishDate: DateTime
 	task: Task!
+}
+
+type Tag {
+	id: Int! @id
+	name: String! @unique
+	tasks: [Task!]! @relation(onDelete: SET_NULL)
 }
