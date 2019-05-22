@@ -1,4 +1,5 @@
 import { prismaObjectType } from 'nexus-prisma'
+import { ApolloError } from 'apollo-server-errors'
 import { arg } from 'nexus'
 import * as moment from 'moment'
 
@@ -45,11 +46,24 @@ export const Mutation = prismaObjectType({
     t.field('startTimelog', {
       type: 'Timelog',
       args: { data: arg({ type: 'TimelogCreateInput' }) },
-      resolve: (root, { data }, { prisma }) =>
-        prisma.createTimelog({
+      resolve: async (root, { data }, { prisma }) => {
+        const timelog = await prisma
+          .timelogs({ where: { finishDate: null } })
+          .then(t => t[0])
+
+        // stop pending timelog
+        if (timelog) {
+          await prisma.updateTimelog({
+            data: { finishDate: moment().format() },
+            where: { id: timelog.id }
+          })
+        }
+
+        return prisma.createTimelog({
           startDate: moment().format(),
           ...data
         })
+      }
     })
   }
 })
