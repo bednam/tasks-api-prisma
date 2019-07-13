@@ -819,6 +819,7 @@ export interface NexusGenInputs {
     id?: number | null; // Int
   }
   TimelogCreateInput: { // input type
+    description?: string | null; // String
     finishDate?: any | null; // DateTime
     id?: number | null; // Int
     startDate?: any | null; // DateTime
@@ -829,12 +830,27 @@ export interface NexusGenInputs {
     create?: NexusGenInputs['TimelogCreateWithoutTaskInput'][] | null; // [TimelogCreateWithoutTaskInput!]
   }
   TimelogCreateWithoutTaskInput: { // input type
+    description?: string | null; // String
     finishDate?: any | null; // DateTime
     id?: number | null; // Int
     startDate?: any | null; // DateTime
   }
   TimelogScalarWhereInput: { // input type
     AND?: NexusGenInputs['TimelogScalarWhereInput'][] | null; // [TimelogScalarWhereInput!]
+    description?: string | null; // String
+    description_contains?: string | null; // String
+    description_ends_with?: string | null; // String
+    description_gt?: string | null; // String
+    description_gte?: string | null; // String
+    description_in?: string[] | null; // [String!]
+    description_lt?: string | null; // String
+    description_lte?: string | null; // String
+    description_not?: string | null; // String
+    description_not_contains?: string | null; // String
+    description_not_ends_with?: string | null; // String
+    description_not_in?: string[] | null; // [String!]
+    description_not_starts_with?: string | null; // String
+    description_starts_with?: string | null; // String
     finishDate?: any | null; // DateTime
     finishDate_gt?: any | null; // DateTime
     finishDate_gte?: any | null; // DateTime
@@ -863,15 +879,18 @@ export interface NexusGenInputs {
     startDate_not_in?: any[] | null; // [DateTime!]
   }
   TimelogUpdateInput: { // input type
+    description?: string | null; // String
     finishDate?: any | null; // DateTime
     startDate?: any | null; // DateTime
     task?: NexusGenInputs['TaskUpdateOneRequiredWithoutTimelogsInput'] | null; // TaskUpdateOneRequiredWithoutTimelogsInput
   }
   TimelogUpdateManyDataInput: { // input type
+    description?: string | null; // String
     finishDate?: any | null; // DateTime
     startDate?: any | null; // DateTime
   }
   TimelogUpdateManyMutationInput: { // input type
+    description?: string | null; // String
     finishDate?: any | null; // DateTime
     startDate?: any | null; // DateTime
   }
@@ -895,6 +914,7 @@ export interface NexusGenInputs {
     where: NexusGenInputs['TimelogWhereUniqueInput']; // TimelogWhereUniqueInput!
   }
   TimelogUpdateWithoutTaskDataInput: { // input type
+    description?: string | null; // String
     finishDate?: any | null; // DateTime
     startDate?: any | null; // DateTime
   }
@@ -905,6 +925,20 @@ export interface NexusGenInputs {
   }
   TimelogWhereInput: { // input type
     AND?: NexusGenInputs['TimelogWhereInput'][] | null; // [TimelogWhereInput!]
+    description?: string | null; // String
+    description_contains?: string | null; // String
+    description_ends_with?: string | null; // String
+    description_gt?: string | null; // String
+    description_gte?: string | null; // String
+    description_in?: string[] | null; // [String!]
+    description_lt?: string | null; // String
+    description_lte?: string | null; // String
+    description_not?: string | null; // String
+    description_not_contains?: string | null; // String
+    description_not_ends_with?: string | null; // String
+    description_not_in?: string[] | null; // [String!]
+    description_not_starts_with?: string | null; // String
+    description_starts_with?: string | null; // String
     finishDate?: any | null; // DateTime
     finishDate_gt?: any | null; // DateTime
     finishDate_gte?: any | null; // DateTime
@@ -943,7 +977,7 @@ export interface NexusGenEnums {
   SubprojectOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "name_ASC" | "name_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
   TagOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "id_ASC" | "id_DESC" | "name_ASC" | "name_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
   TaskOrderByInput: "comments_ASC" | "comments_DESC" | "completed_ASC" | "completed_DESC" | "createdAt_ASC" | "createdAt_DESC" | "deadlineDate_ASC" | "deadlineDate_DESC" | "estimateTime_ASC" | "estimateTime_DESC" | "finishDate_ASC" | "finishDate_DESC" | "id_ASC" | "id_DESC" | "name_ASC" | "name_DESC" | "plannedDate_ASC" | "plannedDate_DESC" | "plannedTime_ASC" | "plannedTime_DESC" | "priority_ASC" | "priority_DESC" | "repeat_ASC" | "repeat_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
-  TimelogOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "finishDate_ASC" | "finishDate_DESC" | "id_ASC" | "id_DESC" | "startDate_ASC" | "startDate_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
+  TimelogOrderByInput: "createdAt_ASC" | "createdAt_DESC" | "description_ASC" | "description_DESC" | "finishDate_ASC" | "finishDate_DESC" | "id_ASC" | "id_DESC" | "startDate_ASC" | "startDate_DESC" | "updatedAt_ASC" | "updatedAt_DESC"
 }
 
 export interface NexusGenRootTypes {
@@ -1031,6 +1065,7 @@ export interface NexusGenRootTypes {
     node: NexusGenRootTypes['Task']; // Task!
   }
   Timelog: { // root type
+    description?: string | null; // String
     finishDate?: any | null; // DateTime
     id: number; // Int!
     startDate?: any | null; // DateTime
@@ -1285,6 +1320,7 @@ export interface NexusGenFieldTypes {
     statusTime: string | null; // String
     subproject: NexusGenRootTypes['Subproject'] | null; // Subproject
     tags: NexusGenRootTypes['Tag'][] | null; // [Tag!]
+    timelogCount: string; // String!
     timelogs: NexusGenRootTypes['Timelog'][] | null; // [Timelog!]
   }
   TaskConnection: { // field return type
@@ -1297,6 +1333,7 @@ export interface NexusGenFieldTypes {
     node: NexusGenRootTypes['Task']; // Task!
   }
   Timelog: { // field return type
+    description: string | null; // String
     finishDate: any | null; // DateTime
     id: number; // Int!
     startDate: any | null; // DateTime

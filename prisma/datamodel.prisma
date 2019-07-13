@@ -32,6 +32,7 @@ type Timelog {
 	id: Int! @id
 	startDate: DateTime
 	finishDate: DateTime
+	description: String
 	task: Task!
 }
 

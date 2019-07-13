@@ -839,12 +839,14 @@ type TimelogObject =
   | { name: 'id', args?: [] | false, alias?: string  } 
   | { name: 'startDate', args?: [] | false, alias?: string  } 
   | { name: 'finishDate', args?: [] | false, alias?: string  } 
+  | { name: 'description', args?: [] | false, alias?: string  } 
   | { name: 'task', args?: [] | false, alias?: string  } 
 
 type TimelogFields =
   | 'id'
   | 'startDate'
   | 'finishDate'
+  | 'description'
   | 'task'
 
 
@@ -870,6 +872,14 @@ export interface TimelogFieldDetails {
   }
   finishDate: {
     type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+  description: {
+    type: 'String'
     args: {}
     description: string
     list: undefined
@@ -2779,11 +2789,13 @@ type TimelogPreviousValuesObject =
   | { name: 'id', args?: [] | false, alias?: string  } 
   | { name: 'startDate', args?: [] | false, alias?: string  } 
   | { name: 'finishDate', args?: [] | false, alias?: string  } 
+  | { name: 'description', args?: [] | false, alias?: string  } 
 
 type TimelogPreviousValuesFields =
   | 'id'
   | 'startDate'
   | 'finishDate'
+  | 'description'
 
 
 
@@ -2808,6 +2820,14 @@ export interface TimelogPreviousValuesFieldDetails {
   }
   finishDate: {
     type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+  description: {
+    type: 'String'
     args: {}
     description: string
     list: undefined
@@ -3366,6 +3386,20 @@ export interface TimelogWhereInput {
   finishDate_lte?: string | null
   finishDate_gt?: string | null
   finishDate_gte?: string | null
+  description?: string | null
+  description_not?: string | null
+  description_in?: string[]
+  description_not_in?: string[]
+  description_lt?: string | null
+  description_lte?: string | null
+  description_gt?: string | null
+  description_gte?: string | null
+  description_contains?: string | null
+  description_not_contains?: string | null
+  description_starts_with?: string | null
+  description_not_starts_with?: string | null
+  description_ends_with?: string | null
+  description_not_ends_with?: string | null
   task?: TaskWhereInput | null
   AND?: TimelogWhereInput[]
   OR?: TimelogWhereInput[]
@@ -3397,6 +3431,20 @@ export type TimelogWhereInputInputObject =
   | { name: 'finishDate_lte', alias?: string  } 
   | { name: 'finishDate_gt', alias?: string  } 
   | { name: 'finishDate_gte', alias?: string  } 
+  | { name: 'description', alias?: string  } 
+  | { name: 'description_not', alias?: string  } 
+  | { name: 'description_in', alias?: string  } 
+  | { name: 'description_not_in', alias?: string  } 
+  | { name: 'description_lt', alias?: string  } 
+  | { name: 'description_lte', alias?: string  } 
+  | { name: 'description_gt', alias?: string  } 
+  | { name: 'description_gte', alias?: string  } 
+  | { name: 'description_contains', alias?: string  } 
+  | { name: 'description_not_contains', alias?: string  } 
+  | { name: 'description_starts_with', alias?: string  } 
+  | { name: 'description_not_starts_with', alias?: string  } 
+  | { name: 'description_ends_with', alias?: string  } 
+  | { name: 'description_not_ends_with', alias?: string  } 
   | { name: 'task', alias?: string  } 
   | { name: 'AND', alias?: string  } 
   | { name: 'OR', alias?: string  } 
@@ -3579,12 +3627,14 @@ export interface TimelogCreateWithoutTaskInput {
   id?: number | null
   startDate?: string | null
   finishDate?: string | null
+  description?: string | null
 }
 export type TimelogCreateWithoutTaskInputInputObject =
   | Extract<keyof TimelogCreateWithoutTaskInput, string>
   | { name: 'id', alias?: string  } 
   | { name: 'startDate', alias?: string  } 
   | { name: 'finishDate', alias?: string  } 
+  | { name: 'description', alias?: string  } 
   
 export interface TagCreateManyWithoutTasksInput {
   create?: TagCreateWithoutTasksInput[]
@@ -3750,11 +3800,13 @@ export type TimelogUpdateWithWhereUniqueWithoutTaskInputInputObject =
 export interface TimelogUpdateWithoutTaskDataInput {
   startDate?: string | null
   finishDate?: string | null
+  description?: string | null
 }
 export type TimelogUpdateWithoutTaskDataInputInputObject =
   | Extract<keyof TimelogUpdateWithoutTaskDataInput, string>
   | { name: 'startDate', alias?: string  } 
   | { name: 'finishDate', alias?: string  } 
+  | { name: 'description', alias?: string  } 
   
 export interface TimelogUpsertWithWhereUniqueWithoutTaskInput {
   where?: TimelogWhereUniqueInput
@@ -3792,6 +3844,20 @@ export interface TimelogScalarWhereInput {
   finishDate_lte?: string | null
   finishDate_gt?: string | null
   finishDate_gte?: string | null
+  description?: string | null
+  description_not?: string | null
+  description_in?: string[]
+  description_not_in?: string[]
+  description_lt?: string | null
+  description_lte?: string | null
+  description_gt?: string | null
+  description_gte?: string | null
+  description_contains?: string | null
+  description_not_contains?: string | null
+  description_starts_with?: string | null
+  description_not_starts_with?: string | null
+  description_ends_with?: string | null
+  description_not_ends_with?: string | null
   AND?: TimelogScalarWhereInput[]
   OR?: TimelogScalarWhereInput[]
   NOT?: TimelogScalarWhereInput[]
@@ -3822,6 +3888,20 @@ export type TimelogScalarWhereInputInputObject =
   | { name: 'finishDate_lte', alias?: string  } 
   | { name: 'finishDate_gt', alias?: string  } 
   | { name: 'finishDate_gte', alias?: string  } 
+  | { name: 'description', alias?: string  } 
+  | { name: 'description_not', alias?: string  } 
+  | { name: 'description_in', alias?: string  } 
+  | { name: 'description_not_in', alias?: string  } 
+  | { name: 'description_lt', alias?: string  } 
+  | { name: 'description_lte', alias?: string  } 
+  | { name: 'description_gt', alias?: string  } 
+  | { name: 'description_gte', alias?: string  } 
+  | { name: 'description_contains', alias?: string  } 
+  | { name: 'description_not_contains', alias?: string  } 
+  | { name: 'description_starts_with', alias?: string  } 
+  | { name: 'description_not_starts_with', alias?: string  } 
+  | { name: 'description_ends_with', alias?: string  } 
+  | { name: 'description_not_ends_with', alias?: string  } 
   | { name: 'AND', alias?: string  } 
   | { name: 'OR', alias?: string  } 
   | { name: 'NOT', alias?: string  } 
@@ -3838,11 +3918,13 @@ export type TimelogUpdateManyWithWhereNestedInputInputObject =
 export interface TimelogUpdateManyDataInput {
   startDate?: string | null
   finishDate?: string | null
+  description?: string | null
 }
 export type TimelogUpdateManyDataInputInputObject =
   | Extract<keyof TimelogUpdateManyDataInput, string>
   | { name: 'startDate', alias?: string  } 
   | { name: 'finishDate', alias?: string  } 
+  | { name: 'description', alias?: string  } 
   
 export interface TagUpdateManyWithoutTasksInput {
   create?: TagCreateWithoutTasksInput[]
@@ -4596,6 +4678,7 @@ export interface TimelogCreateInput {
   id?: number | null
   startDate?: string | null
   finishDate?: string | null
+  description?: string | null
   task?: TaskCreateOneWithoutTimelogsInput
 }
 export type TimelogCreateInputInputObject =
@@ -4603,6 +4686,7 @@ export type TimelogCreateInputInputObject =
   | { name: 'id', alias?: string  } 
   | { name: 'startDate', alias?: string  } 
   | { name: 'finishDate', alias?: string  } 
+  | { name: 'description', alias?: string  } 
   | { name: 'task', alias?: string  } 
   
 export interface TaskCreateOneWithoutTimelogsInput {
@@ -4648,12 +4732,14 @@ export type TaskCreateWithoutTimelogsInputInputObject =
 export interface TimelogUpdateInput {
   startDate?: string | null
   finishDate?: string | null
+  description?: string | null
   task?: TaskUpdateOneRequiredWithoutTimelogsInput | null
 }
 export type TimelogUpdateInputInputObject =
   | Extract<keyof TimelogUpdateInput, string>
   | { name: 'startDate', alias?: string  } 
   | { name: 'finishDate', alias?: string  } 
+  | { name: 'description', alias?: string  } 
   | { name: 'task', alias?: string  } 
   
 export interface TaskUpdateOneRequiredWithoutTimelogsInput {
@@ -4710,11 +4796,13 @@ export type TaskUpsertWithoutTimelogsInputInputObject =
 export interface TimelogUpdateManyMutationInput {
   startDate?: string | null
   finishDate?: string | null
+  description?: string | null
 }
 export type TimelogUpdateManyMutationInputInputObject =
   | Extract<keyof TimelogUpdateManyMutationInput, string>
   | { name: 'startDate', alias?: string  } 
   | { name: 'finishDate', alias?: string  } 
+  | { name: 'description', alias?: string  } 
   
 export interface TagCreateInput {
   id?: number | null
@@ -5006,6 +5094,8 @@ export type TimelogOrderByInputValues =
   | 'startDate_DESC'
   | 'finishDate_ASC'
   | 'finishDate_DESC'
+  | 'description_ASC'
+  | 'description_DESC'
   | 'createdAt_ASC'
   | 'createdAt_DESC'
   | 'updatedAt_ASC'

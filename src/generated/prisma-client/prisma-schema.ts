@@ -1213,6 +1213,7 @@ type Timelog {
   id: Int!
   startDate: DateTime
   finishDate: DateTime
+  description: String
   task: Task!
 }
 
@@ -1226,6 +1227,7 @@ input TimelogCreateInput {
   id: Int
   startDate: DateTime
   finishDate: DateTime
+  description: String
   task: TaskCreateOneWithoutTimelogsInput!
 }
 
@@ -1238,6 +1240,7 @@ input TimelogCreateWithoutTaskInput {
   id: Int
   startDate: DateTime
   finishDate: DateTime
+  description: String
 }
 
 type TimelogEdge {
@@ -1252,12 +1255,15 @@ enum TimelogOrderByInput {
   startDate_DESC
   finishDate_ASC
   finishDate_DESC
+  description_ASC
+  description_DESC
 }
 
 type TimelogPreviousValues {
   id: Int!
   startDate: DateTime
   finishDate: DateTime
+  description: String
 }
 
 input TimelogScalarWhereInput {
@@ -1285,6 +1291,20 @@ input TimelogScalarWhereInput {
   finishDate_lte: DateTime
   finishDate_gt: DateTime
   finishDate_gte: DateTime
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
   AND: [TimelogScalarWhereInput!]
   OR: [TimelogScalarWhereInput!]
   NOT: [TimelogScalarWhereInput!]
@@ -1311,17 +1331,20 @@ input TimelogSubscriptionWhereInput {
 input TimelogUpdateInput {
   startDate: DateTime
   finishDate: DateTime
+  description: String
   task: TaskUpdateOneRequiredWithoutTimelogsInput
 }
 
 input TimelogUpdateManyDataInput {
   startDate: DateTime
   finishDate: DateTime
+  description: String
 }
 
 input TimelogUpdateManyMutationInput {
   startDate: DateTime
   finishDate: DateTime
+  description: String
 }
 
 input TimelogUpdateManyWithoutTaskInput {
@@ -1344,6 +1367,7 @@ input TimelogUpdateManyWithWhereNestedInput {
 input TimelogUpdateWithoutTaskDataInput {
   startDate: DateTime
   finishDate: DateTime
+  description: String
 }
 
 input TimelogUpdateWithWhereUniqueWithoutTaskInput {
@@ -1382,6 +1406,20 @@ input TimelogWhereInput {
   finishDate_lte: DateTime
   finishDate_gt: DateTime
   finishDate_gte: DateTime
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
   task: TaskWhereInput
   AND: [TimelogWhereInput!]
   OR: [TimelogWhereInput!]

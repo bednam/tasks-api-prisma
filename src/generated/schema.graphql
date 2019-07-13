@@ -561,6 +561,7 @@ type Task {
   statusTime: String
   subproject: Subproject
   tags(after: String, before: String, first: Int, last: Int, orderBy: TagOrderByInput, skip: Int, where: TagWhereInput): [Tag!]
+  timelogCount: String!
   timelogs(after: String, before: String, first: Int, last: Int, orderBy: TimelogOrderByInput, skip: Int, where: TimelogWhereInput): [Timelog!]
 }
 
@@ -1118,6 +1119,7 @@ input TaskWhereUniqueInput {
 }
 
 type Timelog {
+  description: String
   finishDate: DateTime
   id: Int!
   startDate: DateTime
@@ -1131,6 +1133,7 @@ type TimelogConnection {
 }
 
 input TimelogCreateInput {
+  description: String
   finishDate: DateTime
   id: Int
   startDate: DateTime
@@ -1143,6 +1146,7 @@ input TimelogCreateManyWithoutTaskInput {
 }
 
 input TimelogCreateWithoutTaskInput {
+  description: String
   finishDate: DateTime
   id: Int
   startDate: DateTime
@@ -1156,6 +1160,8 @@ type TimelogEdge {
 enum TimelogOrderByInput {
   createdAt_ASC
   createdAt_DESC
+  description_ASC
+  description_DESC
   finishDate_ASC
   finishDate_DESC
   id_ASC
@@ -1168,6 +1174,20 @@ enum TimelogOrderByInput {
 
 input TimelogScalarWhereInput {
   AND: [TimelogScalarWhereInput!]
+  description: String
+  description_contains: String
+  description_ends_with: String
+  description_gt: String
+  description_gte: String
+  description_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_not: String
+  description_not_contains: String
+  description_not_ends_with: String
+  description_not_in: [String!]
+  description_not_starts_with: String
+  description_starts_with: String
   finishDate: DateTime
   finishDate_gt: DateTime
   finishDate_gte: DateTime
@@ -1197,17 +1217,20 @@ input TimelogScalarWhereInput {
 }
 
 input TimelogUpdateInput {
+  description: String
   finishDate: DateTime
   startDate: DateTime
   task: TaskUpdateOneRequiredWithoutTimelogsInput
 }
 
 input TimelogUpdateManyDataInput {
+  description: String
   finishDate: DateTime
   startDate: DateTime
 }
 
 input TimelogUpdateManyMutationInput {
+  description: String
   finishDate: DateTime
   startDate: DateTime
 }
@@ -1230,6 +1253,7 @@ input TimelogUpdateManyWithWhereNestedInput {
 }
 
 input TimelogUpdateWithoutTaskDataInput {
+  description: String
   finishDate: DateTime
   startDate: DateTime
 }
@@ -1247,6 +1271,20 @@ input TimelogUpsertWithWhereUniqueWithoutTaskInput {
 
 input TimelogWhereInput {
   AND: [TimelogWhereInput!]
+  description: String
+  description_contains: String
+  description_ends_with: String
+  description_gt: String
+  description_gte: String
+  description_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_not: String
+  description_not_contains: String
+  description_not_ends_with: String
+  description_not_in: [String!]
+  description_not_starts_with: String
+  description_starts_with: String
   finishDate: DateTime
   finishDate_gt: DateTime
   finishDate_gte: DateTime

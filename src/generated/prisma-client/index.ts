@@ -291,7 +291,9 @@ export type TimelogOrderByInput =
   | "startDate_ASC"
   | "startDate_DESC"
   | "finishDate_ASC"
-  | "finishDate_DESC";
+  | "finishDate_DESC"
+  | "description_ASC"
+  | "description_DESC";
 
 export type TagOrderByInput = "id_ASC" | "id_DESC" | "name_ASC" | "name_DESC";
 
@@ -343,6 +345,20 @@ export interface TimelogWhereInput {
   finishDate_lte?: DateTimeInput;
   finishDate_gt?: DateTimeInput;
   finishDate_gte?: DateTimeInput;
+  description?: String;
+  description_not?: String;
+  description_in?: String[] | String;
+  description_not_in?: String[] | String;
+  description_lt?: String;
+  description_lte?: String;
+  description_gt?: String;
+  description_gte?: String;
+  description_contains?: String;
+  description_not_contains?: String;
+  description_starts_with?: String;
+  description_not_starts_with?: String;
+  description_ends_with?: String;
+  description_not_ends_with?: String;
   task?: TaskWhereInput;
   AND?: TimelogWhereInput[] | TimelogWhereInput;
   OR?: TimelogWhereInput[] | TimelogWhereInput;
@@ -540,11 +556,13 @@ export interface TimelogUpdateWithWhereUniqueWithoutTaskInput {
 export interface TimelogUpdateManyMutationInput {
   startDate?: DateTimeInput;
   finishDate?: DateTimeInput;
+  description?: String;
 }
 
 export interface TimelogUpdateWithoutTaskDataInput {
   startDate?: DateTimeInput;
   finishDate?: DateTimeInput;
+  description?: String;
 }
 
 export interface TaskUpdateWithoutTimelogsDataInput {
@@ -600,6 +618,20 @@ export interface TimelogScalarWhereInput {
   finishDate_lte?: DateTimeInput;
   finishDate_gt?: DateTimeInput;
   finishDate_gte?: DateTimeInput;
+  description?: String;
+  description_not?: String;
+  description_in?: String[] | String;
+  description_not_in?: String[] | String;
+  description_lt?: String;
+  description_lte?: String;
+  description_gt?: String;
+  description_gte?: String;
+  description_contains?: String;
+  description_not_contains?: String;
+  description_starts_with?: String;
+  description_not_starts_with?: String;
+  description_ends_with?: String;
+  description_not_ends_with?: String;
   AND?: TimelogScalarWhereInput[] | TimelogScalarWhereInput;
   OR?: TimelogScalarWhereInput[] | TimelogScalarWhereInput;
   NOT?: TimelogScalarWhereInput[] | TimelogScalarWhereInput;
@@ -634,6 +666,7 @@ export interface TaskCreateOneWithoutTimelogsInput {
 export interface TimelogUpdateManyDataInput {
   startDate?: DateTimeInput;
   finishDate?: DateTimeInput;
+  description?: String;
 }
 
 export interface TaskUpdateManyMutationInput {
@@ -1229,6 +1262,7 @@ export interface TimelogCreateWithoutTaskInput {
   id?: Int;
   startDate?: DateTimeInput;
   finishDate?: DateTimeInput;
+  description?: String;
 }
 
 export interface ProjectCreateOneWithoutSubprojectsInput {
@@ -1281,6 +1315,7 @@ export interface SubprojectUpdateInput {
 export interface TimelogUpdateInput {
   startDate?: DateTimeInput;
   finishDate?: DateTimeInput;
+  description?: String;
   task?: TaskUpdateOneRequiredWithoutTimelogsInput;
 }
 
@@ -1395,6 +1430,7 @@ export interface TimelogCreateInput {
   id?: Int;
   startDate?: DateTimeInput;
   finishDate?: DateTimeInput;
+  description?: String;
   task: TaskCreateOneWithoutTimelogsInput;
 }
 
@@ -1411,6 +1447,7 @@ export interface TimelogPreviousValues {
   id: Int;
   startDate?: DateTimeOutput;
   finishDate?: DateTimeOutput;
+  description?: String;
 }
 
 export interface TimelogPreviousValuesPromise
@@ -1419,6 +1456,7 @@ export interface TimelogPreviousValuesPromise
   id: () => Promise<Int>;
   startDate: () => Promise<DateTimeOutput>;
   finishDate: () => Promise<DateTimeOutput>;
+  description: () => Promise<String>;
 }
 
 export interface TimelogPreviousValuesSubscription
@@ -1427,6 +1465,7 @@ export interface TimelogPreviousValuesSubscription
   id: () => Promise<AsyncIterator<Int>>;
   startDate: () => Promise<AsyncIterator<DateTimeOutput>>;
   finishDate: () => Promise<AsyncIterator<DateTimeOutput>>;
+  description: () => Promise<AsyncIterator<String>>;
 }
 
 export interface AggregateProject {
@@ -1507,12 +1546,14 @@ export interface Timelog {
   id: Int;
   startDate?: DateTimeOutput;
   finishDate?: DateTimeOutput;
+  description?: String;
 }
 
 export interface TimelogPromise extends Promise<Timelog>, Fragmentable {
   id: () => Promise<Int>;
   startDate: () => Promise<DateTimeOutput>;
   finishDate: () => Promise<DateTimeOutput>;
+  description: () => Promise<String>;
   task: <T = TaskPromise>() => T;
 }
 
@@ -1522,6 +1563,7 @@ export interface TimelogSubscription
   id: () => Promise<AsyncIterator<Int>>;
   startDate: () => Promise<AsyncIterator<DateTimeOutput>>;
   finishDate: () => Promise<AsyncIterator<DateTimeOutput>>;
+  description: () => Promise<AsyncIterator<String>>;
   task: <T = TaskSubscription>() => T;
 }
 
