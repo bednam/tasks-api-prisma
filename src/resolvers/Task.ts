@@ -28,5 +28,15 @@ export const Task = prismaObjectType({
         return moment.utc(duration.as('milliseconds')).format('HH:mm:ss')
       }
     })
+    t.string('latestTimelogStartDate', {
+      nullable: true,
+      resolve: async (root, args, { prisma }) => {
+        const [latestTimelog] = await prisma
+          .task({ id: root.id })
+          .timelogs({ orderBy: 'startDate_DESC' })
+
+        return latestTimelog ? latestTimelog.startDate : null
+      }
+    })
   }
 })

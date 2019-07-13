@@ -1275,6 +1275,7 @@ export interface NexusGenFieldTypes {
     estimateTime: string | null; // String
     finishDate: string | null; // String
     id: number; // Int!
+    latestTimelogStartDate: string | null; // String
     name: string; // String!
     plannedDate: string | null; // String
     plannedTime: string | null; // String

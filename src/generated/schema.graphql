@@ -551,6 +551,7 @@ type Task {
   estimateTime: String
   finishDate: String
   id: Int!
+  latestTimelogStartDate: String
   name: String!
   plannedDate: String
   plannedTime: String
