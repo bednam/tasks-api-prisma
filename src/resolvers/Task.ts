@@ -37,6 +37,13 @@ export const Task = prismaObjectType({
 
         return latestTimelog ? latestTimelog.startDate : null
       }
-    })
+    }),
+      t.string('timelogCount', {
+        resolve: async (root, args, { prisma }) =>
+          await prisma
+            .timelogsConnection({ where: { task: { id: root.id } } })
+            .aggregate()
+            .count()
+      })
   }
 })
