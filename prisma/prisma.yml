@@ -1,8 +1,8 @@
 # Specifies the HTTP endpoint of your Prisma API (deployed to a Prisma Demo server).
 # endpoint: https://eu1.prisma.sh/public-luminousstinger-883/tasks-api-prisma/dev
-endpoint: http://localhost:4466/default/${env:STAGE}
+# endpoint: http://localhost:4466/default/${env:STAGE}
 # endpoint: http://localhost:4466/default/
-# endpoint: https://tasks-api-prisma-9d8a96e4f1.herokuapp.com/tasks-api-prisma/dev
+endpoint: https://tasks-api-prisma-9d8a96e4f1.herokuapp.com/tasks-api-prisma/dev
 
 # Defines your models, each model is mapped to the database as a table.
 datamodel: datamodel.prisma
