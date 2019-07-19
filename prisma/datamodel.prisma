@@ -1,7 +1,7 @@
 type Project {
 	id: Int! @id
 	name: String! @unique
-	subprojects: [Subproject!]!
+	subprojects: [Subproject!]! @relation(onDelete: CASCADE)
 }
 
 type Subproject {
