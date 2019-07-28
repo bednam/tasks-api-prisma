@@ -1,4 +1,5 @@
 import { prismaObjectType } from 'nexus-prisma'
+import TimelogRepository from '../repositories/TimelogRepository'
 
 export const Query = prismaObjectType({
   name: 'Query',
@@ -7,8 +8,8 @@ export const Query = prismaObjectType({
     t.field('activeTimelog', {
       type: 'Timelog',
       nullable: true,
-      resolve: (root, args, { prisma }) =>
-        prisma.timelogs({ where: { finishDate: null } }).then(t => t[0])
+      resolve: (root, args, context) =>
+        TimelogRepository.getActiveTimelog(context)
     })
   }
 })

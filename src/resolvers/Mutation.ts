@@ -2,6 +2,8 @@ import { prismaObjectType } from 'nexus-prisma'
 import { ApolloError } from 'apollo-server-errors'
 import { arg } from 'nexus'
 import * as moment from 'moment'
+import TaskRepository from '../repositories/TaskRepository'
+import TimelogRepository from '../repositories/TimelogRepository'
 
 export const Mutation = prismaObjectType({
   name: 'Mutation',
@@ -10,60 +12,28 @@ export const Mutation = prismaObjectType({
     t.field('completeTask', {
       type: 'Task',
       args: { where: arg({ type: 'TaskWhereUniqueInput', nullable: false }) },
-      resolve: async (root, { where }, { prisma }) => {
-        const task = await prisma.task({ id: where.id })
-        return prisma.updateTask({
-          data: {
-            completed: !task.completed,
-            finishDate: task.finishDate ? null : moment().format()
-          },
-          where
-        })
-      }
+      resolve: async (root, { where }, context) =>
+        TaskRepository.completeTask(where.id, context)
     })
     t.field('cloneTask', {
       type: 'Task',
       args: { where: arg({ type: 'TaskWhereUniqueInput' }) },
-      resolve: async (root, { where }, { prisma }) => {
-        const { id, completed, finishDate, ...data } = await prisma.task({
-          id: where.id
-        })
-
-        return prisma.createTask(data)
-      }
+      resolve: async (root, { where }, context) =>
+        TaskRepository.cloneTask(where.id, context)
     })
     t.field('stopTimelog', {
       type: 'Timelog',
       args: {
         where: arg({ type: 'TimelogWhereUniqueInput', nullable: false })
       },
-      resolve: (root, { where }, { prisma }) =>
-        prisma.updateTimelog({
-          data: { finishDate: moment().format() },
-          where
-        })
+      resolve: (root, { where }, context) =>
+        TimelogRepository.stopTimelog(where.id, context)
     })
     t.field('startTimelog', {
       type: 'Timelog',
       args: { data: arg({ type: 'TimelogCreateInput' }) },
-      resolve: async (root, { data }, { prisma }) => {
-        const timelog = await prisma
-          .timelogs({ where: { finishDate: null } })
-          .then(t => t[0])
-
-        // stop pending timelog
-        if (timelog) {
-          await prisma.updateTimelog({
-            data: { finishDate: moment().format() },
-            where: { id: timelog.id }
-          })
-        }
-
-        return prisma.createTimelog({
-          startDate: moment().format(),
-          ...data
-        })
-      }
+      resolve: async (root, { data }, context) =>
+        TimelogRepository.startTimelog(data, context)
     })
   }
 })
