@@ -15,13 +15,17 @@ export interface NexusPrismaTypes {
   objectTypes: {
     fields: {
       Query: QueryObject
-      Project: ProjectObject
-      Subproject: SubprojectObject
+      User: UserObject
       Task: TaskObject
+      Subproject: SubprojectObject
+      Project: ProjectObject
       Timelog: TimelogObject
       Tag: TagObject
-      ProjectConnection: ProjectConnectionObject
+      UserConnection: UserConnectionObject
       PageInfo: PageInfoObject
+      UserEdge: UserEdgeObject
+      AggregateUser: AggregateUserObject
+      ProjectConnection: ProjectConnectionObject
       ProjectEdge: ProjectEdgeObject
       AggregateProject: AggregateProjectObject
       SubprojectConnection: SubprojectConnectionObject
@@ -39,6 +43,8 @@ export interface NexusPrismaTypes {
       Mutation: MutationObject
       BatchPayload: BatchPayloadObject
       Subscription: SubscriptionObject
+      UserSubscriptionPayload: UserSubscriptionPayloadObject
+      UserPreviousValues: UserPreviousValuesObject
       ProjectSubscriptionPayload: ProjectSubscriptionPayloadObject
       ProjectPreviousValues: ProjectPreviousValuesObject
       SubprojectSubscriptionPayload: SubprojectSubscriptionPayloadObject
@@ -52,13 +58,17 @@ export interface NexusPrismaTypes {
     }
     fieldsDetails: {
       Query: QueryFieldDetails
-      Project: ProjectFieldDetails
-      Subproject: SubprojectFieldDetails
+      User: UserFieldDetails
       Task: TaskFieldDetails
+      Subproject: SubprojectFieldDetails
+      Project: ProjectFieldDetails
       Timelog: TimelogFieldDetails
       Tag: TagFieldDetails
-      ProjectConnection: ProjectConnectionFieldDetails
+      UserConnection: UserConnectionFieldDetails
       PageInfo: PageInfoFieldDetails
+      UserEdge: UserEdgeFieldDetails
+      AggregateUser: AggregateUserFieldDetails
+      ProjectConnection: ProjectConnectionFieldDetails
       ProjectEdge: ProjectEdgeFieldDetails
       AggregateProject: AggregateProjectFieldDetails
       SubprojectConnection: SubprojectConnectionFieldDetails
@@ -76,6 +86,8 @@ export interface NexusPrismaTypes {
       Mutation: MutationFieldDetails
       BatchPayload: BatchPayloadFieldDetails
       Subscription: SubscriptionFieldDetails
+      UserSubscriptionPayload: UserSubscriptionPayloadFieldDetails
+      UserPreviousValues: UserPreviousValuesFieldDetails
       ProjectSubscriptionPayload: ProjectSubscriptionPayloadFieldDetails
       ProjectPreviousValues: ProjectPreviousValuesFieldDetails
       SubprojectSubscriptionPayload: SubprojectSubscriptionPayloadFieldDetails
@@ -90,32 +102,61 @@ export interface NexusPrismaTypes {
   }
   inputTypes: {
     fields: {
-      ProjectWhereUniqueInput: ProjectWhereUniqueInputInputObject
+      UserWhereUniqueInput: UserWhereUniqueInputInputObject
+      TaskWhereInput: TaskWhereInputInputObject
       SubprojectWhereInput: SubprojectWhereInputInputObject
       ProjectWhereInput: ProjectWhereInputInputObject
-      TaskWhereInput: TaskWhereInputInputObject
-      TimelogWhereInput: TimelogWhereInputInputObject
+      UserWhereInput: UserWhereInputInputObject
       TagWhereInput: TagWhereInputInputObject
+      TimelogWhereInput: TimelogWhereInputInputObject
+      ProjectWhereUniqueInput: ProjectWhereUniqueInputInputObject
       SubprojectWhereUniqueInput: SubprojectWhereUniqueInputInputObject
       TaskWhereUniqueInput: TaskWhereUniqueInputInputObject
       TimelogWhereUniqueInput: TimelogWhereUniqueInputInputObject
       TagWhereUniqueInput: TagWhereUniqueInputInputObject
-      ProjectCreateInput: ProjectCreateInputInputObject
+      UserCreateInput: UserCreateInputInputObject
+      TaskCreateManyWithoutUserInput: TaskCreateManyWithoutUserInputInputObject
+      TaskCreateWithoutUserInput: TaskCreateWithoutUserInputInputObject
+      SubprojectCreateOneWithoutTasksInput: SubprojectCreateOneWithoutTasksInputInputObject
+      SubprojectCreateWithoutTasksInput: SubprojectCreateWithoutTasksInputInputObject
+      ProjectCreateOneWithoutSubprojectsInput: ProjectCreateOneWithoutSubprojectsInputInputObject
+      ProjectCreateWithoutSubprojectsInput: ProjectCreateWithoutSubprojectsInputInputObject
+      UserCreateOneWithoutProjectsInput: UserCreateOneWithoutProjectsInputInputObject
+      UserCreateWithoutProjectsInput: UserCreateWithoutProjectsInputInputObject
+      TagCreateManyWithoutUserInput: TagCreateManyWithoutUserInputInputObject
+      TagCreateWithoutUserInput: TagCreateWithoutUserInputInputObject
+      TaskCreateManyWithoutTagsInput: TaskCreateManyWithoutTagsInputInputObject
+      TaskCreateWithoutTagsInput: TaskCreateWithoutTagsInputInputObject
+      TimelogCreateManyWithoutTaskInput: TimelogCreateManyWithoutTaskInputInputObject
+      TimelogCreateWithoutTaskInput: TimelogCreateWithoutTaskInputInputObject
+      UserCreateOneWithoutTasksInput: UserCreateOneWithoutTasksInputInputObject
+      UserCreateWithoutTasksInput: UserCreateWithoutTasksInputInputObject
+      ProjectCreateManyWithoutUserInput: ProjectCreateManyWithoutUserInputInputObject
+      ProjectCreateWithoutUserInput: ProjectCreateWithoutUserInputInputObject
       SubprojectCreateManyWithoutProjectInput: SubprojectCreateManyWithoutProjectInputInputObject
       SubprojectCreateWithoutProjectInput: SubprojectCreateWithoutProjectInputInputObject
       TaskCreateManyWithoutSubprojectInput: TaskCreateManyWithoutSubprojectInputInputObject
       TaskCreateWithoutSubprojectInput: TaskCreateWithoutSubprojectInputInputObject
-      TimelogCreateManyWithoutTaskInput: TimelogCreateManyWithoutTaskInputInputObject
-      TimelogCreateWithoutTaskInput: TimelogCreateWithoutTaskInputInputObject
       TagCreateManyWithoutTasksInput: TagCreateManyWithoutTasksInputInputObject
       TagCreateWithoutTasksInput: TagCreateWithoutTasksInputInputObject
-      ProjectUpdateInput: ProjectUpdateInputInputObject
-      SubprojectUpdateManyWithoutProjectInput: SubprojectUpdateManyWithoutProjectInputInputObject
-      SubprojectUpdateWithWhereUniqueWithoutProjectInput: SubprojectUpdateWithWhereUniqueWithoutProjectInputInputObject
-      SubprojectUpdateWithoutProjectDataInput: SubprojectUpdateWithoutProjectDataInputInputObject
-      TaskUpdateManyWithoutSubprojectInput: TaskUpdateManyWithoutSubprojectInputInputObject
-      TaskUpdateWithWhereUniqueWithoutSubprojectInput: TaskUpdateWithWhereUniqueWithoutSubprojectInputInputObject
-      TaskUpdateWithoutSubprojectDataInput: TaskUpdateWithoutSubprojectDataInputInputObject
+      UserCreateOneWithoutTagsInput: UserCreateOneWithoutTagsInputInputObject
+      UserCreateWithoutTagsInput: UserCreateWithoutTagsInputInputObject
+      UserUpdateInput: UserUpdateInputInputObject
+      TaskUpdateManyWithoutUserInput: TaskUpdateManyWithoutUserInputInputObject
+      TaskUpdateWithWhereUniqueWithoutUserInput: TaskUpdateWithWhereUniqueWithoutUserInputInputObject
+      TaskUpdateWithoutUserDataInput: TaskUpdateWithoutUserDataInputInputObject
+      SubprojectUpdateOneWithoutTasksInput: SubprojectUpdateOneWithoutTasksInputInputObject
+      SubprojectUpdateWithoutTasksDataInput: SubprojectUpdateWithoutTasksDataInputInputObject
+      ProjectUpdateOneRequiredWithoutSubprojectsInput: ProjectUpdateOneRequiredWithoutSubprojectsInputInputObject
+      ProjectUpdateWithoutSubprojectsDataInput: ProjectUpdateWithoutSubprojectsDataInputInputObject
+      UserUpdateOneWithoutProjectsInput: UserUpdateOneWithoutProjectsInputInputObject
+      UserUpdateWithoutProjectsDataInput: UserUpdateWithoutProjectsDataInputInputObject
+      TagUpdateManyWithoutUserInput: TagUpdateManyWithoutUserInputInputObject
+      TagUpdateWithWhereUniqueWithoutUserInput: TagUpdateWithWhereUniqueWithoutUserInputInputObject
+      TagUpdateWithoutUserDataInput: TagUpdateWithoutUserDataInputInputObject
+      TaskUpdateManyWithoutTagsInput: TaskUpdateManyWithoutTagsInputInputObject
+      TaskUpdateWithWhereUniqueWithoutTagsInput: TaskUpdateWithWhereUniqueWithoutTagsInputInputObject
+      TaskUpdateWithoutTagsDataInput: TaskUpdateWithoutTagsDataInputInputObject
       TimelogUpdateManyWithoutTaskInput: TimelogUpdateManyWithoutTaskInputInputObject
       TimelogUpdateWithWhereUniqueWithoutTaskInput: TimelogUpdateWithWhereUniqueWithoutTaskInputInputObject
       TimelogUpdateWithoutTaskDataInput: TimelogUpdateWithoutTaskDataInputInputObject
@@ -123,9 +164,23 @@ export interface NexusPrismaTypes {
       TimelogScalarWhereInput: TimelogScalarWhereInputInputObject
       TimelogUpdateManyWithWhereNestedInput: TimelogUpdateManyWithWhereNestedInputInputObject
       TimelogUpdateManyDataInput: TimelogUpdateManyDataInputInputObject
+      UserUpdateOneWithoutTasksInput: UserUpdateOneWithoutTasksInputInputObject
+      UserUpdateWithoutTasksDataInput: UserUpdateWithoutTasksDataInputInputObject
+      ProjectUpdateManyWithoutUserInput: ProjectUpdateManyWithoutUserInputInputObject
+      ProjectUpdateWithWhereUniqueWithoutUserInput: ProjectUpdateWithWhereUniqueWithoutUserInputInputObject
+      ProjectUpdateWithoutUserDataInput: ProjectUpdateWithoutUserDataInputInputObject
+      SubprojectUpdateManyWithoutProjectInput: SubprojectUpdateManyWithoutProjectInputInputObject
+      SubprojectUpdateWithWhereUniqueWithoutProjectInput: SubprojectUpdateWithWhereUniqueWithoutProjectInputInputObject
+      SubprojectUpdateWithoutProjectDataInput: SubprojectUpdateWithoutProjectDataInputInputObject
+      TaskUpdateManyWithoutSubprojectInput: TaskUpdateManyWithoutSubprojectInputInputObject
+      TaskUpdateWithWhereUniqueWithoutSubprojectInput: TaskUpdateWithWhereUniqueWithoutSubprojectInputInputObject
+      TaskUpdateWithoutSubprojectDataInput: TaskUpdateWithoutSubprojectDataInputInputObject
       TagUpdateManyWithoutTasksInput: TagUpdateManyWithoutTasksInputInputObject
       TagUpdateWithWhereUniqueWithoutTasksInput: TagUpdateWithWhereUniqueWithoutTasksInputInputObject
       TagUpdateWithoutTasksDataInput: TagUpdateWithoutTasksDataInputInputObject
+      UserUpdateOneWithoutTagsInput: UserUpdateOneWithoutTagsInputInputObject
+      UserUpdateWithoutTagsDataInput: UserUpdateWithoutTagsDataInputInputObject
+      UserUpsertWithoutTagsInput: UserUpsertWithoutTagsInputInputObject
       TagUpsertWithWhereUniqueWithoutTasksInput: TagUpsertWithWhereUniqueWithoutTasksInputInputObject
       TagScalarWhereInput: TagScalarWhereInputInputObject
       TagUpdateManyWithWhereNestedInput: TagUpdateManyWithWhereNestedInputInputObject
@@ -138,22 +193,26 @@ export interface NexusPrismaTypes {
       SubprojectScalarWhereInput: SubprojectScalarWhereInputInputObject
       SubprojectUpdateManyWithWhereNestedInput: SubprojectUpdateManyWithWhereNestedInputInputObject
       SubprojectUpdateManyDataInput: SubprojectUpdateManyDataInputInputObject
+      ProjectUpsertWithWhereUniqueWithoutUserInput: ProjectUpsertWithWhereUniqueWithoutUserInputInputObject
+      ProjectScalarWhereInput: ProjectScalarWhereInputInputObject
+      ProjectUpdateManyWithWhereNestedInput: ProjectUpdateManyWithWhereNestedInputInputObject
+      ProjectUpdateManyDataInput: ProjectUpdateManyDataInputInputObject
+      UserUpsertWithoutTasksInput: UserUpsertWithoutTasksInputInputObject
+      TaskUpsertWithWhereUniqueWithoutTagsInput: TaskUpsertWithWhereUniqueWithoutTagsInputInputObject
+      TagUpsertWithWhereUniqueWithoutUserInput: TagUpsertWithWhereUniqueWithoutUserInputInputObject
+      UserUpsertWithoutProjectsInput: UserUpsertWithoutProjectsInputInputObject
+      ProjectUpsertWithoutSubprojectsInput: ProjectUpsertWithoutSubprojectsInputInputObject
+      SubprojectUpsertWithoutTasksInput: SubprojectUpsertWithoutTasksInputInputObject
+      TaskUpsertWithWhereUniqueWithoutUserInput: TaskUpsertWithWhereUniqueWithoutUserInputInputObject
+      UserUpdateManyMutationInput: UserUpdateManyMutationInputInputObject
+      ProjectCreateInput: ProjectCreateInputInputObject
+      ProjectUpdateInput: ProjectUpdateInputInputObject
       ProjectUpdateManyMutationInput: ProjectUpdateManyMutationInputInputObject
       SubprojectCreateInput: SubprojectCreateInputInputObject
-      ProjectCreateOneWithoutSubprojectsInput: ProjectCreateOneWithoutSubprojectsInputInputObject
-      ProjectCreateWithoutSubprojectsInput: ProjectCreateWithoutSubprojectsInputInputObject
       SubprojectUpdateInput: SubprojectUpdateInputInputObject
-      ProjectUpdateOneRequiredWithoutSubprojectsInput: ProjectUpdateOneRequiredWithoutSubprojectsInputInputObject
-      ProjectUpdateWithoutSubprojectsDataInput: ProjectUpdateWithoutSubprojectsDataInputInputObject
-      ProjectUpsertWithoutSubprojectsInput: ProjectUpsertWithoutSubprojectsInputInputObject
       SubprojectUpdateManyMutationInput: SubprojectUpdateManyMutationInputInputObject
       TaskCreateInput: TaskCreateInputInputObject
-      SubprojectCreateOneWithoutTasksInput: SubprojectCreateOneWithoutTasksInputInputObject
-      SubprojectCreateWithoutTasksInput: SubprojectCreateWithoutTasksInputInputObject
       TaskUpdateInput: TaskUpdateInputInputObject
-      SubprojectUpdateOneWithoutTasksInput: SubprojectUpdateOneWithoutTasksInputInputObject
-      SubprojectUpdateWithoutTasksDataInput: SubprojectUpdateWithoutTasksDataInputInputObject
-      SubprojectUpsertWithoutTasksInput: SubprojectUpsertWithoutTasksInputInputObject
       TaskUpdateManyMutationInput: TaskUpdateManyMutationInputInputObject
       TimelogCreateInput: TimelogCreateInputInputObject
       TaskCreateOneWithoutTimelogsInput: TaskCreateOneWithoutTimelogsInputInputObject
@@ -164,14 +223,9 @@ export interface NexusPrismaTypes {
       TaskUpsertWithoutTimelogsInput: TaskUpsertWithoutTimelogsInputInputObject
       TimelogUpdateManyMutationInput: TimelogUpdateManyMutationInputInputObject
       TagCreateInput: TagCreateInputInputObject
-      TaskCreateManyWithoutTagsInput: TaskCreateManyWithoutTagsInputInputObject
-      TaskCreateWithoutTagsInput: TaskCreateWithoutTagsInputInputObject
       TagUpdateInput: TagUpdateInputInputObject
-      TaskUpdateManyWithoutTagsInput: TaskUpdateManyWithoutTagsInputInputObject
-      TaskUpdateWithWhereUniqueWithoutTagsInput: TaskUpdateWithWhereUniqueWithoutTagsInputInputObject
-      TaskUpdateWithoutTagsDataInput: TaskUpdateWithoutTagsDataInputInputObject
-      TaskUpsertWithWhereUniqueWithoutTagsInput: TaskUpsertWithWhereUniqueWithoutTagsInputInputObject
       TagUpdateManyMutationInput: TagUpdateManyMutationInputInputObject
+      UserSubscriptionWhereInput: UserSubscriptionWhereInputInputObject
       ProjectSubscriptionWhereInput: ProjectSubscriptionWhereInputInputObject
       SubprojectSubscriptionWhereInput: SubprojectSubscriptionWhereInputInputObject
       TaskSubscriptionWhereInput: TaskSubscriptionWhereInputInputObject
@@ -180,11 +234,12 @@ export interface NexusPrismaTypes {
     }
   }
   enumTypes: {
-    SubprojectOrderByInput: SubprojectOrderByInputValues,
     TaskOrderByInput: TaskOrderByInputValues,
+    SubprojectOrderByInput: SubprojectOrderByInputValues,
     TimelogOrderByInput: TimelogOrderByInputValues,
     TagOrderByInput: TagOrderByInputValues,
     ProjectOrderByInput: ProjectOrderByInputValues,
+    UserOrderByInput: UserOrderByInputValues,
     MutationType: MutationTypeValues,
   }
 }
@@ -193,6 +248,9 @@ export interface NexusPrismaTypes {
 
 type QueryObject =
   | QueryFields
+  | { name: 'user', args?: QueryUserArgs[] | false, alias?: string  } 
+  | { name: 'users', args?: QueryUsersArgs[] | false, alias?: string  } 
+  | { name: 'usersConnection', args?: QueryUsersConnectionArgs[] | false, alias?: string  } 
   | { name: 'project', args?: QueryProjectArgs[] | false, alias?: string  } 
   | { name: 'projects', args?: QueryProjectsArgs[] | false, alias?: string  } 
   | { name: 'projectsConnection', args?: QueryProjectsConnectionArgs[] | false, alias?: string  } 
@@ -210,6 +268,9 @@ type QueryObject =
   | { name: 'tagsConnection', args?: QueryTagsConnectionArgs[] | false, alias?: string  } 
 
 type QueryFields =
+  | 'user'
+  | 'users'
+  | 'usersConnection'
   | 'project'
   | 'projects'
   | 'projectsConnection'
@@ -227,6 +288,24 @@ type QueryFields =
   | 'tagsConnection'
 
 
+type QueryUserArgs =
+  | 'where'
+type QueryUsersArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryUsersConnectionArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
 type QueryProjectArgs =
   | 'where'
 type QueryProjectsArgs =
@@ -320,6 +399,45 @@ type QueryTagsConnectionArgs =
   
 
 export interface QueryFieldDetails {
+  user: {
+    type: 'User'
+    args: Record<QueryUserArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where: UserWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User | null> | prisma.User | null
+  }
+  users: {
+    type: 'User'
+    args: Record<QueryUsersArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: UserWhereInput | null, orderBy?: prisma.UserOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User[]> | prisma.User[]
+  }
+  usersConnection: {
+    type: 'UserConnection'
+    args: Record<QueryUsersConnectionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: UserWhereInput | null, orderBy?: prisma.UserOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.UserConnection> | prisma.UserConnection
+  }
   project: {
     type: 'Project'
     args: Record<QueryProjectArgs, core.NexusArgDef<string>>
@@ -518,80 +636,43 @@ export interface QueryFieldDetails {
 }
   
 
-// Types for Project
+// Types for User
 
-type ProjectObject =
-  | ProjectFields
+type UserObject =
+  | UserFields
   | { name: 'id', args?: [] | false, alias?: string  } 
-  | { name: 'name', args?: [] | false, alias?: string  } 
-  | { name: 'subprojects', args?: ProjectSubprojectsArgs[] | false, alias?: string  } 
+  | { name: 'email', args?: [] | false, alias?: string  } 
+  | { name: 'password', args?: [] | false, alias?: string  } 
+  | { name: 'tasks', args?: UserTasksArgs[] | false, alias?: string  } 
+  | { name: 'projects', args?: UserProjectsArgs[] | false, alias?: string  } 
+  | { name: 'tags', args?: UserTagsArgs[] | false, alias?: string  } 
 
-type ProjectFields =
+type UserFields =
   | 'id'
-  | 'name'
-  | 'subprojects'
-
-
-type ProjectSubprojectsArgs =
-  | 'where'
-  | 'orderBy'
-  | 'skip'
-  | 'after'
-  | 'before'
-  | 'first'
-  | 'last'
-  
-
-export interface ProjectFieldDetails {
-  id: {
-    type: 'Int'
-    args: {}
-    description: string
-    list: undefined
-    nullable: false
-    resolve: undefined
-  }
-  name: {
-    type: 'String'
-    args: {}
-    description: string
-    list: undefined
-    nullable: false
-    resolve: undefined
-  }
-  subprojects: {
-    type: 'Subproject'
-    args: Record<ProjectSubprojectsArgs, core.NexusArgDef<string>>
-    description: string
-    list: true
-    nullable: false
-    resolve: (
-      root: core.RootValue<"Project">,
-      args: { where?: SubprojectWhereInput | null, orderBy?: prisma.SubprojectOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
-      context: core.GetGen<"context">,
-      info?: GraphQLResolveInfo
-    ) => Promise<prisma.Subproject[]> | prisma.Subproject[]
-  }
-}
-  
-
-// Types for Subproject
-
-type SubprojectObject =
-  | SubprojectFields
-  | { name: 'id', args?: [] | false, alias?: string  } 
-  | { name: 'name', args?: [] | false, alias?: string  } 
-  | { name: 'project', args?: [] | false, alias?: string  } 
-  | { name: 'tasks', args?: SubprojectTasksArgs[] | false, alias?: string  } 
-
-type SubprojectFields =
-  | 'id'
-  | 'name'
-  | 'project'
+  | 'email'
+  | 'password'
   | 'tasks'
+  | 'projects'
+  | 'tags'
 
 
-type SubprojectTasksArgs =
+type UserTasksArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type UserProjectsArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type UserTagsArgs =
   | 'where'
   | 'orderBy'
   | 'skip'
@@ -601,7 +682,7 @@ type SubprojectTasksArgs =
   | 'last'
   
 
-export interface SubprojectFieldDetails {
+export interface UserFieldDetails {
   id: {
     type: 'Int'
     args: {}
@@ -610,7 +691,7 @@ export interface SubprojectFieldDetails {
     nullable: false
     resolve: undefined
   }
-  name: {
+  email: {
     type: 'String'
     args: {}
     description: string
@@ -618,31 +699,52 @@ export interface SubprojectFieldDetails {
     nullable: false
     resolve: undefined
   }
-  project: {
-    type: 'Project'
+  password: {
+    type: 'String'
     args: {}
     description: string
     list: undefined
     nullable: false
-    resolve: (
-      root: core.RootValue<"Subproject">,
-      args: {  }  ,
-      context: core.GetGen<"context">,
-      info?: GraphQLResolveInfo
-    ) => Promise<prisma.Project> | prisma.Project
+    resolve: undefined
   }
   tasks: {
     type: 'Task'
-    args: Record<SubprojectTasksArgs, core.NexusArgDef<string>>
+    args: Record<UserTasksArgs, core.NexusArgDef<string>>
     description: string
     list: true
     nullable: false
     resolve: (
-      root: core.RootValue<"Subproject">,
+      root: core.RootValue<"User">,
       args: { where?: TaskWhereInput | null, orderBy?: prisma.TaskOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.Task[]> | prisma.Task[]
+  }
+  projects: {
+    type: 'Project'
+    args: Record<UserProjectsArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"User">,
+      args: { where?: ProjectWhereInput | null, orderBy?: prisma.ProjectOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Project[]> | prisma.Project[]
+  }
+  tags: {
+    type: 'Tag'
+    args: Record<UserTagsArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"User">,
+      args: { where?: TagWhereInput | null, orderBy?: prisma.TagOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Tag[]> | prisma.Tag[]
   }
 }
   
@@ -665,6 +767,7 @@ type TaskObject =
   | { name: 'subproject', args?: [] | false, alias?: string  } 
   | { name: 'timelogs', args?: TaskTimelogsArgs[] | false, alias?: string  } 
   | { name: 'tags', args?: TaskTagsArgs[] | false, alias?: string  } 
+  | { name: 'user', args?: [] | false, alias?: string  } 
 
 type TaskFields =
   | 'id'
@@ -681,6 +784,7 @@ type TaskFields =
   | 'subproject'
   | 'timelogs'
   | 'tags'
+  | 'user'
 
 
 type TaskTimelogsArgs =
@@ -829,6 +933,163 @@ export interface TaskFieldDetails {
       info?: GraphQLResolveInfo
     ) => Promise<prisma.Tag[]> | prisma.Tag[]
   }
+  user: {
+    type: 'User'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Task">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User | null> | prisma.User | null
+  }
+}
+  
+
+// Types for Subproject
+
+type SubprojectObject =
+  | SubprojectFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'name', args?: [] | false, alias?: string  } 
+  | { name: 'project', args?: [] | false, alias?: string  } 
+  | { name: 'tasks', args?: SubprojectTasksArgs[] | false, alias?: string  } 
+
+type SubprojectFields =
+  | 'id'
+  | 'name'
+  | 'project'
+  | 'tasks'
+
+
+type SubprojectTasksArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+  
+
+export interface SubprojectFieldDetails {
+  id: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  name: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  project: {
+    type: 'Project'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Subproject">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Project> | prisma.Project
+  }
+  tasks: {
+    type: 'Task'
+    args: Record<SubprojectTasksArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Subproject">,
+      args: { where?: TaskWhereInput | null, orderBy?: prisma.TaskOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Task[]> | prisma.Task[]
+  }
+}
+  
+
+// Types for Project
+
+type ProjectObject =
+  | ProjectFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'name', args?: [] | false, alias?: string  } 
+  | { name: 'subprojects', args?: ProjectSubprojectsArgs[] | false, alias?: string  } 
+  | { name: 'user', args?: [] | false, alias?: string  } 
+
+type ProjectFields =
+  | 'id'
+  | 'name'
+  | 'subprojects'
+  | 'user'
+
+
+type ProjectSubprojectsArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+  
+
+export interface ProjectFieldDetails {
+  id: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  name: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  subprojects: {
+    type: 'Subproject'
+    args: Record<ProjectSubprojectsArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Project">,
+      args: { where?: SubprojectWhereInput | null, orderBy?: prisma.SubprojectOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Subproject[]> | prisma.Subproject[]
+  }
+  user: {
+    type: 'User'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Project">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User | null> | prisma.User | null
+  }
 }
   
 
@@ -908,11 +1169,13 @@ type TagObject =
   | TagFields
   | { name: 'id', args?: [] | false, alias?: string  } 
   | { name: 'name', args?: [] | false, alias?: string  } 
+  | { name: 'user', args?: [] | false, alias?: string  } 
   | { name: 'tasks', args?: TagTasksArgs[] | false, alias?: string  } 
 
 type TagFields =
   | 'id'
   | 'name'
+  | 'user'
   | 'tasks'
 
 
@@ -943,6 +1206,19 @@ export interface TagFieldDetails {
     nullable: false
     resolve: undefined
   }
+  user: {
+    type: 'User'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Tag">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User | null> | prisma.User | null
+  }
   tasks: {
     type: 'Task'
     args: Record<TagTasksArgs, core.NexusArgDef<string>>
@@ -955,6 +1231,186 @@ export interface TagFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.Task[]> | prisma.Task[]
+  }
+}
+  
+
+// Types for UserConnection
+
+type UserConnectionObject =
+  | UserConnectionFields
+  | { name: 'pageInfo', args?: [] | false, alias?: string  } 
+  | { name: 'edges', args?: [] | false, alias?: string  } 
+  | { name: 'aggregate', args?: [] | false, alias?: string  } 
+
+type UserConnectionFields =
+  | 'pageInfo'
+  | 'edges'
+  | 'aggregate'
+
+
+
+  
+
+export interface UserConnectionFieldDetails {
+  pageInfo: {
+    type: 'PageInfo'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"UserConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.PageInfo> | prisma.PageInfo
+  }
+  edges: {
+    type: 'UserEdge'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"UserConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.UserEdge[]> | prisma.UserEdge[]
+  }
+  aggregate: {
+    type: 'AggregateUser'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"UserConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AggregateUser> | prisma.AggregateUser
+  }
+}
+  
+
+// Types for PageInfo
+
+type PageInfoObject =
+  | PageInfoFields
+  | { name: 'hasNextPage', args?: [] | false, alias?: string  } 
+  | { name: 'hasPreviousPage', args?: [] | false, alias?: string  } 
+  | { name: 'startCursor', args?: [] | false, alias?: string  } 
+  | { name: 'endCursor', args?: [] | false, alias?: string  } 
+
+type PageInfoFields =
+  | 'hasNextPage'
+  | 'hasPreviousPage'
+  | 'startCursor'
+  | 'endCursor'
+
+
+
+  
+
+export interface PageInfoFieldDetails {
+  hasNextPage: {
+    type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  hasPreviousPage: {
+    type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  startCursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+  endCursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+}
+  
+
+// Types for UserEdge
+
+type UserEdgeObject =
+  | UserEdgeFields
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'cursor', args?: [] | false, alias?: string  } 
+
+type UserEdgeFields =
+  | 'node'
+  | 'cursor'
+
+
+
+  
+
+export interface UserEdgeFieldDetails {
+  node: {
+    type: 'User'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"UserEdge">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User> | prisma.User
+  }
+  cursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AggregateUser
+
+type AggregateUserObject =
+  | AggregateUserFields
+  | { name: 'count', args?: [] | false, alias?: string  } 
+
+type AggregateUserFields =
+  | 'count'
+
+
+
+  
+
+export interface AggregateUserFieldDetails {
+  count: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
   }
 }
   
@@ -1015,61 +1471,6 @@ export interface ProjectConnectionFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.AggregateProject> | prisma.AggregateProject
-  }
-}
-  
-
-// Types for PageInfo
-
-type PageInfoObject =
-  | PageInfoFields
-  | { name: 'hasNextPage', args?: [] | false, alias?: string  } 
-  | { name: 'hasPreviousPage', args?: [] | false, alias?: string  } 
-  | { name: 'startCursor', args?: [] | false, alias?: string  } 
-  | { name: 'endCursor', args?: [] | false, alias?: string  } 
-
-type PageInfoFields =
-  | 'hasNextPage'
-  | 'hasPreviousPage'
-  | 'startCursor'
-  | 'endCursor'
-
-
-
-  
-
-export interface PageInfoFieldDetails {
-  hasNextPage: {
-    type: 'Boolean'
-    args: {}
-    description: string
-    list: undefined
-    nullable: false
-    resolve: undefined
-  }
-  hasPreviousPage: {
-    type: 'Boolean'
-    args: {}
-    description: string
-    list: undefined
-    nullable: false
-    resolve: undefined
-  }
-  startCursor: {
-    type: 'String'
-    args: {}
-    description: string
-    list: undefined
-    nullable: true
-    resolve: undefined
-  }
-  endCursor: {
-    type: 'String'
-    args: {}
-    description: string
-    list: undefined
-    nullable: true
-    resolve: undefined
   }
 }
   
@@ -1643,6 +2044,12 @@ export interface AggregateTagFieldDetails {
 
 type MutationObject =
   | MutationFields
+  | { name: 'createUser', args?: MutationCreateUserArgs[] | false, alias?: string  } 
+  | { name: 'updateUser', args?: MutationUpdateUserArgs[] | false, alias?: string  } 
+  | { name: 'updateManyUsers', args?: MutationUpdateManyUsersArgs[] | false, alias?: string  } 
+  | { name: 'upsertUser', args?: MutationUpsertUserArgs[] | false, alias?: string  } 
+  | { name: 'deleteUser', args?: MutationDeleteUserArgs[] | false, alias?: string  } 
+  | { name: 'deleteManyUsers', args?: MutationDeleteManyUsersArgs[] | false, alias?: string  } 
   | { name: 'createProject', args?: MutationCreateProjectArgs[] | false, alias?: string  } 
   | { name: 'updateProject', args?: MutationUpdateProjectArgs[] | false, alias?: string  } 
   | { name: 'updateManyProjects', args?: MutationUpdateManyProjectsArgs[] | false, alias?: string  } 
@@ -1675,6 +2082,12 @@ type MutationObject =
   | { name: 'deleteManyTags', args?: MutationDeleteManyTagsArgs[] | false, alias?: string  } 
 
 type MutationFields =
+  | 'createUser'
+  | 'updateUser'
+  | 'updateManyUsers'
+  | 'upsertUser'
+  | 'deleteUser'
+  | 'deleteManyUsers'
   | 'createProject'
   | 'updateProject'
   | 'updateManyProjects'
@@ -1707,6 +2120,22 @@ type MutationFields =
   | 'deleteManyTags'
 
 
+type MutationCreateUserArgs =
+  | 'data'
+type MutationUpdateUserArgs =
+  | 'data'
+  | 'where'
+type MutationUpdateManyUsersArgs =
+  | 'data'
+  | 'where'
+type MutationUpsertUserArgs =
+  | 'where'
+  | 'create'
+  | 'update'
+type MutationDeleteUserArgs =
+  | 'where'
+type MutationDeleteManyUsersArgs =
+  | 'where'
 type MutationCreateProjectArgs =
   | 'data'
 type MutationUpdateProjectArgs =
@@ -1790,6 +2219,84 @@ type MutationDeleteManyTagsArgs =
   
 
 export interface MutationFieldDetails {
+  createUser: {
+    type: 'User'
+    args: Record<MutationCreateUserArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: UserCreateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User> | prisma.User
+  }
+  updateUser: {
+    type: 'User'
+    args: Record<MutationUpdateUserArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: UserUpdateInput, where: UserWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User | null> | prisma.User | null
+  }
+  updateManyUsers: {
+    type: 'BatchPayload'
+    args: Record<MutationUpdateManyUsersArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: UserUpdateManyMutationInput, where?: UserWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  upsertUser: {
+    type: 'User'
+    args: Record<MutationUpsertUserArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: UserWhereUniqueInput, create: UserCreateInput, update: UserUpdateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User> | prisma.User
+  }
+  deleteUser: {
+    type: 'User'
+    args: Record<MutationDeleteUserArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: UserWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User | null> | prisma.User | null
+  }
+  deleteManyUsers: {
+    type: 'BatchPayload'
+    args: Record<MutationDeleteManyUsersArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where?: UserWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
   createProject: {
     type: 'Project'
     args: Record<MutationCreateProjectArgs, core.NexusArgDef<string>>
@@ -2212,6 +2719,7 @@ export interface BatchPayloadFieldDetails {
 
 type SubscriptionObject =
   | SubscriptionFields
+  | { name: 'user', args?: SubscriptionUserArgs[] | false, alias?: string  } 
   | { name: 'project', args?: SubscriptionProjectArgs[] | false, alias?: string  } 
   | { name: 'subproject', args?: SubscriptionSubprojectArgs[] | false, alias?: string  } 
   | { name: 'task', args?: SubscriptionTaskArgs[] | false, alias?: string  } 
@@ -2219,6 +2727,7 @@ type SubscriptionObject =
   | { name: 'tag', args?: SubscriptionTagArgs[] | false, alias?: string  } 
 
 type SubscriptionFields =
+  | 'user'
   | 'project'
   | 'subproject'
   | 'task'
@@ -2226,6 +2735,8 @@ type SubscriptionFields =
   | 'tag'
 
 
+type SubscriptionUserArgs =
+  | 'where'
 type SubscriptionProjectArgs =
   | 'where'
 type SubscriptionSubprojectArgs =
@@ -2239,6 +2750,19 @@ type SubscriptionTagArgs =
   
 
 export interface SubscriptionFieldDetails {
+  user: {
+    type: 'UserSubscriptionPayload'
+    args: Record<SubscriptionUserArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Subscription">,
+      args: { where?: UserSubscriptionWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.UserSubscriptionPayload | null> | prisma.UserSubscriptionPayload | null
+  }
   project: {
     type: 'ProjectSubscriptionPayload'
     args: Record<SubscriptionProjectArgs, core.NexusArgDef<string>>
@@ -2303,6 +2827,121 @@ export interface SubscriptionFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.TagSubscriptionPayload | null> | prisma.TagSubscriptionPayload | null
+  }
+}
+  
+
+// Types for UserSubscriptionPayload
+
+type UserSubscriptionPayloadObject =
+  | UserSubscriptionPayloadFields
+  | { name: 'mutation', args?: [] | false, alias?: string  } 
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'updatedFields', args?: [] | false, alias?: string  } 
+  | { name: 'previousValues', args?: [] | false, alias?: string  } 
+
+type UserSubscriptionPayloadFields =
+  | 'mutation'
+  | 'node'
+  | 'updatedFields'
+  | 'previousValues'
+
+
+
+  
+
+export interface UserSubscriptionPayloadFieldDetails {
+  mutation: {
+    type: 'MutationType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"UserSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MutationType> | prisma.MutationType
+  }
+  node: {
+    type: 'User'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"UserSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User | null> | prisma.User | null
+  }
+  updatedFields: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
+  }
+  previousValues: {
+    type: 'UserPreviousValues'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"UserSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.UserPreviousValues | null> | prisma.UserPreviousValues | null
+  }
+}
+  
+
+// Types for UserPreviousValues
+
+type UserPreviousValuesObject =
+  | UserPreviousValuesFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'email', args?: [] | false, alias?: string  } 
+  | { name: 'password', args?: [] | false, alias?: string  } 
+
+type UserPreviousValuesFields =
+  | 'id'
+  | 'email'
+  | 'password'
+
+
+
+  
+
+export interface UserPreviousValuesFieldDetails {
+  id: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  email: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  password: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
   }
 }
   
@@ -2943,138 +3582,14 @@ export interface TagPreviousValuesFieldDetails {
   
 
 
-export interface ProjectWhereUniqueInput {
+export interface UserWhereUniqueInput {
   id?: number | null
-  name?: string | null
+  email?: string | null
 }
-export type ProjectWhereUniqueInputInputObject =
-  | Extract<keyof ProjectWhereUniqueInput, string>
+export type UserWhereUniqueInputInputObject =
+  | Extract<keyof UserWhereUniqueInput, string>
   | { name: 'id', alias?: string  } 
-  | { name: 'name', alias?: string  } 
-  
-export interface SubprojectWhereInput {
-  id?: number | null
-  id_not?: number | null
-  id_in?: number[]
-  id_not_in?: number[]
-  id_lt?: number | null
-  id_lte?: number | null
-  id_gt?: number | null
-  id_gte?: number | null
-  name?: string | null
-  name_not?: string | null
-  name_in?: string[]
-  name_not_in?: string[]
-  name_lt?: string | null
-  name_lte?: string | null
-  name_gt?: string | null
-  name_gte?: string | null
-  name_contains?: string | null
-  name_not_contains?: string | null
-  name_starts_with?: string | null
-  name_not_starts_with?: string | null
-  name_ends_with?: string | null
-  name_not_ends_with?: string | null
-  project?: ProjectWhereInput | null
-  tasks_every?: TaskWhereInput | null
-  tasks_some?: TaskWhereInput | null
-  tasks_none?: TaskWhereInput | null
-  AND?: SubprojectWhereInput[]
-  OR?: SubprojectWhereInput[]
-  NOT?: SubprojectWhereInput[]
-}
-export type SubprojectWhereInputInputObject =
-  | Extract<keyof SubprojectWhereInput, string>
-  | { name: 'id', alias?: string  } 
-  | { name: 'id_not', alias?: string  } 
-  | { name: 'id_in', alias?: string  } 
-  | { name: 'id_not_in', alias?: string  } 
-  | { name: 'id_lt', alias?: string  } 
-  | { name: 'id_lte', alias?: string  } 
-  | { name: 'id_gt', alias?: string  } 
-  | { name: 'id_gte', alias?: string  } 
-  | { name: 'name', alias?: string  } 
-  | { name: 'name_not', alias?: string  } 
-  | { name: 'name_in', alias?: string  } 
-  | { name: 'name_not_in', alias?: string  } 
-  | { name: 'name_lt', alias?: string  } 
-  | { name: 'name_lte', alias?: string  } 
-  | { name: 'name_gt', alias?: string  } 
-  | { name: 'name_gte', alias?: string  } 
-  | { name: 'name_contains', alias?: string  } 
-  | { name: 'name_not_contains', alias?: string  } 
-  | { name: 'name_starts_with', alias?: string  } 
-  | { name: 'name_not_starts_with', alias?: string  } 
-  | { name: 'name_ends_with', alias?: string  } 
-  | { name: 'name_not_ends_with', alias?: string  } 
-  | { name: 'project', alias?: string  } 
-  | { name: 'tasks_every', alias?: string  } 
-  | { name: 'tasks_some', alias?: string  } 
-  | { name: 'tasks_none', alias?: string  } 
-  | { name: 'AND', alias?: string  } 
-  | { name: 'OR', alias?: string  } 
-  | { name: 'NOT', alias?: string  } 
-  
-export interface ProjectWhereInput {
-  id?: number | null
-  id_not?: number | null
-  id_in?: number[]
-  id_not_in?: number[]
-  id_lt?: number | null
-  id_lte?: number | null
-  id_gt?: number | null
-  id_gte?: number | null
-  name?: string | null
-  name_not?: string | null
-  name_in?: string[]
-  name_not_in?: string[]
-  name_lt?: string | null
-  name_lte?: string | null
-  name_gt?: string | null
-  name_gte?: string | null
-  name_contains?: string | null
-  name_not_contains?: string | null
-  name_starts_with?: string | null
-  name_not_starts_with?: string | null
-  name_ends_with?: string | null
-  name_not_ends_with?: string | null
-  subprojects_every?: SubprojectWhereInput | null
-  subprojects_some?: SubprojectWhereInput | null
-  subprojects_none?: SubprojectWhereInput | null
-  AND?: ProjectWhereInput[]
-  OR?: ProjectWhereInput[]
-  NOT?: ProjectWhereInput[]
-}
-export type ProjectWhereInputInputObject =
-  | Extract<keyof ProjectWhereInput, string>
-  | { name: 'id', alias?: string  } 
-  | { name: 'id_not', alias?: string  } 
-  | { name: 'id_in', alias?: string  } 
-  | { name: 'id_not_in', alias?: string  } 
-  | { name: 'id_lt', alias?: string  } 
-  | { name: 'id_lte', alias?: string  } 
-  | { name: 'id_gt', alias?: string  } 
-  | { name: 'id_gte', alias?: string  } 
-  | { name: 'name', alias?: string  } 
-  | { name: 'name_not', alias?: string  } 
-  | { name: 'name_in', alias?: string  } 
-  | { name: 'name_not_in', alias?: string  } 
-  | { name: 'name_lt', alias?: string  } 
-  | { name: 'name_lte', alias?: string  } 
-  | { name: 'name_gt', alias?: string  } 
-  | { name: 'name_gte', alias?: string  } 
-  | { name: 'name_contains', alias?: string  } 
-  | { name: 'name_not_contains', alias?: string  } 
-  | { name: 'name_starts_with', alias?: string  } 
-  | { name: 'name_not_starts_with', alias?: string  } 
-  | { name: 'name_ends_with', alias?: string  } 
-  | { name: 'name_not_ends_with', alias?: string  } 
-  | { name: 'subprojects_every', alias?: string  } 
-  | { name: 'subprojects_some', alias?: string  } 
-  | { name: 'subprojects_none', alias?: string  } 
-  | { name: 'AND', alias?: string  } 
-  | { name: 'OR', alias?: string  } 
-  | { name: 'NOT', alias?: string  } 
+  | { name: 'email', alias?: string  } 
   
 export interface TaskWhereInput {
   id?: number | null
@@ -3214,6 +3729,7 @@ export interface TaskWhereInput {
   tags_every?: TagWhereInput | null
   tags_some?: TagWhereInput | null
   tags_none?: TagWhereInput | null
+  user?: UserWhereInput | null
   AND?: TaskWhereInput[]
   OR?: TaskWhereInput[]
   NOT?: TaskWhereInput[]
@@ -3357,6 +3873,297 @@ export type TaskWhereInputInputObject =
   | { name: 'tags_every', alias?: string  } 
   | { name: 'tags_some', alias?: string  } 
   | { name: 'tags_none', alias?: string  } 
+  | { name: 'user', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
+export interface SubprojectWhereInput {
+  id?: number | null
+  id_not?: number | null
+  id_in?: number[]
+  id_not_in?: number[]
+  id_lt?: number | null
+  id_lte?: number | null
+  id_gt?: number | null
+  id_gte?: number | null
+  name?: string | null
+  name_not?: string | null
+  name_in?: string[]
+  name_not_in?: string[]
+  name_lt?: string | null
+  name_lte?: string | null
+  name_gt?: string | null
+  name_gte?: string | null
+  name_contains?: string | null
+  name_not_contains?: string | null
+  name_starts_with?: string | null
+  name_not_starts_with?: string | null
+  name_ends_with?: string | null
+  name_not_ends_with?: string | null
+  project?: ProjectWhereInput | null
+  tasks_every?: TaskWhereInput | null
+  tasks_some?: TaskWhereInput | null
+  tasks_none?: TaskWhereInput | null
+  AND?: SubprojectWhereInput[]
+  OR?: SubprojectWhereInput[]
+  NOT?: SubprojectWhereInput[]
+}
+export type SubprojectWhereInputInputObject =
+  | Extract<keyof SubprojectWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  | { name: 'name_not', alias?: string  } 
+  | { name: 'name_in', alias?: string  } 
+  | { name: 'name_not_in', alias?: string  } 
+  | { name: 'name_lt', alias?: string  } 
+  | { name: 'name_lte', alias?: string  } 
+  | { name: 'name_gt', alias?: string  } 
+  | { name: 'name_gte', alias?: string  } 
+  | { name: 'name_contains', alias?: string  } 
+  | { name: 'name_not_contains', alias?: string  } 
+  | { name: 'name_starts_with', alias?: string  } 
+  | { name: 'name_not_starts_with', alias?: string  } 
+  | { name: 'name_ends_with', alias?: string  } 
+  | { name: 'name_not_ends_with', alias?: string  } 
+  | { name: 'project', alias?: string  } 
+  | { name: 'tasks_every', alias?: string  } 
+  | { name: 'tasks_some', alias?: string  } 
+  | { name: 'tasks_none', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
+export interface ProjectWhereInput {
+  id?: number | null
+  id_not?: number | null
+  id_in?: number[]
+  id_not_in?: number[]
+  id_lt?: number | null
+  id_lte?: number | null
+  id_gt?: number | null
+  id_gte?: number | null
+  name?: string | null
+  name_not?: string | null
+  name_in?: string[]
+  name_not_in?: string[]
+  name_lt?: string | null
+  name_lte?: string | null
+  name_gt?: string | null
+  name_gte?: string | null
+  name_contains?: string | null
+  name_not_contains?: string | null
+  name_starts_with?: string | null
+  name_not_starts_with?: string | null
+  name_ends_with?: string | null
+  name_not_ends_with?: string | null
+  subprojects_every?: SubprojectWhereInput | null
+  subprojects_some?: SubprojectWhereInput | null
+  subprojects_none?: SubprojectWhereInput | null
+  user?: UserWhereInput | null
+  AND?: ProjectWhereInput[]
+  OR?: ProjectWhereInput[]
+  NOT?: ProjectWhereInput[]
+}
+export type ProjectWhereInputInputObject =
+  | Extract<keyof ProjectWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  | { name: 'name_not', alias?: string  } 
+  | { name: 'name_in', alias?: string  } 
+  | { name: 'name_not_in', alias?: string  } 
+  | { name: 'name_lt', alias?: string  } 
+  | { name: 'name_lte', alias?: string  } 
+  | { name: 'name_gt', alias?: string  } 
+  | { name: 'name_gte', alias?: string  } 
+  | { name: 'name_contains', alias?: string  } 
+  | { name: 'name_not_contains', alias?: string  } 
+  | { name: 'name_starts_with', alias?: string  } 
+  | { name: 'name_not_starts_with', alias?: string  } 
+  | { name: 'name_ends_with', alias?: string  } 
+  | { name: 'name_not_ends_with', alias?: string  } 
+  | { name: 'subprojects_every', alias?: string  } 
+  | { name: 'subprojects_some', alias?: string  } 
+  | { name: 'subprojects_none', alias?: string  } 
+  | { name: 'user', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
+export interface UserWhereInput {
+  id?: number | null
+  id_not?: number | null
+  id_in?: number[]
+  id_not_in?: number[]
+  id_lt?: number | null
+  id_lte?: number | null
+  id_gt?: number | null
+  id_gte?: number | null
+  email?: string | null
+  email_not?: string | null
+  email_in?: string[]
+  email_not_in?: string[]
+  email_lt?: string | null
+  email_lte?: string | null
+  email_gt?: string | null
+  email_gte?: string | null
+  email_contains?: string | null
+  email_not_contains?: string | null
+  email_starts_with?: string | null
+  email_not_starts_with?: string | null
+  email_ends_with?: string | null
+  email_not_ends_with?: string | null
+  password?: string | null
+  password_not?: string | null
+  password_in?: string[]
+  password_not_in?: string[]
+  password_lt?: string | null
+  password_lte?: string | null
+  password_gt?: string | null
+  password_gte?: string | null
+  password_contains?: string | null
+  password_not_contains?: string | null
+  password_starts_with?: string | null
+  password_not_starts_with?: string | null
+  password_ends_with?: string | null
+  password_not_ends_with?: string | null
+  tasks_every?: TaskWhereInput | null
+  tasks_some?: TaskWhereInput | null
+  tasks_none?: TaskWhereInput | null
+  projects_every?: ProjectWhereInput | null
+  projects_some?: ProjectWhereInput | null
+  projects_none?: ProjectWhereInput | null
+  tags_every?: TagWhereInput | null
+  tags_some?: TagWhereInput | null
+  tags_none?: TagWhereInput | null
+  AND?: UserWhereInput[]
+  OR?: UserWhereInput[]
+  NOT?: UserWhereInput[]
+}
+export type UserWhereInputInputObject =
+  | Extract<keyof UserWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'email_not', alias?: string  } 
+  | { name: 'email_in', alias?: string  } 
+  | { name: 'email_not_in', alias?: string  } 
+  | { name: 'email_lt', alias?: string  } 
+  | { name: 'email_lte', alias?: string  } 
+  | { name: 'email_gt', alias?: string  } 
+  | { name: 'email_gte', alias?: string  } 
+  | { name: 'email_contains', alias?: string  } 
+  | { name: 'email_not_contains', alias?: string  } 
+  | { name: 'email_starts_with', alias?: string  } 
+  | { name: 'email_not_starts_with', alias?: string  } 
+  | { name: 'email_ends_with', alias?: string  } 
+  | { name: 'email_not_ends_with', alias?: string  } 
+  | { name: 'password', alias?: string  } 
+  | { name: 'password_not', alias?: string  } 
+  | { name: 'password_in', alias?: string  } 
+  | { name: 'password_not_in', alias?: string  } 
+  | { name: 'password_lt', alias?: string  } 
+  | { name: 'password_lte', alias?: string  } 
+  | { name: 'password_gt', alias?: string  } 
+  | { name: 'password_gte', alias?: string  } 
+  | { name: 'password_contains', alias?: string  } 
+  | { name: 'password_not_contains', alias?: string  } 
+  | { name: 'password_starts_with', alias?: string  } 
+  | { name: 'password_not_starts_with', alias?: string  } 
+  | { name: 'password_ends_with', alias?: string  } 
+  | { name: 'password_not_ends_with', alias?: string  } 
+  | { name: 'tasks_every', alias?: string  } 
+  | { name: 'tasks_some', alias?: string  } 
+  | { name: 'tasks_none', alias?: string  } 
+  | { name: 'projects_every', alias?: string  } 
+  | { name: 'projects_some', alias?: string  } 
+  | { name: 'projects_none', alias?: string  } 
+  | { name: 'tags_every', alias?: string  } 
+  | { name: 'tags_some', alias?: string  } 
+  | { name: 'tags_none', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
+export interface TagWhereInput {
+  id?: number | null
+  id_not?: number | null
+  id_in?: number[]
+  id_not_in?: number[]
+  id_lt?: number | null
+  id_lte?: number | null
+  id_gt?: number | null
+  id_gte?: number | null
+  name?: string | null
+  name_not?: string | null
+  name_in?: string[]
+  name_not_in?: string[]
+  name_lt?: string | null
+  name_lte?: string | null
+  name_gt?: string | null
+  name_gte?: string | null
+  name_contains?: string | null
+  name_not_contains?: string | null
+  name_starts_with?: string | null
+  name_not_starts_with?: string | null
+  name_ends_with?: string | null
+  name_not_ends_with?: string | null
+  user?: UserWhereInput | null
+  tasks_every?: TaskWhereInput | null
+  tasks_some?: TaskWhereInput | null
+  tasks_none?: TaskWhereInput | null
+  AND?: TagWhereInput[]
+  OR?: TagWhereInput[]
+  NOT?: TagWhereInput[]
+}
+export type TagWhereInputInputObject =
+  | Extract<keyof TagWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  | { name: 'name_not', alias?: string  } 
+  | { name: 'name_in', alias?: string  } 
+  | { name: 'name_not_in', alias?: string  } 
+  | { name: 'name_lt', alias?: string  } 
+  | { name: 'name_lte', alias?: string  } 
+  | { name: 'name_gt', alias?: string  } 
+  | { name: 'name_gte', alias?: string  } 
+  | { name: 'name_contains', alias?: string  } 
+  | { name: 'name_not_contains', alias?: string  } 
+  | { name: 'name_starts_with', alias?: string  } 
+  | { name: 'name_not_starts_with', alias?: string  } 
+  | { name: 'name_ends_with', alias?: string  } 
+  | { name: 'name_not_ends_with', alias?: string  } 
+  | { name: 'user', alias?: string  } 
+  | { name: 'tasks_every', alias?: string  } 
+  | { name: 'tasks_some', alias?: string  } 
+  | { name: 'tasks_none', alias?: string  } 
   | { name: 'AND', alias?: string  } 
   | { name: 'OR', alias?: string  } 
   | { name: 'NOT', alias?: string  } 
@@ -3450,66 +4257,14 @@ export type TimelogWhereInputInputObject =
   | { name: 'OR', alias?: string  } 
   | { name: 'NOT', alias?: string  } 
   
-export interface TagWhereInput {
+export interface ProjectWhereUniqueInput {
   id?: number | null
-  id_not?: number | null
-  id_in?: number[]
-  id_not_in?: number[]
-  id_lt?: number | null
-  id_lte?: number | null
-  id_gt?: number | null
-  id_gte?: number | null
   name?: string | null
-  name_not?: string | null
-  name_in?: string[]
-  name_not_in?: string[]
-  name_lt?: string | null
-  name_lte?: string | null
-  name_gt?: string | null
-  name_gte?: string | null
-  name_contains?: string | null
-  name_not_contains?: string | null
-  name_starts_with?: string | null
-  name_not_starts_with?: string | null
-  name_ends_with?: string | null
-  name_not_ends_with?: string | null
-  tasks_every?: TaskWhereInput | null
-  tasks_some?: TaskWhereInput | null
-  tasks_none?: TaskWhereInput | null
-  AND?: TagWhereInput[]
-  OR?: TagWhereInput[]
-  NOT?: TagWhereInput[]
 }
-export type TagWhereInputInputObject =
-  | Extract<keyof TagWhereInput, string>
+export type ProjectWhereUniqueInputInputObject =
+  | Extract<keyof ProjectWhereUniqueInput, string>
   | { name: 'id', alias?: string  } 
-  | { name: 'id_not', alias?: string  } 
-  | { name: 'id_in', alias?: string  } 
-  | { name: 'id_not_in', alias?: string  } 
-  | { name: 'id_lt', alias?: string  } 
-  | { name: 'id_lte', alias?: string  } 
-  | { name: 'id_gt', alias?: string  } 
-  | { name: 'id_gte', alias?: string  } 
   | { name: 'name', alias?: string  } 
-  | { name: 'name_not', alias?: string  } 
-  | { name: 'name_in', alias?: string  } 
-  | { name: 'name_not_in', alias?: string  } 
-  | { name: 'name_lt', alias?: string  } 
-  | { name: 'name_lte', alias?: string  } 
-  | { name: 'name_gt', alias?: string  } 
-  | { name: 'name_gte', alias?: string  } 
-  | { name: 'name_contains', alias?: string  } 
-  | { name: 'name_not_contains', alias?: string  } 
-  | { name: 'name_starts_with', alias?: string  } 
-  | { name: 'name_not_starts_with', alias?: string  } 
-  | { name: 'name_ends_with', alias?: string  } 
-  | { name: 'name_not_ends_with', alias?: string  } 
-  | { name: 'tasks_every', alias?: string  } 
-  | { name: 'tasks_some', alias?: string  } 
-  | { name: 'tasks_none', alias?: string  } 
-  | { name: 'AND', alias?: string  } 
-  | { name: 'OR', alias?: string  } 
-  | { name: 'NOT', alias?: string  } 
   
 export interface SubprojectWhereUniqueInput {
   id?: number | null
@@ -3543,13 +4298,253 @@ export type TagWhereUniqueInputInputObject =
   | { name: 'id', alias?: string  } 
   | { name: 'name', alias?: string  } 
   
-export interface ProjectCreateInput {
+export interface UserCreateInput {
+  id?: number | null
+  email?: string
+  password?: string
+  tasks?: TaskCreateManyWithoutUserInput | null
+  projects?: ProjectCreateManyWithoutUserInput | null
+  tags?: TagCreateManyWithoutUserInput | null
+}
+export type UserCreateInputInputObject =
+  | Extract<keyof UserCreateInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
+  | { name: 'tasks', alias?: string  } 
+  | { name: 'projects', alias?: string  } 
+  | { name: 'tags', alias?: string  } 
+  
+export interface TaskCreateManyWithoutUserInput {
+  create?: TaskCreateWithoutUserInput[]
+  connect?: TaskWhereUniqueInput[]
+}
+export type TaskCreateManyWithoutUserInputInputObject =
+  | Extract<keyof TaskCreateManyWithoutUserInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface TaskCreateWithoutUserInput {
+  id?: number | null
+  name?: string
+  priority?: string | null
+  comments?: string | null
+  repeat?: number | null
+  estimateTime?: string | null
+  plannedTime?: string | null
+  plannedDate?: string | null
+  finishDate?: string | null
+  deadlineDate?: string | null
+  completed?: boolean | null
+  subproject?: SubprojectCreateOneWithoutTasksInput | null
+  timelogs?: TimelogCreateManyWithoutTaskInput | null
+  tags?: TagCreateManyWithoutTasksInput | null
+}
+export type TaskCreateWithoutUserInputInputObject =
+  | Extract<keyof TaskCreateWithoutUserInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  | { name: 'priority', alias?: string  } 
+  | { name: 'comments', alias?: string  } 
+  | { name: 'repeat', alias?: string  } 
+  | { name: 'estimateTime', alias?: string  } 
+  | { name: 'plannedTime', alias?: string  } 
+  | { name: 'plannedDate', alias?: string  } 
+  | { name: 'finishDate', alias?: string  } 
+  | { name: 'deadlineDate', alias?: string  } 
+  | { name: 'completed', alias?: string  } 
+  | { name: 'subproject', alias?: string  } 
+  | { name: 'timelogs', alias?: string  } 
+  | { name: 'tags', alias?: string  } 
+  
+export interface SubprojectCreateOneWithoutTasksInput {
+  create?: SubprojectCreateWithoutTasksInput | null
+  connect?: SubprojectWhereUniqueInput | null
+}
+export type SubprojectCreateOneWithoutTasksInputInputObject =
+  | Extract<keyof SubprojectCreateOneWithoutTasksInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface SubprojectCreateWithoutTasksInput {
+  id?: number | null
+  name?: string
+  project?: ProjectCreateOneWithoutSubprojectsInput
+}
+export type SubprojectCreateWithoutTasksInputInputObject =
+  | Extract<keyof SubprojectCreateWithoutTasksInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  | { name: 'project', alias?: string  } 
+  
+export interface ProjectCreateOneWithoutSubprojectsInput {
+  create?: ProjectCreateWithoutSubprojectsInput | null
+  connect?: ProjectWhereUniqueInput | null
+}
+export type ProjectCreateOneWithoutSubprojectsInputInputObject =
+  | Extract<keyof ProjectCreateOneWithoutSubprojectsInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface ProjectCreateWithoutSubprojectsInput {
+  id?: number | null
+  name?: string
+  user?: UserCreateOneWithoutProjectsInput | null
+}
+export type ProjectCreateWithoutSubprojectsInputInputObject =
+  | Extract<keyof ProjectCreateWithoutSubprojectsInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  | { name: 'user', alias?: string  } 
+  
+export interface UserCreateOneWithoutProjectsInput {
+  create?: UserCreateWithoutProjectsInput | null
+  connect?: UserWhereUniqueInput | null
+}
+export type UserCreateOneWithoutProjectsInputInputObject =
+  | Extract<keyof UserCreateOneWithoutProjectsInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface UserCreateWithoutProjectsInput {
+  id?: number | null
+  email?: string
+  password?: string
+  tasks?: TaskCreateManyWithoutUserInput | null
+  tags?: TagCreateManyWithoutUserInput | null
+}
+export type UserCreateWithoutProjectsInputInputObject =
+  | Extract<keyof UserCreateWithoutProjectsInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
+  | { name: 'tasks', alias?: string  } 
+  | { name: 'tags', alias?: string  } 
+  
+export interface TagCreateManyWithoutUserInput {
+  create?: TagCreateWithoutUserInput[]
+  connect?: TagWhereUniqueInput[]
+}
+export type TagCreateManyWithoutUserInputInputObject =
+  | Extract<keyof TagCreateManyWithoutUserInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface TagCreateWithoutUserInput {
+  id?: number | null
+  name?: string
+  tasks?: TaskCreateManyWithoutTagsInput | null
+}
+export type TagCreateWithoutUserInputInputObject =
+  | Extract<keyof TagCreateWithoutUserInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  | { name: 'tasks', alias?: string  } 
+  
+export interface TaskCreateManyWithoutTagsInput {
+  create?: TaskCreateWithoutTagsInput[]
+  connect?: TaskWhereUniqueInput[]
+}
+export type TaskCreateManyWithoutTagsInputInputObject =
+  | Extract<keyof TaskCreateManyWithoutTagsInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface TaskCreateWithoutTagsInput {
+  id?: number | null
+  name?: string
+  priority?: string | null
+  comments?: string | null
+  repeat?: number | null
+  estimateTime?: string | null
+  plannedTime?: string | null
+  plannedDate?: string | null
+  finishDate?: string | null
+  deadlineDate?: string | null
+  completed?: boolean | null
+  subproject?: SubprojectCreateOneWithoutTasksInput | null
+  timelogs?: TimelogCreateManyWithoutTaskInput | null
+  user?: UserCreateOneWithoutTasksInput | null
+}
+export type TaskCreateWithoutTagsInputInputObject =
+  | Extract<keyof TaskCreateWithoutTagsInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  | { name: 'priority', alias?: string  } 
+  | { name: 'comments', alias?: string  } 
+  | { name: 'repeat', alias?: string  } 
+  | { name: 'estimateTime', alias?: string  } 
+  | { name: 'plannedTime', alias?: string  } 
+  | { name: 'plannedDate', alias?: string  } 
+  | { name: 'finishDate', alias?: string  } 
+  | { name: 'deadlineDate', alias?: string  } 
+  | { name: 'completed', alias?: string  } 
+  | { name: 'subproject', alias?: string  } 
+  | { name: 'timelogs', alias?: string  } 
+  | { name: 'user', alias?: string  } 
+  
+export interface TimelogCreateManyWithoutTaskInput {
+  create?: TimelogCreateWithoutTaskInput[]
+  connect?: TimelogWhereUniqueInput[]
+}
+export type TimelogCreateManyWithoutTaskInputInputObject =
+  | Extract<keyof TimelogCreateManyWithoutTaskInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface TimelogCreateWithoutTaskInput {
+  id?: number | null
+  startDate?: string | null
+  finishDate?: string | null
+  description?: string | null
+}
+export type TimelogCreateWithoutTaskInputInputObject =
+  | Extract<keyof TimelogCreateWithoutTaskInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'startDate', alias?: string  } 
+  | { name: 'finishDate', alias?: string  } 
+  | { name: 'description', alias?: string  } 
+  
+export interface UserCreateOneWithoutTasksInput {
+  create?: UserCreateWithoutTasksInput | null
+  connect?: UserWhereUniqueInput | null
+}
+export type UserCreateOneWithoutTasksInputInputObject =
+  | Extract<keyof UserCreateOneWithoutTasksInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface UserCreateWithoutTasksInput {
+  id?: number | null
+  email?: string
+  password?: string
+  projects?: ProjectCreateManyWithoutUserInput | null
+  tags?: TagCreateManyWithoutUserInput | null
+}
+export type UserCreateWithoutTasksInputInputObject =
+  | Extract<keyof UserCreateWithoutTasksInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
+  | { name: 'projects', alias?: string  } 
+  | { name: 'tags', alias?: string  } 
+  
+export interface ProjectCreateManyWithoutUserInput {
+  create?: ProjectCreateWithoutUserInput[]
+  connect?: ProjectWhereUniqueInput[]
+}
+export type ProjectCreateManyWithoutUserInputInputObject =
+  | Extract<keyof ProjectCreateManyWithoutUserInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface ProjectCreateWithoutUserInput {
   id?: number | null
   name?: string
   subprojects?: SubprojectCreateManyWithoutProjectInput | null
 }
-export type ProjectCreateInputInputObject =
-  | Extract<keyof ProjectCreateInput, string>
+export type ProjectCreateWithoutUserInputInputObject =
+  | Extract<keyof ProjectCreateWithoutUserInput, string>
   | { name: 'id', alias?: string  } 
   | { name: 'name', alias?: string  } 
   | { name: 'subprojects', alias?: string  } 
@@ -3597,6 +4592,7 @@ export interface TaskCreateWithoutSubprojectInput {
   completed?: boolean | null
   timelogs?: TimelogCreateManyWithoutTaskInput | null
   tags?: TagCreateManyWithoutTasksInput | null
+  user?: UserCreateOneWithoutTasksInput | null
 }
 export type TaskCreateWithoutSubprojectInputInputObject =
   | Extract<keyof TaskCreateWithoutSubprojectInput, string>
@@ -3613,28 +4609,7 @@ export type TaskCreateWithoutSubprojectInputInputObject =
   | { name: 'completed', alias?: string  } 
   | { name: 'timelogs', alias?: string  } 
   | { name: 'tags', alias?: string  } 
-  
-export interface TimelogCreateManyWithoutTaskInput {
-  create?: TimelogCreateWithoutTaskInput[]
-  connect?: TimelogWhereUniqueInput[]
-}
-export type TimelogCreateManyWithoutTaskInputInputObject =
-  | Extract<keyof TimelogCreateManyWithoutTaskInput, string>
-  | { name: 'create', alias?: string  } 
-  | { name: 'connect', alias?: string  } 
-  
-export interface TimelogCreateWithoutTaskInput {
-  id?: number | null
-  startDate?: string | null
-  finishDate?: string | null
-  description?: string | null
-}
-export type TimelogCreateWithoutTaskInputInputObject =
-  | Extract<keyof TimelogCreateWithoutTaskInput, string>
-  | { name: 'id', alias?: string  } 
-  | { name: 'startDate', alias?: string  } 
-  | { name: 'finishDate', alias?: string  } 
-  | { name: 'description', alias?: string  } 
+  | { name: 'user', alias?: string  } 
   
 export interface TagCreateManyWithoutTasksInput {
   create?: TagCreateWithoutTasksInput[]
@@ -3648,75 +4623,66 @@ export type TagCreateManyWithoutTasksInputInputObject =
 export interface TagCreateWithoutTasksInput {
   id?: number | null
   name?: string
+  user?: UserCreateOneWithoutTagsInput | null
 }
 export type TagCreateWithoutTasksInputInputObject =
   | Extract<keyof TagCreateWithoutTasksInput, string>
   | { name: 'id', alias?: string  } 
   | { name: 'name', alias?: string  } 
+  | { name: 'user', alias?: string  } 
   
-export interface ProjectUpdateInput {
-  name?: string | null
-  subprojects?: SubprojectUpdateManyWithoutProjectInput | null
+export interface UserCreateOneWithoutTagsInput {
+  create?: UserCreateWithoutTagsInput | null
+  connect?: UserWhereUniqueInput | null
 }
-export type ProjectUpdateInputInputObject =
-  | Extract<keyof ProjectUpdateInput, string>
-  | { name: 'name', alias?: string  } 
-  | { name: 'subprojects', alias?: string  } 
-  
-export interface SubprojectUpdateManyWithoutProjectInput {
-  create?: SubprojectCreateWithoutProjectInput[]
-  delete?: SubprojectWhereUniqueInput[]
-  connect?: SubprojectWhereUniqueInput[]
-  set?: SubprojectWhereUniqueInput[]
-  disconnect?: SubprojectWhereUniqueInput[]
-  update?: SubprojectUpdateWithWhereUniqueWithoutProjectInput[]
-  upsert?: SubprojectUpsertWithWhereUniqueWithoutProjectInput[]
-  deleteMany?: SubprojectScalarWhereInput[]
-  updateMany?: SubprojectUpdateManyWithWhereNestedInput[]
-}
-export type SubprojectUpdateManyWithoutProjectInputInputObject =
-  | Extract<keyof SubprojectUpdateManyWithoutProjectInput, string>
+export type UserCreateOneWithoutTagsInputInputObject =
+  | Extract<keyof UserCreateOneWithoutTagsInput, string>
   | { name: 'create', alias?: string  } 
-  | { name: 'delete', alias?: string  } 
   | { name: 'connect', alias?: string  } 
-  | { name: 'set', alias?: string  } 
-  | { name: 'disconnect', alias?: string  } 
-  | { name: 'update', alias?: string  } 
-  | { name: 'upsert', alias?: string  } 
-  | { name: 'deleteMany', alias?: string  } 
-  | { name: 'updateMany', alias?: string  } 
   
-export interface SubprojectUpdateWithWhereUniqueWithoutProjectInput {
-  where?: SubprojectWhereUniqueInput
-  data?: SubprojectUpdateWithoutProjectDataInput
+export interface UserCreateWithoutTagsInput {
+  id?: number | null
+  email?: string
+  password?: string
+  tasks?: TaskCreateManyWithoutUserInput | null
+  projects?: ProjectCreateManyWithoutUserInput | null
 }
-export type SubprojectUpdateWithWhereUniqueWithoutProjectInputInputObject =
-  | Extract<keyof SubprojectUpdateWithWhereUniqueWithoutProjectInput, string>
-  | { name: 'where', alias?: string  } 
-  | { name: 'data', alias?: string  } 
-  
-export interface SubprojectUpdateWithoutProjectDataInput {
-  name?: string | null
-  tasks?: TaskUpdateManyWithoutSubprojectInput | null
-}
-export type SubprojectUpdateWithoutProjectDataInputInputObject =
-  | Extract<keyof SubprojectUpdateWithoutProjectDataInput, string>
-  | { name: 'name', alias?: string  } 
+export type UserCreateWithoutTagsInputInputObject =
+  | Extract<keyof UserCreateWithoutTagsInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
   | { name: 'tasks', alias?: string  } 
+  | { name: 'projects', alias?: string  } 
   
-export interface TaskUpdateManyWithoutSubprojectInput {
-  create?: TaskCreateWithoutSubprojectInput[]
+export interface UserUpdateInput {
+  email?: string | null
+  password?: string | null
+  tasks?: TaskUpdateManyWithoutUserInput | null
+  projects?: ProjectUpdateManyWithoutUserInput | null
+  tags?: TagUpdateManyWithoutUserInput | null
+}
+export type UserUpdateInputInputObject =
+  | Extract<keyof UserUpdateInput, string>
+  | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
+  | { name: 'tasks', alias?: string  } 
+  | { name: 'projects', alias?: string  } 
+  | { name: 'tags', alias?: string  } 
+  
+export interface TaskUpdateManyWithoutUserInput {
+  create?: TaskCreateWithoutUserInput[]
   delete?: TaskWhereUniqueInput[]
   connect?: TaskWhereUniqueInput[]
   set?: TaskWhereUniqueInput[]
   disconnect?: TaskWhereUniqueInput[]
-  update?: TaskUpdateWithWhereUniqueWithoutSubprojectInput[]
-  upsert?: TaskUpsertWithWhereUniqueWithoutSubprojectInput[]
+  update?: TaskUpdateWithWhereUniqueWithoutUserInput[]
+  upsert?: TaskUpsertWithWhereUniqueWithoutUserInput[]
   deleteMany?: TaskScalarWhereInput[]
   updateMany?: TaskUpdateManyWithWhereNestedInput[]
 }
-export type TaskUpdateManyWithoutSubprojectInputInputObject =
-  | Extract<keyof TaskUpdateManyWithoutSubprojectInput, string>
+export type TaskUpdateManyWithoutUserInputInputObject =
+  | Extract<keyof TaskUpdateManyWithoutUserInput, string>
   | { name: 'create', alias?: string  } 
   | { name: 'delete', alias?: string  } 
   | { name: 'connect', alias?: string  } 
@@ -3727,16 +4693,16 @@ export type TaskUpdateManyWithoutSubprojectInputInputObject =
   | { name: 'deleteMany', alias?: string  } 
   | { name: 'updateMany', alias?: string  } 
   
-export interface TaskUpdateWithWhereUniqueWithoutSubprojectInput {
+export interface TaskUpdateWithWhereUniqueWithoutUserInput {
   where?: TaskWhereUniqueInput
-  data?: TaskUpdateWithoutSubprojectDataInput
+  data?: TaskUpdateWithoutUserDataInput
 }
-export type TaskUpdateWithWhereUniqueWithoutSubprojectInputInputObject =
-  | Extract<keyof TaskUpdateWithWhereUniqueWithoutSubprojectInput, string>
+export type TaskUpdateWithWhereUniqueWithoutUserInputInputObject =
+  | Extract<keyof TaskUpdateWithWhereUniqueWithoutUserInput, string>
   | { name: 'where', alias?: string  } 
   | { name: 'data', alias?: string  } 
   
-export interface TaskUpdateWithoutSubprojectDataInput {
+export interface TaskUpdateWithoutUserDataInput {
   name?: string | null
   priority?: string | null
   comments?: string | null
@@ -3747,11 +4713,12 @@ export interface TaskUpdateWithoutSubprojectDataInput {
   finishDate?: string | null
   deadlineDate?: string | null
   completed?: boolean | null
+  subproject?: SubprojectUpdateOneWithoutTasksInput | null
   timelogs?: TimelogUpdateManyWithoutTaskInput | null
   tags?: TagUpdateManyWithoutTasksInput | null
 }
-export type TaskUpdateWithoutSubprojectDataInputInputObject =
-  | Extract<keyof TaskUpdateWithoutSubprojectDataInput, string>
+export type TaskUpdateWithoutUserDataInputInputObject =
+  | Extract<keyof TaskUpdateWithoutUserDataInput, string>
   | { name: 'name', alias?: string  } 
   | { name: 'priority', alias?: string  } 
   | { name: 'comments', alias?: string  } 
@@ -3762,8 +4729,191 @@ export type TaskUpdateWithoutSubprojectDataInputInputObject =
   | { name: 'finishDate', alias?: string  } 
   | { name: 'deadlineDate', alias?: string  } 
   | { name: 'completed', alias?: string  } 
+  | { name: 'subproject', alias?: string  } 
   | { name: 'timelogs', alias?: string  } 
   | { name: 'tags', alias?: string  } 
+  
+export interface SubprojectUpdateOneWithoutTasksInput {
+  create?: SubprojectCreateWithoutTasksInput | null
+  update?: SubprojectUpdateWithoutTasksDataInput | null
+  upsert?: SubprojectUpsertWithoutTasksInput | null
+  delete?: boolean | null
+  disconnect?: boolean | null
+  connect?: SubprojectWhereUniqueInput | null
+}
+export type SubprojectUpdateOneWithoutTasksInputInputObject =
+  | Extract<keyof SubprojectUpdateOneWithoutTasksInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface SubprojectUpdateWithoutTasksDataInput {
+  name?: string | null
+  project?: ProjectUpdateOneRequiredWithoutSubprojectsInput | null
+}
+export type SubprojectUpdateWithoutTasksDataInputInputObject =
+  | Extract<keyof SubprojectUpdateWithoutTasksDataInput, string>
+  | { name: 'name', alias?: string  } 
+  | { name: 'project', alias?: string  } 
+  
+export interface ProjectUpdateOneRequiredWithoutSubprojectsInput {
+  create?: ProjectCreateWithoutSubprojectsInput | null
+  update?: ProjectUpdateWithoutSubprojectsDataInput | null
+  upsert?: ProjectUpsertWithoutSubprojectsInput | null
+  connect?: ProjectWhereUniqueInput | null
+}
+export type ProjectUpdateOneRequiredWithoutSubprojectsInputInputObject =
+  | Extract<keyof ProjectUpdateOneRequiredWithoutSubprojectsInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface ProjectUpdateWithoutSubprojectsDataInput {
+  name?: string | null
+  user?: UserUpdateOneWithoutProjectsInput | null
+}
+export type ProjectUpdateWithoutSubprojectsDataInputInputObject =
+  | Extract<keyof ProjectUpdateWithoutSubprojectsDataInput, string>
+  | { name: 'name', alias?: string  } 
+  | { name: 'user', alias?: string  } 
+  
+export interface UserUpdateOneWithoutProjectsInput {
+  create?: UserCreateWithoutProjectsInput | null
+  update?: UserUpdateWithoutProjectsDataInput | null
+  upsert?: UserUpsertWithoutProjectsInput | null
+  delete?: boolean | null
+  disconnect?: boolean | null
+  connect?: UserWhereUniqueInput | null
+}
+export type UserUpdateOneWithoutProjectsInputInputObject =
+  | Extract<keyof UserUpdateOneWithoutProjectsInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface UserUpdateWithoutProjectsDataInput {
+  email?: string | null
+  password?: string | null
+  tasks?: TaskUpdateManyWithoutUserInput | null
+  tags?: TagUpdateManyWithoutUserInput | null
+}
+export type UserUpdateWithoutProjectsDataInputInputObject =
+  | Extract<keyof UserUpdateWithoutProjectsDataInput, string>
+  | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
+  | { name: 'tasks', alias?: string  } 
+  | { name: 'tags', alias?: string  } 
+  
+export interface TagUpdateManyWithoutUserInput {
+  create?: TagCreateWithoutUserInput[]
+  delete?: TagWhereUniqueInput[]
+  connect?: TagWhereUniqueInput[]
+  set?: TagWhereUniqueInput[]
+  disconnect?: TagWhereUniqueInput[]
+  update?: TagUpdateWithWhereUniqueWithoutUserInput[]
+  upsert?: TagUpsertWithWhereUniqueWithoutUserInput[]
+  deleteMany?: TagScalarWhereInput[]
+  updateMany?: TagUpdateManyWithWhereNestedInput[]
+}
+export type TagUpdateManyWithoutUserInputInputObject =
+  | Extract<keyof TagUpdateManyWithoutUserInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface TagUpdateWithWhereUniqueWithoutUserInput {
+  where?: TagWhereUniqueInput
+  data?: TagUpdateWithoutUserDataInput
+}
+export type TagUpdateWithWhereUniqueWithoutUserInputInputObject =
+  | Extract<keyof TagUpdateWithWhereUniqueWithoutUserInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface TagUpdateWithoutUserDataInput {
+  name?: string | null
+  tasks?: TaskUpdateManyWithoutTagsInput | null
+}
+export type TagUpdateWithoutUserDataInputInputObject =
+  | Extract<keyof TagUpdateWithoutUserDataInput, string>
+  | { name: 'name', alias?: string  } 
+  | { name: 'tasks', alias?: string  } 
+  
+export interface TaskUpdateManyWithoutTagsInput {
+  create?: TaskCreateWithoutTagsInput[]
+  delete?: TaskWhereUniqueInput[]
+  connect?: TaskWhereUniqueInput[]
+  set?: TaskWhereUniqueInput[]
+  disconnect?: TaskWhereUniqueInput[]
+  update?: TaskUpdateWithWhereUniqueWithoutTagsInput[]
+  upsert?: TaskUpsertWithWhereUniqueWithoutTagsInput[]
+  deleteMany?: TaskScalarWhereInput[]
+  updateMany?: TaskUpdateManyWithWhereNestedInput[]
+}
+export type TaskUpdateManyWithoutTagsInputInputObject =
+  | Extract<keyof TaskUpdateManyWithoutTagsInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface TaskUpdateWithWhereUniqueWithoutTagsInput {
+  where?: TaskWhereUniqueInput
+  data?: TaskUpdateWithoutTagsDataInput
+}
+export type TaskUpdateWithWhereUniqueWithoutTagsInputInputObject =
+  | Extract<keyof TaskUpdateWithWhereUniqueWithoutTagsInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface TaskUpdateWithoutTagsDataInput {
+  name?: string | null
+  priority?: string | null
+  comments?: string | null
+  repeat?: number | null
+  estimateTime?: string | null
+  plannedTime?: string | null
+  plannedDate?: string | null
+  finishDate?: string | null
+  deadlineDate?: string | null
+  completed?: boolean | null
+  subproject?: SubprojectUpdateOneWithoutTasksInput | null
+  timelogs?: TimelogUpdateManyWithoutTaskInput | null
+  user?: UserUpdateOneWithoutTasksInput | null
+}
+export type TaskUpdateWithoutTagsDataInputInputObject =
+  | Extract<keyof TaskUpdateWithoutTagsDataInput, string>
+  | { name: 'name', alias?: string  } 
+  | { name: 'priority', alias?: string  } 
+  | { name: 'comments', alias?: string  } 
+  | { name: 'repeat', alias?: string  } 
+  | { name: 'estimateTime', alias?: string  } 
+  | { name: 'plannedTime', alias?: string  } 
+  | { name: 'plannedDate', alias?: string  } 
+  | { name: 'finishDate', alias?: string  } 
+  | { name: 'deadlineDate', alias?: string  } 
+  | { name: 'completed', alias?: string  } 
+  | { name: 'subproject', alias?: string  } 
+  | { name: 'timelogs', alias?: string  } 
+  | { name: 'user', alias?: string  } 
   
 export interface TimelogUpdateManyWithoutTaskInput {
   create?: TimelogCreateWithoutTaskInput[]
@@ -3926,6 +5076,181 @@ export type TimelogUpdateManyDataInputInputObject =
   | { name: 'finishDate', alias?: string  } 
   | { name: 'description', alias?: string  } 
   
+export interface UserUpdateOneWithoutTasksInput {
+  create?: UserCreateWithoutTasksInput | null
+  update?: UserUpdateWithoutTasksDataInput | null
+  upsert?: UserUpsertWithoutTasksInput | null
+  delete?: boolean | null
+  disconnect?: boolean | null
+  connect?: UserWhereUniqueInput | null
+}
+export type UserUpdateOneWithoutTasksInputInputObject =
+  | Extract<keyof UserUpdateOneWithoutTasksInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface UserUpdateWithoutTasksDataInput {
+  email?: string | null
+  password?: string | null
+  projects?: ProjectUpdateManyWithoutUserInput | null
+  tags?: TagUpdateManyWithoutUserInput | null
+}
+export type UserUpdateWithoutTasksDataInputInputObject =
+  | Extract<keyof UserUpdateWithoutTasksDataInput, string>
+  | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
+  | { name: 'projects', alias?: string  } 
+  | { name: 'tags', alias?: string  } 
+  
+export interface ProjectUpdateManyWithoutUserInput {
+  create?: ProjectCreateWithoutUserInput[]
+  delete?: ProjectWhereUniqueInput[]
+  connect?: ProjectWhereUniqueInput[]
+  set?: ProjectWhereUniqueInput[]
+  disconnect?: ProjectWhereUniqueInput[]
+  update?: ProjectUpdateWithWhereUniqueWithoutUserInput[]
+  upsert?: ProjectUpsertWithWhereUniqueWithoutUserInput[]
+  deleteMany?: ProjectScalarWhereInput[]
+  updateMany?: ProjectUpdateManyWithWhereNestedInput[]
+}
+export type ProjectUpdateManyWithoutUserInputInputObject =
+  | Extract<keyof ProjectUpdateManyWithoutUserInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface ProjectUpdateWithWhereUniqueWithoutUserInput {
+  where?: ProjectWhereUniqueInput
+  data?: ProjectUpdateWithoutUserDataInput
+}
+export type ProjectUpdateWithWhereUniqueWithoutUserInputInputObject =
+  | Extract<keyof ProjectUpdateWithWhereUniqueWithoutUserInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface ProjectUpdateWithoutUserDataInput {
+  name?: string | null
+  subprojects?: SubprojectUpdateManyWithoutProjectInput | null
+}
+export type ProjectUpdateWithoutUserDataInputInputObject =
+  | Extract<keyof ProjectUpdateWithoutUserDataInput, string>
+  | { name: 'name', alias?: string  } 
+  | { name: 'subprojects', alias?: string  } 
+  
+export interface SubprojectUpdateManyWithoutProjectInput {
+  create?: SubprojectCreateWithoutProjectInput[]
+  delete?: SubprojectWhereUniqueInput[]
+  connect?: SubprojectWhereUniqueInput[]
+  set?: SubprojectWhereUniqueInput[]
+  disconnect?: SubprojectWhereUniqueInput[]
+  update?: SubprojectUpdateWithWhereUniqueWithoutProjectInput[]
+  upsert?: SubprojectUpsertWithWhereUniqueWithoutProjectInput[]
+  deleteMany?: SubprojectScalarWhereInput[]
+  updateMany?: SubprojectUpdateManyWithWhereNestedInput[]
+}
+export type SubprojectUpdateManyWithoutProjectInputInputObject =
+  | Extract<keyof SubprojectUpdateManyWithoutProjectInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface SubprojectUpdateWithWhereUniqueWithoutProjectInput {
+  where?: SubprojectWhereUniqueInput
+  data?: SubprojectUpdateWithoutProjectDataInput
+}
+export type SubprojectUpdateWithWhereUniqueWithoutProjectInputInputObject =
+  | Extract<keyof SubprojectUpdateWithWhereUniqueWithoutProjectInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface SubprojectUpdateWithoutProjectDataInput {
+  name?: string | null
+  tasks?: TaskUpdateManyWithoutSubprojectInput | null
+}
+export type SubprojectUpdateWithoutProjectDataInputInputObject =
+  | Extract<keyof SubprojectUpdateWithoutProjectDataInput, string>
+  | { name: 'name', alias?: string  } 
+  | { name: 'tasks', alias?: string  } 
+  
+export interface TaskUpdateManyWithoutSubprojectInput {
+  create?: TaskCreateWithoutSubprojectInput[]
+  delete?: TaskWhereUniqueInput[]
+  connect?: TaskWhereUniqueInput[]
+  set?: TaskWhereUniqueInput[]
+  disconnect?: TaskWhereUniqueInput[]
+  update?: TaskUpdateWithWhereUniqueWithoutSubprojectInput[]
+  upsert?: TaskUpsertWithWhereUniqueWithoutSubprojectInput[]
+  deleteMany?: TaskScalarWhereInput[]
+  updateMany?: TaskUpdateManyWithWhereNestedInput[]
+}
+export type TaskUpdateManyWithoutSubprojectInputInputObject =
+  | Extract<keyof TaskUpdateManyWithoutSubprojectInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface TaskUpdateWithWhereUniqueWithoutSubprojectInput {
+  where?: TaskWhereUniqueInput
+  data?: TaskUpdateWithoutSubprojectDataInput
+}
+export type TaskUpdateWithWhereUniqueWithoutSubprojectInputInputObject =
+  | Extract<keyof TaskUpdateWithWhereUniqueWithoutSubprojectInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface TaskUpdateWithoutSubprojectDataInput {
+  name?: string | null
+  priority?: string | null
+  comments?: string | null
+  repeat?: number | null
+  estimateTime?: string | null
+  plannedTime?: string | null
+  plannedDate?: string | null
+  finishDate?: string | null
+  deadlineDate?: string | null
+  completed?: boolean | null
+  timelogs?: TimelogUpdateManyWithoutTaskInput | null
+  tags?: TagUpdateManyWithoutTasksInput | null
+  user?: UserUpdateOneWithoutTasksInput | null
+}
+export type TaskUpdateWithoutSubprojectDataInputInputObject =
+  | Extract<keyof TaskUpdateWithoutSubprojectDataInput, string>
+  | { name: 'name', alias?: string  } 
+  | { name: 'priority', alias?: string  } 
+  | { name: 'comments', alias?: string  } 
+  | { name: 'repeat', alias?: string  } 
+  | { name: 'estimateTime', alias?: string  } 
+  | { name: 'plannedTime', alias?: string  } 
+  | { name: 'plannedDate', alias?: string  } 
+  | { name: 'finishDate', alias?: string  } 
+  | { name: 'deadlineDate', alias?: string  } 
+  | { name: 'completed', alias?: string  } 
+  | { name: 'timelogs', alias?: string  } 
+  | { name: 'tags', alias?: string  } 
+  | { name: 'user', alias?: string  } 
+  
 export interface TagUpdateManyWithoutTasksInput {
   create?: TagCreateWithoutTasksInput[]
   delete?: TagWhereUniqueInput[]
@@ -3960,10 +5285,51 @@ export type TagUpdateWithWhereUniqueWithoutTasksInputInputObject =
   
 export interface TagUpdateWithoutTasksDataInput {
   name?: string | null
+  user?: UserUpdateOneWithoutTagsInput | null
 }
 export type TagUpdateWithoutTasksDataInputInputObject =
   | Extract<keyof TagUpdateWithoutTasksDataInput, string>
   | { name: 'name', alias?: string  } 
+  | { name: 'user', alias?: string  } 
+  
+export interface UserUpdateOneWithoutTagsInput {
+  create?: UserCreateWithoutTagsInput | null
+  update?: UserUpdateWithoutTagsDataInput | null
+  upsert?: UserUpsertWithoutTagsInput | null
+  delete?: boolean | null
+  disconnect?: boolean | null
+  connect?: UserWhereUniqueInput | null
+}
+export type UserUpdateOneWithoutTagsInputInputObject =
+  | Extract<keyof UserUpdateOneWithoutTagsInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface UserUpdateWithoutTagsDataInput {
+  email?: string | null
+  password?: string | null
+  tasks?: TaskUpdateManyWithoutUserInput | null
+  projects?: ProjectUpdateManyWithoutUserInput | null
+}
+export type UserUpdateWithoutTagsDataInputInputObject =
+  | Extract<keyof UserUpdateWithoutTagsDataInput, string>
+  | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
+  | { name: 'tasks', alias?: string  } 
+  | { name: 'projects', alias?: string  } 
+  
+export interface UserUpsertWithoutTagsInput {
+  update?: UserUpdateWithoutTagsDataInput
+  create?: UserCreateWithoutTagsInput
+}
+export type UserUpsertWithoutTagsInputInputObject =
+  | Extract<keyof UserUpsertWithoutTagsInput, string>
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
   
 export interface TagUpsertWithWhereUniqueWithoutTasksInput {
   where?: TagWhereUniqueInput
@@ -4445,6 +5811,190 @@ export type SubprojectUpdateManyDataInputInputObject =
   | Extract<keyof SubprojectUpdateManyDataInput, string>
   | { name: 'name', alias?: string  } 
   
+export interface ProjectUpsertWithWhereUniqueWithoutUserInput {
+  where?: ProjectWhereUniqueInput
+  update?: ProjectUpdateWithoutUserDataInput
+  create?: ProjectCreateWithoutUserInput
+}
+export type ProjectUpsertWithWhereUniqueWithoutUserInputInputObject =
+  | Extract<keyof ProjectUpsertWithWhereUniqueWithoutUserInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface ProjectScalarWhereInput {
+  id?: number | null
+  id_not?: number | null
+  id_in?: number[]
+  id_not_in?: number[]
+  id_lt?: number | null
+  id_lte?: number | null
+  id_gt?: number | null
+  id_gte?: number | null
+  name?: string | null
+  name_not?: string | null
+  name_in?: string[]
+  name_not_in?: string[]
+  name_lt?: string | null
+  name_lte?: string | null
+  name_gt?: string | null
+  name_gte?: string | null
+  name_contains?: string | null
+  name_not_contains?: string | null
+  name_starts_with?: string | null
+  name_not_starts_with?: string | null
+  name_ends_with?: string | null
+  name_not_ends_with?: string | null
+  AND?: ProjectScalarWhereInput[]
+  OR?: ProjectScalarWhereInput[]
+  NOT?: ProjectScalarWhereInput[]
+}
+export type ProjectScalarWhereInputInputObject =
+  | Extract<keyof ProjectScalarWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  | { name: 'name_not', alias?: string  } 
+  | { name: 'name_in', alias?: string  } 
+  | { name: 'name_not_in', alias?: string  } 
+  | { name: 'name_lt', alias?: string  } 
+  | { name: 'name_lte', alias?: string  } 
+  | { name: 'name_gt', alias?: string  } 
+  | { name: 'name_gte', alias?: string  } 
+  | { name: 'name_contains', alias?: string  } 
+  | { name: 'name_not_contains', alias?: string  } 
+  | { name: 'name_starts_with', alias?: string  } 
+  | { name: 'name_not_starts_with', alias?: string  } 
+  | { name: 'name_ends_with', alias?: string  } 
+  | { name: 'name_not_ends_with', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
+export interface ProjectUpdateManyWithWhereNestedInput {
+  where?: ProjectScalarWhereInput
+  data?: ProjectUpdateManyDataInput
+}
+export type ProjectUpdateManyWithWhereNestedInputInputObject =
+  | Extract<keyof ProjectUpdateManyWithWhereNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface ProjectUpdateManyDataInput {
+  name?: string | null
+}
+export type ProjectUpdateManyDataInputInputObject =
+  | Extract<keyof ProjectUpdateManyDataInput, string>
+  | { name: 'name', alias?: string  } 
+  
+export interface UserUpsertWithoutTasksInput {
+  update?: UserUpdateWithoutTasksDataInput
+  create?: UserCreateWithoutTasksInput
+}
+export type UserUpsertWithoutTasksInputInputObject =
+  | Extract<keyof UserUpsertWithoutTasksInput, string>
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface TaskUpsertWithWhereUniqueWithoutTagsInput {
+  where?: TaskWhereUniqueInput
+  update?: TaskUpdateWithoutTagsDataInput
+  create?: TaskCreateWithoutTagsInput
+}
+export type TaskUpsertWithWhereUniqueWithoutTagsInputInputObject =
+  | Extract<keyof TaskUpsertWithWhereUniqueWithoutTagsInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface TagUpsertWithWhereUniqueWithoutUserInput {
+  where?: TagWhereUniqueInput
+  update?: TagUpdateWithoutUserDataInput
+  create?: TagCreateWithoutUserInput
+}
+export type TagUpsertWithWhereUniqueWithoutUserInputInputObject =
+  | Extract<keyof TagUpsertWithWhereUniqueWithoutUserInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface UserUpsertWithoutProjectsInput {
+  update?: UserUpdateWithoutProjectsDataInput
+  create?: UserCreateWithoutProjectsInput
+}
+export type UserUpsertWithoutProjectsInputInputObject =
+  | Extract<keyof UserUpsertWithoutProjectsInput, string>
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface ProjectUpsertWithoutSubprojectsInput {
+  update?: ProjectUpdateWithoutSubprojectsDataInput
+  create?: ProjectCreateWithoutSubprojectsInput
+}
+export type ProjectUpsertWithoutSubprojectsInputInputObject =
+  | Extract<keyof ProjectUpsertWithoutSubprojectsInput, string>
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface SubprojectUpsertWithoutTasksInput {
+  update?: SubprojectUpdateWithoutTasksDataInput
+  create?: SubprojectCreateWithoutTasksInput
+}
+export type SubprojectUpsertWithoutTasksInputInputObject =
+  | Extract<keyof SubprojectUpsertWithoutTasksInput, string>
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface TaskUpsertWithWhereUniqueWithoutUserInput {
+  where?: TaskWhereUniqueInput
+  update?: TaskUpdateWithoutUserDataInput
+  create?: TaskCreateWithoutUserInput
+}
+export type TaskUpsertWithWhereUniqueWithoutUserInputInputObject =
+  | Extract<keyof TaskUpsertWithWhereUniqueWithoutUserInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface UserUpdateManyMutationInput {
+  email?: string | null
+  password?: string | null
+}
+export type UserUpdateManyMutationInputInputObject =
+  | Extract<keyof UserUpdateManyMutationInput, string>
+  | { name: 'email', alias?: string  } 
+  | { name: 'password', alias?: string  } 
+  
+export interface ProjectCreateInput {
+  id?: number | null
+  name?: string
+  subprojects?: SubprojectCreateManyWithoutProjectInput | null
+  user?: UserCreateOneWithoutProjectsInput | null
+}
+export type ProjectCreateInputInputObject =
+  | Extract<keyof ProjectCreateInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  | { name: 'subprojects', alias?: string  } 
+  | { name: 'user', alias?: string  } 
+  
+export interface ProjectUpdateInput {
+  name?: string | null
+  subprojects?: SubprojectUpdateManyWithoutProjectInput | null
+  user?: UserUpdateOneWithoutProjectsInput | null
+}
+export type ProjectUpdateInputInputObject =
+  | Extract<keyof ProjectUpdateInput, string>
+  | { name: 'name', alias?: string  } 
+  | { name: 'subprojects', alias?: string  } 
+  | { name: 'user', alias?: string  } 
+  
 export interface ProjectUpdateManyMutationInput {
   name?: string | null
 }
@@ -4465,24 +6015,6 @@ export type SubprojectCreateInputInputObject =
   | { name: 'project', alias?: string  } 
   | { name: 'tasks', alias?: string  } 
   
-export interface ProjectCreateOneWithoutSubprojectsInput {
-  create?: ProjectCreateWithoutSubprojectsInput | null
-  connect?: ProjectWhereUniqueInput | null
-}
-export type ProjectCreateOneWithoutSubprojectsInputInputObject =
-  | Extract<keyof ProjectCreateOneWithoutSubprojectsInput, string>
-  | { name: 'create', alias?: string  } 
-  | { name: 'connect', alias?: string  } 
-  
-export interface ProjectCreateWithoutSubprojectsInput {
-  id?: number | null
-  name?: string
-}
-export type ProjectCreateWithoutSubprojectsInputInputObject =
-  | Extract<keyof ProjectCreateWithoutSubprojectsInput, string>
-  | { name: 'id', alias?: string  } 
-  | { name: 'name', alias?: string  } 
-  
 export interface SubprojectUpdateInput {
   name?: string | null
   project?: ProjectUpdateOneRequiredWithoutSubprojectsInput | null
@@ -4493,35 +6025,6 @@ export type SubprojectUpdateInputInputObject =
   | { name: 'name', alias?: string  } 
   | { name: 'project', alias?: string  } 
   | { name: 'tasks', alias?: string  } 
-  
-export interface ProjectUpdateOneRequiredWithoutSubprojectsInput {
-  create?: ProjectCreateWithoutSubprojectsInput | null
-  update?: ProjectUpdateWithoutSubprojectsDataInput | null
-  upsert?: ProjectUpsertWithoutSubprojectsInput | null
-  connect?: ProjectWhereUniqueInput | null
-}
-export type ProjectUpdateOneRequiredWithoutSubprojectsInputInputObject =
-  | Extract<keyof ProjectUpdateOneRequiredWithoutSubprojectsInput, string>
-  | { name: 'create', alias?: string  } 
-  | { name: 'update', alias?: string  } 
-  | { name: 'upsert', alias?: string  } 
-  | { name: 'connect', alias?: string  } 
-  
-export interface ProjectUpdateWithoutSubprojectsDataInput {
-  name?: string | null
-}
-export type ProjectUpdateWithoutSubprojectsDataInputInputObject =
-  | Extract<keyof ProjectUpdateWithoutSubprojectsDataInput, string>
-  | { name: 'name', alias?: string  } 
-  
-export interface ProjectUpsertWithoutSubprojectsInput {
-  update?: ProjectUpdateWithoutSubprojectsDataInput
-  create?: ProjectCreateWithoutSubprojectsInput
-}
-export type ProjectUpsertWithoutSubprojectsInputInputObject =
-  | Extract<keyof ProjectUpsertWithoutSubprojectsInput, string>
-  | { name: 'update', alias?: string  } 
-  | { name: 'create', alias?: string  } 
   
 export interface SubprojectUpdateManyMutationInput {
   name?: string | null
@@ -4545,6 +6048,7 @@ export interface TaskCreateInput {
   subproject?: SubprojectCreateOneWithoutTasksInput | null
   timelogs?: TimelogCreateManyWithoutTaskInput | null
   tags?: TagCreateManyWithoutTasksInput | null
+  user?: UserCreateOneWithoutTasksInput | null
 }
 export type TaskCreateInputInputObject =
   | Extract<keyof TaskCreateInput, string>
@@ -4562,26 +6066,7 @@ export type TaskCreateInputInputObject =
   | { name: 'subproject', alias?: string  } 
   | { name: 'timelogs', alias?: string  } 
   | { name: 'tags', alias?: string  } 
-  
-export interface SubprojectCreateOneWithoutTasksInput {
-  create?: SubprojectCreateWithoutTasksInput | null
-  connect?: SubprojectWhereUniqueInput | null
-}
-export type SubprojectCreateOneWithoutTasksInputInputObject =
-  | Extract<keyof SubprojectCreateOneWithoutTasksInput, string>
-  | { name: 'create', alias?: string  } 
-  | { name: 'connect', alias?: string  } 
-  
-export interface SubprojectCreateWithoutTasksInput {
-  id?: number | null
-  name?: string
-  project?: ProjectCreateOneWithoutSubprojectsInput
-}
-export type SubprojectCreateWithoutTasksInputInputObject =
-  | Extract<keyof SubprojectCreateWithoutTasksInput, string>
-  | { name: 'id', alias?: string  } 
-  | { name: 'name', alias?: string  } 
-  | { name: 'project', alias?: string  } 
+  | { name: 'user', alias?: string  } 
   
 export interface TaskUpdateInput {
   name?: string | null
@@ -4597,6 +6082,7 @@ export interface TaskUpdateInput {
   subproject?: SubprojectUpdateOneWithoutTasksInput | null
   timelogs?: TimelogUpdateManyWithoutTaskInput | null
   tags?: TagUpdateManyWithoutTasksInput | null
+  user?: UserUpdateOneWithoutTasksInput | null
 }
 export type TaskUpdateInputInputObject =
   | Extract<keyof TaskUpdateInput, string>
@@ -4613,41 +6099,7 @@ export type TaskUpdateInputInputObject =
   | { name: 'subproject', alias?: string  } 
   | { name: 'timelogs', alias?: string  } 
   | { name: 'tags', alias?: string  } 
-  
-export interface SubprojectUpdateOneWithoutTasksInput {
-  create?: SubprojectCreateWithoutTasksInput | null
-  update?: SubprojectUpdateWithoutTasksDataInput | null
-  upsert?: SubprojectUpsertWithoutTasksInput | null
-  delete?: boolean | null
-  disconnect?: boolean | null
-  connect?: SubprojectWhereUniqueInput | null
-}
-export type SubprojectUpdateOneWithoutTasksInputInputObject =
-  | Extract<keyof SubprojectUpdateOneWithoutTasksInput, string>
-  | { name: 'create', alias?: string  } 
-  | { name: 'update', alias?: string  } 
-  | { name: 'upsert', alias?: string  } 
-  | { name: 'delete', alias?: string  } 
-  | { name: 'disconnect', alias?: string  } 
-  | { name: 'connect', alias?: string  } 
-  
-export interface SubprojectUpdateWithoutTasksDataInput {
-  name?: string | null
-  project?: ProjectUpdateOneRequiredWithoutSubprojectsInput | null
-}
-export type SubprojectUpdateWithoutTasksDataInputInputObject =
-  | Extract<keyof SubprojectUpdateWithoutTasksDataInput, string>
-  | { name: 'name', alias?: string  } 
-  | { name: 'project', alias?: string  } 
-  
-export interface SubprojectUpsertWithoutTasksInput {
-  update?: SubprojectUpdateWithoutTasksDataInput
-  create?: SubprojectCreateWithoutTasksInput
-}
-export type SubprojectUpsertWithoutTasksInputInputObject =
-  | Extract<keyof SubprojectUpsertWithoutTasksInput, string>
-  | { name: 'update', alias?: string  } 
-  | { name: 'create', alias?: string  } 
+  | { name: 'user', alias?: string  } 
   
 export interface TaskUpdateManyMutationInput {
   name?: string | null
@@ -4712,6 +6164,7 @@ export interface TaskCreateWithoutTimelogsInput {
   completed?: boolean | null
   subproject?: SubprojectCreateOneWithoutTasksInput | null
   tags?: TagCreateManyWithoutTasksInput | null
+  user?: UserCreateOneWithoutTasksInput | null
 }
 export type TaskCreateWithoutTimelogsInputInputObject =
   | Extract<keyof TaskCreateWithoutTimelogsInput, string>
@@ -4728,6 +6181,7 @@ export type TaskCreateWithoutTimelogsInputInputObject =
   | { name: 'completed', alias?: string  } 
   | { name: 'subproject', alias?: string  } 
   | { name: 'tags', alias?: string  } 
+  | { name: 'user', alias?: string  } 
   
 export interface TimelogUpdateInput {
   startDate?: string | null
@@ -4768,6 +6222,7 @@ export interface TaskUpdateWithoutTimelogsDataInput {
   completed?: boolean | null
   subproject?: SubprojectUpdateOneWithoutTasksInput | null
   tags?: TagUpdateManyWithoutTasksInput | null
+  user?: UserUpdateOneWithoutTasksInput | null
 }
 export type TaskUpdateWithoutTimelogsDataInputInputObject =
   | Extract<keyof TaskUpdateWithoutTimelogsDataInput, string>
@@ -4783,6 +6238,7 @@ export type TaskUpdateWithoutTimelogsDataInputInputObject =
   | { name: 'completed', alias?: string  } 
   | { name: 'subproject', alias?: string  } 
   | { name: 'tags', alias?: string  } 
+  | { name: 'user', alias?: string  } 
   
 export interface TaskUpsertWithoutTimelogsInput {
   update?: TaskUpdateWithoutTimelogsDataInput
@@ -4807,134 +6263,26 @@ export type TimelogUpdateManyMutationInputInputObject =
 export interface TagCreateInput {
   id?: number | null
   name?: string
+  user?: UserCreateOneWithoutTagsInput | null
   tasks?: TaskCreateManyWithoutTagsInput | null
 }
 export type TagCreateInputInputObject =
   | Extract<keyof TagCreateInput, string>
   | { name: 'id', alias?: string  } 
   | { name: 'name', alias?: string  } 
+  | { name: 'user', alias?: string  } 
   | { name: 'tasks', alias?: string  } 
-  
-export interface TaskCreateManyWithoutTagsInput {
-  create?: TaskCreateWithoutTagsInput[]
-  connect?: TaskWhereUniqueInput[]
-}
-export type TaskCreateManyWithoutTagsInputInputObject =
-  | Extract<keyof TaskCreateManyWithoutTagsInput, string>
-  | { name: 'create', alias?: string  } 
-  | { name: 'connect', alias?: string  } 
-  
-export interface TaskCreateWithoutTagsInput {
-  id?: number | null
-  name?: string
-  priority?: string | null
-  comments?: string | null
-  repeat?: number | null
-  estimateTime?: string | null
-  plannedTime?: string | null
-  plannedDate?: string | null
-  finishDate?: string | null
-  deadlineDate?: string | null
-  completed?: boolean | null
-  subproject?: SubprojectCreateOneWithoutTasksInput | null
-  timelogs?: TimelogCreateManyWithoutTaskInput | null
-}
-export type TaskCreateWithoutTagsInputInputObject =
-  | Extract<keyof TaskCreateWithoutTagsInput, string>
-  | { name: 'id', alias?: string  } 
-  | { name: 'name', alias?: string  } 
-  | { name: 'priority', alias?: string  } 
-  | { name: 'comments', alias?: string  } 
-  | { name: 'repeat', alias?: string  } 
-  | { name: 'estimateTime', alias?: string  } 
-  | { name: 'plannedTime', alias?: string  } 
-  | { name: 'plannedDate', alias?: string  } 
-  | { name: 'finishDate', alias?: string  } 
-  | { name: 'deadlineDate', alias?: string  } 
-  | { name: 'completed', alias?: string  } 
-  | { name: 'subproject', alias?: string  } 
-  | { name: 'timelogs', alias?: string  } 
   
 export interface TagUpdateInput {
   name?: string | null
+  user?: UserUpdateOneWithoutTagsInput | null
   tasks?: TaskUpdateManyWithoutTagsInput | null
 }
 export type TagUpdateInputInputObject =
   | Extract<keyof TagUpdateInput, string>
   | { name: 'name', alias?: string  } 
+  | { name: 'user', alias?: string  } 
   | { name: 'tasks', alias?: string  } 
-  
-export interface TaskUpdateManyWithoutTagsInput {
-  create?: TaskCreateWithoutTagsInput[]
-  delete?: TaskWhereUniqueInput[]
-  connect?: TaskWhereUniqueInput[]
-  set?: TaskWhereUniqueInput[]
-  disconnect?: TaskWhereUniqueInput[]
-  update?: TaskUpdateWithWhereUniqueWithoutTagsInput[]
-  upsert?: TaskUpsertWithWhereUniqueWithoutTagsInput[]
-  deleteMany?: TaskScalarWhereInput[]
-  updateMany?: TaskUpdateManyWithWhereNestedInput[]
-}
-export type TaskUpdateManyWithoutTagsInputInputObject =
-  | Extract<keyof TaskUpdateManyWithoutTagsInput, string>
-  | { name: 'create', alias?: string  } 
-  | { name: 'delete', alias?: string  } 
-  | { name: 'connect', alias?: string  } 
-  | { name: 'set', alias?: string  } 
-  | { name: 'disconnect', alias?: string  } 
-  | { name: 'update', alias?: string  } 
-  | { name: 'upsert', alias?: string  } 
-  | { name: 'deleteMany', alias?: string  } 
-  | { name: 'updateMany', alias?: string  } 
-  
-export interface TaskUpdateWithWhereUniqueWithoutTagsInput {
-  where?: TaskWhereUniqueInput
-  data?: TaskUpdateWithoutTagsDataInput
-}
-export type TaskUpdateWithWhereUniqueWithoutTagsInputInputObject =
-  | Extract<keyof TaskUpdateWithWhereUniqueWithoutTagsInput, string>
-  | { name: 'where', alias?: string  } 
-  | { name: 'data', alias?: string  } 
-  
-export interface TaskUpdateWithoutTagsDataInput {
-  name?: string | null
-  priority?: string | null
-  comments?: string | null
-  repeat?: number | null
-  estimateTime?: string | null
-  plannedTime?: string | null
-  plannedDate?: string | null
-  finishDate?: string | null
-  deadlineDate?: string | null
-  completed?: boolean | null
-  subproject?: SubprojectUpdateOneWithoutTasksInput | null
-  timelogs?: TimelogUpdateManyWithoutTaskInput | null
-}
-export type TaskUpdateWithoutTagsDataInputInputObject =
-  | Extract<keyof TaskUpdateWithoutTagsDataInput, string>
-  | { name: 'name', alias?: string  } 
-  | { name: 'priority', alias?: string  } 
-  | { name: 'comments', alias?: string  } 
-  | { name: 'repeat', alias?: string  } 
-  | { name: 'estimateTime', alias?: string  } 
-  | { name: 'plannedTime', alias?: string  } 
-  | { name: 'plannedDate', alias?: string  } 
-  | { name: 'finishDate', alias?: string  } 
-  | { name: 'deadlineDate', alias?: string  } 
-  | { name: 'completed', alias?: string  } 
-  | { name: 'subproject', alias?: string  } 
-  | { name: 'timelogs', alias?: string  } 
-  
-export interface TaskUpsertWithWhereUniqueWithoutTagsInput {
-  where?: TaskWhereUniqueInput
-  update?: TaskUpdateWithoutTagsDataInput
-  create?: TaskCreateWithoutTagsInput
-}
-export type TaskUpsertWithWhereUniqueWithoutTagsInputInputObject =
-  | Extract<keyof TaskUpsertWithWhereUniqueWithoutTagsInput, string>
-  | { name: 'where', alias?: string  } 
-  | { name: 'update', alias?: string  } 
-  | { name: 'create', alias?: string  } 
   
 export interface TagUpdateManyMutationInput {
   name?: string | null
@@ -4942,6 +6290,27 @@ export interface TagUpdateManyMutationInput {
 export type TagUpdateManyMutationInputInputObject =
   | Extract<keyof TagUpdateManyMutationInput, string>
   | { name: 'name', alias?: string  } 
+  
+export interface UserSubscriptionWhereInput {
+  mutation_in?: prisma.MutationType[]
+  updatedFields_contains?: string | null
+  updatedFields_contains_every?: string[]
+  updatedFields_contains_some?: string[]
+  node?: UserWhereInput | null
+  AND?: UserSubscriptionWhereInput[]
+  OR?: UserSubscriptionWhereInput[]
+  NOT?: UserSubscriptionWhereInput[]
+}
+export type UserSubscriptionWhereInputInputObject =
+  | Extract<keyof UserSubscriptionWhereInput, string>
+  | { name: 'mutation_in', alias?: string  } 
+  | { name: 'updatedFields_contains', alias?: string  } 
+  | { name: 'updatedFields_contains_every', alias?: string  } 
+  | { name: 'updatedFields_contains_some', alias?: string  } 
+  | { name: 'node', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
   
 export interface ProjectSubscriptionWhereInput {
   mutation_in?: prisma.MutationType[]
@@ -5049,16 +6418,6 @@ export type TagSubscriptionWhereInputInputObject =
   | { name: 'NOT', alias?: string  } 
   
 
-export type SubprojectOrderByInputValues =
-  | 'id_ASC'
-  | 'id_DESC'
-  | 'name_ASC'
-  | 'name_DESC'
-  | 'createdAt_ASC'
-  | 'createdAt_DESC'
-  | 'updatedAt_ASC'
-  | 'updatedAt_DESC'
-  
 export type TaskOrderByInputValues =
   | 'id_ASC'
   | 'id_DESC'
@@ -5082,6 +6441,16 @@ export type TaskOrderByInputValues =
   | 'deadlineDate_DESC'
   | 'completed_ASC'
   | 'completed_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  
+export type SubprojectOrderByInputValues =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'name_ASC'
+  | 'name_DESC'
   | 'createdAt_ASC'
   | 'createdAt_DESC'
   | 'updatedAt_ASC'
@@ -5116,6 +6485,18 @@ export type ProjectOrderByInputValues =
   | 'id_DESC'
   | 'name_ASC'
   | 'name_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  
+export type UserOrderByInputValues =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'email_ASC'
+  | 'email_DESC'
+  | 'password_ASC'
+  | 'password_DESC'
   | 'createdAt_ASC'
   | 'createdAt_DESC'
   | 'updatedAt_ASC'

@@ -1,29 +1,36 @@
-import * as moment from 'moment'
+import { getCurrentDateTime } from '../utils/'
+import { getUserId } from '../utils'
 
 class TimelogRepository {
-	getActiveTimelog({ prisma }) {
-		return prisma.timelogs({ where: { finishDate: null } }).then(t => t[0])
-	}
+	async getActiveTimelog(context) {
+		const userId = getUserId(context)
 
-	async startTimelog(data, { prisma }) {
-		const timelog = await prisma
-			.timelogs({ where: { finishDate: null } })
+		const activeTimelog = await context.prisma
+			.timelogs({
+				where: { finishDate: null, task: { user: { id: userId } } }
+			})
 			.then(t => t[0])
 
+		return activeTimelog
+	}
+
+	async startTimelog(data, context) {
+		const activeTimelog = await this.getActiveTimelog(context)
+
 		// stop pending timelog
-		if (timelog) {
-			await this.stopTimelog(timelog.id, { prisma })
+		if (activeTimelog) {
+			await this.stopTimelog(activeTimelog.id, context)
 		}
 
-		return prisma.createTimelog({
-			startDate: moment().format(),
+		return context.prisma.createTimelog({
+			startDate: getCurrentDateTime(),
 			...data
 		})
 	}
 
 	async stopTimelog(id, { prisma }) {
 		const timelog = await prisma.updateTimelog({
-			data: { finishDate: moment().format() },
+			data: { finishDate: getCurrentDateTime() },
 			where: { id }
 		})
 

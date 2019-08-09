@@ -1,4 +1,4 @@
-import * as moment from 'moment'
+import { aggregateTime, aggregateTimeDiff, getCurrentDateTime } from '../utils/'
 
 class TaskRepository {
 	async getProject(id, { prisma }) {
@@ -13,12 +13,7 @@ class TaskRepository {
 	async getStatusTime(id, { prisma }) {
 		const timelogs = await prisma.task({ id }).timelogs()
 
-		const duration = timelogs.reduce(
-			(acc, curr) =>
-				acc.add(moment(curr.finishDate).diff(moment(curr.startDate))),
-			moment.duration(0)
-		)
-		return moment.utc(duration.as('milliseconds')).format('HH:mm:ss')
+		return aggregateTimeDiff(timelogs, t => t.startDate, t => t.finishDate)
 	}
 
 	async getLatestTimelogStartDate(id, { prisma }) {
@@ -41,7 +36,7 @@ class TaskRepository {
 		const updatedTask = await prisma.updateTask({
 			data: {
 				completed: !task.completed,
-				finishDate: task.finishDate ? null : moment().format()
+				finishDate: task.finishDate ? null : getCurrentDateTime()
 			},
 			where: { id }
 		})

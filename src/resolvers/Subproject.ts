@@ -1,5 +1,4 @@
 import { prismaObjectType } from 'nexus-prisma'
-import * as moment from 'moment'
 import SubprojectRepository from '../repositories/SubprojectRepository'
 
 export const Subproject = prismaObjectType({
@@ -10,13 +9,13 @@ export const Subproject = prismaObjectType({
       type: 'String',
       nullable: true,
       resolve: (root, args, context) =>
-        SubprojectRepository.getEstimateTime(id, context)
+        SubprojectRepository.getEstimateTime(root.id, context)
     })
     t.field('statusTime', {
       type: 'String',
       nullable: true,
       resolve: async (root, args, context) =>
-        SubprojectRepository.getStatusTime(id, context)
+        SubprojectRepository.getStatusTime(root.id, context)
     })
   }
 })

@@ -1,15 +1,10 @@
-import * as moment from 'moment'
+import { aggregateTime, aggregateTimeDiff } from '../utils/'
 
 class SubprojectRepository {
 	async getEstimateTime(id, { prisma }) {
 		const tasks = await prisma.subproject({ id }).tasks()
 
-		const estimateTime = tasks.reduce(
-			(acc, curr) => acc.add(moment.duration(curr.estimateTime)),
-			moment.duration(0)
-		)
-
-		return moment.utc(estimateTime.as('milliseconds')).format('HH:mm:ss')
+		return aggregateTime(tasks, t => t.estimateTime)
 	}
 
 	async getStatusTime(id, { prisma }) {
@@ -20,13 +15,7 @@ class SubprojectRepository {
 				tasks.reduce((acc, curr) => [...acc, ...curr.timelogs()], [])
 			)
 
-		const duration = timelogs.reduce(
-			(acc, curr) =>
-				acc.add(moment(curr.finishDate).diff(moment(curr.startDate))),
-			moment.duration(0)
-		)
-
-		return moment.utc(duration.as('milliseconds')).format('HH:mm:ss')
+		return aggregateTimeDiff(timelogs, t => t.startDate, t => t.finishDate)
 	}
 }
 

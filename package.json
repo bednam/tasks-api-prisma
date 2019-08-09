@@ -11,8 +11,11 @@
   "dependencies": {
     "apollo-server-errors": "^2.3.0",
     "axios": "^0.18.0",
+    "bcrypt": "^3.0.6",
     "graphql-iso-date": "^3.6.1",
+    "graphql-shield": "^6.0.4",
     "graphql-yoga": "1.17.4",
+    "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "nexus": "^0.11.7",
     "nexus-prisma": "^0.3.7",
@@ -22,7 +25,6 @@
   "devDependencies": {
     "@types/jest": "^24.0.12",
     "jest": "^24.7.1",
-    "prisma": "1.31.1",
     "ts-jest": "^24.0.2",
     "ts-node-dev": "^1.0.0-pre.32",
     "typescript": "3.4.5"

@@ -1,5 +1,4 @@
-import * as moment from 'moment'
-import { dateToTime } from '../utils/'
+import { aggregateTime, aggregateTimeDiff } from '../utils/'
 
 class ProjectRepository {
 	async getEstimateTime(id, { prisma }) {
@@ -13,12 +12,7 @@ class ProjectRepository {
 			}
 		})
 
-		const estimateTime = tasks.reduce(
-			(acc, curr) => acc.add(moment.duration(curr.estimateTime)),
-			moment.duration(0)
-		)
-
-		return dateToTime(estimateTime)
+		return aggregateTime(tasks, task => task.estimateTime)
 	}
 
 	async getStatusTime(id, { prisma }) {
@@ -36,13 +30,7 @@ class ProjectRepository {
 			}
 		})
 
-		const statusTime = timelogs.reduce(
-			(acc, curr) =>
-				acc.add(moment(curr.finishDate).diff(moment(curr.startDate))),
-			moment.duration(0)
-		)
-
-		return dateToTime(statusTime)
+		return aggregateTimeDiff(timelogs, t => t.startDate, t => t.finishDate)
 	}
 }
 
