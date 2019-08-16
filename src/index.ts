@@ -1,3 +1,4 @@
+require('newrelic')
 import { GraphQLServer } from 'graphql-yoga'
 import { prisma } from './generated/prisma-client'
 import { Context } from './types'
