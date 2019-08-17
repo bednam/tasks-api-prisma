@@ -1,4 +1,5 @@
 import { prismaObjectType } from 'nexus-prisma'
+import { subscriptionField } from 'nexus'
 import * as moment from 'moment'
 import TaskRepository from '../repositories/TaskRepository'
 
@@ -27,4 +28,10 @@ export const Task = prismaObjectType({
           TaskRepository.getTimelogCount(root.id, context)
       })
   }
+})
+
+export const TaskSubscription = subscriptionField('task', {
+  type: 'TaskSubscriptionPayload',
+  subscribe: (root, args, ctx) => ctx.prisma.$subscribe.user() as any,
+  resolve: payload => payload
 })
