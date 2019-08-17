@@ -14,10 +14,8 @@ const rules = {
       getUserId(context) === task.user.id
   ),
   isOwnerThroughProject: rule()(
-    async (parent, { where: { project } }, context) => {
-      const user = await context.prisma.project({ id: project.id }).user()
-      return getUserId(context) === user.id
-    }
+    (parent, { where: { project } }, context) =>
+      getUserId(context) === project.user.id
   )
 }
 
