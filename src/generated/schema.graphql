@@ -500,7 +500,6 @@ input SubprojectWhereUniqueInput {
 
 type Subscription {
   task(where: TaskSubscriptionWhereInput!): TaskSubscriptionPayload!
-  timelog(where: TimelogSubscriptionWhereInput!): TimelogSubscriptionPayload!
 }
 
 type Tag {
@@ -1432,13 +1431,6 @@ enum TimelogOrderByInput {
   updatedAt_DESC
 }
 
-type TimelogPreviousValues {
-  description: String
-  finishDate: DateTime
-  id: Int!
-  startDate: DateTime
-}
-
 input TimelogScalarWhereInput {
   AND: [TimelogScalarWhereInput!]
   description: String
@@ -1481,24 +1473,6 @@ input TimelogScalarWhereInput {
   startDate_lte: DateTime
   startDate_not: DateTime
   startDate_not_in: [DateTime!]
-}
-
-type TimelogSubscriptionPayload {
-  mutation: MutationType!
-  node: Timelog
-  previousValues: TimelogPreviousValues
-  updatedFields: [String!]
-}
-
-input TimelogSubscriptionWhereInput {
-  AND: [TimelogSubscriptionWhereInput!]
-  mutation_in: [MutationType!]
-  node: TimelogWhereInput
-  NOT: [TimelogSubscriptionWhereInput!]
-  OR: [TimelogSubscriptionWhereInput!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
 }
 
 input TimelogUpdateInput {
