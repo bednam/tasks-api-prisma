@@ -1,5 +1,5 @@
-import { prismaObjectType } from 'nexus-prisma'
-import { subscriptionField } from 'nexus'
+import { prismaObjectType, prismaInputObjectType } from 'nexus-prisma'
+import { subscriptionField, arg } from 'nexus'
 import * as moment from 'moment'
 import TaskRepository from '../repositories/TaskRepository'
 
@@ -32,6 +32,14 @@ export const Task = prismaObjectType({
 
 export const TaskSubscription = subscriptionField('task', {
   type: 'TaskSubscriptionPayload',
-  subscribe: (root, args, ctx) => ctx.prisma.$subscribe.user() as any,
+  args: { where: arg({ type: 'TaskSubscriptionWhereInput', nullable: false }) },
+  subscribe: (root, args, ctx) => ctx.prisma.$subscribe.task(args.where) as any,
   resolve: payload => payload
+})
+
+export const TaskSubscriptionWhereInput = prismaInputObjectType({
+  name: 'TaskSubscriptionWhereInput',
+  definition(t) {
+    t.prismaFields(['*'])
+  }
 })

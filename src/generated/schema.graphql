@@ -83,6 +83,12 @@ type Mutation {
   upsertUser(create: UserCreateInput!, update: UserUpdateInput!, where: UserWhereUniqueInput!): User!
 }
 
+enum MutationType {
+  CREATED
+  DELETED
+  UPDATED
+}
+
 type PageInfo {
   endCursor: String
   hasNextPage: Boolean!
@@ -492,6 +498,10 @@ input SubprojectWhereUniqueInput {
   name: String
 }
 
+type Subscription {
+  task(where: TaskSubscriptionWhereInput!): TaskSubscriptionPayload!
+}
+
 type Tag {
   id: Int!
   name: String!
@@ -858,6 +868,20 @@ enum TaskOrderByInput {
   updatedAt_DESC
 }
 
+type TaskPreviousValues {
+  comments: String
+  completed: Boolean!
+  deadlineDate: String
+  estimateTime: String
+  finishDate: String
+  id: Int!
+  name: String!
+  plannedDate: String
+  plannedTime: String
+  priority: String
+  repeat: Int
+}
+
 input TaskScalarWhereInput {
   AND: [TaskScalarWhereInput!]
   comments: String
@@ -992,6 +1016,24 @@ input TaskScalarWhereInput {
   repeat_lte: Int
   repeat_not: Int
   repeat_not_in: [Int!]
+}
+
+type TaskSubscriptionPayload {
+  mutation: MutationType!
+  node: Task
+  previousValues: TaskPreviousValues
+  updatedFields: [String!]
+}
+
+input TaskSubscriptionWhereInput {
+  AND: [TaskSubscriptionWhereInput!]
+  mutation_in: [MutationType!]
+  node: TaskWhereInput
+  NOT: [TaskSubscriptionWhereInput!]
+  OR: [TaskSubscriptionWhereInput!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
 }
 
 input TaskUpdateInput {

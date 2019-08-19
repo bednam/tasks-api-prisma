@@ -20,6 +20,7 @@ const schema = makePrismaSchema({
     typegen: path.join(__dirname, './generated/nexus.ts')
   }
 })
+
 const server = new GraphQLServer({
   schema,
   middlewares: [permissions],
