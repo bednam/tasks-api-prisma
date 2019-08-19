@@ -8,12 +8,14 @@ class SubprojectRepository {
 	}
 
 	async getStatusTime(id, { prisma }) {
-		const timelogs = await prisma
+		const taskIds = await prisma
 			.subproject({ id })
 			.tasks()
-			.then(tasks =>
-				tasks.reduce((acc, curr) => [...acc, ...curr.timelogs()], [])
-			)
+			.then(tasks => tasks.map(({ id }) => id))
+
+		const timelogs = await prisma.timelogs({
+			where: { task: { id_in: taskIds } }
+		})
 
 		return aggregateTimeDiff(timelogs, t => t.startDate, t => t.finishDate)
 	}
