@@ -19,13 +19,16 @@ const rules = {
   )
 }
 
+/*
+  TODO subproject permission not breaking subproject select and new-project
+*/
 export const permissions = shield({
   Query: {
     '*': rules.isAuthenticated,
     tasks: rules.isOwner,
     timelogs: rules.isOwnerThroughTask,
-    projects: rules.isOwner,
-    subprojects: rules.isOwnerThroughProject
+    projects: rules.isOwner
+    // subprojects: rules.isOwnerThroughProject
   },
   Mutation: {
     '*': rules.isAuthenticated,
