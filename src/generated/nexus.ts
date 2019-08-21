@@ -1743,6 +1743,8 @@ export interface NexusGenFieldTypes {
   Tag: { // field return type
     id: number; // Int!
     name: string; // String!
+    statusMs: any; // Long!
+    statusTime: string | null; // String
     tasks: NexusGenRootTypes['Task'][] | null; // [Task!]
     user: NexusGenRootTypes['User'] | null; // User
   }
@@ -2146,6 +2148,12 @@ export interface NexusGenArgTypes {
     }
   }
   Tag: {
+    statusMs: { // args
+      timelogs_every?: NexusGenInputs['TimelogWhereInput'] | null; // TimelogWhereInput
+    }
+    statusTime: { // args
+      timelogs_every: NexusGenInputs['TimelogWhereInput']; // TimelogWhereInput!
+    }
     tasks: { // args
       after?: string | null; // String
       before?: string | null; // String
