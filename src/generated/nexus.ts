@@ -1744,7 +1744,7 @@ export interface NexusGenFieldTypes {
     id: number; // Int!
     name: string; // String!
     statusMs: any; // Long!
-    statusTime: string | null; // String
+    statusTime: string; // String!
     tasks: NexusGenRootTypes['Task'][] | null; // [Task!]
     user: NexusGenRootTypes['User'] | null; // User
   }

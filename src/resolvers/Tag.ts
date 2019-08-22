@@ -1,7 +1,7 @@
 import { prismaObjectType } from 'nexus-prisma'
 import { arg, stringArg } from 'nexus'
 import { aggregateTime, aggregateTimeDiff, dateToMilliseconds } from '../utils/'
-
+import TagRepository from '../repositories/TagRepository'
 /*
 	TODO
 	- move business logic to TagRepository
@@ -20,24 +20,7 @@ export const Tag = prismaObjectType({
 					nullable: false
 				})
 			},
-			nullable: true,
-			resolve: async (root, args, context) => {
-				const { timelogs_every } = args
-				const taskIds = await context.prisma
-					.tag({ id: root.id })
-					.tasks()
-					.then(tasks => tasks.map(({ id }) => id))
-
-				const timelogs = await context.prisma.timelogs({
-					where: { task: { id_in: taskIds }, ...timelogs_every }
-				})
-
-				return aggregateTimeDiff(
-					timelogs,
-					t => t.startDate,
-					t => t.finishDate
-				)
-			}
+			resolve: TagRepository.getStatusTime
 		})
 		t.field('statusMs', {
 			type: 'Long',
@@ -46,24 +29,7 @@ export const Tag = prismaObjectType({
 					type: 'TimelogWhereInput'
 				})
 			},
-			resolve: async (root, args, context) => {
-				const { timelogs_every } = args
-				const taskIds = await context.prisma
-					.tag({ id: root.id })
-					.tasks()
-					.then(tasks => tasks.map(({ id }) => id))
-
-				const timelogs = await context.prisma.timelogs({
-					where: { task: { id_in: taskIds }, ...timelogs_every }
-				})
-
-				return aggregateTimeDiff(
-					timelogs,
-					t => t.startDate,
-					t => t.finishDate,
-					dateToMilliseconds
-				)
-			}
+			resolve: TagRepository.getStatusMs
 		})
 	}
 })

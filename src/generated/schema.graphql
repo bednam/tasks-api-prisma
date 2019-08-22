@@ -506,7 +506,7 @@ type Tag {
   id: Int!
   name: String!
   statusMs(timelogs_every: TimelogWhereInput): Long!
-  statusTime(timelogs_every: TimelogWhereInput!): String
+  statusTime(timelogs_every: TimelogWhereInput!): String!
   tasks(after: String, before: String, first: Int, last: Int, orderBy: TaskOrderByInput, skip: Int, where: TaskWhereInput): [Task!]
   user: User
 }
