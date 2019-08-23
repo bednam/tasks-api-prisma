@@ -1,7 +1,8 @@
 import * as moment from 'moment'
+import 'moment-duration-format'
 
 export const dateToTime = date =>
-	moment.utc(dateToMilliseconds(date)).format('HH:mm:ss')
+	moment.duration(date).format('HH:mm:ss', { trim: false })
 
 export const dateToMilliseconds = date => date.as('milliseconds')
 
