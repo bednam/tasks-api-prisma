@@ -499,6 +499,7 @@ input SubprojectWhereUniqueInput {
 }
 
 type Subscription {
+  tag(where: TagSubscriptionWhereInput!): TagSubscriptionPayload!
   task(where: TaskSubscriptionWhereInput!): TaskSubscriptionPayload!
 }
 
@@ -506,7 +507,7 @@ type Tag {
   id: Int!
   name: String!
   statusMs(timelogs_every: TimelogWhereInput): Long!
-  statusTime(timelogs_every: TimelogWhereInput!): String!
+  statusTime(timelogs_every: TimelogWhereInput): String!
   tasks(after: String, before: String, first: Int, last: Int, orderBy: TaskOrderByInput, skip: Int, where: TaskWhereInput): [Task!]
   user: User
 }
@@ -562,6 +563,11 @@ enum TagOrderByInput {
   updatedAt_DESC
 }
 
+type TagPreviousValues {
+  id: Int!
+  name: String!
+}
+
 input TagScalarWhereInput {
   AND: [TagScalarWhereInput!]
   id: Int
@@ -588,6 +594,24 @@ input TagScalarWhereInput {
   name_starts_with: String
   NOT: [TagScalarWhereInput!]
   OR: [TagScalarWhereInput!]
+}
+
+type TagSubscriptionPayload {
+  mutation: MutationType!
+  node: Tag
+  previousValues: TagPreviousValues
+  updatedFields: [String!]
+}
+
+input TagSubscriptionWhereInput {
+  AND: [TagSubscriptionWhereInput!]
+  mutation_in: [MutationType!]
+  node: TagWhereInput
+  NOT: [TagSubscriptionWhereInput!]
+  OR: [TagSubscriptionWhereInput!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
 }
 
 input TagUpdateInput {

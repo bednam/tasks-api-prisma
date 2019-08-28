@@ -1,5 +1,5 @@
-import { prismaObjectType } from 'nexus-prisma'
-import { arg, stringArg } from 'nexus'
+import { prismaObjectType, prismaInputObjectType } from 'nexus-prisma'
+import { arg, stringArg, subscriptionField } from 'nexus'
 import { aggregateTime, aggregateTimeDiff, dateToMilliseconds } from '../utils/'
 import TagRepository from '../repositories/TagRepository'
 /*
@@ -16,8 +16,7 @@ export const Tag = prismaObjectType({
 			type: 'String',
 			args: {
 				timelogs_every: arg({
-					type: 'TimelogWhereInput',
-					nullable: false
+					type: 'TimelogWhereInput'
 				})
 			},
 			resolve: TagRepository.getStatusTime
@@ -31,5 +30,22 @@ export const Tag = prismaObjectType({
 			},
 			resolve: TagRepository.getStatusMs
 		})
+	}
+})
+
+export const TagSubscription = subscriptionField('tag', {
+	type: 'TagSubscriptionPayload',
+	args: {
+		where: arg({ type: 'TagSubscriptionWhereInput', nullable: false })
+	},
+	subscribe: (root, args, ctx) =>
+		ctx.prisma.$subscribe.tag(args.where) as any,
+	resolve: payload => payload
+})
+
+export const TagSubscriptionWhereInput = prismaInputObjectType({
+	name: 'TagSubscriptionWhereInput',
+	definition(t) {
+		t.prismaFields(['*'])
 	}
 })

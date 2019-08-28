@@ -342,6 +342,16 @@ export interface NexusGenInputs {
     NOT?: NexusGenInputs['TagScalarWhereInput'][] | null; // [TagScalarWhereInput!]
     OR?: NexusGenInputs['TagScalarWhereInput'][] | null; // [TagScalarWhereInput!]
   }
+  TagSubscriptionWhereInput: { // input type
+    AND?: NexusGenInputs['TagSubscriptionWhereInput'][] | null; // [TagSubscriptionWhereInput!]
+    mutation_in?: NexusGenEnums['MutationType'][] | null; // [MutationType!]
+    node?: NexusGenInputs['TagWhereInput'] | null; // TagWhereInput
+    NOT?: NexusGenInputs['TagSubscriptionWhereInput'][] | null; // [TagSubscriptionWhereInput!]
+    OR?: NexusGenInputs['TagSubscriptionWhereInput'][] | null; // [TagSubscriptionWhereInput!]
+    updatedFields_contains?: string | null; // String
+    updatedFields_contains_every?: string[] | null; // [String!]
+    updatedFields_contains_some?: string[] | null; // [String!]
+  }
   TagUpdateInput: { // input type
     name?: string | null; // String
     tasks?: NexusGenInputs['TaskUpdateManyWithoutTagsInput'] | null; // TaskUpdateManyWithoutTagsInput
@@ -1397,6 +1407,16 @@ export interface NexusGenRootTypes {
     cursor: string; // String!
     node: NexusGenRootTypes['Tag']; // Tag!
   }
+  TagPreviousValues: { // root type
+    id: number; // Int!
+    name: string; // String!
+  }
+  TagSubscriptionPayload: { // root type
+    mutation: NexusGenEnums['MutationType']; // MutationType!
+    node?: NexusGenRootTypes['Tag'] | null; // Tag
+    previousValues?: NexusGenRootTypes['TagPreviousValues'] | null; // TagPreviousValues
+    updatedFields?: string[] | null; // [String!]
+  }
   Task: { // root type
     comments?: string | null; // String
     completed: boolean; // Boolean!
@@ -1518,6 +1538,7 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   TagCreateWithoutTasksInput: NexusGenInputs['TagCreateWithoutTasksInput'];
   TagCreateWithoutUserInput: NexusGenInputs['TagCreateWithoutUserInput'];
   TagScalarWhereInput: NexusGenInputs['TagScalarWhereInput'];
+  TagSubscriptionWhereInput: NexusGenInputs['TagSubscriptionWhereInput'];
   TagUpdateInput: NexusGenInputs['TagUpdateInput'];
   TagUpdateManyDataInput: NexusGenInputs['TagUpdateManyDataInput'];
   TagUpdateManyMutationInput: NexusGenInputs['TagUpdateManyMutationInput'];
@@ -1738,6 +1759,7 @@ export interface NexusGenFieldTypes {
     node: NexusGenRootTypes['Subproject']; // Subproject!
   }
   Subscription: { // field return type
+    tag: NexusGenRootTypes['TagSubscriptionPayload']; // TagSubscriptionPayload!
     task: NexusGenRootTypes['TaskSubscriptionPayload']; // TaskSubscriptionPayload!
   }
   Tag: { // field return type
@@ -1756,6 +1778,16 @@ export interface NexusGenFieldTypes {
   TagEdge: { // field return type
     cursor: string; // String!
     node: NexusGenRootTypes['Tag']; // Tag!
+  }
+  TagPreviousValues: { // field return type
+    id: number; // Int!
+    name: string; // String!
+  }
+  TagSubscriptionPayload: { // field return type
+    mutation: NexusGenEnums['MutationType']; // MutationType!
+    node: NexusGenRootTypes['Tag'] | null; // Tag
+    previousValues: NexusGenRootTypes['TagPreviousValues'] | null; // TagPreviousValues
+    updatedFields: string[] | null; // [String!]
   }
   Task: { // field return type
     comments: string | null; // String
@@ -2143,6 +2175,9 @@ export interface NexusGenArgTypes {
     }
   }
   Subscription: {
+    tag: { // args
+      where: NexusGenInputs['TagSubscriptionWhereInput']; // TagSubscriptionWhereInput!
+    }
     task: { // args
       where: NexusGenInputs['TaskSubscriptionWhereInput']; // TaskSubscriptionWhereInput!
     }
@@ -2152,7 +2187,7 @@ export interface NexusGenArgTypes {
       timelogs_every?: NexusGenInputs['TimelogWhereInput'] | null; // TimelogWhereInput
     }
     statusTime: { // args
-      timelogs_every: NexusGenInputs['TimelogWhereInput']; // TimelogWhereInput!
+      timelogs_every?: NexusGenInputs['TimelogWhereInput'] | null; // TimelogWhereInput
     }
     tasks: { // args
       after?: string | null; // String
@@ -2220,9 +2255,9 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "AggregateProject" | "AggregateSubproject" | "AggregateTag" | "AggregateTask" | "AggregateTimelog" | "AggregateUser" | "AuthPayload" | "BatchPayload" | "Mutation" | "PageInfo" | "Project" | "ProjectConnection" | "ProjectEdge" | "Query" | "Subproject" | "SubprojectConnection" | "SubprojectEdge" | "Subscription" | "Tag" | "TagConnection" | "TagEdge" | "Task" | "TaskConnection" | "TaskEdge" | "TaskPreviousValues" | "TaskSubscriptionPayload" | "Timelog" | "TimelogConnection" | "TimelogEdge" | "User" | "UserConnection" | "UserEdge";
+export type NexusGenObjectNames = "AggregateProject" | "AggregateSubproject" | "AggregateTag" | "AggregateTask" | "AggregateTimelog" | "AggregateUser" | "AuthPayload" | "BatchPayload" | "Mutation" | "PageInfo" | "Project" | "ProjectConnection" | "ProjectEdge" | "Query" | "Subproject" | "SubprojectConnection" | "SubprojectEdge" | "Subscription" | "Tag" | "TagConnection" | "TagEdge" | "TagPreviousValues" | "TagSubscriptionPayload" | "Task" | "TaskConnection" | "TaskEdge" | "TaskPreviousValues" | "TaskSubscriptionPayload" | "Timelog" | "TimelogConnection" | "TimelogEdge" | "User" | "UserConnection" | "UserEdge";
 
-export type NexusGenInputNames = "ProjectCreateInput" | "ProjectCreateManyWithoutUserInput" | "ProjectCreateOneWithoutSubprojectsInput" | "ProjectCreateWithoutSubprojectsInput" | "ProjectCreateWithoutUserInput" | "ProjectScalarWhereInput" | "ProjectUpdateInput" | "ProjectUpdateManyDataInput" | "ProjectUpdateManyMutationInput" | "ProjectUpdateManyWithWhereNestedInput" | "ProjectUpdateManyWithoutUserInput" | "ProjectUpdateOneRequiredWithoutSubprojectsInput" | "ProjectUpdateWithWhereUniqueWithoutUserInput" | "ProjectUpdateWithoutSubprojectsDataInput" | "ProjectUpdateWithoutUserDataInput" | "ProjectUpsertWithWhereUniqueWithoutUserInput" | "ProjectUpsertWithoutSubprojectsInput" | "ProjectWhereInput" | "ProjectWhereUniqueInput" | "SubprojectCreateInput" | "SubprojectCreateManyWithoutProjectInput" | "SubprojectCreateOneWithoutTasksInput" | "SubprojectCreateWithoutProjectInput" | "SubprojectCreateWithoutTasksInput" | "SubprojectScalarWhereInput" | "SubprojectUpdateInput" | "SubprojectUpdateManyDataInput" | "SubprojectUpdateManyMutationInput" | "SubprojectUpdateManyWithWhereNestedInput" | "SubprojectUpdateManyWithoutProjectInput" | "SubprojectUpdateOneWithoutTasksInput" | "SubprojectUpdateWithWhereUniqueWithoutProjectInput" | "SubprojectUpdateWithoutProjectDataInput" | "SubprojectUpdateWithoutTasksDataInput" | "SubprojectUpsertWithWhereUniqueWithoutProjectInput" | "SubprojectUpsertWithoutTasksInput" | "SubprojectWhereInput" | "SubprojectWhereUniqueInput" | "TagCreateInput" | "TagCreateManyWithoutTasksInput" | "TagCreateManyWithoutUserInput" | "TagCreateWithoutTasksInput" | "TagCreateWithoutUserInput" | "TagScalarWhereInput" | "TagUpdateInput" | "TagUpdateManyDataInput" | "TagUpdateManyMutationInput" | "TagUpdateManyWithWhereNestedInput" | "TagUpdateManyWithoutTasksInput" | "TagUpdateManyWithoutUserInput" | "TagUpdateWithWhereUniqueWithoutTasksInput" | "TagUpdateWithWhereUniqueWithoutUserInput" | "TagUpdateWithoutTasksDataInput" | "TagUpdateWithoutUserDataInput" | "TagUpsertWithWhereUniqueWithoutTasksInput" | "TagUpsertWithWhereUniqueWithoutUserInput" | "TagWhereInput" | "TagWhereUniqueInput" | "TaskCreateInput" | "TaskCreateManyWithoutSubprojectInput" | "TaskCreateManyWithoutTagsInput" | "TaskCreateManyWithoutUserInput" | "TaskCreateOneWithoutTimelogsInput" | "TaskCreateWithoutSubprojectInput" | "TaskCreateWithoutTagsInput" | "TaskCreateWithoutTimelogsInput" | "TaskCreateWithoutUserInput" | "TaskScalarWhereInput" | "TaskSubscriptionWhereInput" | "TaskUpdateInput" | "TaskUpdateManyDataInput" | "TaskUpdateManyMutationInput" | "TaskUpdateManyWithWhereNestedInput" | "TaskUpdateManyWithoutSubprojectInput" | "TaskUpdateManyWithoutTagsInput" | "TaskUpdateManyWithoutUserInput" | "TaskUpdateOneRequiredWithoutTimelogsInput" | "TaskUpdateWithWhereUniqueWithoutSubprojectInput" | "TaskUpdateWithWhereUniqueWithoutTagsInput" | "TaskUpdateWithWhereUniqueWithoutUserInput" | "TaskUpdateWithoutSubprojectDataInput" | "TaskUpdateWithoutTagsDataInput" | "TaskUpdateWithoutTimelogsDataInput" | "TaskUpdateWithoutUserDataInput" | "TaskUpsertWithWhereUniqueWithoutSubprojectInput" | "TaskUpsertWithWhereUniqueWithoutTagsInput" | "TaskUpsertWithWhereUniqueWithoutUserInput" | "TaskUpsertWithoutTimelogsInput" | "TaskWhereInput" | "TaskWhereUniqueInput" | "TimelogCreateInput" | "TimelogCreateManyWithoutTaskInput" | "TimelogCreateWithoutTaskInput" | "TimelogScalarWhereInput" | "TimelogUpdateInput" | "TimelogUpdateManyDataInput" | "TimelogUpdateManyMutationInput" | "TimelogUpdateManyWithWhereNestedInput" | "TimelogUpdateManyWithoutTaskInput" | "TimelogUpdateWithWhereUniqueWithoutTaskInput" | "TimelogUpdateWithoutTaskDataInput" | "TimelogUpsertWithWhereUniqueWithoutTaskInput" | "TimelogWhereInput" | "TimelogWhereUniqueInput" | "UserCreateInput" | "UserCreateOneWithoutProjectsInput" | "UserCreateOneWithoutTagsInput" | "UserCreateOneWithoutTasksInput" | "UserCreateWithoutProjectsInput" | "UserCreateWithoutTagsInput" | "UserCreateWithoutTasksInput" | "UserUpdateInput" | "UserUpdateManyMutationInput" | "UserUpdateOneWithoutProjectsInput" | "UserUpdateOneWithoutTagsInput" | "UserUpdateOneWithoutTasksInput" | "UserUpdateWithoutProjectsDataInput" | "UserUpdateWithoutTagsDataInput" | "UserUpdateWithoutTasksDataInput" | "UserUpsertWithoutProjectsInput" | "UserUpsertWithoutTagsInput" | "UserUpsertWithoutTasksInput" | "UserWhereInput" | "UserWhereUniqueInput";
+export type NexusGenInputNames = "ProjectCreateInput" | "ProjectCreateManyWithoutUserInput" | "ProjectCreateOneWithoutSubprojectsInput" | "ProjectCreateWithoutSubprojectsInput" | "ProjectCreateWithoutUserInput" | "ProjectScalarWhereInput" | "ProjectUpdateInput" | "ProjectUpdateManyDataInput" | "ProjectUpdateManyMutationInput" | "ProjectUpdateManyWithWhereNestedInput" | "ProjectUpdateManyWithoutUserInput" | "ProjectUpdateOneRequiredWithoutSubprojectsInput" | "ProjectUpdateWithWhereUniqueWithoutUserInput" | "ProjectUpdateWithoutSubprojectsDataInput" | "ProjectUpdateWithoutUserDataInput" | "ProjectUpsertWithWhereUniqueWithoutUserInput" | "ProjectUpsertWithoutSubprojectsInput" | "ProjectWhereInput" | "ProjectWhereUniqueInput" | "SubprojectCreateInput" | "SubprojectCreateManyWithoutProjectInput" | "SubprojectCreateOneWithoutTasksInput" | "SubprojectCreateWithoutProjectInput" | "SubprojectCreateWithoutTasksInput" | "SubprojectScalarWhereInput" | "SubprojectUpdateInput" | "SubprojectUpdateManyDataInput" | "SubprojectUpdateManyMutationInput" | "SubprojectUpdateManyWithWhereNestedInput" | "SubprojectUpdateManyWithoutProjectInput" | "SubprojectUpdateOneWithoutTasksInput" | "SubprojectUpdateWithWhereUniqueWithoutProjectInput" | "SubprojectUpdateWithoutProjectDataInput" | "SubprojectUpdateWithoutTasksDataInput" | "SubprojectUpsertWithWhereUniqueWithoutProjectInput" | "SubprojectUpsertWithoutTasksInput" | "SubprojectWhereInput" | "SubprojectWhereUniqueInput" | "TagCreateInput" | "TagCreateManyWithoutTasksInput" | "TagCreateManyWithoutUserInput" | "TagCreateWithoutTasksInput" | "TagCreateWithoutUserInput" | "TagScalarWhereInput" | "TagSubscriptionWhereInput" | "TagUpdateInput" | "TagUpdateManyDataInput" | "TagUpdateManyMutationInput" | "TagUpdateManyWithWhereNestedInput" | "TagUpdateManyWithoutTasksInput" | "TagUpdateManyWithoutUserInput" | "TagUpdateWithWhereUniqueWithoutTasksInput" | "TagUpdateWithWhereUniqueWithoutUserInput" | "TagUpdateWithoutTasksDataInput" | "TagUpdateWithoutUserDataInput" | "TagUpsertWithWhereUniqueWithoutTasksInput" | "TagUpsertWithWhereUniqueWithoutUserInput" | "TagWhereInput" | "TagWhereUniqueInput" | "TaskCreateInput" | "TaskCreateManyWithoutSubprojectInput" | "TaskCreateManyWithoutTagsInput" | "TaskCreateManyWithoutUserInput" | "TaskCreateOneWithoutTimelogsInput" | "TaskCreateWithoutSubprojectInput" | "TaskCreateWithoutTagsInput" | "TaskCreateWithoutTimelogsInput" | "TaskCreateWithoutUserInput" | "TaskScalarWhereInput" | "TaskSubscriptionWhereInput" | "TaskUpdateInput" | "TaskUpdateManyDataInput" | "TaskUpdateManyMutationInput" | "TaskUpdateManyWithWhereNestedInput" | "TaskUpdateManyWithoutSubprojectInput" | "TaskUpdateManyWithoutTagsInput" | "TaskUpdateManyWithoutUserInput" | "TaskUpdateOneRequiredWithoutTimelogsInput" | "TaskUpdateWithWhereUniqueWithoutSubprojectInput" | "TaskUpdateWithWhereUniqueWithoutTagsInput" | "TaskUpdateWithWhereUniqueWithoutUserInput" | "TaskUpdateWithoutSubprojectDataInput" | "TaskUpdateWithoutTagsDataInput" | "TaskUpdateWithoutTimelogsDataInput" | "TaskUpdateWithoutUserDataInput" | "TaskUpsertWithWhereUniqueWithoutSubprojectInput" | "TaskUpsertWithWhereUniqueWithoutTagsInput" | "TaskUpsertWithWhereUniqueWithoutUserInput" | "TaskUpsertWithoutTimelogsInput" | "TaskWhereInput" | "TaskWhereUniqueInput" | "TimelogCreateInput" | "TimelogCreateManyWithoutTaskInput" | "TimelogCreateWithoutTaskInput" | "TimelogScalarWhereInput" | "TimelogUpdateInput" | "TimelogUpdateManyDataInput" | "TimelogUpdateManyMutationInput" | "TimelogUpdateManyWithWhereNestedInput" | "TimelogUpdateManyWithoutTaskInput" | "TimelogUpdateWithWhereUniqueWithoutTaskInput" | "TimelogUpdateWithoutTaskDataInput" | "TimelogUpsertWithWhereUniqueWithoutTaskInput" | "TimelogWhereInput" | "TimelogWhereUniqueInput" | "UserCreateInput" | "UserCreateOneWithoutProjectsInput" | "UserCreateOneWithoutTagsInput" | "UserCreateOneWithoutTasksInput" | "UserCreateWithoutProjectsInput" | "UserCreateWithoutTagsInput" | "UserCreateWithoutTasksInput" | "UserUpdateInput" | "UserUpdateManyMutationInput" | "UserUpdateOneWithoutProjectsInput" | "UserUpdateOneWithoutTagsInput" | "UserUpdateOneWithoutTasksInput" | "UserUpdateWithoutProjectsDataInput" | "UserUpdateWithoutTagsDataInput" | "UserUpdateWithoutTasksDataInput" | "UserUpsertWithoutProjectsInput" | "UserUpsertWithoutTagsInput" | "UserUpsertWithoutTasksInput" | "UserWhereInput" | "UserWhereUniqueInput";
 
 export type NexusGenEnumNames = "MutationType" | "ProjectOrderByInput" | "SubprojectOrderByInput" | "TagOrderByInput" | "TaskOrderByInput" | "TimelogOrderByInput" | "UserOrderByInput";
 
