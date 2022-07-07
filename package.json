@@ -16,7 +16,7 @@
     "graphql-shield": "^6.0.4",
     "graphql-yoga": "1.17.4",
     "lodash": "^4.17.15",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "moment-duration-format": "^2.3.2",
     "nexus": "^0.11.7",
     "nexus-prisma": "^0.3.7",
